@@ -1,0 +1,27 @@
+<md-dialog aria-label="Mango (Fruit)">
+    <form ng-cloak>
+      <div style="padding:15px; text-align: center;">
+          <h2>{{title}}</h2>
+      </div>
+      
+      
+      <md-dialog-content>
+        <div class="md-dialog-content">
+          <md-input-container>
+            <label>Nombre</label>
+            <input ng-model="Model.nombre" >
+          </md-input-container>
+        </div>
+      </md-dialog-content>
+  
+      <md-dialog-actions layout="row">
+        <md-button ng-click="cancel()">
+            Cancelar
+        </md-button>
+        <span flex></span>
+        <md-button ng-disabled="!Model.nombre" ng-click="submit()">
+            {{ title }}
+        </md-button>
+      </md-dialog-actions>
+    </form>
+  </md-dialog>

@@ -17,7 +17,7 @@ if ( !function_exists( 'add_action' ) ) {
 
 
 // Setup
-define( 'DESTINO_PLUGIN_URL', __FILE__ );
+define( 'SER_PLUGIN_URL', __FILE__ );
 
 
 // Includes
@@ -27,8 +27,9 @@ include( 'process/save_post.php' );
 include( 'process/filter_content.php' );
 include( 'includes/frontend/enqueue.php' );
 include( 'process/rate_destino.php' );
+include( 'process/admin/options.php' );
 include( 'includes/admin/init.php' );
-
+include( 'includes/admin/menus.php' );
 
 // Hooks
 register_activation_hook( __FILE__ , 'serlib_activate_plugin' );
@@ -36,8 +37,13 @@ add_action( 'init', 'serlib_fovea_init' );
 add_action( 'save_post_destino', 'ser_save_post_admin', 10, 3 ); 
 add_filter( 'the_content', 'serlib_filter_destino_content' );
 add_action( 'wp_enqueue_scripts', 'serlib_enqueue_scripts', 100 );
+/**solo superuser */
+add_action( 'wp_ajax_serlib_options_handler', 'serlib_options_handler' );
+/**usuarios registrados */
 add_action( 'wp_ajax_serlib_rate_destino', 'serlib_rate_destino' );
+
 add_action( 'admin_init', 'serlib_admin_init' );
+add_action( 'admin_menu', 'serlib_admin_menus' );
 
 
 // Shortcodes

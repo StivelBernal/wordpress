@@ -109,40 +109,5 @@ function serlib_activate_plugin(){
         ]
     );
 
-     /**Importación de ciudades y departamentos */
-     $wpdb->query("INSERT INTO `".$wpdb->prefix . 'states'."` (`ID`, `nombre`, `is_active`) VALUES (1, 'ANTIOQUIA', 0),
-     (2, 'ATLANTICO',0),
-     (3, 'BOLIVAR',0),
-     (4, 'BOYACA', 0),
-     (5, 'CALDAS', 0),
-     (6, 'CAUCA', 0),
-     (7, 'CESAR', 0),
-     (8, 'CORDOBA', 0),
-     (9, 'CUNDINAMARCA', 0),
-     (10, 'CHOCO', 0),
-     (11, 'HUILA', 0),
-     (12, 'MAGDALENA', 0),
-     (13, 'NARIÑO', 0),
-     (14, 'RISARALDA', 0),
-     (15, 'QUINDIO', 0),
-     (16, 'SANTANDER', 0),
-     (17, 'SUCRE', 0),
-     (18, 'TOLIMA', 0),
-     (19, 'VALLE DEL CAUCA', 0),
-     (20, 'ARAUCA', 0),
-     (21, 'CAQUETA', 0),
-     (22, 'CASANARE', 0),
-     (23, 'LA GUAJIRA', 0),
-     (24, 'GUAINIA', 0),
-     (25, 'META', 0)
-     (26, 'GUAVIARE', 0),
-     (27, 'SAN ANDRES Y PROVIDENCIA', 0),
-     (28, 'AMAZONAS', 0),
-     (29, 'PUTUMAYO', 0),
-     (30, 'VAUPES', 0),
-     (31, 'VICHADA', 0),
-     (32, 'NORTE DE SANTANDER', 0)");
-
-
 }
 
