@@ -1,0 +1,38 @@
+<md-dialog style="min-width: 500px;">
+    <form ng-cloak>
+      <div style="padding:15px; text-align: center;">
+          <h2>{{title}}</h2>
+      </div>
+      
+      
+      <md-dialog-content>
+        <div class="md-dialog-content ">
+          <div class="row-wrap ">
+
+            <md-input-container class="s-47">
+              <label>Nombre</label>
+              <input ng-model="Model.nombre" >
+            </md-input-container>
+            <div class="flex"></div>
+            <md-input-container class="s-47">
+              <md-select ng-model="Model.state_id" placeholder="Selecciona departamento">
+                <md-option ng-value="opt.ID" ng-repeat="opt in FormData">{{ opt.nombre }}</md-option>
+              </md-select>
+            </md-input-container>
+
+          </div>
+          <div style="color:red; text-align: center;">{{error}}</div>
+        </div>
+      </md-dialog-content>
+  
+      <md-dialog-actions layout="row">
+        <md-button ng-click="cancel()">
+            Cancelar
+        </md-button>
+        <span flex></span>
+        <md-button ng-disabled="!Model.nombre" ng-click="submit()">
+            {{ title }}
+        </md-button>
+      </md-dialog-actions>
+    </form>
+  </md-dialog>

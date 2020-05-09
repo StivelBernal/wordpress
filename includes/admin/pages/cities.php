@@ -30,23 +30,26 @@ function serlib_plugin_cities_page()
             <tr>
                 <th style="position: sticky; top: 0;"></th>
                 <th style="position: sticky; top: 0;" class="manage-column column-name column-primary"><?php echo __('Nombre', 'serlib'); ?></th>
-            </tr>
+                <th style="position: sticky; top: 0;" class="manage-column column-name column-primary"><?php echo __('Departamento', 'serlib'); ?></th>
+              </tr>
         </thead>
     </table>
     <div md-virtual-repeat-container style="width:100%; min-height:100vh;">
     
         <table class="wp-list-table widefat plugins">
             <tbody id="the-list" >
-                <tr class="active" md-virtual-repeat="object in ObjectList | filter:search:strict">
-                    <th ng-style="{'border-left': '4px solid ' + (object.is_active ? '#2ead2e' : 'red')}" 
+                <tr class="active" id="objectlist{{object.ID}}" md-virtual-repeat="object in ObjectList | filter:search:strict">
+                    <td ng-style="{'border-left': '4px solid ' + (object.is_active ? '#2ead2e' : 'red')}" 
                          class="check-column">
                         <input type="checkbox" ng-model="object.is_active" ng-change="toggleActive(object)" >
-                    </th>
-                    <td class=" column-primary"><strong>{{object.nombre}}</strong>
+                    </td>
+                    <td style="width:42%;"><strong>{{object.nombre}}</strong>
                         <div class="row-actions visible">
                             <span><a ng-click="update($event ,object)"><?php echo __('Actualizar', 'serlib'); ?></a></span>
                             <span><a ng-click="delete(object.ID, $index)" style="margin-left:3px; color:#9d3243;" ng-click="update(object)"><?php echo __('Borrar', 'serlib'); ?></a></span>
                         </div>
+                    </td>
+                    <td><strong>{{object.state_nombre}}</strong>
                     </td>
                 </tr>
             </tbody>

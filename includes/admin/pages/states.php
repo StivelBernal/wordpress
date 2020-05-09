@@ -37,7 +37,7 @@ function serlib_plugin_states_page()
     
         <table class="wp-list-table widefat plugins">
             <tbody id="the-list" >
-                <tr class="active" md-virtual-repeat="object in ObjectList | filter:search:strict">
+                <tr class="active" id="objectlist{{object.ID}}" md-virtual-repeat="object in ObjectList | filter:search:strict">
                     <th ng-style="{'border-left': '4px solid ' + (object.is_active ? '#2ead2e' : 'red')}" 
                          class="check-column">
                         <input type="checkbox" ng-model="object.is_active" ng-change="toggleActive(object)" >

@@ -93,10 +93,10 @@ function serlib_options_handler(){
     
     
         if( $_SERVER['REQUEST_METHOD'] === 'GET' ){
-
-            $results = $wpdb->get_results( 
-                "SELECT * FROM ".$wpdb->prefix."cities "
-            );
+            $query = "SELECT c.ID, c.nombre, c.state_id, c.is_active, s.nombre AS 'state_nombre' 
+                 FROM ".$wpdb->prefix."cities c  INNER JOIN  ".$wpdb->prefix."states s ON c.state_id = s.ID ;"; 
+           
+            $results = $wpdb->get_results( $query );
             for($i = 0; $i < count($results); $i++){
                 $results[$i]->is_active = boolval( $results[$i]->is_active );
             }
@@ -164,7 +164,7 @@ function serlib_options_handler(){
             
 
         }
-        
+
         wp_send_json( $results );
 
         die();
