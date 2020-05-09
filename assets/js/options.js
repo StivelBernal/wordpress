@@ -7,13 +7,14 @@ var app = angular.module('serApp', ['ngMaterial'])
         $compileProvider.debugInfoEnabled(false);
     }]);
 
-app.controller('stateController', ['$scope', '$http', '$mdDialog' 
-                ,function stateController($scope, $http, $mdDialog) {
+
+app.controller('BaseCrud', ['$scope', 'Config', '$http', '$mdDialog' 
+                ,function baseCrud($scope, Config, $http, $mdDialog) {
         
     $scope.ObjectList = [];
     $scope.error = '';
-    var $table = 'states',
-        $templateForm = '../wp-content/plugins/ser_library/assets/html/dialog-admin.html';
+    var $table = Config.table,
+        $templateForm = Config.templateForm;
     
     $scope.getList = function(){
         $scope.ObjectList = [];
@@ -101,7 +102,34 @@ app.controller('stateController', ['$scope', '$http', '$mdDialog'
 
     $scope.getList();
 
-}]); 
+}]);
+
+app.controller('cityController', ['$scope', '$controller' 
+                ,function cityController($scope, $controller) {
+        
+    $controller('BaseCrud', {
+        $scope: $scope,
+        Config: {
+            table: 'cities',
+             templateForm: '../wp-content/plugins/ser_library/assets/html/dialog-admin.html'
+        }
+    });
+
+}]);
+
+app.controller('stateController', ['$scope', '$controller' 
+             ,function stateController($scope, $controller) {
+
+    $controller('BaseCrud', {
+    $scope: $scope,
+    Config: {
+    table: 'states',
+    templateForm: '../wp-content/plugins/ser_library/assets/html/dialog-admin.html'
+    }
+    });
+
+}]);
+
 
 function DialogController($scope, $mdDialog, $http, Instance, table) {
     
