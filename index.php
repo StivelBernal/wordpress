@@ -30,6 +30,7 @@ include( 'process/rate_destino.php' );
 include( 'process/admin/options.php' );
 include( 'includes/admin/init.php' );
 include( 'includes/admin/menus.php' );
+include( 'includes/shortcodes/auth.php' );
 
 // Hooks
 register_activation_hook( __FILE__ , 'serlib_activate_plugin' );
@@ -45,6 +46,8 @@ add_action( 'wp_ajax_serlib_rate_destino', 'serlib_rate_destino' );
 add_action( 'admin_init', 'serlib_admin_init' );
 add_action( 'admin_menu', 'serlib_admin_menus' );
 
+add_shortcode( 'serlib_login_form', 'serlib_login_form_shortcode' );
+add_shortcode( 'serlib_register_form', 'serlib_login_form_shortcode' );
 
 // Shortcodes
 
