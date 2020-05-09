@@ -9,18 +9,20 @@ var app = angular.module('serApp', ['ngMaterial'])
 
 app.controller('stateController', ['$scope', '$http', '$mdDialog' 
                 ,function stateController($scope, $http, $mdDialog) {
-    
-    console.log('cargado');
-    
-    $scope.states = [];
+        
+    $scope.ObjectList = [];
+    $scope.error = '';
+    var $table = 'states',
+        $templateForm = '../wp-content/plugins/ser_library/assets/html/dialog-admin.html';
     
     $scope.getList = function(){
+        $scope.ObjectList = [];
         $http({
             method: 'GET',
-            params: { action: 'serlib_options_handler', table: 'states', mod: 'GET' },
-            url: back_obj.ajax_url
+            params: { action: 'serlib_options_handler', table: $table },
+            url:    back_obj.ajax_url
         }).then(function successCallback(response) {
-            $scope.states = response.data;
+            $scope.ObjectList = response.data;
             
         }, function errorCallback(response) {
             console.log('fallo cargando states', response);            
@@ -29,23 +31,75 @@ app.controller('stateController', ['$scope', '$http', '$mdDialog'
 
     $scope.create = function(ev) {
         $mdDialog.show({
-          controller: DialogController,
-          templateUrl: '../wp-content/plugins/ser_library/assets/html/dialog-admin.html',
-          parent: angular.element(document.body),
-          locals: { Instance: null, table: 'states' }, 
-          targetEvent: ev,
-          clickOutsideToClose:true
+          controller:           DialogController,
+          templateUrl:          $templateForm,
+          parent:               angular.element(document.body),
+          locals:               { Instance: null, table: $table }, 
+          targetEvent:          ev,
+          clickOutsideToClose:  true
         })
-        .then(function(answer) {
-            $scope.status = 'You said the information was "' + answer + '".';
-        }, function() {
-            $scope.status = 'You cancelled the dialog.';
-        });
-      };
+        .then(function(response) {
+            if(response.data == 1 ){
+                $scope.getList();
+            }
 
-      $scope.getList();
-	   
-  
+        }, function(error) {
+           $scope.error =  error.data;
+        });
+    };
+
+    $scope.update = function(ev, state) {
+        $mdDialog.show({
+          controller:           DialogController,
+          templateUrl:          $templateForm,
+          parent:               angular.element(document.body),
+          locals:               { Instance: state, table: $table }, 
+          targetEvent:          ev,
+          clickOutsideToClose:  true
+        })
+        .then(function(response) {
+            if(response.data == 1 ){
+                $scope.getList();
+            }
+        }, function(error) {
+            $scope.error =  error.data;
+        });
+    };
+
+    $scope.toggleActive = function(object){
+        
+        $http( {
+            method: 'PUT',
+            params: { action: 'serlib_options_handler', table: $table, mod: 'active' },
+            url:    back_obj.ajax_url,
+            data:   object,
+		}).then(function successCallback(response) {
+            if(response.data == 1){
+                console.log(response);
+            }
+		}, function errorCallback(error) {
+			$scope.error =  error.data;            
+        });
+    }
+
+    $scope.delete = function(object, $index){
+        
+        $http( {
+            method: 'DELETE',
+            params: { action: 'serlib_options_handler', table: $table },
+            url:    back_obj.ajax_url,
+            data:   object,
+		}).then(function successCallback(response) {
+            if(response.data == 1){
+                $scope.ObjectList.splice($index, 1);
+            }
+		}, function errorCallback(error) {
+			$scope.error =  error.data;           
+        });
+        
+    }
+
+    $scope.getList();
 
 }]); 
 
@@ -54,22 +108,27 @@ function DialogController($scope, $mdDialog, $http, Instance, table) {
     $scope.Model = {};
     
     if(hasValue(Instance)){ 
-        $scope.title = 'Editar'
+        $scope.title    =   'Editar'
+        $params         =   { action: 'serlib_options_handler', table: table};
+        $scope.Model    =   angular.copy(Instance);
+        $method         =   'PUT';
     }else{ 
-        $scope.title = 'Crear';
+        $scope.title    =   'Crear';
+        $params         =   { action: 'serlib_options_handler', table: table }
+        $scope.Model    =   {};
+        $method         =   'POST';
     }
     
     $scope.submit = function() {
         $http( {
-            method: 'POST',
-            params: { action: 'serlib_options_handler', table: 'states', mod: 'POST' },
-            url: back_obj.ajax_url,
-            data: $scope.Model,
+            method: $method,
+            params: $params,
+            url:    back_obj.ajax_url,
+            data:   $scope.Model,
 		}).then(function successCallback(response) {
-			$scope.send = false;
-           $scope.message = response.data + ' correos enviados';
+			$mdDialog.hide(response);
 		}, function errorCallback(response) {
-			console.log('fallo cargando contactos', response);            
+			alert('fallo server', response.data);            
 		});
     };
 
