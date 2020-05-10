@@ -6,11 +6,14 @@ function serlib_auth_handler(){
     global $wpdb;
 
     if( $_SERVER['REQUEST_METHOD'] === 'GET' ){
-        $query = "SELECT * FROM ".$wpdb->prefix."cities ;";
-        $query2 = "SELECT * FROM ".$wpdb->prefix."states ;";
-        $results['cities'] = $wpdb->get_results( $query );
-        $results['states'] = $wpdb->get_results( $query2 );
-       
+        
+        $query = "SELECT * FROM ".$wpdb->prefix."states;";
+        
+        $results = $wpdb->get_results( $query );
+        
+        for($i = 0; $i < count($results); $i++ ){
+            $results[$i]->cities = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."cities WHERE state_id = ".$results[$i]->ID.";");
+        }
 
     }
 

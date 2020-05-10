@@ -125,7 +125,7 @@ NONCE_FIELD_PH
                       
                         
                         <div class="form-group s-45">      
-                            <selector model="Model.state_id" value-attr="ID" Label-attr="nombre" options="states"></selector>
+                            <selector model="Model.state_id" change="cityFilter(newValue)" value-attr="ID" Label-attr="nombre" options="states"></selector>
                         </div>
                         
                         <div class="form-group s-45">
