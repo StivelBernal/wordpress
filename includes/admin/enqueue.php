@@ -18,7 +18,7 @@ function serlib_admin_enqueue(){
   );
 
   wp_register_script( 
-      'serlib_options', plugins_url( '/assets/js/options.js', SER_PLUGIN_URL ), [], time(), true 
+      'serlib_options', plugins_url( '/assets/js/options.js', SER_PLUGIN_URL ), [], '1.0.0', true 
   );
 
   wp_localize_script( 'serlib_options', 'back_obj', [

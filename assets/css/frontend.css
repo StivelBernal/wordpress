@@ -15,9 +15,15 @@ body{
     user-select: none;
     height:20px;
 }
+.options-login {
+    margin: 10px 0;
+}
+.margin-0{
+    margin: 0 !important;
+}
 .register-login{
     font-weight: 600;
-    margin-left: 3px;
+    margin-top: 0px !important;
     text-decoration: underline;
 }
 .form-group {

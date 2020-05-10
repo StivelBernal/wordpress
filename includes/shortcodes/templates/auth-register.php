@@ -1,6 +1,6 @@
 NONCE_FIELD_PH
                        
-<div ng-app="AUTHApp">
+<div ng-app="serAuth">
     <div class="row center-center auth">
         <div ng-controller="registerController" class="s-80 ng-cloak">
             <div class="ser-form" style="min-heigth:400px;">

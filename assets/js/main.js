@@ -9,8 +9,35 @@
             rating:         $(this).rateit( 'value' )
         };
 
-        $.post( destino_obj.ajax_url, form, function(data){
+        $.post( front_obj.ajax_url, form, function(data){
             
         });
     });
 })(jQuery);
+
+
+var app = angular.module('serAuth', ['SER.selector', 'ngMaterial', 'ngMessages', 'SER.match'])
+    .config(function ($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('light-green');
+    })
+    .config(['$compileProvider', function ($compileProvider) {
+        $compileProvider.debugInfoEnabled(false);
+    }]);
+
+
+app.controller('loginController', ['$scope', '$http', '$mdDialog' 
+                ,function baseCrud($scope, $http, $mdDialog) {
+        
+    console.log('cargado');
+
+}]);
+
+
+app.controller('registerController', ['$scope', '$http', '$mdDialog' 
+                ,function baseCrud($scope, $http, $mdDialog) {
+        
+    console.log('cargado');
+
+}]);
+
