@@ -3,7 +3,7 @@ NONCE_FIELD_PH
 <div ng-app="serAuth">
     <div class="row center-center auth">
         <div ng-controller="registerController" class="s-80 ng-cloak">
-            <div class="ser-form" style="min-heigth:400px;">
+            <div class="ser-form" style="min-height:400px;">
                 
                 <div class="s-100" >
                     <div class="account-social"><h3>register_has_I18N</h3></div>
@@ -129,7 +129,7 @@ NONCE_FIELD_PH
                         </div>
                         
                         <div class="form-group s-45">
-                            <selector model="ModelQuestions" value-attr="ID" Label-attr="nombre" options="cities"></selector>
+                            <selector model="Model.city_id" value-attr="ID" Label-attr="nombre" options="cities"></selector>
                         </div> 
 
                         <div class="row s-100 center-center" style="margin-top:20px;">

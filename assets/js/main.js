@@ -36,8 +36,23 @@ app.controller('loginController', ['$scope', '$http', '$mdDialog'
 
 app.controller('registerController', ['$scope', '$http', '$mdDialog' 
                 ,function baseCrud($scope, $http, $mdDialog) {
-        
-    console.log('cargado');
+    
+        $scope.cities = []; 
+        $scope.states = [];
+
+        $http({
+            method: 'GET',
+            params: { action: 'serlib_auth_handler' },
+            url:    front_obj.ajax_url
+        }).then(function successCallback(response) {
+    
+           $scope.cities = response.data.cities; 
+           $scope.states = response.data.states;
+            
+        }, function errorCallback(response) {
+            console.log('fallo cargando states', response);            
+        });
+    
 
 }]);
 

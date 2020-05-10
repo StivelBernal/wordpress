@@ -21,6 +21,10 @@ body{
 .margin-0{
     margin: 0 !important;
 }
+.no-have-account{
+    margin-right: 0.18rem;
+}
+
 .register-login{
     font-weight: 600;
     margin-top: 0px !important;
@@ -155,8 +159,8 @@ body{
 .options-users{
     justify-content: space-evenly;
 }
-.md-select-menu-container.md-active{
-    z-index: 1000;
+.selector-dropdown li{ 
+    background-color: #e7e7e7;
 }
 
 form.register{

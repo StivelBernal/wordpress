@@ -26,6 +26,7 @@ include( 'includes/init.php' );
 include( 'process/save_post.php' );
 include( 'process/filter_content.php' );
 include( 'includes/frontend/enqueue.php' );
+include( 'process/frontend/auth.php' );
 include( 'process/rate_destino.php' );
 include( 'process/admin/options.php' );
 include( 'includes/admin/init.php' );
@@ -38,10 +39,14 @@ add_action( 'init', 'serlib_fovea_init' );
 add_action( 'save_post_destino', 'ser_save_post_admin', 10, 3 ); 
 add_filter( 'the_content', 'serlib_filter_destino_content' );
 add_action( 'wp_enqueue_scripts', 'serlib_enqueue_scripts', 100 );
+
+/**XHR*/
 /**solo superuser */
 add_action( 'wp_ajax_serlib_options_handler', 'serlib_options_handler' );
 /**usuarios registrados */
 add_action( 'wp_ajax_serlib_rate_destino', 'serlib_rate_destino' );
+/**publicos */
+add_action( 'wp_ajax_nopriv_serlib_auth_handler', 'serlib_auth_handler' );
 
 add_action( 'admin_init', 'serlib_admin_init' );
 add_action( 'admin_menu', 'serlib_admin_menus' );

@@ -37,13 +37,13 @@ NONCE_FIELD_PH
                             </md-checkbox>
                               
                             <p class=" margin-0 register-login lost_password">
-                                <a href="/auth/register/">Lost_your_ password?_I18N</a>
+                                <a href="/auth/recover-account/">Lost_your_ password?_I18N</a>
                             </p>
                         </div>
                         
                         <div class="row s-100 center-center" style="margin-top:20px;">
                             <div>
-                                <button ng-click="submit()" ng-disabled="registerForm.$invalid" class="bttn default s-100">register_I18N</button>
+                                <button ng-click="submit()" ng-disabled="registerForm.$invalid" class="bttn default s-100">login_I18N</button>
                             </div>
                         </div>
                          
@@ -55,6 +55,13 @@ NONCE_FIELD_PH
                                 <div class="facebook">Facebook</div>
                                 <div class="instagram">Instagram</div>       
                             </div>
+                        </div>
+
+                        <div class="s-100 options-login row space-around-center">
+                                                       
+                            <p>
+                                <span class="no-have-account" >No_tienes_cuenta_I18N </span> <a class="register-login"  href="/auth/register/">Registerme_I18N</a>
+                            </p>
                         </div>
 
                                        
