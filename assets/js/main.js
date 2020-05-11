@@ -39,20 +39,25 @@ app.controller('registerController', ['$scope', '$http', '$mdDialog'
     
         $scope.states = [];
         $scope.cities = [];
+        $scope.profile_photo = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
+        $scope.conocimientoPagina = [ 'Volante' , 'Correo Electrónico', 'Amigo', 'Redes Sociales', 'Otro' ],
+        $scope.Intereses = ['Hospedaje', 'Gastronomía', 'Sitios', 'Diversión', 'Cultura', 'Transporte' ];      
 
         $http({
             method: 'GET',
             params: { action: 'serlib_auth_handler' },
             url:    front_obj.ajax_url
         }).then(function successCallback(response) {
-            
-           $scope.states = response.data;
+           
+           $scope.cities_active = response.data.cities_active;
+           $scope.states = response.data.states;
             
         }, function errorCallback(response) {
             console.log('fallo cargando states', response);            
         });
 
         $scope.cityFilter = function(newValue){
+            $scope.Model.city_id = null;
             $scope.cities = newValue.cities; 
         }
     

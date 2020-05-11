@@ -18,6 +18,8 @@ NONCE_FIELD_PH
                 <form class="register form-show-hide " name="registerForm" ng-show="Model.rol == 'turista'"  method="post">
 
                     <h4>register_turista_I18N</h4>
+                    
+                  
 
                     <div class="row-wrap space-around-center" >
                        
@@ -29,6 +31,16 @@ NONCE_FIELD_PH
                                 <div class="instagram">Instagram</div>       
                             </div>
                             <div class="account-social"><h6>or_register_with_I18N</h6></div>
+                        </div>
+
+                        <div class="s-95" center-center">
+                            <div id="profile-image-container">
+
+                                <div><img id="img-profile"  src="{{profile_photo}}"></div> 
+                                <label class="photo-profile row center-center" for="photo-profile"><span class="icon_camera"></span></label>
+                                <input type="file" id="photo-profile" style="display: none;" (change)="viewFile($event)"> 
+
+                            </div>
                         </div>
 
                         <div class="form-group s-45">
@@ -124,12 +136,29 @@ NONCE_FIELD_PH
                     <div class="row-wrap space-around-center" >
                       
                         
-                        <div class="form-group s-45">      
+                        <div class="form-group s-45">
+                            <label for="telefono">Departamento_I18N</label>      
                             <selector model="Model.state_id" change="cityFilter(newValue)" value-attr="ID" Label-attr="nombre" options="states"></selector>
                         </div>
                         
                         <div class="form-group s-45">
+                            <label for="telefono">Ciudad_I18N</label>
                             <selector model="Model.city_id" value-attr="ID" Label-attr="nombre" options="cities"></selector>
+                        </div> 
+
+                        <div class="form-group s-45">
+                            <label for="telefono">Conocimiento_pagina_I18N</label>      
+                            <selector model="Model.conocimiento_pagina" change="cityFilter(newValue)"  options="Intereses"></selector>
+                        </div>
+                        
+                        <div class="form-group s-45">
+                            <label for="telefono">Intereses_I18N</label>
+                            <selector model="Model.intereses" options="conocimientoPagina"></selector>
+                        </div> 
+
+                        <div class="form-group s-45">
+                            <label for="telefono">Ciudades a visitar_I18N</label>
+                            <selector model="Model.city_active" value-attr="ID" Label-attr="nombre" options="cities_active"></selector>
                         </div> 
 
                         <div class="row s-100 center-center" style="margin-top:20px;">
@@ -159,98 +188,7 @@ NONCE_FIELD_PH
                             <div class="account-social"><h6>or_register_with_I18N</h6></div>
                         </div>
 
-                        <div class="form-group s-45">
-                            <label for="nombreComerciante">nombre_I18N<span class="required"  >*</span></label>
-                            <input type="text" name="nombreComerciante" ng-model="ModelComerciante.nombre" id="nombreComerciante" class="fovea-input input-text" maxlength="40" required>
-                            <div ng-messages="ComercianteForm.nombreComerciante.$error">
-                                <div ng-message="required">required_I18N</div>
-                            </div>
-                        </div>
-                        <div class="form-group s-45">
-                            <label for="apellidoComerciante">apellido_I18N<span class="required">*</span></label>
-                            <input type="text" name="apellidoComerciante" id="apellidoComerciante" ng-model="ModelComerciante.apellido" class="fovea-input input-text" maxlength="40" required>
-                            <div ng-messages="ComercianteForm.apellidoComerciante.$error">
-                                <div ng-message="required">required_I18N</div>
-                            </div>
-                        </div>
-                       
-                        <div class="form-group s-45">
-                            <label for="birthdateComerciante">fecha_nacimiento_I18N</label>
-                            <datepicker  date-format="yyyy-MM-dd" button-prev-title="previous month"  button-next-title="next month" date-year-title="Click aqui">
-                                <input  ng-model="ModelComerciante.birthday" name="birthdateComerciante" id="birthdateComerciante" type="text" required/>
-                            </datepicker>
-                            <div ng-messages="ComercianteForm.birthdateComerciante.$error">
-                                <div ng-message="required">required_I18N</div>
-                            </div>
-                          
-                        </div>
-
-                        <div class="form-group s-45">
-                            <label for="emailComerciante">email_I18N</label>
-                            <input type="email" class="fovea-input input-text" ng-model="ModelComerciante.email" name="emailComerciante" id="emailComerciante" maxlength="150" required>
-                            <div ng-messages="ComercianteForm.emailComerciante.$error">
-                                <div ng-message="required">required_I18N</div>
-                                <div ng-message="email">email_error_I18N</div>
-                            </div>
-                        </div>
-                        <div class="form-group s-45">
-                            <label for="telefonoComerciante">telefono</label>
-                            <input class="fovea-input input-text"  id="telefonoComerciante" ng-model="ModelComerciante.telefono" name="telefonoComerciante" maxlength="20" type="text">
-                            <div ng-messages="ComercianteForm.telefonoComerciante.$error">
-                                <div ng-message="required">required_I18N</div>
-                            </div>
-                        </div>
-                        <div class="form-group s-45" ng-cloak>
-                            <label for="passwordComerciante">password_I18N</label>
-                            <input class="fovea-input input-text" type="password" ng-model="ModelComerciante.password" 
-                                name="passwordComerciante" id="passwordComerciante" maxlength="255"  ng-pattern="/^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])).{6,}$/" required>
-                            <div ng-messages="ComercianteForm.passwordComerciante.$error">
-                                <div ng-message="required">required_I18N</div>
-                                <div ng-message="pattern">password_error_I18N</div>
-                            </div>
-                            
-                        </div>
-                        <div class="form-group s-45">
-                            <label for="passwordComerciante2">repeat_password_I18N</label>
-                            <input class="fovea-input input-text" type="password" match="ModelComerciante.password" 
-                            name="passwordComerciante2" ng-model="ModelComerciante.password_confirm"  id="passwordComerciante2" maxlength="255" required>
-                            <div ng-messages="ComercianteForm.passwordComerciante2.$error">
-                                <div ng-message="required">required_I18N</div>
-                                <div ng-message="match">password_error_matchI18N</div>
-                            </div>
-                        </div>
-                                   
-                    </div>
-                      
-                    <h4>register_aditional_I18N</h4>
-                    <div class="row-wrap space-around-center" >
                         
-                        <div class="form-group s-45">      
-                            <md-input-container class="s-field">
-                                <label>Departamento</label>
-                                <md-select  ng-model="Model.state_id" required>
-                                    <md-option ng-repeat="state in states" ng-value="state.ID">
-                                        {{state.nombre}}
-                                    </md-option>
-                                </md-select>
-                            </md-input-container>
-                        </div>
-                        <div class="form-group s-45">
-                            <md-input-container class="s-field">
-                                <label>Ciudad</label>
-                                <md-select  ng-model="Model.city_id" required>
-                                    <md-option ng-repeat="city in cities" ng-value="city.ID">
-                                        {{city.nombre}}
-                                    </md-option>
-                                </md-select>
-                                
-                            </md-input-container>
-                        </div>
-                        <div class="row s-100 center-center">
-                            <div >
-                                <button ng-click="submit()" ng-disabled="ComercianteForm.$invalid" class="bttn default s-100">register_I18N</button>
-                            </div>
-                        </div>
                     </div>
 
                 </form>
