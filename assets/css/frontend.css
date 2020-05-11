@@ -187,13 +187,13 @@ button[disabled]{
 }
 
 /*foto de perfil*/
-#profile-image-container{
+.profile-image-container{
     width:150px;
     height:150px;
     margin:10px auto 30px;
 }
     
-#profile-image-container div{
+.profile-image-container div{
       overflow:hidden;
       width:100%;
       height:100%;
@@ -202,14 +202,14 @@ button[disabled]{
 }
 
       
-#profile-image-container div img{
+.profile-image-container div img{
         width:100%;
         height:100%;
         margin: 0;    
 }
     
 
-#profile-image-container .photo-profile{
+.profile-image-container .photo-profile{
     width: 35px;
     height: 35px;
     border-radius: 100%;
@@ -222,7 +222,7 @@ button[disabled]{
     cursor:pointer;
     bottom:100%;
 }
-#profile-image-container > label > span:before{ 
+.profile-image-container > label > span:before{ 
     font-size: 19px;
 }
     
@@ -232,7 +232,35 @@ button[disabled]{
     top:0;
 }
 
+    
+#photo-profile2{
+    opacity:0;
+    position: absolute;
+    top:0;
+}
 
+#fotocopia_documento{
+
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+        
+}
+label[for="fotocopia_documento"]{
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(101, 92, 92);
+    background-color: rgb(224, 224, 224);
+    display: inline-block;
+    transition: all .5s;
+    cursor: pointer;
+    padding: 14px 25px !important;
+    text-transform: uppercase;
+    text-align: center;
+}
 
 
 
