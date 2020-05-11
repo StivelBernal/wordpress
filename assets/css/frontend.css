@@ -262,9 +262,10 @@ label[for="fotocopia_documento"]{
     text-align: center;
 }
 
-
-
-
+.multiple .selector-values li {
+    color:black !important;
+    background-color: antiquewhite !important;
+}
 
 
 

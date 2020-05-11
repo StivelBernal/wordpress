@@ -31,7 +31,7 @@ NONCE_FIELD_PH
                             <div class="account-social"><h6>or_register_with_I18N</h6></div>
                         </div>
 
-                        <div class="s-95" center-center">
+                        <div class="s-95 center-center">
                             <div class="profile-image-container">
 
                                 <div><img id="img-profile" class="img-profile"  ng-src="{{profile_photo}}"></div> 
@@ -135,28 +135,43 @@ NONCE_FIELD_PH
                       
                         
                         <div class="form-group s-45">
-                            <label for="telefono">Departamento_I18N</label>      
-                            <selector model="Model.state_id" change="cityFilter(newValue)" value-attr="ID" Label-attr="nombre" options="states"></selector>
+                            <label>Departamento_I18N</label>      
+                            <selector model="Model.state_id" name="departamento" change="cityFilter(newValue)" require="true" value-attr="ID" Label-attr="nombre" options="states"></selector>
+                            <div ng-messages="registerForm.departamento.$error">
+                                <div ng-message="required">required_I18N</div>
+                            </div>
                         </div>
                         
                         <div class="form-group s-45">
-                            <label for="telefono">Ciudad_I18N</label>
-                            <selector model="Model.city_id" value-attr="ID" Label-attr="nombre" options="cities"></selector>
+                            <label>Ciudad_I18N</label>
+                            <selector model="Model.city_id" name="ciudad" value-attr="ID" require="true" Label-attr="nombre" options="cities" require="true"></selector>
+                            <div ng-messages="registerForm.ciudad.$error">
+                                <div ng-message="required">required_I18N</div>
+                            </div>
                         </div> 
 
                         <div class="form-group s-45">
-                            <label for="telefono">Conocimiento_pagina_I18N</label>      
-                            <selector model="Model.conocimiento_pagina" options="conocimientoPagina" ></selector>
+                            <label>Conocimiento_pagina_I18N</label>      
+                            <selector name="conocimiento" require="true" model="Model.conocimiento_pagina" require="true" options="conocimientoPagina" ></selector>
+                            <div ng-messages="registerForm.conocimiento.$error">
+                                <div ng-message="required">required_I18N</div>
+                            </div>
                         </div>
                         
                         <div class="form-group s-45">
-                            <label for="telefono">Intereses_I18N</label>
-                            <selector model="Model.intereses" options=" Intereses" multi="true"></selector>
+                            <label>Intereses_I18N</label>
+                            <selector name="intereses" require="true" model="Model.intereses" options=" Intereses" multi="true"></selector>
+                            <div ng-messages="registerForm.intereses.$error">
+                                <div ng-message="required">required_I18N</div>
+                            </div>
                         </div> 
 
                         <div class="form-group s-45">
-                            <label for="telefono">Ciudades a visitar_I18N</label>
-                            <selector model="Model.city_active" value-attr="ID" Label-attr="nombre" multi="true" options="cities_active"></selector>
+                            <label>Ciudades a visitar_I18N</label>
+                            <selector name="ciudades" require="true" model="Model.city_active" value-attr="ID" Label-attr="nombre" multi="true" options="cities_active"></selector>
+                            <div ng-messages="registerForm.ciudades.$error">
+                                <div ng-message="required">required_I18N</div>
+                            </div>
                         </div> 
 
                         <div class="row s-100 center-center" style="margin-top:20px;">
@@ -187,7 +202,7 @@ NONCE_FIELD_PH
                         </div>
 
 
-                        <div class="s-95" center-center">
+                        <div class="s-95 center-center">
                             <div class="profile-image-container">
 
                                 <div><img id="img-profile2" class="img-profile"  ng-src="{{profile_photo}}"></div> 
@@ -214,7 +229,7 @@ NONCE_FIELD_PH
                        
                         <div class="form-group s-45">
                             <label for="c_birthdate">fecha_nacimiento_I18N</label>
-                            <datepicker  date-format="yyyy-MM-dd" button-prev-title="previous month"  button-next-title="next month" date-year-title="Click aqui">
+                            <datepicker date-format="yyyy-MM-dd" button-prev-title="previous month"  button-next-title="next month" date-year-title="Click aqui">
                                 <input  ng-model="Model.birthday" name="birthdate" id="c_birthdate" type="text" required/>
                             </datepicker>
                             <div ng-messages="c_Form.birthdate.$error">
@@ -263,7 +278,7 @@ NONCE_FIELD_PH
                         <div class="form-group row space-around-center s-45">
                          
                             <div class="S-50">
-                                <md-checkbox  aria-label="terminos_condiciones_I18N" ng-model="Model.terms">
+                                <md-checkbox aria-label="terminos_condiciones_I18N" ng-model="Model.terms">
                                     <a href="/terminos" target="_blank" >terminos_condiciones_I18N</a>
                                 </md-checkbox>
                                 <div ng-messages >
@@ -272,7 +287,7 @@ NONCE_FIELD_PH
                             </div>
 
                             <div class="S-50">
-                                <md-checkbox  aria-label="politica_privacidad_I18N" ng-model="Model.policy">
+                                <md-checkbox aria-label="politica_privacidad_I18N" ng-model="Model.policy">
                                     <a href="/politicas" target="_blank" >politica_privacidad_I18N</a>
                                 </md-checkbox>
                                 <div ng-messages >
@@ -283,19 +298,28 @@ NONCE_FIELD_PH
                         </div>
 
                         <div class="form-group s-30">
-                            <label >Tipo_documento_I18N</label>      
-                            <selector model="Model.TipoDocumento" options="tipo_documento"></selector>
+                            <label>Tipo_documento_I18N</label>      
+                            <selector name="tipo_documento" model="Model.tipo_documento" options="tipo_documento" require="true"></selector>
+                            <div ng-messages="c_Form.tipo_documento.$error">
+                                <div ng-message="required">required_I18N</div>
+                            </div>
                         </div>
 
                         <div class="form-group s-32">
                             <label for="d_number">Numero_documento_I18N</label>      
-                            <input type="text" name="apellido"   id="d_number" class="fovea-input input-text" maxlength="20" required>
+                            <input type="text" name="d_number" ng-model="Model.numero_documento" id="d_number" required class="fovea-input input-text" maxlength="20" >
+                            <div ng-messages="c_Form.d_number.$error">
+                                <div ng-message="required">required_I18N</div>
+                            </div>
                         </div>
 
                         <div class="form-group s-24">
-                            <label >Fotocopia_documento_I18N</label>
+                            <label>Fotocopia_documento_I18N</label>
                             <label for="fotocopia_documento" class="input-file-label">{{ !File1.name ? 'Seleccionar archivo': File1.name }} </label>      
-                            <input type="file" ng-model="File1" accept="image/png, image/jpeg" app-filereader style="display:none;"  id="fotocopia_documento"></selector>
+                            <input name="fotocopia_documento" type="file" ng-model="File" accept="image/png, image/jpeg" app-filereader style="display:none;"  id="fotocopia_documento"></selector>
+                            <div ng-messages >
+                                <div  ng-if="!File">required_I18N</div>
+                            </div>
                             
                         </div>
                     
@@ -305,13 +329,19 @@ NONCE_FIELD_PH
                     <div class="row-wrap space-around-center" >
 
                         <div class="form-group s-45">
-                            <label >Conocimiento_pagina_I18N</label>      
-                            <selector model="Model.conocimiento_pagina" change="cityFilter(newValue)" options="Intereses"></selector>
+                            <label>Conocimiento_pagina_I18N</label>      
+                            <selector name="conocimiento" require="true" model="Model.conocimiento_pagina" change="cityFilter(newValue)" options="Intereses"></selector>
+                            <div ng-messages="c_Form.conocimiento.$error">
+                                <div ng-message="required">required_I18N</div>
+                            </div>
                         </div>
 
                         <div class="form-group s-45">
-                            <label >Ciudades a visitar_I18N</label>
-                            <selector model="Model.city_active" value-attr="ID" Label-attr="nombre" multi="true" options="cities_active"></selector>
+                            <label>Ciudades a visitar_I18N</label>
+                            <selector name="ciudadesVisitar" require="true" model="Model.city_active" value-attr="ID" Label-attr="nombre" multi="true" options="cities_active"></selector>
+                            <div ng-messages="c_Form.ciudadesVisitar.$error">
+                                <div ng-message="required">required_I18N</div>
+                            </div>
                         </div> 
                         
                     </div>
