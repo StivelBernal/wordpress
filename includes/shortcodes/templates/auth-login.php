@@ -7,7 +7,7 @@ NONCE_FIELD_PH
 
                 <form class="register form-show-hide " name="loginForm">
 
-                    <h4>login__I18N</h4>
+                    <h4>login_I18N</h4>
 
                     <div class="row-wrap " >
                                              
@@ -37,7 +37,7 @@ NONCE_FIELD_PH
                             </md-checkbox>
                               
                             <p class=" margin-0 register-login lost_password">
-                                <a href="/auth/recover-account/">Lost_your_ password?_I18N</a>
+                                <a href="/auth/recover-account/">Lost_your_pass_I18N</a>
                             </p>
                         </div>
                         
@@ -47,7 +47,7 @@ NONCE_FIELD_PH
                             </div>
                         </div>
                          
-                        <div class="s-95" style="margin-top:20px;">
+                        <div class="s-100" style="margin-top:20px; margin:0 10px;">
                             
                             <div class="account-social"><h6>or_login_with_I18N</h6></div>
                             <div class="socials-buttons-auth row">

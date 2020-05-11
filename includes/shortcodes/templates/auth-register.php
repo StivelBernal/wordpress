@@ -9,8 +9,8 @@ NONCE_FIELD_PH
                     <div class="account-social"><h3>register_has_I18N</h3></div>
                     <md-radio-group class="row options-users" ng-model="Model.rol">
 
-                        <md-radio-button value="turista" class="md-primary">turista_I18N</md-radio-button>
-                        <md-radio-button value="comerciante">comerciante_I18N </md-radio-button>
+                        <md-radio-button value="turista" class="md-primary">turista_rol_I18N</md-radio-button>
+                        <md-radio-button value="comerciante">comerciante_rol_I18N </md-radio-button>
 
                     </md-radio-group>
                 </div>
@@ -77,7 +77,7 @@ NONCE_FIELD_PH
                         </div>
                         
                         <div class="form-group s-45" ng-cloak>
-                            <label for="password">password_I18N</label>
+                            <label for="password">password1_I18N</label>
                             <input class="fovea-input input-text" type="password" ng-model="Model.password" name="password" id="password" maxlength="255"  
                                     ng-pattern="/^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])).{6,}$/" required>
                             <div ng-messages="registerForm.password.$error">
@@ -166,6 +166,14 @@ NONCE_FIELD_PH
                             </div>
                         </div> 
 
+                        <div class="form-group s-45" ng-if="Model.conocimiento_pagina === 'Otro'">
+                            <label for="telefono">otro_I18N</label>
+                            <input class="fovea-input input-text"  id="otro" ng-model="Model.conocimiento_pagina_otro" name="otro" maxlength="40" required type="text">
+                            <div ng-messages="registerForm.otro.$error">
+                                <div ng-message="required">required_I18N</div>
+                            </div>
+                        </div>
+
                         <div class="form-group s-45">
                             <label>Ciudades a visitar_I18N</label>
                             <selector name="ciudades" require="true" model="Model.city_active" value-attr="ID" Label-attr="nombre" multi="true" options="cities_active"></selector>
@@ -175,8 +183,8 @@ NONCE_FIELD_PH
                         </div> 
 
                         <div class="row s-100 center-center" style="margin-top:20px;">
-                            <div >
-                                <button ng-click="submit()" ng-disabled="registerForm.$invalid" class="bttn default s-100">register_I18N</button>
+                            <div>
+                                <button ng-click="submit()" ng-disabled="registerForm.$invalid || !Model.terms === true || !Model.policy === true" class="bttn default s-100">register_button_I18N</button>
                             </div>
                         </div>
                         
@@ -248,7 +256,7 @@ NONCE_FIELD_PH
                         </div>
                         
                         <div class="form-group s-45" ng-cloak>
-                            <label for="c_password">password_I18N</label>
+                            <label for="c_password">password1_I18N</label>
                             <input class="fovea-input input-text" type="password" ng-model="Model.password" name="password" id="c_password" maxlength="255"  
                                     ng-pattern="/^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])).{6,}$/" required>
                             <div ng-messages="c_Form.password.$error">
@@ -315,7 +323,7 @@ NONCE_FIELD_PH
 
                         <div class="form-group s-24">
                             <label>Fotocopia_documento_I18N</label>
-                            <label for="fotocopia_documento" class="input-file-label">{{ !File1.name ? 'Seleccionar archivo': File1.name }} </label>      
+                            <label for="fotocopia_documento" class="input-file-label">{{ !File.name ? 'Seleccionar archivo': File.name }} </label>      
                             <input name="fotocopia_documento" type="file" ng-model="File" accept="image/png, image/jpeg" app-filereader style="display:none;"  id="fotocopia_documento"></selector>
                             <div ng-messages >
                                 <div  ng-if="!File">required_I18N</div>
@@ -343,6 +351,12 @@ NONCE_FIELD_PH
                                 <div ng-message="required">required_I18N</div>
                             </div>
                         </div> 
+
+                        <div class="row s-100 center-center" style="margin-top:20px;">
+                            <div > 
+                                <button ng-click="submit()" ng-disabled="c_Form.$invalid || !Model.terms === true || !Model.policy === true || !File" class="bttn default s-100">register_button_I18N</button>
+                            </div>
+                        </div>
                         
                     </div>
 
