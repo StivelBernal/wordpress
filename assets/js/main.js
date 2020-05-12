@@ -97,7 +97,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         }else{
             
             $scope.profile_photo = hasValue($scope.Instance.picture) ? $scope.Instance.picture: $scope.profile_photo;
-            $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.name, email: $scope.Instance.email, _wpnonce: angular.element('#_wpnonce').val() };
+            $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, _wpnonce: angular.element('#_wpnonce').val() };
             
         }
         
