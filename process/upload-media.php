@@ -2,8 +2,8 @@
 
 function serlib_uploader(){  
     
-    $profilepicture = $_FILES['files']['name'];
-
+    $profilepicture = $_FILES['files'];
+    // $_GET['id']
     $wordpress_upload_dir = wp_upload_dir();
     // $wordpress_upload_dir['path'] is the full server path to wp-content/uploads/2017/05, for multisite works good as well
     // $wordpress_upload_dir['url'] the absolute URL to the same folder, actually we do not need it, just to show the link to file
@@ -15,6 +15,8 @@ function serlib_uploader(){
     if( empty( $profilepicture ) )
         die( 'File is not selected.' );
     
+       
+
     if( $profilepicture['error'] )
         die( $profilepicture['error'] );
     
@@ -45,10 +47,18 @@ function serlib_uploader(){
     
         // Generate and save the attachment metas into the database
         wp_update_attachment_metadata( $upload_id, wp_generate_attachment_metadata( $upload_id, $new_file_path ) );
-    
-        // Show the uploaded file in browser
-        wp_redirect( $wordpress_upload_dir['url'] . '/' . basename( $new_file_path ) );
+        
+        $output  =  [ 'success' => $upload_id ];
+        
+        if( $_GET["destino"] === 'photo_profile' ){
+            update_user_meta( $_GET['id'], 'user_photo', $new_file_path );
+        }else if($_GET["destino"] === 'file_document'){
+            update_user_meta( $_GET['id'], 'file_document', $new_file_path );
+        }
+        
+        wp_send_json($output);
     
     }
 
+    die();
 }

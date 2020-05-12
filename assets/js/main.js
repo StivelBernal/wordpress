@@ -110,51 +110,68 @@ app.controller('registerController', ['$scope', '$http', '$mdDialog'
             
             if(hasValue($scope.photo) ) prom++;
             if(hasValue($scope.File) ) prom++;
+
+            $scope.afterSubmit = function(){
+                prom--;
+                if(prom === 0){
+                    $scope.finish();
+                }
+            }
+
             if(hasValue($scope.photo) ){
-                
-                
+                                
                 var formData = new FormData();
                 formData.append('files', $scope.photo);
             
                 angular.element.ajax({
                     type: 'POST',
-                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=photo_profile',
+                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=photo_profile&id='+id,
                     data: formData,
                     contentType: false,
                     cache: false,
                     processData:false,
-                    success: function(success){
-                        if(response.data.success){
-                            $scope.submitFiles(response.data.success);
-                          
+                    success: function(response){
+                        if(response.success){
+                            
+                        }else if(response.data.error){
+                            $scope.error =  response.error; 
                         }
+                        $scope.afterSubmit();
                     },
                     error: function(error){
-                        $scope.is_submit = false;
-                        $scope.error =  error.data; 
+                        $scope.error =  error; 
+                        $scope.afterSubmit();
                     }
                 });
 
-               return;
             }
 
             if(hasValue($scope.File) ){
-                $http( {
-                method: 'POST',
-                params: { action: 'serlib_uploader', destino: 'photo_profile'},
-                url:    front_obj.ajax_url,
-                data:   $scope.File,
-            }).then(function successCallback(response) {
-                
-                console.log(response);
 
-                if(response.data.success){
-                    $scope.submitFiles(response.data.success); 
-                }
-            }, function errorCallback(error) {
-                $scope.is_submit = false;
-                $scope.error =  error.data;            
-            });
+                var formData = new FormData();
+                formData.append('files', $scope.File);
+
+                angular.element.ajax({
+                    type: 'POST',
+                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=file_document&id='+id,
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(response){
+                        if(response.success){
+                            
+                        }else if(response.error){
+                            $scope.error =  response.error; 
+                            
+                        }
+                        $scope.afterSubmit();
+                    },
+                    error: function(error){
+                        $scope.error =  error; 
+                        $scope.afterSubmit();
+                    }
+                });
             }
             
         }

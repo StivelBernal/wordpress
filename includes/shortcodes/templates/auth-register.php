@@ -377,9 +377,6 @@ NONCE_FIELD_PH
                 <div ng-if="user_created"  class="s-100"  >
                     <p style="text-align:center; color:green;">Usuario_creado_I18N</p>
                 </div>
-                <div  class="s-100"  >
-                    <button style="text-align:center; color:green;" ng-click="submitFiles(1)">test</button>
-                </div>
 
             </div>
         </div>
