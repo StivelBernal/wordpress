@@ -149,7 +149,7 @@ function serlib_auth_handler(){
         
         $output     =     [ 'error' => __('Usuario no encontrado', 'serlib'),
                             'code' => 401];
-                            
+
         $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
         
         if( !wp_verify_nonce( $nonce, 'serlib_auth' ) ){
@@ -161,49 +161,48 @@ function serlib_auth_handler(){
               
               wp_send_json($output);
         }
+        $creds = null;
 
         switch ($objDatos->metodo) {
             case 'directo':
                 
-                $user                   =   wp_signon([
+                $creds                   =   [
                     'user_login'          =>  sanitize_text_field($objDatos->email),
                     'user_password'       =>  sanitize_text_field($objDatos->password),
                     'remember'            =>  boolval($objDatos->remembermme)
-                  ], false);
+                  ];
 
                 break;
             case 'facebook':
                
-                $user                   =   wp_signon([
+                $creds                   =  [
                     'user_login'          =>  sanitize_text_field($objDatos->email),
                     'user_password'       =>  sanitize_text_field($objDatos->Id+'ser'+$objDatos->email),
                     'remember'            =>  true
-                  ], false);
+                  ];
 
                 break;
 
             case 'google':
-                echo "i es igual a 2";
+                
                 break;
 
             case 'instagram':
-                echo "i es igual a 2";
+                
                 break;
         }
-/*
-        wp_set_current_user( $user_id, $user->user_login );
-            wp_set_auth_cookie( $user_id );
-            do_action( 'wp_login', $user->user_login, $user );*/
+        if($creds !== null){
 
-
-      
-
-        if( is_wp_error($user) ){
+            $user   =   wp_signon( $creds, is_ssl());
+           
+            if( is_wp_error($user) ){
+                wp_send_json($output);
+            }
+                    
+            $output['success']       =   $user;
             wp_send_json($output);
+
         }
-        
-        $output['success']       =   $user;
-        wp_send_json($output);
 
     }
 
