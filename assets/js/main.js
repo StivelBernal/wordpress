@@ -35,11 +35,12 @@ app.controller('loginController', ['$scope', '$http', '$controller',
                             action: 'login',
                         }
                     });
+                    
                                        
                     $scope.error  = false;
                     $scope.user_login = false;
                     $scope.is_submit = false;
-                    $scope.Model = { remembermme: false, _wpnonce: angular.element('#_wpnonce').val(), metodo: 'directo' }
+                    $scope.Model = { remembermme: false, _wpnonce: angular.element('#_wpnonce').val(), modo: 'directo' }
 
                     $scope.submit = function(){
                         if($scope.is_submit) return;
@@ -81,8 +82,25 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                 action: 'register',
             }
         });
-        $scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
-        console.log($scope.Instance);
+        
+        
+        $scope.profile_photo = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
+       
+
+        //$scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
+         //$scope.Instance = {"_wpnonce":"519fcb020d","modo":"facebook","name":"Stivel Bernal",
+       //                 "email":"monotiti_25@hotmail.com",
+         //               "picture":"http://graph.facebook.com/3560903340593605/picture?type=large"};
+        
+        if( !hasValue($scope.Instance ) ){
+            $scope.Model = { modo: 'directo', _wpnonce: angular.element('#_wpnonce').val() };
+        }else{
+            
+            $scope.profile_photo = hasValue($scope.Instance.picture) ? $scope.Instance.picture: $scope.profile_photo;
+            $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.name, email: $scope.Instance.email, _wpnonce: angular.element('#_wpnonce').val() };
+            
+        }
+        
         /**Options */
         $scope.error  = false;
         $scope.user_created = false;
@@ -90,9 +108,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         $scope.states = [];
         $scope.modo = 'directo';
         $scope.cities = [];
-        $scope.Model = { modo: 'directo', _wpnonce: angular.element('#_wpnonce').val() };
         $scope.photo = [], $scope.files = [];
-        $scope.profile_photo = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
         $scope.conocimientoPagina = [ 'Volante' , 'Correo Electrónico', 'Amigo', 'Redes Sociales', 'Otro' ],
         $scope.Intereses = ['Hospedaje', 'Gastronomía', 'Sitios', 'Diversión', 'Cultura', 'Transporte' ];  
         $scope.tipo_documento = ['Cedula ciudadania', 'Pasaporte', 'Visa',  'Cedula Extrangera' ];      
@@ -114,7 +130,6 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             $scope.Model.city_id = null;
             $scope.cities = newValue.cities; 
         }
-
         
         if ( $scope.Model.rol === 'turista' && !$scope.registerForm.$valid ) return; 
         if ( $scope.Model.rol === 'comerciante' && $scope.c_Form.$valid ) return;
@@ -275,7 +290,7 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
                 case 'instagram':
 
                     sessionStorage.setItem('auth', JSON.stringify(datos) );
-                    window.location = 'auth/register';
+                    window.location = '/auth/register';
                     break;
                     
             }
@@ -311,7 +326,6 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
         switch (red) {
 
             case 'google':
-                
 
                 break;
 
@@ -319,48 +333,37 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
             case 'facebook':
                 
                 FB.login(function(response){
-
                     validarUsuario();
-            
                 }, {scope: 'public_profile, email'})
-                
 
                 function validarUsuario(){
-
                     FB.getLoginStatus(function(response){
-                
                         statusChangeCallback(response);
-                
                     })
-                
                 }
 
                 function statusChangeCallback(response){
-
                     if(response.status === 'connected'){
-                
                         testApi();
-                
                     }else{
                         $scope.error = 'hubo un error con facebook por favor intente nuevamente';
                     }
-                
                 }
 
                 function testApi(){
-
                     FB.api('/me?fields=id,name,last_name,email,picture,birthday',function(response){
-                
-                        if(response.email == null){
-
-                        }else{
-
-                            var picture = "http://graph.facebook.com/"+response.id+"/picture?type=large";
+                        if(response.email !== null){
+                            var picture = "http://graph.facebook.com/"+response.id+"/picture?type=large";    
+                            console.log(response);
+                            return;
                             
-                            $scope.ValidateUser( {  _wpnonce: angular.element('#_wpnonce').val(), modo: 'facebook', name: response.name, email: response.email, picture: picture });
-
+                            $scope.ValidateUser( 
+                                {  _wpnonce: angular.element('#_wpnonce').val(),
+                                 modo: 'facebook', name: response.name,
+                                  email: response.email, picture: picture
+                                }
+                            );
                         }
-
                     });
                 }
 

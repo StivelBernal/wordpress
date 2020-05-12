@@ -16,6 +16,7 @@ function serlib_auth_handler(){
         for($i = 0; $i < count($results['states']); $i++ ){
             $results['states'][$i]->cities = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."cities WHERE state_id = ".$results['states'][$i]->ID.";");
         }
+        wp_send_json($results);
 
     }
 
@@ -163,7 +164,7 @@ function serlib_auth_handler(){
         }
         $creds = null;
 
-        switch ($objDatos->metodo) {
+        switch ($objDatos->modo) {
             case 'directo':
                 
                 $creds                   =   [
