@@ -274,7 +274,7 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
                 case 'google':
                 case 'instagram':
 
-                    sessionStorage.setItem('auth', JSON.stringify($datos) );
+                    sessionStorage.setItem('auth', JSON.stringify(datos) );
                     window.location = 'auth/register';
                     break;
                     
