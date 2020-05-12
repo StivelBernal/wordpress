@@ -59,9 +59,9 @@ NONCE_FIELD_PH
                             
                             <div class="account-social"><h6>or_login_with_I18N</h6></div>
                             <div class="socials-buttons-auth row">
-                                <div class="google ">Google</div>
-                                <div class="facebook">Facebook</div>
-                                <div class="instagram">Instagram</div>       
+                                <div ng-click="AuthSocial('google')" class="google ">Google</div>
+                                <div ng-click="AuthSocial('facebook')" class="facebook">Facebook</div>
+                                <div ng-click="AuthSocial('instagram')" class="instagram">Instagram</div>       
                             </div>
                         </div>
 

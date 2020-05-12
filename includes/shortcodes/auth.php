@@ -1,9 +1,38 @@
 <?php
 
+function serlib_footer_scripts(){
+
+  // 70b319466e82d758dd86ee4988cb4161
+  echo "<script>
+              window.fbAsyncInit = function() {
+              FB.init({
+                  appId      : '808181629710199',
+                  cookie     : true,
+                  xfbml      : true,
+                  version    : 'v6.0'
+              });
+                  
+              FB.AppEvents.logPageView();   
+                  
+              };
+          
+              (function(d, s, id){
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {return;}
+              js = d.createElement(s); js.id = id;
+              js.src = 'https://connect.facebook.net/en_US/sdk.js';
+              fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+          </script>";
+
+}
+
+
 function serlib_login_form_shortcode(){
   if( is_user_logged_in() ){
     return '';
   }
+  add_action('wp_footer', 'serlib_footer_scripts');
 
   $formHTML               = file_get_contents( 'templates/auth-login.php', true );
 
@@ -30,9 +59,11 @@ function serlib_login_form_shortcode(){
 
 function serlib_register_form_shortcode(){
     if( is_user_logged_in() ){
-   //   return '';
+      return '';
     }
-  
+
+    add_action('wp_footer', 'serlib_footer_scripts');
+
     $formHTML = file_get_contents( 'templates/auth-register.php', true );
     
     $formHTML               = str_replace(
@@ -61,7 +92,6 @@ function serlib_register_form_shortcode(){
       wp_nonce_field( 'serlib_auth', '_wpnonce', true, false ),
       $formHTML
     );
-    
   
     return $formHTML;
   }

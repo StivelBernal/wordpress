@@ -26,8 +26,15 @@ var app = angular.module('serAuth', ['SER.selector', 'ngMaterial', 'ngMessages',
     }]);
 
 
-app.controller('loginController', ['$scope', '$http', '$mdDialog' 
-                ,function loginController($scope, $http, $mdDialog) {
+app.controller('loginController', ['$scope', '$http', '$controller', 
+                function loginController($scope, $http, $controller) {
+
+                    $controller('authSocialController', {
+                        $scope: $scope,
+                        Config: {
+                            action: 'login',
+                        }
+                    });
                                        
                     $scope.error  = false;
                     $scope.user_login = false;
@@ -65,9 +72,15 @@ app.controller('loginController', ['$scope', '$http', '$mdDialog'
 }]);
 
 
-app.controller('registerController', ['$scope', '$http', '$mdDialog' 
-                ,function registerController($scope, $http, $mdDialog) {
+app.controller('registerController', ['$scope', '$http', '$controller',  
+                ,function registerController($scope, $http, $controller ) {
         
+        $controller('authSocialController', {
+            $scope: $scope,
+            Config: {
+                action: 'register',
+            }
+        });
         /**Options */
         $scope.error  = false;
         $scope.user_created = false;
@@ -246,5 +259,79 @@ app.controller('registerController', ['$scope', '$http', '$mdDialog'
 });
 
 
+/**Registro con facebook - google - instagram */
+app.controller('authSocialController', ['$scope', '$http', 'Config', function authSocialController($scope, $http,  Config) {
+                         console.log('se cargo socials', Config);   
+    $scope.AuthSocial = function(red){
+                       
 
-       
+       // localStorage.setItem('social', 'objecto con los datos en caso de que no este registrado lo pedimos cuando cargue el registro')
+        switch (red) {
+
+            case 'google':
+                
+
+                break;
+            case 'facebook':
+                
+                FB.login(function(response){
+
+                    validarUsuario();
+            
+                }, {scope: 'public_profile, email'})
+                
+
+                function validarUsuario(){
+
+                    FB.getLoginStatus(function(response){
+                
+                        statusChangeCallback(response);
+                
+                    })
+                
+                }
+
+                function statusChangeCallback(response){
+
+                    if(response.status === 'connected'){
+                
+                        testApi();
+                
+                    }else{
+                        /** MOSTRAR ERROR DE QUE NO ESTA REGISTRADO  
+                         * 
+                         * Window.location = register;
+                        */
+                        alert('error');
+                
+                    }
+                
+                }
+
+                function testApi(){
+
+                    FB.api('/me?fields=id,name,email,picture',function(response){
+                
+                        if(response.email == null){
+
+                        }else{
+
+                            var email = response.email;
+                            var nombre = response.name;
+                            var foto = "http://graph.facebook.com/"+response.id+"/picture?type=large";
+                            console.log(response);
+                            
+                        }
+
+                    });
+                }
+
+                break;
+            case 'Instagram':
+        
+                
+                break;
+        }
+    }
+                 
+}]);

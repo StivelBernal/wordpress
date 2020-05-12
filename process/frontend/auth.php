@@ -2,6 +2,7 @@
 
 function serlib_auth_handler(){
     
+    
     global $wpdb;
 
     if( $_SERVER['REQUEST_METHOD'] === 'GET' ){
