@@ -280,6 +280,7 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
                     
             }
         }
+
         $scope.ValidateUser = function(datos){
             
             $http( {
@@ -356,7 +357,7 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
 
                             var picture = "http://graph.facebook.com/"+response.id+"/picture?type=large";
                             
-                            $scope.AuthSocial( {  _wpnonce: angular.element('#_wpnonce').val(), modo: 'facebook', name: response.name, email: response.email, picture: picture });
+                            $scope.ValidateUser( {  _wpnonce: angular.element('#_wpnonce').val(), modo: 'facebook', name: response.name, email: response.email, picture: picture });
 
                         }
 
