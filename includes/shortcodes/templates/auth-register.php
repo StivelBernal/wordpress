@@ -167,8 +167,8 @@ NONCE_FIELD_PH
                         </div> 
 
                         <div class="form-group s-45" ng-if="Model.conocimiento_pagina === 'Otro'">
-                            <label for="telefono">otro_I18N</label>
-                            <input class="fovea-input input-text"  id="otro" ng-model="Model.conocimiento_pagina_otro" name="otro" maxlength="40" required type="text">
+                            <label for="otro">otro_I18N</label>
+                            <input class="fovea-input input-text"  id="otro" ng-model="Model.conocimiento_pagina_otro" name="otro" maxlength="80" required type="text">
                             <div ng-messages="registerForm.otro.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
@@ -184,7 +184,8 @@ NONCE_FIELD_PH
 
                         <div class="row s-100 center-center" style="margin-top:20px;">
                             <div>
-                                <button ng-click="submit()" ng-disabled="registerForm.$invalid || !Model.terms === true || !Model.policy === true" class="bttn default s-100">register_button_I18N</button>
+                                <button ng-click="submit()" ng-disabled="registerForm.$invalid || !Model.terms === true || !Model.policy === true" class="bttn default s-100">
+                                <div ng-if="is_submit" class="lds-ripple-small"><div></div><div></div></div> register_button_I18N</button>
                             </div>
                         </div>
                         
@@ -327,8 +328,7 @@ NONCE_FIELD_PH
                             <input name="fotocopia_documento" type="file" ng-model="File" accept="image/png, image/jpeg" app-filereader style="display:none;"  id="fotocopia_documento"></selector>
                             <div ng-messages >
                                 <div  ng-if="!File">required_I18N</div>
-                            </div>
-                            
+                            </div> 
                         </div>
                     
                     </div>
@@ -344,6 +344,14 @@ NONCE_FIELD_PH
                             </div>
                         </div>
 
+                        <div class="form-group s-45" ng-if="Model.conocimiento_pagina === 'Otro'">
+                            <label for="c_otro">otro_I18N</label>
+                            <input class="fovea-input input-text"  id="c_otro" ng-model="Model.conocimiento_pagina_otro" name="otro" maxlength="80" required type="text">
+                            <div ng-messages="c_Form.otro.$error">
+                                <div ng-message="required">required_I18N</div>
+                            </div>
+                        </div>
+
                         <div class="form-group s-45">
                             <label>Ciudades a visitar_I18N</label>
                             <selector name="ciudadesVisitar" require="true" model="Model.city_active" value-attr="ID" Label-attr="nombre" multi="true" options="cities_active"></selector>
@@ -354,13 +362,25 @@ NONCE_FIELD_PH
 
                         <div class="row s-100 center-center" style="margin-top:20px;">
                             <div > 
-                                <button ng-click="submit()" ng-disabled="c_Form.$invalid || !Model.terms === true || !Model.policy === true || !File" class="bttn default s-100">register_button_I18N</button>
+                                <button ng-click="submit()" ng-disabled="c_Form.$invalid || !Model.terms === true || !Model.policy === true || !File" class="bttn default s-100">
+                                <div ng-if="is_submit" class="lds-ripple-small"><div></div><div></div></div>register_button_I18N</button>
                             </div>
                         </div>
                         
                     </div>
 
                 </form>
+
+                <div ng-if="error" class="s-100"  >
+                    <p style="text-align:center; color:red;">{{error}}</p>
+                </div>
+                <div ng-if="user_created"  class="s-100"  >
+                    <p style="text-align:center; color:green;">Usuario_creado_I18N</p>
+                </div>
+                <div  class="s-100"  >
+                    <button style="text-align:center; color:green;" ng-click="submitFiles(1)">test</button>
+                </div>
+
             </div>
         </div>
     </div>

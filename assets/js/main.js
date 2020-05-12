@@ -27,19 +27,55 @@ var app = angular.module('serAuth', ['SER.selector', 'ngMaterial', 'ngMessages',
 
 
 app.controller('loginController', ['$scope', '$http', '$mdDialog' 
-                ,function baseCrud($scope, $http, $mdDialog) {
-        
-    console.log('cargado');
+                ,function loginController($scope, $http, $mdDialog) {
+                                       
+                    $scope.error  = false;
+                    $scope.user_login = false;
+                    $scope.is_submit = false;
+                    $scope.Model = { remembermme: false, _wpnonce: angular.element('#_wpnonce').val() }
+
+                    $scope.submit = function(){
+                        if($scope.is_submit) return;
+                        
+                         $scope.is_submit = true;
+                         $scope.error  = false;
+                          
+                         $http( {
+                             method: 'POST',
+                             params: { action: 'serlib_auth_handler', 'login': ''},
+                             url:    front_obj.ajax_url,
+                             data:   $scope.Model,
+                         }).then(function successCallback(response) {
+                             
+                             if(response.data.success){
+                                 $scope.user_login = true;
+                                 setTimeout(() => { window.location = "/blog"; }, 1000);
+                             }else if(response.data.error){
+                                 $scope.error = response.data.error;
+                                 $scope.is_submit = false;
+                             }
+                         }, function errorCallback(error) {
+                             $scope.is_submit = false;
+                             $scope.error =  error.data;            
+                         });
+             
+                        
+                     }
 
 }]);
 
 
 app.controller('registerController', ['$scope', '$http', '$mdDialog' 
-                ,function baseCrud($scope, $http, $mdDialog) {
+                ,function registerController($scope, $http, $mdDialog) {
         
         /**Options */
+        $scope.error  = false;
+        $scope.user_created = false;
+        $scope.is_submit = false;
         $scope.states = [];
+        $scope.modo = 'directo';
         $scope.cities = [];
+        $scope.Model = { modo: 'directo', token: '', _wpnonce: angular.element('#_wpnonce').val() };
         $scope.photo = [], $scope.files = [];
         $scope.profile_photo = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
         $scope.conocimientoPagina = [ 'Volante' , 'Correo Electrónico', 'Amigo', 'Redes Sociales', 'Otro' ],
@@ -64,8 +100,95 @@ app.controller('registerController', ['$scope', '$http', '$mdDialog'
             $scope.cities = newValue.cities; 
         }
 
-        $scope.ver = function(){
-            console.log($scope.fotocopia_documento);
+        
+        if ( $scope.Model.rol === 'turista' && !$scope.registerForm.$valid ) return; 
+        if ( $scope.Model.rol === 'comerciante' && $scope.c_Form.$valid ) return;
+        
+        $scope.submitFiles = function(id){
+            
+            var prom = 0
+            
+            if(hasValue($scope.photo) ) prom++;
+            if(hasValue($scope.File) ) prom++;
+            if(hasValue($scope.photo) ){
+                
+                
+                var formData = new FormData();
+                formData.append('files', $scope.photo);
+            
+                angular.element.ajax({
+                    type: 'POST',
+                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=photo_profile',
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(success){
+                        if(response.data.success){
+                            $scope.submitFiles(response.data.success);
+                          
+                        }
+                    },
+                    error: function(error){
+                        $scope.is_submit = false;
+                        $scope.error =  error.data; 
+                    }
+                });
+
+               return;
+            }
+
+            if(hasValue($scope.File) ){
+                $http( {
+                method: 'POST',
+                params: { action: 'serlib_uploader', destino: 'photo_profile'},
+                url:    front_obj.ajax_url,
+                data:   $scope.File,
+            }).then(function successCallback(response) {
+                
+                console.log(response);
+
+                if(response.data.success){
+                    $scope.submitFiles(response.data.success); 
+                }
+            }, function errorCallback(error) {
+                $scope.is_submit = false;
+                $scope.error =  error.data;            
+            });
+            }
+            
+        }
+
+        $scope.finish = function(){
+              $scope.user_created = true;
+              setTimeout(() => { window.location = "/gracias"; }, 2000);
+        }
+
+        $scope.submit = function(){
+           if($scope.is_submit) return;
+            $scope.is_submit = true;
+            $scope.error  = false;
+
+            $http( {
+                method: 'POST',
+                params: { action: 'serlib_auth_handler', 'create': ''},
+                url:    front_obj.ajax_url,
+                data:   $scope.Model,
+            }).then(function successCallback(response) {
+                
+                if(response.data.success){
+                    $scope.submitFiles(response.data.success);
+                  
+                }else if(response.data.error){
+                    $scope.error = response.data.error;
+                    $scope.is_submit = false;
+                }
+            }, function errorCallback(error) {
+                $scope.is_submit = false;
+                $scope.error =  error.data;            
+            });
+
+           
         }
     
 

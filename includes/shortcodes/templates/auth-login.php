@@ -14,7 +14,7 @@ NONCE_FIELD_PH
                         <div class="form-group s-100">
                             <label for="email">email_I18N</label>
                             
-                            <input type="email" class="fovea-input input-text" ng-model="Model.email" name="email" id="email" maxlength="150" required>
+                            <input type="email" class="fovea-input input-text"  autocomplete="on" ng-model="Model.email" name="email" id="email" maxlength="150" required>
                             <div class="row-wrap" ng-messages="loginForm.email.$error">
                                 <div ng-message="required">required_I18N</div>
                                 <div style="margin-left:10px;" ng-message="email">email_error_I18N</div>
@@ -43,8 +43,16 @@ NONCE_FIELD_PH
                         
                         <div class="row s-100 center-center" style="margin-top:20px;">
                             <div>
-                                <button ng-click="submit()" ng-disabled="registerForm.$invalid" class="bttn default s-100">login_I18N</button>
+                                <button ng-click="submit()" ng-disabled="registerForm.$invalid" class="bttn default s-100">
+                                <div ng-if="is_submit" class="lds-ripple-small"><div></div><div></div></div>login_I18N</button>
                             </div>
+                        </div>
+
+                        <div ng-if="error" class="s-100">
+                            <p style="text-align:center; color:red;">{{error}}</p>
+                        </div>
+                        <div ng-if="user_login"  class="s-100">
+                            <p style="text-align:center; color:green;">Inicio_de_session_I18N</p>
                         </div>
                          
                         <div class="s-100" style="margin-top:20px; margin:0 10px;">

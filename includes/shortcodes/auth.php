@@ -8,11 +8,11 @@ function serlib_login_form_shortcode(){
   $formHTML               = file_get_contents( 'templates/auth-login.php', true );
 
   $formHTML               = str_replace(
-    ['login_I18N', 'email_I18N', 'required_I18N', 'email_error_I18N', 'password_I18N',
+    ['login_I18N', 'email_I18N', 'required_I18N', 'email_error_I18N', 'password_I18N', 'Inicio_de_session_I18N',
      'Remember_me_I18N', 'Lost_your_pass_I18N', 'or_login_with_I18N', 'No_tienes_cuenta_I18N', 'Registerme_I18N'],
      [ 
-       __('login', 'serlib'), __('Correo electrónico', 'serlib'), __('requerido', 'serlib'),
-       __('Por favor coloca un email valido', 'serlib'), __('Contraseña', 'serlib'), __('Recuerdame', 'serlib'),
+       __('Iniciar sesión', 'serlib'), __('Correo electrónico', 'serlib'), __('requerido', 'serlib'),
+       __('Por favor coloca un email valido', 'serlib'), __('Contraseña', 'serlib'), __('Inicio de sesión exitoso', 'serlib'), __('Recuerdame', 'serlib'),
        __('Olvidaste tu contraseña', 'serlib'), __('o iniciar sesión con', 'serlib'), __('No tienes cuenta', 'serlib'),
        __('Registrate', 'serlib') 
      ],
@@ -21,7 +21,7 @@ function serlib_login_form_shortcode(){
 
   $formHTML               = str_replace( 
     'NONCE_FIELD_PH', 
-    wp_nonce_field( 'recipe_auth', '_wpnonce', true, false ),
+    wp_nonce_field( 'serlib_auth', '_wpnonce', true, false ),
     $formHTML
   );
 
@@ -30,7 +30,7 @@ function serlib_login_form_shortcode(){
 
 function serlib_register_form_shortcode(){
     if( is_user_logged_in() ){
-      return '';
+   //   return '';
     }
   
     $formHTML = file_get_contents( 'templates/auth-register.php', true );
@@ -41,7 +41,7 @@ function serlib_register_form_shortcode(){
        'fecha_nacimiento_I18N', 'email_I18N', 'password_error_matchI18N', 'password_error_I18N', 'repeat_password_I18N',
        'telefono_I18N', 'terminos_condiciones_I18N', 'politica_privacidad_I18N', 'register_aditional_I18N', 'Departamento_I18N',
        'Ciudad_I18N', 'Conocimiento_pagina_I18N', 'Intereses_I18N', 'Ciudades a visitar_I18N', 'register_button_I18N', 'otro_I18N',
-       'Tipo_documento_I18N', 'Numero_documento_I18N', 'Fotocopia_documento_I18N'], 
+       'Tipo_documento_I18N', 'Numero_documento_I18N', 'Fotocopia_documento_I18N', 'Usuario_creado_I18N'], 
        [ 
          __('Registrarme como:', 'serlib'), __('Turista', 'serlib'), __('requerido', 'serlib'),
          __('Por favor coloca un email valido', 'serlib'), __('Contraseña', 'serlib'), __('Comerciante', 'serlib'),
@@ -51,7 +51,7 @@ function serlib_register_form_shortcode(){
          __('Repetir contraseña', 'serlib'), __('Teléfono', 'serlib'), __('Términos y condiciones', 'serlib'), __('políticas de privacidad', 'serlib'), 
          __('Datos adicionales', 'serlib'), __('Departamento origen', 'serlib'), __('Ciudad origen', 'serlib'), __('Conocimiento de la página', 'serlib'), 
          __('Intereses', 'serlib'), __('Ciudades a visitar', 'serlib'), __('Registrarme', 'serlib'), __('¿ Cual ?', 'serlib'),
-         __('Tipo de documento', 'serlib'), __('Número de documento', 'serlib'), __('Fotocopia del documento', 'serlib')
+         __('Tipo de documento', 'serlib'), __('Número de documento', 'serlib'), __('Fotocopia del documento', 'serlib'), __('Usuario creado, redireccionando...', 'serlib')
        ],
       $formHTML
     );
