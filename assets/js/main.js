@@ -39,7 +39,7 @@ app.controller('loginController', ['$scope', '$http', '$controller',
                     $scope.error  = false;
                     $scope.user_login = false;
                     $scope.is_submit = false;
-                    $scope.Model = { remembermme: false, _wpnonce: angular.element('#_wpnonce').val() }
+                    $scope.Model = { remembermme: false, _wpnonce: angular.element('#_wpnonce').val(), metodo: 'directo' }
 
                     $scope.submit = function(){
                         if($scope.is_submit) return;
@@ -81,6 +81,8 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                 action: 'register',
             }
         });
+        $scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
+        console.log($scope.Instance);
         /**Options */
         $scope.error  = false;
         $scope.user_created = false;
@@ -272,7 +274,7 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
                 case 'google':
                 case 'instagram':
 
-                    sessionStorage.setItem(' auth', JSON.stringify($datos) );
+                    sessionStorage.setItem('auth', JSON.stringify($datos) );
                     window.location = 'auth/register';
                     break;
                     
@@ -346,7 +348,7 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
 
                 function testApi(){
 
-                    FB.api('/me?fields=id,name,email,picture',function(response){
+                    FB.api('/me?fields=id,name,last_name,email,picture,birthday',function(response){
                 
                         if(response.email == null){
 

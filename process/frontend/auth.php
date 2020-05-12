@@ -149,7 +149,7 @@ function serlib_auth_handler(){
         
         $output     =     [ 'error' => __('Usuario no encontrado', 'serlib'),
                             'code' => 401];
-
+                            
         $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
         
         if( !wp_verify_nonce( $nonce, 'serlib_auth' ) ){
@@ -190,6 +190,10 @@ function serlib_auth_handler(){
                 echo "i es igual a 2";
                 break;
         }
+/*
+        wp_set_current_user( $user_id, $user->user_login );
+            wp_set_auth_cookie( $user_id );
+            do_action( 'wp_login', $user->user_login, $user );*/
 
 
       
@@ -198,7 +202,7 @@ function serlib_auth_handler(){
             wp_send_json($output);
         }
         
-        $output['success']       =   2;
+        $output['success']       =   $user;
         wp_send_json($output);
 
     }
