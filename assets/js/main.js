@@ -87,7 +87,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         $scope.profile_photo = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
        
 
-        //$scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
+        $scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
          //$scope.Instance = {"_wpnonce":"519fcb020d","modo":"facebook","name":"Stivel Bernal",
        //                 "email":"monotiti_25@hotmail.com",
          //               "picture":"http://graph.facebook.com/3560903340593605/picture?type=large"};
@@ -351,15 +351,14 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
                 }
 
                 function testApi(){
-                    FB.api('/me?fields=id,name,last_name,email,picture,birthday',function(response){
+                    FB.api('/me?fields=id,first_name,last_name,email,picture,birthday',function(response){
                         if(response.email !== null){
                             var picture = "http://graph.facebook.com/"+response.id+"/picture?type=large";    
-                            console.log(response);
-                            return;
-                            
+                                                        
                             $scope.ValidateUser( 
                                 {  _wpnonce: angular.element('#_wpnonce').val(),
-                                 modo: 'facebook', name: response.name,
+                                 modo: 'facebook', first_name: response.first_name,
+                                 last_name: response.last_name,
                                   email: response.email, picture: picture
                                 }
                             );
