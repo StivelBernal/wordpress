@@ -147,8 +147,8 @@ function serlib_auth_handler(){
         
         $objDatos   =     json_decode(file_get_contents("php://input"));
         
-        
-        $output     =     [ 'error' => 400 ];
+        $output     =     [ 'error' => __('Usuario no encontrado', 'serlib'),
+                            'code' => 401];
 
         $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
         
@@ -158,24 +158,51 @@ function serlib_auth_handler(){
         }
         
         if( !isset( $objDatos->email, $objDatos->password ) ){
-              echo 'sdf';
+              
               wp_send_json($output);
         }
 
-        $user                   =   wp_signon([
-            'user_login'          =>  sanitize_text_field($objDatos->email),
-            'user_password'       =>  sanitize_text_field($objDatos->password),
-            'remember'            =>  boolval($objDatos->remembermme)
-          ], false);
+        switch ($objDatos->metodo) {
+            case 'directo':
+                
+                $user                   =   wp_signon([
+                    'user_login'          =>  sanitize_text_field($objDatos->email),
+                    'user_password'       =>  sanitize_text_field($objDatos->password),
+                    'remember'            =>  boolval($objDatos->remembermme)
+                  ], false);
 
-          if( is_wp_error($user) ){
+                break;
+            case 'facebook':
+               
+                $user                   =   wp_signon([
+                    'user_login'          =>  sanitize_text_field($objDatos->email),
+                    'user_password'       =>  sanitize_text_field($objDatos->Id+'ser'+$objDatos->email),
+                    'remember'            =>  true
+                  ], false);
+
+                break;
+
+            case 'google':
+                echo "i es igual a 2";
+                break;
+
+            case 'instagram':
+                echo "i es igual a 2";
+                break;
+        }
+
+
+      
+
+        if( is_wp_error($user) ){
             wp_send_json($output);
-          }
+        }
         
-          $output['success']       =   2;
-          wp_send_json($output);
+        $output['success']       =   2;
+        wp_send_json($output);
 
     }
+
 
     die();
 }

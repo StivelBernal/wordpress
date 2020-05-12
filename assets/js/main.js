@@ -73,7 +73,7 @@ app.controller('loginController', ['$scope', '$http', '$controller',
 
 
 app.controller('registerController', ['$scope', '$http', '$controller',  
-                ,function registerController($scope, $http, $controller ) {
+                function registerController($scope, $http, $controller ) {
         
         $controller('authSocialController', {
             $scope: $scope,
@@ -88,7 +88,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         $scope.states = [];
         $scope.modo = 'directo';
         $scope.cities = [];
-        $scope.Model = { modo: 'directo', token: '', _wpnonce: angular.element('#_wpnonce').val() };
+        $scope.Model = { modo: 'directo', _wpnonce: angular.element('#_wpnonce').val() };
         $scope.photo = [], $scope.files = [];
         $scope.profile_photo = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
         $scope.conocimientoPagina = [ 'Volante' , 'Correo Electrónico', 'Amigo', 'Redes Sociales', 'Otro' ],
@@ -263,15 +263,56 @@ app.controller('registerController', ['$scope', '$http', '$controller',
 app.controller('authSocialController', ['$scope', '$http', 'Config', function authSocialController($scope, $http,  Config) {
                          console.log('se cargo socials', Config);   
     $scope.AuthSocial = function(red){
-                       
+        
+        $scope.is_submit = true;
 
-       // localStorage.setItem('social', 'objecto con los datos en caso de que no este registrado lo pedimos cuando cargue el registro')
+        $scope.redirect_register_social = function(datos){
+            switch (datos.modo){
+                case 'facebook':                
+                case 'google':
+                case 'instagram':
+
+                    sessionStorage.setItem(' auth', JSON.stringify($datos) );
+                    window.location = 'auth/register';
+                    break;
+                    
+            }
+        }
+        $scope.ValidateUser = function(datos){
+            
+            $http( {
+                method: 'POST',
+                params: { action: 'serlib_auth_handler', 'login': ''},
+                url:    front_obj.ajax_url,
+                data:   datos,
+            }).then(function successCallback(response) {
+                
+                if(response.data.success){
+                    $scope.user_login = true;
+                    setTimeout(() => { window.location = "/blog"; }, 1000);
+
+                }else if(response.data.error){
+                    $scope.error = response.data.error;
+                    $scope.redirect_register_social(datos);
+                    $scope.is_submit = false;
+                }
+
+            }, function errorCallback(error) {
+                $scope.is_submit = false;
+                $scope.error =  error.data;            
+            });
+            
+
+        }
+
         switch (red) {
 
             case 'google':
                 
 
                 break;
+
+            
             case 'facebook':
                 
                 FB.login(function(response){
@@ -298,12 +339,7 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
                         testApi();
                 
                     }else{
-                        /** MOSTRAR ERROR DE QUE NO ESTA REGISTRADO  
-                         * 
-                         * Window.location = register;
-                        */
-                        alert('error');
-                
+                        $scope.error = 'hubo un error con facebook por favor intente nuevamente';
                     }
                 
                 }
@@ -316,11 +352,10 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
 
                         }else{
 
-                            var email = response.email;
-                            var nombre = response.name;
-                            var foto = "http://graph.facebook.com/"+response.id+"/picture?type=large";
-                            console.log(response);
+                            var picture = "http://graph.facebook.com/"+response.id+"/picture?type=large";
                             
+                            $scope.AuthSocial( {  _wpnonce: angular.element('#_wpnonce').val(), modo: 'facebook', name: response.name, email: response.email, picture: picture });
+
                         }
 
                     });
