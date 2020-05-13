@@ -7,6 +7,9 @@ function serlib_footer_scripts(){
   // google AIzaSyB8jiUEeoxqr4dvoNtJieG9gpOIZWr_xnU
   //497715945399-naggc6pk24b2hdlnld3n50cmeajmo4qs.apps.googleusercontent.com
   //gKuQGGvhvwp6pX2n5L5oYPkw
+//INSTAGRAM
+  // 1117533245288400
+  // 92d0d55deb5af6c6a392e6ec81acb21d
 
   echo "<script>
               window.fbAsyncInit = function() {
