@@ -327,6 +327,10 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
 
             case 'google':
 
+                const googleUser = gapi.auth2.getAuthInstance().currentUser.get();
+                const profile = googleUser.getBasicProfile();
+                console.log(profile);
+
                 break;
 
             

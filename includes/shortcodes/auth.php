@@ -3,6 +3,11 @@
 function serlib_footer_scripts(){
 
   // 70b319466e82d758dd86ee4988cb4161
+
+  // google AIzaSyB8jiUEeoxqr4dvoNtJieG9gpOIZWr_xnU
+  //497715945399-naggc6pk24b2hdlnld3n50cmeajmo4qs.apps.googleusercontent.com
+  //gKuQGGvhvwp6pX2n5L5oYPkw
+
   echo "<script>
               window.fbAsyncInit = function() {
               FB.init({
@@ -27,11 +32,11 @@ function serlib_footer_scripts(){
 
 }
 
-
 function serlib_login_form_shortcode(){
   if( is_user_logged_in() ){
     return '';
   }
+
   add_action('wp_footer', 'serlib_footer_scripts');
 
   $formHTML               = file_get_contents( 'templates/auth-login.php', true );
@@ -61,7 +66,7 @@ function serlib_register_form_shortcode(){
     if( is_user_logged_in() ){
       return '';
     }
-
+    add_action('wp_head', 'head_login_includes');
     add_action('wp_footer', 'serlib_footer_scripts');
 
     $formHTML = file_get_contents( 'templates/auth-register.php', true );
