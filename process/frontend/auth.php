@@ -175,23 +175,20 @@ function serlib_auth_handler(){
 
                 break;
             case 'facebook':
-               
+            case 'google':   
                 $creds                   =  [
                     'user_login'          =>  sanitize_text_field($objDatos->email),
-                    'user_password'       =>  sanitize_text_field($objDatos->Id+'ser'+$objDatos->email),
+                    'user_password'       =>  sanitize_text_field('ser'+$objDatos->email),
                     'remember'            =>  true
                   ];
 
-                break;
-
-            case 'google':
-                
                 break;
 
             case 'instagram':
                 
                 break;
         }
+
         if($creds !== null){
 
             $user   =   wp_signon( $creds, is_ssl());

@@ -15,14 +15,16 @@
     });
 })(jQuery);
 
-
-var app = angular.module('serAuth', ['SER.selector', 'ngMaterial', 'ngMessages', 'SER.match'])
+var app = angular.module('serAuth', ['SER.selector', 'ngMaterial', 'ngMessages', 'SER.match', 'socialLogin'])
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('light-green');
     })
     .config(['$compileProvider', function ($compileProvider) {
         $compileProvider.debugInfoEnabled(false);
+    }])
+    .config(['socialProvider', function (socialProvider) {
+        socialProvider.setGoogleKey("497715945399-naggc6pk24b2hdlnld3n50cmeajmo4qs.apps.googleusercontent.com");
     }]);
 
 
@@ -86,7 +88,6 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         
         $scope.profile_photo = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
        
-
         $scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
          //$scope.Instance = {"_wpnonce":"519fcb020d","modo":"facebook","name":"Stivel Bernal",
        //                 "email":"monotiti_25@hotmail.com",
@@ -277,9 +278,14 @@ app.controller('registerController', ['$scope', '$http', '$controller',
 
 
 /**Registro con facebook - google - instagram */
-app.controller('authSocialController', ['$scope', '$http', 'Config', function authSocialController($scope, $http,  Config) {
-                         console.log('se cargo socials', Config);   
-    $scope.AuthSocial = function(red){
+app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config', 
+                 function authSocialController($scope, $rootScope, $http,  Config) {
+    
+    $rootScope.$on('event:social-sign-in-success', function(event, userDetails){
+        $scope.AuthSocial('google', userDetails)
+    })
+
+    $scope.AuthSocial = function(red, profile = null){
         
         $scope.is_submit = true;
 
@@ -326,13 +332,16 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
         switch (red) {
 
             case 'google':
-
-                const googleUser = gapi.auth2.getAuthInstance().currentUser.get();
-                const profile = googleUser.getBasicProfile();
-                console.log(profile);
+                  
+                $scope.ValidateUser( 
+                    {  _wpnonce: angular.element('#_wpnonce').val(),
+                      modo: 'google', first_name: profile.firstName,
+                      last_name: profile.lastName,
+                      email: profile.email, picture: profile.imageUrl
+                    }
+                );
 
                 break;
-
             
             case 'facebook':
                 
@@ -379,3 +388,4 @@ app.controller('authSocialController', ['$scope', '$http', 'Config', function au
     }
                  
 }]);
+

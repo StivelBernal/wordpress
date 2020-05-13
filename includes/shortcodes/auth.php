@@ -32,11 +32,13 @@ function serlib_footer_scripts(){
 
 }
 
+
+
 function serlib_login_form_shortcode(){
   if( is_user_logged_in() ){
     return '';
   }
-
+  
   add_action('wp_footer', 'serlib_footer_scripts');
 
   $formHTML               = file_get_contents( 'templates/auth-login.php', true );
