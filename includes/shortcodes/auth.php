@@ -135,9 +135,11 @@ function serlib_register_form_shortcode(){
     $data = json_decode(curl_exec($ch), true);	
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
     curl_close($ch); 		
-    if($http_code !== '200')			
-      echo 'Error : Failed to receieve access token'; return false;
-    
+    if($http_code !== '200'){
+      echo 'Error : Failed to receieve access token'; 
+      return false;
+    }
+    var_dump($data);
     return $data['access_token'];	
   }
 
