@@ -36,12 +36,27 @@ function serlib_footer_scripts(){
 }
 
 
-
 function serlib_login_form_shortcode(){
   if( is_user_logged_in() ){
     return '';
   }
+
   
+  if(isset($_GET['code'])){
+
+    define( 'INSTAGRAM_CS', '92d0d55deb5af6c6a392e6ec81acb21d' );
+    define( 'INSTAGRAM_CID', '1117533245288400' );
+    define( 'REDIRECT_URI', 'https://golfodemorrosquillo.com/auth' ); 
+    $token = GetAccessToken(INSTAGRAM_CID, INSTAGRAM_CS, 'REDIRECT_URI', $_GET['code']);
+    $datos = GetUserProfileInfo($token);
+    var_dump($datos);
+
+    echo '<script> var Inst = "'.$_GET['code'].'"; </script>';
+
+  }else{
+    echo '<script> var Inst = false; </script>';
+  }
+
   add_action('wp_footer', 'serlib_footer_scripts');
 
   $formHTML               = file_get_contents( 'templates/auth-login.php', true );
@@ -104,4 +119,39 @@ function serlib_register_form_shortcode(){
     );
   
     return $formHTML;
+  }
+
+  function GetAccessToken($client_id, $client_secret, $redirect_uri, $code) {		
+    $url = 'https://api.instagram.com/oauth/access_token';
+    
+    $curlPost = 'client_id='. $client_id . '&redirect_uri=' . $redirect_uri . '&client_secret=' . $client_secret . '&code='. $code . '&grant_type=authorization_code';
+    $ch = curl_init();		
+    curl_setopt($ch, CURLOPT_URL, $url);		
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);		
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);			
+    $data = json_decode(curl_exec($ch), true);	
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
+    curl_close($ch); 		
+    if($http_code != '200')			
+      throw new Exception('Error : Failed to receieve access token');
+    
+    return $data['access_token'];	
+  }
+
+  function GetUserProfileInfo($access_token) { 
+    $url = 'https://api.instagram.com/v1/users/self/?access_token=' . $access_token;	
+  
+    $ch = curl_init();		
+    curl_setopt($ch, CURLOPT_URL, $url);		
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);	
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    $data = json_decode(curl_exec($ch), true);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
+    curl_close($ch); 
+    if($data['meta']['code'] != 200 || $http_code != 200)
+      throw new Exception('Error : Failed to get user information');
+  
+    return $data['data'];
   }

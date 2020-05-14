@@ -281,9 +281,17 @@ app.controller('registerController', ['$scope', '$http', '$controller',
 app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config', 
                  function authSocialController($scope, $rootScope, $http,  Config) {
     
+    if(hasValue(Inst)){
+        console.log(Inst);
+        
+        //$scope.AuthSocial('instagram', Inst );
+    }
+
+    /**Escucha la directiva de google */
     $rootScope.$on('event:social-sign-in-success', function(event, userDetails){
-        $scope.AuthSocial('google', userDetails)
-    })
+        $scope.AuthSocial('google', userDetails);
+        
+    });
 
     $scope.AuthSocial = function(red, profile = null){
         
@@ -381,15 +389,30 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
 
                 break;
             case 'instagram':
-                
-                var CLIENT_ID = "1117533245288400";
-                var REDIRECT_URI = "https://golfodemorrosquillo.com/auth"; 
-                var url = "https://api.instagram.com/oauth/authorize/?client_id="+ CLIENT_ID + "&redirect_uri="+REDIRECT_URI+"&response_type=code&scope=user_profile";
-                window.location = url;
+
+                $scope.ValidateUser( 
+                    {  _wpnonce: angular.element('#_wpnonce').val(),
+                      modo: 'google', first_name: profile.firstName,
+                      last_name: profile.lastName,
+                      email: profile.email, picture: profile.imageUrl
+                    }
+                );
 
                 break;
-        }
+                
     }
-                 
+
+   
+
+    }
+    
+    $scope.InstagramRedirect = function(){
+        
+            var CLIENT_ID = "1117533245288400";
+            var REDIRECT_URI = "https://golfodemorrosquillo.com/auth"; 
+            var url = "https://api.instagram.com/oauth/authorize/?client_id="+ CLIENT_ID + "&redirect_uri="+REDIRECT_URI+"&response_type=code&scope=user_profile";
+            window.location = url;
+            
+    }           
 }]);
 
