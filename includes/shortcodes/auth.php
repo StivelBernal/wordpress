@@ -124,6 +124,7 @@ function serlib_register_form_shortcode(){
 
   function GetAccessToken( $client_secret, $client_id, $redirect_uri, $code ) {		
     $url = 'https://api.instagram.com/oauth/access_token';
+    echo $redirect_uri;
     $curlPost = 'client_id='. $client_id . '&redirect_uri=' . $redirect_uri . '&client_secret=' . $client_secret . '&code='. $code . '&grant_type=authorization_code';
     $ch = curl_init();		
     curl_setopt($ch, CURLOPT_URL, $url);		
