@@ -49,7 +49,7 @@ function serlib_login_form_shortcode(){
     $code = str_replace('#_', '', $_GET['code']);
     $token = GetAccessToken( INSTAGRAM_CS, INSTAGRAM_CID, REDIRECT_URI, $code);
    
-    if( isset($token) ){ 
+    if(isset($token) ){ 
       $datos = GetUserProfileInfo($token);
       
       echo '<script> var Inst = "'.json_encode($datos, true).'"; </script>';
@@ -128,7 +128,6 @@ function serlib_register_form_shortcode(){
 
   function GetAccessToken( $client_secret, $client_id, $redirect_uri, $code ) {		
     $url = 'https://api.instagram.com/oauth/access_token';
-    echo $redirect_uri;
     $curlPost = 'client_id='. $client_id . '&redirect_uri=' . $redirect_uri . '&client_secret=' . $client_secret . '&code='. $code . '&grant_type=authorization_code';
     $ch = curl_init();		
     curl_setopt($ch, CURLOPT_URL, $url);		
@@ -139,14 +138,13 @@ function serlib_register_form_shortcode(){
     $data = json_decode(curl_exec($ch), true);	
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
     curl_close($ch); 	
-    var_dump($http_code);
-    
-    return isset($data['access_token']) ? $data['access_token']: NULL;
+       
+    return isset($data['access_token']) ? $data: NULL;
 
   }
 
-  function GetUserProfileInfo($access_token) { 
-    $url = 'https://api.instagram.com/v1/users/self/?access_token=' . $access_token;	
+  function GetUserProfileInfo( $token ) { 
+    $url = 'https://graph.instagram.com/'.$token["user_id"].'?fields=id,username,media&access_token=' . $token["access_token"];	
   
     $ch = curl_init();		
     curl_setopt($ch, CURLOPT_URL, $url);		

@@ -410,7 +410,7 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
         
             var CLIENT_ID = "1117533245288400";
             var REDIRECT_URI = "https://golfodemorrosquillo.com/auth"; 
-            var url = "https://api.instagram.com/oauth/authorize/?client_id="+ CLIENT_ID + "&redirect_uri="+REDIRECT_URI+"&response_type=code&scope=user_profile";
+            var url = "https://api.instagram.com/oauth/authorize/?client_id="+ CLIENT_ID + "&redirect_uri="+REDIRECT_URI+"&response_type=code&scope=user_profile,user_media";
             window.location = url;
             
     }           
