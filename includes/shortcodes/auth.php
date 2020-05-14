@@ -48,16 +48,16 @@ function serlib_login_form_shortcode(){
     define( 'REDIRECT_URI', 'https://golfodemorrosquillo.com/auth' ); 
     $code = str_replace('#_', '', $_GET['code']);
     $token = GetAccessToken( INSTAGRAM_CS, INSTAGRAM_CID, REDIRECT_URI, $code);
-    var_dump($token);
-
+   
     if( isset($token) ){ 
       $datos = GetUserProfileInfo($token);
-      var_dump($datos);
+      
       echo '<script> var Inst = "'.json_encode($datos, true).'"; </script>';
+      var_dump($datos);
     }else{
       echo 'Error : Failed to receieve access token'; 
     }
-
+ var_dump($token);
   }else{
     echo '<script> var Inst = false; </script>';
   }
@@ -139,11 +139,9 @@ function serlib_register_form_shortcode(){
     $data = json_decode(curl_exec($ch), true);	
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
     curl_close($ch); 	
-    var_dump($data);
-    if($http_code !== '200'){
-      return NULL;
-    }
-    return $data['access_token'];
+    var_dump($http_code);
+    
+    return isset($data['access_token']) ? $data['access_token']: NULL;
 
   }
 
