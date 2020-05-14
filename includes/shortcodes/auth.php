@@ -47,7 +47,8 @@ function serlib_login_form_shortcode(){
     define( 'INSTAGRAM_CS', '92d0d55deb5af6c6a392e6ec81acb21d' );
     define( 'INSTAGRAM_CID', '1117533245288400' );
     define( 'REDIRECT_URI', 'https://golfodemorrosquillo.com/auth' ); 
-    $token = GetAccessToken( INSTAGRAM_CID, INSTAGRAM_CS, 'REDIRECT_URI', $_GET['code']);
+    $code = str_replace('#_', '', $_GET['code']);
+    $token = GetAccessToken( INSTAGRAM_CID, INSTAGRAM_CS, 'REDIRECT_URI', $code);
    // $datos = GetUserProfileInfo($token);
     var_dump($token);
 
@@ -134,8 +135,8 @@ function serlib_register_form_shortcode(){
     $data = json_decode(curl_exec($ch), true);	
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
     curl_close($ch); 		
-    if($http_code != '200')			
-      throw new Exception('Error : Failed to receieve access token');
+   // if($http_code != '200')			
+     // throw new Exception('Error : Failed to receieve access token');
     
     return $data['access_token'];	
   }
