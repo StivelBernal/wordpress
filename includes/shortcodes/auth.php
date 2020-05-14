@@ -47,8 +47,12 @@ function serlib_login_form_shortcode(){
     define( 'INSTAGRAM_CID', '1117533245288400' );
     define( 'REDIRECT_URI', 'https://golfodemorrosquillo.com/auth' ); 
     $code = str_replace('#_', '', $_GET['code']);
-    $token = GetAccessToken( INSTAGRAM_CS, INSTAGRAM_CID, REDIRECT_URI, $code);
-   
+    //$token = GetAccessToken( INSTAGRAM_CS, INSTAGRAM_CID, REDIRECT_URI, $code);
+   $token = [
+    'access_token' => 'IGQVJYUllWZAEhud3NOTUczbE1vYjdyc09tUE9kRDJMb3hkT21XVGdjVVNIN1dnYUlGekRnY21obkF0clA1enA4SzNTZAnFCWGpDVDR6Sk1SM3k0bHNFNkFWZAHRma0xYZAmh2a3U5V204SGgtQThicGNkQ0tnMlZAqem1vNERv',
+    'user_id' => 17841433887861158
+   ];
+
     if(isset($token) ){ 
       $datos = GetUserProfileInfo($token);
       
@@ -57,7 +61,7 @@ function serlib_login_form_shortcode(){
     }else{
       echo 'Error : Failed to receieve access token'; 
     }
- var_dump($token);
+ 
   }else{
     echo '<script> var Inst = false; </script>';
   }
@@ -137,10 +141,27 @@ function serlib_register_form_shortcode(){
     curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);			
     $data = json_decode(curl_exec($ch), true);	
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
-    curl_close($ch); 	
-    var_dump($data);
-    return ($http_code === 200 ? $data: NULL);
+    curl_close($ch); 
+    if($http_code === 200){
+      return NULL;
+    }else{
+      var_dump( longLiveToken( $data, $client_secret ) );
+    } 
 
+  }
+
+  function longLiveToken( $token, $cs ) { 
+    $url = 'https://graph.instagram.com/oauth/access_token?grant_type=ig_exchange_token&client_secret='.$cs.'&access_token='.$token["access_token"];	
+  
+    $ch = curl_init();		
+    curl_setopt($ch, CURLOPT_URL, $url);		
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);	
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    $data = json_decode(curl_exec($ch), true);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
+    curl_close($ch); 
+    if($http_code == 200){ return $data; }else { return NULL; }
+     
   }
 
   function GetUserProfileInfo( $token ) { 
@@ -152,8 +173,9 @@ function serlib_register_form_shortcode(){
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
     $data = json_decode(curl_exec($ch), true);
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
+
     curl_close($ch); 
-    if($data['meta']['code'] != 200 || $http_code != 200)
+    if($http_code != 200)
       echo 'Error : Failed to get user information';
     
     return $data;
