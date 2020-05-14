@@ -2,15 +2,6 @@
 
 function serlib_footer_scripts(){
 
-  // 70b319466e82d758dd86ee4988cb4161
-
-  // google AIzaSyB8jiUEeoxqr4dvoNtJieG9gpOIZWr_xnU
-  //497715945399-naggc6pk24b2hdlnld3n50cmeajmo4qs.apps.googleusercontent.com
-  //gKuQGGvhvwp6pX2n5L5oYPkw
-//INSTAGRAM
-  // 1117533245288400
-  // 92d0d55deb5af6c6a392e6ec81acb21d
-
   echo "<script>
               window.fbAsyncInit = function() {
               FB.init({
@@ -49,15 +40,15 @@ function serlib_login_form_shortcode(){
     $code = str_replace('#_', '', $_GET['code']);
     //$token = GetAccessToken( INSTAGRAM_CS, INSTAGRAM_CID, REDIRECT_URI, $code);
    $token = [
-    'access_token' => 'IGQVJYUllWZAEhud3NOTUczbE1vYjdyc09tUE9kRDJMb3hkT21XVGdjVVNIN1dnYUlGekRnY21obkF0clA1enA4SzNTZAnFCWGpDVDR6Sk1SM3k0bHNFNkFWZAHRma0xYZAmh2a3U5V204SGgtQThicGNkQ0tnMlZAqem1vNERv',
+    'access_token' => 'IGQVJWSzU5VXc1VzBXaHV2dEpTVWIyYjBBR1ZASM0Q3Y3BtUG00R293TmJidHZAqVm1wdXpuVTRjMU5qN1BBQ0RicjhvNVpUdkZAaY2VYUUIxRG9VdFVjMGlCcHFMMFlVTEtoYUdvLWY0aFpNOEMzUUtGbnlNb3AyWkVnOHk0',
     'user_id' => 17841433887861158
    ];
 
     if(isset($token) ){ 
       $datos = GetUserProfileInfo($token);
       
-      echo '<script> var Inst = "'.json_encode($datos, true).'"; </script>';
-      var_dump($datos);
+      echo '<script> var Inst = '.json_encode($datos, true).'; </script>';
+     
     }else{
       echo 'Error : Failed to receieve access token'; 
     }
@@ -145,7 +136,8 @@ function serlib_register_form_shortcode(){
     if($http_code === 200){
       return NULL;
     }else{
-      var_dump( longLiveToken( $data, $client_secret ) );
+      return $data;
+      //var_dump( longLiveToken( $data, $client_secret ) );
     } 
 
   }
@@ -165,7 +157,7 @@ function serlib_register_form_shortcode(){
   }
 
   function GetUserProfileInfo( $token ) { 
-    $url = 'https://graph.instagram.com/'.$token["user_id"].'?fields=id,username,media&access_token=' . $token["access_token"];	
+    $url = 'https://graph.instagram.com/'.$token["user_id"].'?fields=id,username&access_token=' . $token["access_token"];	
   
     $ch = curl_init();		
     curl_setopt($ch, CURLOPT_URL, $url);		

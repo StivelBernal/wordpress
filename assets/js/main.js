@@ -89,17 +89,24 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         $scope.profile_photo = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
        
         $scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
-         //$scope.Instance = {"_wpnonce":"519fcb020d","modo":"facebook","name":"Stivel Bernal",
-       //                 "email":"monotiti_25@hotmail.com",
-         //               "picture":"http://graph.facebook.com/3560903340593605/picture?type=large"};
-        
+     
         if( !hasValue($scope.Instance ) ){
             $scope.Model = { modo: 'directo', _wpnonce: angular.element('#_wpnonce').val() };
         }else{
             
             $scope.profile_photo = hasValue($scope.Instance.picture) ? $scope.Instance.picture: $scope.profile_photo;
-            $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, _wpnonce: angular.element('#_wpnonce').val() };
             
+            if($scope.Instance.modo === 'instagram'){
+           
+                $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.username, _wpnonce: angular.element('#_wpnonce').val() };
+           
+            }else{
+            
+                $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, _wpnonce: angular.element('#_wpnonce').val() };
+
+            }
+
+          
         }
         
         /**Options */
@@ -281,12 +288,6 @@ app.controller('registerController', ['$scope', '$http', '$controller',
 app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config', 
                  function authSocialController($scope, $rootScope, $http,  Config) {
     
-    if(hasValue(Inst)){
-        console.log(Inst);
-        
-        //$scope.AuthSocial('instagram', Inst );
-    }
-
     /**Escucha la directiva de google */
     $rootScope.$on('event:social-sign-in-success', function(event, userDetails){
         $scope.AuthSocial('google', userDetails);
@@ -392,9 +393,8 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
 
                 $scope.ValidateUser( 
                     {  _wpnonce: angular.element('#_wpnonce').val(),
-                      modo: 'google', first_name: profile.firstName,
-                      last_name: profile.lastName,
-                      email: profile.email, picture: profile.imageUrl
+                      modo: 'instagram', email: '', password:'', username: profile.username,
+                      id: profile.id
                     }
                 );
 
@@ -410,9 +410,12 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
         
             var CLIENT_ID = "1117533245288400";
             var REDIRECT_URI = "https://golfodemorrosquillo.com/auth"; 
-            var url = "https://api.instagram.com/oauth/authorize/?client_id="+ CLIENT_ID + "&redirect_uri="+REDIRECT_URI+"&response_type=code&scope=user_profile,user_media";
+            var url = "https://api.instagram.com/oauth/authorize/?client_id="+ CLIENT_ID + "&redirect_uri="+REDIRECT_URI+"&response_type=code&scope=user_profile";
             window.location = url;
             
-    }           
+    }    
+    if( Config.action === 'login'){
+       if(hasValue(Inst)) $scope.AuthSocial('instagram', Inst );
+    }       
 }]);
 

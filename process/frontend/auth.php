@@ -159,8 +159,8 @@ function serlib_auth_handler(){
         }
         
         if( !isset( $objDatos->email, $objDatos->password ) ){
-              
-              wp_send_json($output);
+             
+            wp_send_json($output);
         }
         $creds = null;
 
@@ -186,9 +186,25 @@ function serlib_auth_handler(){
 
             case 'instagram':
                 
+                $query2 = "SELECT * FROM ".$wpdb->prefix."usermeta WHERE meta_key = '.$objDatos->username.$objDatos->id.';";
+
+                $datos = $wpdb->get_results( $query );
+                
+                if(isset($datos)){
+                    $creds                   =  [
+                        'user_login'          =>  sanitize_text_field($datos->email),
+                        'user_password'       =>  sanitize_text_field('ser'+$datos->email),
+                        'remember'            =>  true
+                  ];
+                }else{
+                    wp_send_json($output);
+                    die();
+                }
+
                 break;
         }
 
+        
         if($creds !== null){
 
             $user   =   wp_signon( $creds, is_ssl());
