@@ -47,7 +47,7 @@ function serlib_login_form_shortcode(){
     define( 'INSTAGRAM_CS', '92d0d55deb5af6c6a392e6ec81acb21d' );
     define( 'INSTAGRAM_CID', '1117533245288400' );
     define( 'REDIRECT_URI', 'https://golfodemorrosquillo.com/auth' ); 
-    $token = GetAccessToken(INSTAGRAM_CID, INSTAGRAM_CS, 'REDIRECT_URI', $_GET['code']);
+    $token = GetAccessToken( INSTAGRAM_CID, INSTAGRAM_CS, 'REDIRECT_URI', $_GET['code']);
    // $datos = GetUserProfileInfo($token);
     var_dump($token);
 
@@ -121,7 +121,7 @@ function serlib_register_form_shortcode(){
     return $formHTML;
   }
 
-  function GetAccessToken($client_id, $client_secret, $redirect_uri, $code) {		
+  function GetAccessToken( $client_secret, $client_id, $redirect_uri, $code ) {		
     $url = 'https://api.instagram.com/oauth/access_token';
     
     $curlPost = 'client_id='. $client_id . '&redirect_uri=' . $redirect_uri . '&client_secret=' . $client_secret . '&code='. $code . '&grant_type=authorization_code';
