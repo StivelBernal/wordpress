@@ -124,7 +124,7 @@ function serlib_register_form_shortcode(){
 
   function GetAccessToken( $client_secret, $client_id, $redirect_uri, $code ) {		
     $url = 'https://api.instagram.com/oauth/access_token';
-    
+    //echo $code , $client_secret, $client_id, $redirect_uri;
     $curlPost = 'client_id='. $client_id . '&redirect_uri=' . $redirect_uri . '&client_secret=' . $client_secret . '&code='. $code . '&grant_type=authorization_code';
     $ch = curl_init();		
     curl_setopt($ch, CURLOPT_URL, $url);		
@@ -138,7 +138,7 @@ function serlib_register_form_shortcode(){
    // if($http_code != '200')			
      // throw new Exception('Error : Failed to receieve access token');
     
-    return $data['access_token'];	
+    return $data;	
   }
 
   function GetUserProfileInfo($access_token) { 
