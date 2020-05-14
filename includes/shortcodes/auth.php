@@ -139,11 +139,12 @@ function serlib_register_form_shortcode(){
     curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost);			
     $data = json_decode(curl_exec($ch), true);	
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
-    curl_close($ch); 		
+    curl_close($ch); 	
+    var_dump($data);
     if($http_code !== '200'){
       return false;
     }
-    var_dump($data);
+    
     return $data['access_token'];	
   }
 
