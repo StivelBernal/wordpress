@@ -138,8 +138,8 @@ function serlib_register_form_shortcode(){
     $data = json_decode(curl_exec($ch), true);	
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);	
     curl_close($ch); 	
-       
-    return isset($data['access_token']) ? $data: NULL;
+    var_dump($data);
+    return ($http_code === 200 ? $data: NULL);
 
   }
 
