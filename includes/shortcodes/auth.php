@@ -48,8 +48,8 @@ function serlib_login_form_shortcode(){
     define( 'INSTAGRAM_CID', '1117533245288400' );
     define( 'REDIRECT_URI', 'https://golfodemorrosquillo.com/auth' ); 
     $token = GetAccessToken(INSTAGRAM_CID, INSTAGRAM_CS, 'REDIRECT_URI', $_GET['code']);
-    $datos = GetUserProfileInfo($token);
-    var_dump($datos);
+   // $datos = GetUserProfileInfo($token);
+    var_dump($token);
 
     echo '<script> var Inst = "'.$_GET['code'].'"; </script>';
 
