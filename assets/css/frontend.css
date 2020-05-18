@@ -222,6 +222,9 @@ button[disabled]{
     cursor:pointer;
     bottom:100%;
 }
+.profile-image-container .photo-profile:hover{
+    background-color:rgb(222, 219, 219);
+}
 .profile-image-container > label > span:before{ 
     font-size: 19px;
 }

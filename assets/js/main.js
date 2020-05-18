@@ -100,11 +100,11 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                 
                 if($scope.Instance.modo === 'instagram'){
             
-                    $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.username, _wpnonce: angular.element('#_wpnonce').val() };
+                    $scope.Model = angular.merge( $scope.Model,{ modo: $scope.Instance.modo, nombre: $scope.Instance.username, _wpnonce: angular.element('#_wpnonce').val() });
             
                 }else{
-                
-                    $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, _wpnonce: angular.element('#_wpnonce').val() };
+                    
+                    $scope.Model = angular.merge( $scope.Model, { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, _wpnonce: angular.element('#_wpnonce').val() } );
 
                 }
 
