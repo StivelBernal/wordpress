@@ -170,6 +170,6 @@ function serlib_register_form_shortcode(){
     curl_close($ch); 
     if($http_code != 200)
       echo 'Error : Failed to get user information';
-    
+    var_dump($data);
     return $data;
   }
