@@ -299,7 +299,7 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
         $scope.is_submit = true;
 
         $scope.redirect_register_social = function(datos){
-            switch (datos.modo){
+            switch ( datos.modo ){
                 case 'facebook':                
                 case 'google':
                 case 'instagram':

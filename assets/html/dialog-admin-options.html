@@ -1,14 +1,18 @@
-<md-dialog >
+<md-dialog style="min-width:500px;">
     <form ng-cloak>
       <div style="padding:15px; text-align: center;">
           <h2>{{title}}</h2>
       </div>
-      
+            
       <md-dialog-content>
-        <div class="md-dialog-content">
+        <div class="md-dialog-content column">
           <md-input-container>
             <label>Nombre</label>
             <input ng-model="Model.nombre" >
+          </md-input-container>
+          <md-input-container>
+            <label>Valor</label>
+            <input ng-model="Model.valor" >
           </md-input-container>
           <div style="color:red; text-align: center;">{{error}}</div>
         </div>
@@ -20,7 +24,7 @@
             Cancelar
         </md-button>
         <span flex></span>
-        <md-button ng-disabled="!Model.nombre" ng-click="submit()">
+        <md-button ng-disabled="!Model.valor" ng-click="submit()">
             {{ title }}
         </md-button>
       </md-dialog-actions>

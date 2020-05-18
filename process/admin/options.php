@@ -168,6 +168,32 @@ function serlib_options_handler(){
         wp_send_json( $results );
 
         die();
+    }else if( $_GET['table'] == 'options'){
+        
+        if( $_SERVER['REQUEST_METHOD'] === 'GET' ){
+        
+            $options = []; $var = [];
+            $serlib_opts            = get_option( 'serlib' );
+           
+            foreach ($serlib_opts as $i => $value) {
+                $var = ['nombre' => $i, 'valor' => $value ];
+                array_push($options, $var);
+            }
+                
+            wp_send_json($options);
+            
+        }else if( $_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT'){
+           
+            $data = file_get_contents('php://input');
+            $data = json_decode($data);
+            $serlib_opts            = get_option( 'serlib' );
+            $serlib_opts[$data->nombre] = $data->valor;
+        
+            update_option('serlib', $serlib_opts);
+            echo 1;
+        }
+        
+        die();
     }
 
  }

@@ -133,6 +133,20 @@ app.controller('stateController', ['$scope', '$controller'
 
 }]);
 
+app.controller('optionsController', ['$scope', '$controller' 
+             ,function optionsController($scope, $controller) {
+
+    $controller('BaseCrud', {
+        $scope: $scope,
+        Config: {
+            table: 'options',
+            templateForm: '../wp-content/plugins/ser_library/assets/html/dialog-admin-options.html',
+            controllerForm: DialogForm
+        }
+    });
+
+}]);
+
 
 function DialogForm($scope, $mdDialog, $http, Instance, table) {
     
