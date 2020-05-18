@@ -40,7 +40,7 @@ function serlib_login_form_shortcode(){
     $code = str_replace('#_', '', $_GET['code']);
     $token = GetAccessToken( INSTAGRAM_CS, INSTAGRAM_CID, REDIRECT_URI, $code);
    /*$token = [
-    'access_token' => 'IGQVJWSzU5VXc1VzBXaHV2dEpTVWIyYjBBR1ZASM0Q3Y3BtUG00R293TmJidHZAqVm1wdXpuVTRjMU5qN1BBQ0RicjhvNVpUdkZAaY2VYUUIxRG9VdFVjMGlCcHFMMFlVTEtoYUdvLWY0aFpNOEMzUUtGbnlNb3AyWkVnOHk0',
+    'access_token' => 'IGQVJVUlpKWlZAvSENlRnI4U2swUkpReWlCTGZAMdTRIeEtiVVlDT1hCUlhrNzRiaFFyVUtneG95Vy02SkFVbXdVU2tmSXRlcTNLa1N6TkpqbE5vaVlTZAEpzU1UxcXRnWDl2MW1Pc0hpeFlQYUg2aG1yRkVfaXRqRWxMVjJv',
     'user_id' => 17841433887861158
    ];*/
 
@@ -139,7 +139,6 @@ function serlib_register_form_shortcode(){
       return NULL;
     }else{
       return $data;
-      //var_dump( longLiveToken( $data, $client_secret ) );
     } 
 
   }
@@ -171,6 +170,5 @@ function serlib_register_form_shortcode(){
     curl_close($ch); 
     if($http_code != 200)
       echo 'Error : Failed to get user information';
-    var_dump($data);
     return $data;
   }
