@@ -319,11 +319,11 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
                 url:    front_obj.ajax_url,
                 data:   datos,
             }).then(function successCallback(response) {
-                
+                 console.log($scope.action);
                 if(response.data.success){
                     $scope.user_login = true;
                     setTimeout(() => { window.location = "/blog"; }, 1000);
-                    console.log($scope.action);
+                   
                 }else if(response.data.error){
                     if( Config.action === 'login'){
                         $scope.error = response.data.error;
