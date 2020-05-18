@@ -100,14 +100,11 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                 
                 if($scope.Instance.modo === 'instagram'){
                
-                    var instagramForm = JSON.parse(sessionStorage.getItem('auth_instagram')) ;
-                   
+                    var instagramForm = JSON.parse(sessionStorage.getItem('auth_instagram'));       
                     $scope.Model = angular.merge(instagramForm, { modo: $scope.Instance.modo, nombre: $scope.Instance.username, _wpnonce: angular.element('#_wpnonce').val() });
             
-                }else{
-                    
+                }else{      
                     $scope.Model = angular.merge( $scope.Model, { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, _wpnonce: angular.element('#_wpnonce').val() } );
-
                 }
 
             }
@@ -151,7 +148,12 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             
             if(hasValue($scope.photo) ) prom++;
             if(hasValue($scope.File) ) prom++;
-
+            
+            if(prom === 0) {
+                $scope.finish();
+                return;
+            }
+            
             $scope.afterSubmit = function(){
                 prom--;
                 if(prom === 0){

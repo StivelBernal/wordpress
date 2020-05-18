@@ -35,5 +35,3 @@ function serlib_enqueue_scripts(){
     wp_enqueue_script( 'ser_lib_js' );
     wp_enqueue_script( 'serlib_main' );
 }
-
-

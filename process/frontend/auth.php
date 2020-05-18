@@ -2,9 +2,65 @@
 
 function serlib_auth_handler(){
     
-    
+    function enviar_email_confirm($email, $username, $pass){
+
+        $headers[]= 'From: Contacto <contact@golfomorrosquillo.com>';
+
+        $code = md5($email);
+        $user = md5($username);
+        echo $code.$user;
+        
+        $message = '<html>
+                        <head>	
+                        </head>
+                        <body>
+                            <div style="margin: auto; display: block; flex-direction: column; text-align: center;">
+                                <a class="logo" href="https://golfodemorrosquillo.com">
+                                <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
+                                </a>
+                            </div>
+                            <div style="margin: auto; display: block; text-align: left;">
+                                <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
+                                
+                            
+                                Correo: '.$email.' <br>
+                                Contraseña: '.$pass.'<br>
+                                
+
+                                </p>
+                                
+                            </div>
+                            <div style="margin: auto; display: block; text-align: left;">
+                                <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
+                                
+                                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color:#5ca4c6; border:2px solid #a87910;" href="https://golfodemorrosquillo.com?confirm='.$code.'&u='.$user.'" target="_blank">Ir al Sitio</a>
+
+                                </p>
+                                
+                            </div>
+                        </body>
+                    </html> '; 
+
+                
+                
+        /**
+        *Funcion para enviar el mensaje
+        */ 
+        function tipo_de_contenido_html() {
+             return 'text/html';
+      	}
+    	  
+	   	add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
+       
+        $email = 'brayan.bernalg@gmail.com';
+
+        $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Confirmación de cuenta', $message, $headers );
+
+    }
+
     global $wpdb;
 
+    
     if( $_SERVER['REQUEST_METHOD'] === 'GET' ){
         
         $query = "SELECT * FROM ".$wpdb->prefix."states;";
@@ -87,7 +143,9 @@ function serlib_auth_handler(){
                 wp_send_json($output);
                 return;
             } 
-            
+            enviar_email_confirm( $email, $username, $pass );
+
+        return;
             $user_id                =   wp_insert_user([
                 'user_login'            =>  $username,
                 'first_name'            =>  $first_name,
@@ -146,7 +204,7 @@ function serlib_auth_handler(){
             
             if( $role === 'turista'){
  
-                enviar_email_confirm( $email, $user_id, $username, $pass );
+               enviar_email_confirm( $email, $username, $pass );
            
             }
 
@@ -241,64 +299,7 @@ function serlib_auth_handler(){
 
     }
 
-    function enviar_email_confirm($email, $id, $username, $pass){
-
-        $headers[]= 'From: Contacto <contact@golfomorrosquillo.com>';
-
-         /**
-        *Comienza texto del mensaje
-        */
-        
-        $code = md5($email);
-        $user = md5($username);
-        $message = '              
- <html>
-	<head>	
-	</head>
-	<body>
-		<div style="margin: auto; display: block; flex-direction: column; text-align: center;">
-            <a class="logo" href="https://golfodemorrosquillo.com">
-            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
-            </a>
-		</div>
-		<div style="margin: auto; display: block; text-align: left;">
-			<p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
-			
-         
-			Correo: '.$email.' <br>
-			Contraseña: '.$pass.'<br>
-			
-
-			</p>
-			
-		</div>
-		<div style="margin: auto; display: block; text-align: left;">
-			<p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
-			
-				<a style="padding:5px 10px; text-decoration:none; color:#fff; background-color:#5ca4c6; border:2px solid #a87910;" href="https://golfodemorrosquillo.com?confirm='.$code.'&u='.$user.'" target="_blank">Ir al Sitio</a>
-
-			</p>
-			
-		</div>
-	</body>
-</html> '; 
-
-                
-                
-        /**
-        *Funcion para enviar el mensaje
-        */ 
-        function tipo_de_contenido_html() {
-             return 'text/html';
-      	}
-    	  
-	   	add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
-       
-        $email = 'brayan.bernalg@gmail.com';
-
-        $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Confirmación de cuenta', $message, $headers );
-
-    }
+  
 
 
     die();
