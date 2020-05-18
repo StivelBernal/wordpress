@@ -99,7 +99,8 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                 $scope.profile_photo = hasValue($scope.Instance.picture) ? $scope.Instance.picture: $scope.profile_photo;
                 
                 if($scope.Instance.modo === 'instagram'){
-            
+                    console.log( sessionStorage.getItem('auth_instagram') );
+                   // var instagramForm = JSON.parse(sessionStorage.getItem('auth')); auth_instagram
                     $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.username, _wpnonce: angular.element('#_wpnonce').val() };
             
                 }else{
@@ -418,11 +419,15 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
     }
     
     $scope.InstagramRedirect = function(){
+
+        if( Config.action === 'register'){
+            sessionStorage.setItem('auth_instagram', JSON.stringify( angular.copy( $scope.Model ) ) );
+        }
         
-            var CLIENT_ID = "1117533245288400";
-            var REDIRECT_URI = "https://golfodemorrosquillo.com/auth"; 
-            var url = "https://api.instagram.com/oauth/authorize/?client_id="+ CLIENT_ID + "&redirect_uri="+REDIRECT_URI+"&response_type=code&scope=user_profile";
-            window.location = url;
+        var CLIENT_ID = "1117533245288400";
+        var REDIRECT_URI = "https://golfodemorrosquillo.com/auth"; 
+        var url = "https://api.instagram.com/oauth/authorize/?client_id="+ CLIENT_ID + "&redirect_uri="+REDIRECT_URI+"&response_type=code&scope=user_profile";
+        window.location = url;
             
     }    
 

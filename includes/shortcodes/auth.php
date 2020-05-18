@@ -107,7 +107,7 @@ function serlib_register_form_shortcode(){
        [ 
          __('Registrarme como:', 'serlib'), __('Turista', 'serlib'), __('requerido', 'serlib'),
          __('Por favor coloca un email valido', 'serlib'), __('Contraseña', 'serlib'), __('Comerciante', 'serlib'),
-         __('Registrarme como turista', 'serlib'), __('llena los siguientes campos, puedes autocompeltar con tus redes sociales', 'serlib'), __('Nombre', 'serlib'),
+         __('Registrarme como turista', 'serlib'), __('llena los siguientes campos, puedes autocompletar con tus redes sociales', 'serlib'), __('Nombre', 'serlib'),
          __('Apellido', 'serlib'), __('Fecha de nacimiento', 'serlib'), __('Correo electrónico', 'serlib'), __('Las contraseñas no son iguales', 'serlib'),
          __('Por favor ingresa una contraseña que contenga, mayusculas, minisculas, un numero y mayor de 6 digitos', 'serlib'),
          __('Repetir contraseña', 'serlib'), __('Teléfono', 'serlib'), __('Términos y condiciones', 'serlib'), __('políticas de privacidad', 'serlib'), 
