@@ -1,11 +1,15 @@
 <?php
 
 function serlib_footer_scripts(){
+  
+  $opts = get_option( 'serlib' );
 
   echo "<script>
+              var google_key = '".$opts['google_key']."';
+
               window.fbAsyncInit = function() {
               FB.init({
-                  appId      : '808181629710199',
+                  appId      : '".$opts['facebook_api']."',
                   cookie     : true,
                   xfbml      : true,
                   version    : 'v6.0'
@@ -31,12 +35,14 @@ function serlib_login_form_shortcode(){
   if( is_user_logged_in() ){
     return '';
   }
-  
+  $opts = get_option( 'serlib' );
+
   if(isset($_GET['code'])){
 
-    define( 'INSTAGRAM_CS', '92d0d55deb5af6c6a392e6ec81acb21d' );
-    define( 'INSTAGRAM_CID', '1117533245288400' );
-    define( 'REDIRECT_URI', 'https://golfodemorrosquillo.com/auth' ); 
+
+    define( 'INSTAGRAM_CS', $opts['instagram_client_secret'] );
+    define( 'INSTAGRAM_CID',  $opts['instagram_client_id'] );
+    define( 'REDIRECT_URI', $opts['instagram_redirect_uri'] ); 
     $code = str_replace('#_', '', $_GET['code']);
     $token = GetAccessToken( INSTAGRAM_CS, INSTAGRAM_CID, REDIRECT_URI, $code);
    /*$token = [

@@ -24,7 +24,7 @@ var app = angular.module('serAuth', ['SER.selector', 'ngMaterial', 'ngMessages',
         $compileProvider.debugInfoEnabled(false);
     }])
     .config(['socialProvider', function (socialProvider) {
-        socialProvider.setGoogleKey("497715945399-naggc6pk24b2hdlnld3n50cmeajmo4qs.apps.googleusercontent.com");
+        socialProvider.setGoogleKey(google_key);
     }]);
 
 
