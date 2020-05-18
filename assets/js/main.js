@@ -418,7 +418,7 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
     /** La Instancia es solo para instagram */
     if( Config.action === 'login'){
        if(Inst && hasValue(Inst)){
-        //$scope.AuthSocial('instagram', Inst );
+        $scope.AuthSocial('instagram', Inst );
        }
     }       
 }]);
