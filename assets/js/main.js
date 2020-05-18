@@ -145,9 +145,6 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             $scope.cities = newValue.cities; 
         }
         
-        if ( $scope.Model.rol === 'turista' && !$scope.registerForm.$valid ) return; 
-        if ( $scope.Model.rol === 'comerciante' && $scope.c_Form.$valid ) return;
-        
         $scope.submitFiles = function(id){
             
             var prom = 0
