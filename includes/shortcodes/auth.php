@@ -38,11 +38,11 @@ function serlib_login_form_shortcode(){
     define( 'INSTAGRAM_CID', '1117533245288400' );
     define( 'REDIRECT_URI', 'https://golfodemorrosquillo.com/auth' ); 
     $code = str_replace('#_', '', $_GET['code']);
-    //$token = GetAccessToken( INSTAGRAM_CS, INSTAGRAM_CID, REDIRECT_URI, $code);
-   $token = [
+    $token = GetAccessToken( INSTAGRAM_CS, INSTAGRAM_CID, REDIRECT_URI, $code);
+   /*$token = [
     'access_token' => 'IGQVJWSzU5VXc1VzBXaHV2dEpTVWIyYjBBR1ZASM0Q3Y3BtUG00R293TmJidHZAqVm1wdXpuVTRjMU5qN1BBQ0RicjhvNVpUdkZAaY2VYUUIxRG9VdFVjMGlCcHFMMFlVTEtoYUdvLWY0aFpNOEMzUUtGbnlNb3AyWkVnOHk0',
     'user_id' => 17841433887861158
-   ];
+   ];*/
 
     if(isset($token) ){ 
       $datos = GetUserProfileInfo($token);
@@ -91,7 +91,7 @@ function serlib_register_form_shortcode(){
 
     $formHTML = file_get_contents( 'templates/auth-register.php', true );
     
-    $formHTML               = str_replace(
+    $formHTML  = str_replace(
       ['register_has_I18N', 'turista_rol_I18N', 'required_I18N', 'email_error_I18N', 'password1_I18N',
        'comerciante_rol_I18N', 'registe_turista_I18N', 'or_register_with_I18N', 'nombre_I18N', 'apellido_I18N',
        'fecha_nacimiento_I18N', 'email_I18N', 'password_error_matchI18N', 'password_error_I18N', 'repeat_password_I18N',
