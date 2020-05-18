@@ -323,10 +323,16 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
                 if(response.data.success){
                     $scope.user_login = true;
                     setTimeout(() => { window.location = "/blog"; }, 1000);
-
+                    console.log($scope.action);
                 }else if(response.data.error){
-                    $scope.error = response.data.error;
-                    $scope.redirect_register_social(datos);
+                    if( Config.action === 'login'){
+                        $scope.error = response.data.error;
+                        $scope.redirect_register_social(datos);
+                    }else if(Config.action === 'register'){
+                        $scope.Instance = datos;
+                        $scope.$apply();
+                    }
+                    
                     $scope.is_submit = false;
                 }
 
