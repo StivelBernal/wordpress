@@ -8,7 +8,6 @@ function serlib_auth_handler(){
 
         $code = md5($email);
         $user = md5($username);
-        echo $code.$user;
         
         $message = '<html>
                         <head>	
@@ -60,7 +59,7 @@ function serlib_auth_handler(){
 
     global $wpdb;
 
-    
+
     if( $_SERVER['REQUEST_METHOD'] === 'GET' ){
         
         $query = "SELECT * FROM ".$wpdb->prefix."states;";
@@ -143,9 +142,7 @@ function serlib_auth_handler(){
                 wp_send_json($output);
                 return;
             } 
-            enviar_email_confirm( $email, $username, $pass );
-
-        return;
+          
             $user_id                =   wp_insert_user([
                 'user_login'            =>  $username,
                 'first_name'            =>  $first_name,
