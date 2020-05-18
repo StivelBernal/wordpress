@@ -330,7 +330,7 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
                         $scope.redirect_register_social(datos);
                     }else if(Config.action === 'register'){
                         $scope.Instance = datos;
-                        $scope.$apply();
+                        
                     }
                     
                     $scope.is_submit = false;
