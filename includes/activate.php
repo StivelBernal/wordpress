@@ -58,6 +58,18 @@ function serlib_activate_plugin(){
 
     /**Tipos de usuarios */
     global $wp_roles;
+    
+    remove_role( 'subscriber' );
+
+    remove_role( 'author' );
+
+    remove_role( 'editor' );
+
+    add_role(
+        'pendiente',
+        __('Pendiente', 'serlib'),
+        []
+    );
 
     add_role(
         'turista',

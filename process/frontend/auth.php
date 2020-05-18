@@ -36,8 +36,6 @@ function serlib_auth_handler(){
             wp_send_json($output);
         }
 
-        $headers[]= 'From: Contacto <contact@gofomorrosquillo.com>';
-
         //GENERAMOS UN NOMBRE DE USUARIO
         $str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890aAS";
         $user_random = "";
@@ -50,8 +48,6 @@ function serlib_auth_handler(){
         $last_name              =   validateIsset($objDatos->apellido); 
         $username               =   validateIsset($objDatos->nombre);
         $email                  =   sanitize_email($objDatos->email);
-        $pass                   =   validateIsset($objDatos->password);
-        $confirm_pass           =   validateIsset($objDatos->password_confirm);
         $role                   =   validateIsset($objDatos->rol) ;
         $telefono               =   validateIsset($objDatos->telefono);
         $birthdate              =   validateIsset($objDatos->birthdate);
@@ -72,7 +68,7 @@ function serlib_auth_handler(){
             $username = $username.$user_random;
         }
 
-        if( email_exists($email) || $pass !== $confirm_pass || !is_email($email) ){
+        if( email_exists($email) || !is_email($email) ){
             
             $output  =  [ 'error' => 'email en uso' ];
                 
@@ -82,17 +78,44 @@ function serlib_auth_handler(){
 
         }
 
-        $user_id                =   wp_insert_user([
-            'user_login'            =>  $username,
-            'first_name'            =>  $first_name,
-            'last_name'             =>  $last_name,
-            'user_pass'             =>  $pass,
-            'user_email'            =>  $email,
-            'user_nicename'         =>  $first_name,
-            'role'                  =>  $role,
-            'show_admin_bar_front'  =>  false 
-        ]);
+        if($modo === 'directo'){
+            
+            $pass                   =   validateIsset($objDatos->password);
+            $confirm_pass           =   validateIsset($objDatos->password_confirm);
+            if($pass !==  $confirm_pass){
+                $output  =  [ 'error' => 'las contraseñas no son iguales' ];
+                wp_send_json($output);
+                return;
+            } 
+            
+            $user_id                =   wp_insert_user([
+                'user_login'            =>  $username,
+                'first_name'            =>  $first_name,
+                'last_name'             =>  $last_name,
+                'user_pass'             =>  $pass,
+                'user_email'            =>  $email,
+                'user_nicename'         =>  $first_name,
+                'role'                  =>  'pendiente',
+                'show_admin_bar_front'  =>  false 
+            ]);
 
+        }else if($modo === 'instagram' || $modo === 'facebook' ||  $modo === 'google' ){
+            
+            $pass = md5('ser'.$email);
+
+            $user_id                =   wp_insert_user([
+                'user_login'            =>  $username,
+                'first_name'            =>  $first_name,
+                'last_name'             =>  $last_name,
+                'user_pass'             =>  $pass,
+                'user_email'            =>  $email,
+                'user_nicename'         =>  $first_name,
+                'role'                  =>  $role,
+                'show_admin_bar_front'  =>  false 
+            ]);
+            
+        }
+        
         if( is_wp_error($user_id) ){
             $output  =  [ 'error' => 'error register' ];
             wp_send_json($output);
@@ -102,6 +125,7 @@ function serlib_auth_handler(){
         $output  =  [ 'success' => $user_id ];
 
         update_user_meta( $user_id, 'user_telefono', $telefono );
+        update_user_meta( $user_id, 'user_role', $telefono );
         update_user_meta( $user_id, 'user_birthdate', $birthdate );
         update_user_meta( $user_id, 'user_modo', $modo );
         update_user_meta( $user_id, 'user_intereses', $intereses );
@@ -118,14 +142,14 @@ function serlib_auth_handler(){
         }
         
         
-        if($modo === 'directo'){
-            /**test 
-            $user   =   get_user_by( 'id', $user_id );
-            wp_set_current_user( $user_id, $user->user_login );
-            wp_set_auth_cookie( $user_id );
-            do_action( 'wp_login', $user->user_login, $user );*/
-            //wp_new_user_notification( $user_id, null, 'user' );
+        if( $modo === 'directo'){
             
+            if( $role === 'turista'){
+ 
+                enviar_email_confirm( $email, $user_id, $username, $pass );
+           
+            }
+
             wp_send_json($output);
         
         }else if($modo === 'instagram' || $modo === 'facebook' ||  $modo === 'google' ){
@@ -138,9 +162,6 @@ function serlib_auth_handler(){
         
             wp_send_json($output);
         }
-        
-        
-
         
     }
 
@@ -193,7 +214,7 @@ function serlib_auth_handler(){
                 if(isset($datos)){
                     $creds                   =  [
                         'user_login'          =>  sanitize_text_field($datos->email),
-                        'user_password'       =>  sanitize_text_field('ser'+$datos->email),
+                        'user_password'       =>  sanitize_text_field( md5('ser'+$datos->email) ),
                         'remember'            =>  true
                   ];
                 }else{
@@ -217,6 +238,65 @@ function serlib_auth_handler(){
             wp_send_json($output);
 
         }
+
+    }
+
+    function enviar_email_confirm($email, $id, $username, $pass){
+
+        $headers[]= 'From: Contacto <contact@golfomorrosquillo.com>';
+
+         /**
+        *Comienza texto del mensaje
+        */
+        
+        $code = md5($email);
+        $user = md5($username);
+        $message = '              
+ <html>
+	<head>	
+	</head>
+	<body>
+		<div style="margin: auto; display: block; flex-direction: column; text-align: center;">
+            <a class="logo" href="https://golfodemorrosquillo.com">
+            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
+            </a>
+		</div>
+		<div style="margin: auto; display: block; text-align: left;">
+			<p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
+			
+         
+			Correo: '.$email.' <br>
+			Contraseña: '.$pass.'<br>
+			
+
+			</p>
+			
+		</div>
+		<div style="margin: auto; display: block; text-align: left;">
+			<p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
+			
+				<a style="padding:5px 10px; text-decoration:none; color:#fff; background-color:#5ca4c6; border:2px solid #a87910;" href="https://golfodemorrosquillo.com?confirm='.$code.'&u='.$user.'" target="_blank">Ir al Sitio</a>
+
+			</p>
+			
+		</div>
+	</body>
+</html> '; 
+
+                
+                
+        /**
+        *Funcion para enviar el mensaje
+        */ 
+        function tipo_de_contenido_html() {
+             return 'text/html';
+      	}
+    	  
+	   	add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
+       
+        $email = 'brayan.bernalg@gmail.com';
+
+        $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Confirmación de cuenta', $message, $headers );
 
     }
 

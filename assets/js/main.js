@@ -219,7 +219,11 @@ app.controller('registerController', ['$scope', '$http', '$controller',
 
         $scope.finish = function(){
               $scope.user_created = true;
-              setTimeout(() => { window.location = "/gracias"; }, 2000);
+              if($scope.Model.metodo === 'directo'){
+                setTimeout(() => { window.location = "/gracias?pending="+$scope.rol; }, 2000);
+              }else{
+                setTimeout(() => { window.location = "/gracias"; }, 2000);
+              }       
         }
 
         $scope.submit = function(){
