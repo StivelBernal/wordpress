@@ -112,7 +112,7 @@ app.controller('cityController', ['$scope', '$controller'
         $scope: $scope,
         Config: {
             table: 'cities',
-            templateForm: '../wp-content/plugins/ser_library/assets/html/dialog-admin-cities.html',
+            templateForm: '../wp-content/plugins/ser_lib/assets/html/dialog-admin-cities.html',
             controllerForm: DialogCities
         }
     });
@@ -126,7 +126,7 @@ app.controller('stateController', ['$scope', '$controller'
         $scope: $scope,
         Config: {
             table: 'states',
-            templateForm: '../wp-content/plugins/ser_library/assets/html/dialog-admin-states.html',
+            templateForm: '../wp-content/plugins/ser_lib/assets/html/dialog-admin-states.html',
             controllerForm: DialogForm
         }
     });
@@ -140,7 +140,7 @@ app.controller('optionsController', ['$scope', '$controller'
         $scope: $scope,
         Config: {
             table: 'options',
-            templateForm: '../wp-content/plugins/ser_library/assets/html/dialog-admin-options.html',
+            templateForm: '../wp-content/plugins/ser_lib/assets/html/dialog-admin-options.html',
             controllerForm: DialogForm
         }
     });
