@@ -89,26 +89,30 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         $scope.profile_photo = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
        
         $scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
-     
-        if( !hasValue($scope.Instance ) ){
-            $scope.Model = { modo: 'directo', _wpnonce: angular.element('#_wpnonce').val() };
-        }else{
-            
-            $scope.profile_photo = hasValue($scope.Instance.picture) ? $scope.Instance.picture: $scope.profile_photo;
-            
-            if($scope.Instance.modo === 'instagram'){
-           
-                $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.username, _wpnonce: angular.element('#_wpnonce').val() };
-           
+        
+        $scope.UpdateInstance = function(){
+          
+            if( !hasValue($scope.Instance ) ){
+                $scope.Model = { modo: 'directo', _wpnonce: angular.element('#_wpnonce').val() };
             }else{
+                
+                $scope.profile_photo = hasValue($scope.Instance.picture) ? $scope.Instance.picture: $scope.profile_photo;
+                
+                if($scope.Instance.modo === 'instagram'){
             
-                $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, _wpnonce: angular.element('#_wpnonce').val() };
+                    $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.username, _wpnonce: angular.element('#_wpnonce').val() };
+            
+                }else{
+                
+                    $scope.Model = { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, _wpnonce: angular.element('#_wpnonce').val() };
+
+                }
 
             }
-
-          
+            
         }
-        
+        $scope.UpdateInstance();
+
         /**Options */
         $scope.error  = false;
         $scope.user_created = false;
@@ -319,7 +323,7 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
                 url:    front_obj.ajax_url,
                 data:   datos,
             }).then(function successCallback(response) {
-                 console.log(Config.action);
+                 
                 if(response.data.success){
                     $scope.user_login = true;
                     setTimeout(() => { window.location = "/blog"; }, 1000);
@@ -328,9 +332,10 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
                     if( Config.action === 'login'){
                         $scope.error = response.data.error;
                         $scope.redirect_register_social(datos);
+                   
                     }else if(Config.action === 'register'){
-                        $scope.Instance = datos;
-                        $scope.$apply();
+                       $scope.Instance = datos;
+                       $scope.UpdateInstance();
                     }
                     
                     $scope.is_submit = false;
