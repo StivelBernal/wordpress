@@ -110,12 +110,13 @@ function serlib_register_gracias_shortcode(){
         __('Ir al Inicio', 'serlib') ], 
         $formHTML );
     }
-
-  }else{
-    $formHTML  = str_replace(
+    if($_GET['pending'] === ''){
+      $formHTML  = str_replace(
        ['gracias_I18N', 'parrafo_I18N', 'ir_al_inicio_I18N'],
        [__('Gracias', 'serlib'), __('ya estas registrado.', 'serlib'), __('Ir al Inicio', 'serlib')  ],
        $formHTML );
+    }
+
   }
 
   return $formHTML;
