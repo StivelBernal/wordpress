@@ -58,6 +58,7 @@ function serlib_auth_handler(){
 
         $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Confirmación de cuenta', $message, $headers );
 
+        return $mail_res;
     }
 
     global $wpdb;
