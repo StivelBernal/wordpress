@@ -338,7 +338,7 @@ NONCE_FIELD_PH
 
                         <div class="form-group s-45">
                             <label>Conocimiento_pagina_I18N</label>      
-                            <selector name="conocimiento" require="true" model="Model.conocimiento_pagina" change="cityFilter(newValue)" options="Intereses"></selector>
+                            <selector name="conocimiento" require="true" model="Model.conocimiento_pagina" options="conocimientoPagina"></selector>
                             <div ng-messages="c_Form.conocimiento.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>

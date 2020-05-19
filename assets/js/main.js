@@ -144,11 +144,11 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         
         $scope.submitFiles = function(id){
             
-            var prom = 0
-            
+            var prom = 0;         
+
             if(hasValue($scope.photo) ) prom++;
             if(hasValue($scope.File) ) prom++;
-            
+
             if(prom === 0) {
                 $scope.finish();
                 return;
@@ -220,13 +220,14 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         }
 
         $scope.finish = function(){
-              $scope.user_created = true;
-              console.log($scope.Model.metodo);
-              if($scope.Model.metodo === 'directo'){
-                //setTimeout(() => { window.location = "/gracias?pending="+$scope.rol; }, 2000);
-              }else{
-                //setTimeout(() => { window.location = "/gracias"; }, 2000);
-              }       
+           
+            $scope.user_created = true;
+
+            if($scope.Model.modo === 'directo'){  
+                setTimeout(() => { window.location = "/gracias?pending="+$scope.Model.rol; }, 2000);
+            }else{
+                setTimeout(() => { window.location = "/gracias"; }, 2000);
+            }       
         }
 
         $scope.submit = function(){
@@ -238,7 +239,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                 method: 'POST',
                 params: { action: 'serlib_auth_handler', 'create': ''},
                 url:    front_obj.ajax_url,
-                data:   $scope.Model,
+                data:   angular.copy($scope.Model),
             }).then(function successCallback(response) {
                 
                 if(response.data.success){
