@@ -19,7 +19,6 @@ function serlib_auth_handler(){
                                 </a>
                             </div>
                             <div style="margin: auto; display: block; text-align: left;">
-                                <h2>Verficiar Cuenta</h2>
                             
                                 <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
                                 
@@ -54,7 +53,7 @@ function serlib_auth_handler(){
     	  
 	   	add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
        
-        $email = 'brayan.bernalg@gmail.com';
+        // $email = 'brayan.bernalg@gmail.com';
 
         $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Confirmación de cuenta', $message, $headers );
 

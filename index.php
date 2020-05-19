@@ -44,7 +44,7 @@ add_action( 'wp_enqueue_scripts', 'serlib_enqueue_scripts', 100 );
 add_action( 'wp_ajax_serlib_options_handler', 'serlib_options_handler' );
 /**usuarios registrados */
 add_action( 'wp_ajax_serlib_rate_destino', 'serlib_rate_destino' );
-add_action( 'wp_ajax_serlib_uploader', 'serlib_uploader' );
+add_action( 'wp_ajax_nopriv_serlib_uploader', 'serlib_uploader' );
 /**publicos */
 add_action( 'wp_ajax_nopriv_serlib_auth_handler', 'serlib_auth_handler' );
 
