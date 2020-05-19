@@ -19,6 +19,8 @@ function serlib_auth_handler(){
                                 </a>
                             </div>
                             <div style="margin: auto; display: block; text-align: left;">
+                                <h2>Verficiar Cuenta</h2>
+                            
                                 <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
                                 
                             
@@ -30,14 +32,15 @@ function serlib_auth_handler(){
                                 
                             </div>
                             <div style="margin: auto; display: block; text-align: left;">
-                                <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
+                                <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
                                 
-                                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color:#5ca4c6; border:2px solid #a87910;" href="https://golfodemorrosquillo.com?confirm='.$code.'&u='.$user.'" target="_blank">Ir al Sitio</a>
+                                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com?confirm='.$code.'&u='.$user.'" target="_blank">Darse de alta</a>
 
                                 </p>
                                 
                             </div>
                         </body>
+                    }
                     </html> '; 
 
                 
