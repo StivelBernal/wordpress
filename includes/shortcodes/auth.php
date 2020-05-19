@@ -88,6 +88,41 @@ function serlib_login_form_shortcode(){
   return $formHTML;
 }
 
+/**Mensaje */
+function serlib_register_gracias_shortcode(){
+
+  if( is_user_logged_in() ){
+    return '';
+  }
+
+  $formHTML = file_get_contents( 'templates/thanks-message.php', true );
+  
+  if(isset($_GET['pending'])){
+
+    if($_GET['pending'] === 'comerciante'){
+       $formHTML  = str_replace( ['gracias_I18N', 'parrafo_I18N', 'ir_al_inicio_I18N'],
+       [__('Gracias', 'serlib'), __('Se revisara tu información para activar la cuenta', 'serlib'), __('Ir al Inicio', 'serlib') ], 
+        $formHTML );
+    }
+    if($_GET['pending'] === 'turista'){
+      $formHTML  = str_replace( ['gracias_I18N', 'parrafo_I18N', 'ir_al_inicio_I18N'],
+        [__('Gracias', 'serlib'), __('Por favor revisa el enlace enviado a tu correo electronico para activar la cuenta', 'serlib'),
+        __('Ir al Inicio', 'serlib') ], 
+        $formHTML );
+    }
+
+  }else{
+    $formHTML  = str_replace(
+       ['gracias_I18N', 'parrafo_I18N', 'ir_al_inicio_I18N'],
+       [__('Gracias', 'serlib'), __('ya estas registrado.', 'serlib'), __('Ir al Inicio', 'serlib')  ],
+       $formHTML );
+  }
+
+  return $formHTML;
+
+}
+
+
 function serlib_register_form_shortcode(){
     if( is_user_logged_in() ){
       return '';

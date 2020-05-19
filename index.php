@@ -52,11 +52,12 @@ add_action( 'wp_ajax_nopriv_serlib_uploader', 'serlib_uploader' );
 add_action( 'admin_init', 'serlib_admin_init' );
 add_action( 'admin_menu', 'serlib_admin_menus' );
 
-add_shortcode( 'serlib_login_form', 'serlib_login_form_shortcode' );
-add_shortcode( 'serlib_register_form', 'serlib_register_form_shortcode' );
+
 
 // Shortcodes
-
+add_shortcode( 'serlib_login_form', 'serlib_login_form_shortcode' );
+add_shortcode( 'serlib_register_form', 'serlib_register_form_shortcode' );
+add_shortcode( 'serlib_gracias', 'serlib_register_gracias_shortcode' );
 
 
 
