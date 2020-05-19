@@ -52,24 +52,7 @@ add_action( 'wp_ajax_nopriv_serlib_uploader', 'serlib_uploader' );
 add_action( 'admin_init', 'serlib_admin_init' );
 add_action( 'admin_menu', 'serlib_admin_menus' );
 
-
-
 // Shortcodes
 add_shortcode( 'serlib_login_form', 'serlib_login_form_shortcode' );
 add_shortcode( 'serlib_register_form', 'serlib_register_form_shortcode' );
 add_shortcode( 'serlib_gracias', 'serlib_register_gracias_shortcode' );
-
-
-
-
-/**
- * Requerimientos 
- * 
- * Crear una plantilla para ese tipo de post y hacer un sistema de calificación por la meta para no llenar mas tablas y tambien porque tiene que ser un usuario el que llene si no mostramos un aviso que podria ser con una alerta o con mddialogs
- * Crear un seccion de referencias para hacer uso de estos datos 
- * Formularios de registro para hacer funcionar los datos anteriores
- * Registro con redes sociales ver como funciona los otros plugins aunque yo pienso que es usar un valor en el meta para guardar ese token con el que se validaria hacer los mismo que se hizo en Telecomfiles 
- * Por tipos de usuarios ir colocando sus funciones y enriquisiendo con esos datos
- * Sistema de comentarios se puede usar un plugin para eso para que pueda soportar varios tipos de usuarios
- * 
- */
