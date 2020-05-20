@@ -357,8 +357,9 @@ function serlib_auth_handler(){
         }
         
         /** Generamos un md5 con el correo la password y el id */
-        $user = base64_encode($username);
+        $username = base64_encode($user->data->user_login);
         $code = base64_encode(md5($user->data->user_login.$user->ID.$user->data->email.$user->data->user_pass));
+        
     
         $headers[]= 'From: Contacto <contact@golfomorrosquillo.com>';
 
@@ -376,7 +377,7 @@ function serlib_auth_handler(){
                 <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
                 
             
-                '._x('Correo', 'plantilla email recuperar cuenta', 'serlib').': '.$user->data->email.' <br>
+                '._x('Correo', 'plantilla email recuperar cuenta', 'serlib').': '.$objDatos->email.' <br>
                 
 
                 </p>
@@ -385,7 +386,7 @@ function serlib_auth_handler(){
             <div style="margin: auto; display: block; text-align: left;">
                 <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
                 
-                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth?confirm='.$code.'&u='.$user.'" target="_blank">'._x('Recuperar cuenta',  'plantilla email recuperar cuenta', 'serlib').'</a>
+                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth/recover-account?code='.$code.'&u='.$user.'" target="_blank">'._x('Recuperar cuenta',  'plantilla email recuperar cuenta', 'serlib').'</a>
 
                 </p>
                 
@@ -405,7 +406,7 @@ function serlib_auth_handler(){
 
         add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
 
-        $email = 'brayan.bernalg@gmail.com';
+        $email = 'brayan.bernalg@hotmail.com';
 
         $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] '._x('Recuperación de cuenta', 'asunto email', 'serlib'), $message, $headers );
 

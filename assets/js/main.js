@@ -96,7 +96,7 @@ app.controller('recoverController', ['$scope', '$http',
                          }).then(function successCallback(response) {
                              
                              if(response.data.success){
-                                 $scope.user_login = true;
+                                 $scope.user_recover = true;
                              }else if(response.data.error){
                                  $scope.error = response.data.error;
                                  $scope.is_submit = false;
