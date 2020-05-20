@@ -44,15 +44,17 @@ function serlib_login_form_shortcode(){
     $code = base64_decode($_GET['confirm']);
 
     $user = get_user_by('login', $user);
+  
+    if(!$user) return '';
+    
     $email = $user->data->user_email;
-   var_dump($user);
-   var_dump($user->data);
+   
     if(md5($email) === $code ){
-           echo 'son iguales';
+
       for($i = 0; $i < count( $user->data->roles); $i++){
         
-        if( $user->data->roles[$i] === 'pendiente' ){
-          echo 'ALGO';
+        if( $user->roles[$i] === 'pendiente' ){
+          
           $u = new WP_User( $user->data->ID );
           $u->set_role( 'turista' );
     
