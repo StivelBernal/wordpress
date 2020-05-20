@@ -323,7 +323,7 @@ function serlib_auth_handler(){
     }
 
     if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['recover'])){
-                 
+               
         $objDatos   =     json_decode(file_get_contents("php://input"));
         
         $output     =     [ 'error' => __('Usuario no encontrado', 'serlib'),
@@ -410,7 +410,7 @@ function serlib_auth_handler(){
         $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] '._x('Recuperación de cuenta', 'asunto email', 'serlib'), $message, $headers );
 
         if($mail_res){
-            $output     =     [ 'success' => '',
+            $output     =     [ 'success' => $mail_res,
             'code' => 200];
         }
 

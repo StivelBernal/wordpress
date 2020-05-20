@@ -94,8 +94,9 @@ app.controller('recoverController', ['$scope', '$http',
                              url:    front_obj.ajax_url,
                              data:   $scope.Model,
                          }).then(function successCallback(response) {
-                             
+                             console.log( response.data.success );
                              if(response.data.success){
+                                console.log( response.data.success, 'algo' );
                                  $scope.user_recover = true;
                              }else if(response.data.error){
                                  $scope.error = response.data.error;
