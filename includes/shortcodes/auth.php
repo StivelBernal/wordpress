@@ -48,7 +48,7 @@ function serlib_login_form_shortcode(){
    
     if(md5($email) === $code ){
            echo 'son iguales';
-           var_dump($user->data->roles );
+           var_dump($user );
       for($i = 0; $i < count( $user->data->roles); $i++){
         
         if( $user->data->roles[$i] === 'pendiente' ){
