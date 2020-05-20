@@ -73,29 +73,54 @@ function login_redirect() {
 }
 
 function serlib_recover_account_shortcode(){
- 
+  
   add_action('wp_footer', 'serlib_footer_scripts');
 
   $formHTML = file_get_contents( 'templates/auth-recover.php', true );
 
-  $formHTML               = str_replace(
-    ['recover_account_I18N', 'email_I18N', 'required_I18N', 'email_error_I18N', 'recover_I18N', 'email_info_I18N'],
-     [ 
-       __('Recuperar Cuenta', 'serlib'), __('Correo electrónico', 'serlib'), __('requerido', 'serlib'),
-       __('Por favor coloca un email valido', 'serlib'), __('Recuperar', 'serlib'),
-       __('Hemos enviado un correo electronico con la información para recuperar su cuenta', 'serlib')
-     ],
-    $formHTML
-  );
+  if( isset($_GET['code'], $_GET['u']) && $_GET['u'] !== '' &&  $_GET['code'] !== ''){
+    
+    $user = base64_decode($_GET['u']);
 
-  $formHTML               = str_replace( 
-    'NONCE_FIELD_PH', 
-    wp_nonce_field( 'serlib_auth', '_wpnonce', true, false ),
-    $formHTML
-  );
+    $code = base64_decode($_GET['code']);
+
+    $user = get_user_by('login', $user);
+
+    if($user){
+
+      $codeU = $user->data->user_login.$user->ID.$user->data->user_email.$user->data->user_pass;
+      
+      
+      echo md5($codeU).'<br>'.$code;
+      if(md5($codeU) === $code ){
+        echo 'son iguales';
+        $formHTML = '';
+      }
+    }
+    
+  }else{
+
+    $formHTML               = str_replace(
+      ['recover_account_I18N', 'email_I18N', 'required_I18N', 'email_error_I18N', 'recover_I18N', 'email_info_I18N'],
+      [ 
+        __('Recuperar Cuenta', 'serlib'), __('Correo electrónico', 'serlib'), __('requerido', 'serlib'),
+        __('Por favor coloca un email valido', 'serlib'), __('Recuperar', 'serlib'),
+        __('Hemos enviado un correo electronico con la información para recuperar su cuenta', 'serlib')
+      ],
+      $formHTML
+    );
+
+    $formHTML               = str_replace( 
+      'NONCE_FIELD_PH', 
+      wp_nonce_field( 'serlib_auth', '_wpnonce', true, false ),
+      $formHTML
+    );
+  }
 
   return $formHTML;
 }
+
+
 function serlib_login_form_shortcode(){
   if( is_user_logged_in() ){
     return '';

@@ -363,36 +363,36 @@ function serlib_auth_handler(){
         $headers[]= 'From: Contacto <contact@golfomorrosquillo.com>';
 
         $message = '<html>
-        <head>	
-        </head>
-        <body>
-            <div style="margin: auto; display: block; flex-direction: column; text-align: center;">
-                <a class="logo" href="https://golfodemorrosquillo.com">
-                <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
-                </a>
-            </div>
-            <div style="margin: auto; display: block; text-align: left;">
-            
-                <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
-                
-            
-                '._x('Correo', 'plantilla email recuperar cuenta', 'serlib').': '.$objDatos->email.' <br>
-                
+                        <head>	
+                        </head>
+                        <body>
+                            <div style="margin: auto; display: block; flex-direction: column; text-align: center;">
+                                <a class="logo" href="https://golfodemorrosquillo.com">
+                                <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
+                                </a>
+                            </div>
+                            <div style="margin: auto; display: block; text-align: left;">
+                            
+                                <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
+                                
+                            
+                                '._x('Correo', 'plantilla email recuperar cuenta', 'serlib').': '.$objDatos->email.' <br>
+                                
 
-                </p>
-                
-            </div>
-            <div style="margin: auto; display: block; text-align: left;">
-                <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
-                
-                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth/recover-account?code='.$code.'&u='.$username.'" target="_blank">'._x('Recuperar cuenta',  'plantilla email recuperar cuenta', 'serlib').'</a>
+                                </p>
+                                
+                            </div>
+                            <div style="margin: auto; display: block; text-align: left;">
+                                <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
+                                
+                                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth/recover-account?code='.$code.'&u='.$username.'" target="_blank">'._x('Recuperar cuenta',  'plantilla email recuperar cuenta', 'serlib').'</a>
 
-                </p>
-                
-            </div>
-        </body>
-    }
-    </html> '; 
+                                </p>
+                                
+                            </div>
+                        </body>
+                    }
+                    </html> '; 
 
 
 
