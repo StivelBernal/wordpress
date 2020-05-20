@@ -392,7 +392,7 @@ function serlib_auth_handler(){
 
          /**Obtener meta para verificar la forma como se accedio si es diferente a directo*/
         $user_modo = get_user_meta( $user->ID, 'user_modo', true );
-        var_dump($user_modo);
+        
         if($user_modo && $user_modo !== 'directo' ){
             $output     =     [ 'error' => __('La cuenta esta vinculada a ', 'serlib'),
             'code' => 401];
@@ -400,7 +400,7 @@ function serlib_auth_handler(){
             die();
         } 
 
-        die();
+        
 
         for($i = 0; $i < count( $user->roles); $i++){
         
@@ -412,7 +412,8 @@ function serlib_auth_handler(){
         
         $username = base64_encode($user->data->user_login);
         $code = base64_encode(md5($user->data->user_login.$user->ID.$user->data->user_email.$user->data->user_pass));
-        
+        var_dump($user_modo);
+        die();
         $headers[]= 'From: Contacto <contact@golfomorrosquillo.com>';
 
         $message = '<html>
@@ -458,7 +459,7 @@ function serlib_auth_handler(){
 
         add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
        
-        $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] '._x('Recuperación de cuenta', 'asunto email', 'serlib'), $message, $headers );
+        $mail_res = wp_mail( $objDatos->email, '[Golfo de Morrosquillo] '._x('Recuperación de cuenta', 'asunto email', 'serlib'), $message, $headers );
 
         if($mail_res){
             $output     =     [ 'success' => $mail_res,
