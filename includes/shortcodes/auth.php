@@ -91,7 +91,7 @@ function serlib_recover_account_shortcode(){
       $codeU = $user->data->user_login.$user->ID.$user->data->user_email.$user->data->user_pass;
       
       if(md5($codeU) === $code ){
-        echo '<script> var o = { code: "'.$code.'", u: "'.$_GET['u'].'"  }</script>';
+        echo '<script> var o = { code: "'.$code.'", u: "'.$_GET['u'].'"  };</script>';
         $formHTML = file_get_contents( 'templates/auth-form-reset-password.php', true );
       }
     }
