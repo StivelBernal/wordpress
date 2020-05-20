@@ -116,7 +116,7 @@ app.controller('resetPass', ['$scope', '$http',
                     $scope.error  = false;
                     $scope.user_recover = false;
                     $scope.is_submit = false;
-                    $scope.Model = { _wpnonce: angular.element('#_wpnonce').val(), u: u, code: code }
+                    $scope.Model = { _wpnonce: angular.element('#_wpnonce').val(), u: o.u, code: o.code }
 
                     $scope.submit = function(){
 
