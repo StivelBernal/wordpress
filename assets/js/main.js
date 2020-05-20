@@ -161,7 +161,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         $scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
         
         $scope.UpdateInstance = function(load){
-            if(load) $scope.Model = true;
+            if(load) $scope.Model = {};
             if( !hasValue($scope.Instance ) ){
                 $scope.Model = { modo: 'directo', _wpnonce: angular.element('#_wpnonce').val() };
             }else{
