@@ -342,20 +342,23 @@ function serlib_auth_handler(){
         
         $user = get_user_by( 'login', base64_decode($objDatos->u) );
 
-        /**Verificamos el code */
-
-
         $codeU = $user->data->user_login.$user->ID.$user->data->user_email.$user->data->user_pass;
       
         if(md5($codeU) === $objDatos->code ){
             $u = new WP_User( $user->ID );
             reset_password($u, $objDatos->password);
             
-            wp_set_current_user( $user->ID, $user->user_login );
-            wp_set_auth_cookie( $user_id );
-            do_action( 'wp_login', $user->user_login, $user );
-        
-            wp_send_json($output);
+            $creds                   =  [
+                'user_login'          =>  sanitize_text_field($user->user_email),
+                'user_password'       =>  sanitize_text_field($objDatos->password ),
+                'remember'            =>  false
+            ];
+          $user   =   wp_signon( $creds, is_ssl());
+         
+          $output     =     [ 'success' => 'gf',
+          'code' => 200];
+
+           wp_send_json($output);
         }
    
     }
