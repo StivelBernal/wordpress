@@ -122,6 +122,7 @@ function serlib_auth_handler(){
         $conocimiento_pagina    =   validateIsset( $objDatos->conocimiento_pagina );
         $document_type = validateIsset( $objDatos->numero_documento );
         $document_number = validateIsset( $objDatos->tipo_documento );
+        $photo = validateIsset( $objDatos->tipo_documento );
         
         if( username_exists($username) ){
             $username = $username.$user_random;
@@ -190,7 +191,9 @@ function serlib_auth_handler(){
         update_user_meta( $user_id, 'user_intereses', $intereses );
         update_user_meta( $user_id, 'user_ciudad_visitar', $ciudad_visitar );
         update_user_meta( $user_id, 'user_conocimiento_pagina', $conocimiento_pagina );
-        
+        update_user_meta( $user_id, 'user_photo', $photo );    
+        update_user_meta( $user_id, 'user_ciudad_visitar', $ciudad_visitar );
+
         if($role === 'turista'){
             update_user_meta( $user_id, 'user_city_id', $city_id );
             update_user_meta( $user_id, 'user_state_id', $state_id );

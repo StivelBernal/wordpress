@@ -156,7 +156,6 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             }
         });
         
-        
         $scope.profile_photo = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
        
         $scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
@@ -172,15 +171,17 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                 if($scope.Instance.modo === 'instagram'){
                
                     var instagramForm = JSON.parse(sessionStorage.getItem('auth_instagram'));       
-                    $scope.Model = angular.merge(instagramForm, { modo: $scope.Instance.modo, nombre: $scope.Instance.username, _wpnonce: angular.element('#_wpnonce').val() });
+                    $scope.Model = angular.merge(instagramForm, { modo: $scope.Instance.modo, nombre: $scope.Instance.username, photo_url: '', _wpnonce: angular.element('#_wpnonce').val() });
             
                 }else{      
-                    $scope.Model = angular.merge( $scope.Model, { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, _wpnonce: angular.element('#_wpnonce').val() } );
+                    $scope.Model = angular.merge( $scope.Model, { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, photo_url: '', _wpnonce: angular.element('#_wpnonce').val() } );
+                    
                 }
 
             }
             
         }
+        
         $scope.UpdateInstance();
 
         /**Options */
@@ -302,7 +303,14 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         }
 
         $scope.submit = function(){
-           if($scope.is_submit) return;
+            
+            if($scope.is_submit) return;
+            
+            /**Validamos si no se hizo cambios para guardar la url de la red social */
+            if($scope.Instance.picture === $scope.profile_photo){
+                $scope.Model.photo_url = $scope.profile_photo;
+            }
+           
             $scope.is_submit = true;
             $scope.error  = false;
 
