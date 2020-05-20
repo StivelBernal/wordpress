@@ -46,7 +46,9 @@ function serlib_login_form_shortcode(){
     $user = get_user_by('login', $user);
     $email = $user->data->user_email;
    
-    
+    echo md5($email).'<br>'.$code.'<br>';
+    var_dump($user );
+    return;
     if(md5($email) === $code ){
            
       for($i = 0; $i < count( $user->data->roles); $i++){
