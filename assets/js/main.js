@@ -134,9 +134,6 @@ app.controller('resetPass', ['$scope', '$http',
 
                              if(response.data.success){
                                  window.location = '/';
-                             }else if(response.data.error){
-                                 $scope.error = response.data.error;
-                                 $scope.is_submit = false;
                              }
                          }, function errorCallback(error) {
                              $scope.is_submit = false;

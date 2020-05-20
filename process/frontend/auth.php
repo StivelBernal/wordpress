@@ -454,8 +454,6 @@ function serlib_auth_handler(){
         }
 
         add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
-
-        $email = 'brayan.bernalg@hotmail.com';
        
         $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] '._x('Recuperación de cuenta', 'asunto email', 'serlib'), $message, $headers );
 
