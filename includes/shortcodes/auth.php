@@ -30,12 +30,7 @@ function serlib_footer_scripts(){
 
 }
 
-
-function serlib_login_form_shortcode(){
-  if( is_user_logged_in() ){
-    return '';
-  }
- 
+function login_redirect() {
   /**Activar cuenta */
   if( isset($_GET['confirm'], $_GET['u']) && $_GET['u'] !== '' &&  $_GET['confirm'] !== ''){
     
@@ -48,7 +43,7 @@ function serlib_login_form_shortcode(){
     if(!$user) return '';
     
     $email = $user->data->user_email;
-   
+    
     if(md5($email) === $code ){
 
       for($i = 0; $i < count( $user->roles); $i++){
@@ -61,11 +56,12 @@ function serlib_login_form_shortcode(){
           $i = count( $user->roles );
           
           wp_set_current_user( $user->ID, $user->data->user_login );
-         
+          
+ 
           wp_set_auth_cookie( $user->ID );
           do_action( 'wp_login', $user->data->user_login, $user );
 
-          //echo '<script> window.location = "/gracias?pending"; </script>';
+          echo '<script> window.location = "/gracias?pending"; </script>';
         } 
        
       } 
@@ -75,6 +71,13 @@ function serlib_login_form_shortcode(){
     return '';
     
   }
+}
+function serlib_login_form_shortcode(){
+  if( is_user_logged_in() ){
+    return '';
+  }
+ 
+  
 
   $opts = get_option( 'serlib' );
 

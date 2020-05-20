@@ -51,6 +51,7 @@ add_action( 'wp_ajax_nopriv_serlib_uploader', 'serlib_uploader' );
 
 add_action( 'admin_init', 'serlib_admin_init' );
 add_action( 'admin_menu', 'serlib_admin_menus' );
+add_action ('wp_loaded', 'login_redirect');
 
 // Shortcodes
 add_shortcode( 'serlib_login_form', 'serlib_login_form_shortcode' );
