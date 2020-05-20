@@ -181,7 +181,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             }
             
         }
-        
+
         $scope.UpdateInstance();
 
         /**Options */
@@ -307,8 +307,8 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             if($scope.is_submit) return;
             
             /**Validamos si no se hizo cambios para guardar la url de la red social */
-            if($scope.Instance.picture === $scope.profile_photo){
-                $scope.Model.photo_url = $scope.profile_photo;
+            if(hasValue($scope.Instance)){
+                if($scope.Instance.picture === $scope.profile_photo) $scope.Model.photo_url = $scope.profile_photo;
             }
            
             $scope.is_submit = true;

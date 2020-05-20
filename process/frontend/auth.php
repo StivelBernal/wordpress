@@ -109,7 +109,7 @@ function serlib_auth_handler(){
         $email                  =   sanitize_email($objDatos->email);
         $role                   =   validateIsset($objDatos->rol) ;
         $telefono               =   validateIsset($objDatos->telefono);
-        $birthdate              =   validateIsset($objDatos->birthdate);
+        $birthdate              =   validateIsset($objDatos->birthday);
         $modo                   =   validateIsset($objDatos->modo);
         $intereses              =   validateIsset($objDatos->intereses);
         $ciudad_visitar         =   validateIsset($objDatos->city_active);
@@ -122,7 +122,7 @@ function serlib_auth_handler(){
         $conocimiento_pagina    =   validateIsset( $objDatos->conocimiento_pagina );
         $document_type = validateIsset( $objDatos->numero_documento );
         $document_number = validateIsset( $objDatos->tipo_documento );
-        $photo = validateIsset( $objDatos->tipo_documento );
+        $photo = validateIsset( $objDatos->photo_url );
         
         if( username_exists($username) ){
             $username = $username.$user_random;
@@ -185,18 +185,18 @@ function serlib_auth_handler(){
         $output  =  [ 'success' => $user_id ];
 
         update_user_meta( $user_id, 'user_telefono', $telefono );
-        update_user_meta( $user_id, 'user_role', $telefono );
+        update_user_meta( $user_id, 'user_role', $role );
         update_user_meta( $user_id, 'user_birthdate', $birthdate );
         update_user_meta( $user_id, 'user_modo', $modo );
-        update_user_meta( $user_id, 'user_intereses', $intereses );
+        
         update_user_meta( $user_id, 'user_ciudad_visitar', $ciudad_visitar );
         update_user_meta( $user_id, 'user_conocimiento_pagina', $conocimiento_pagina );
         update_user_meta( $user_id, 'user_photo', $photo );    
-        update_user_meta( $user_id, 'user_ciudad_visitar', $ciudad_visitar );
 
         if($role === 'turista'){
             update_user_meta( $user_id, 'user_city_id', $city_id );
             update_user_meta( $user_id, 'user_state_id', $state_id );
+            update_user_meta( $user_id, 'user_intereses', $intereses );
         }
         if($role === 'comerciante'){
             update_user_meta( $user_id, 'document_type', $document_type );
