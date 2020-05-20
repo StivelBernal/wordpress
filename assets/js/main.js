@@ -116,9 +116,12 @@ app.controller('resetPass', ['$scope', '$http',
                     $scope.error  = false;
                     $scope.user_recover = false;
                     $scope.is_submit = false;
-                    $scope.Model = { _wpnonce: angular.element('#_wpnonce').val(), email: '' }
+                    $scope.Model = { _wpnonce: angular.element('#_wpnonce').val(), u: u, code: code }
 
                     $scope.submit = function(){
+
+                        console.log($scope.Model);
+                        return;
                         if($scope.is_submit) return;
                         
                          $scope.is_submit = true;
@@ -126,11 +129,11 @@ app.controller('resetPass', ['$scope', '$http',
                           
                          $http( {
                              method: 'POST',
-                             params: { action: 'serlib_auth_handler', 'recover': ''},
+                             params: { action: 'serlib_auth_handler', 'reset_pass': ''},
                              url:    front_obj.ajax_url,
                              data:   $scope.Model,
                          }).then(function successCallback(response) {
-                             
+
                              if(response.data.success){
                                  window.location = '/';
                              }else if(response.data.error){

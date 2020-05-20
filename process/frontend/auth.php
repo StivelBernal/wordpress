@@ -322,6 +322,21 @@ function serlib_auth_handler(){
 
     }
 
+    if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['reset_pass'])){
+        $objDatos   =     json_decode(file_get_contents("php://input"));
+       
+        $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
+        
+        if( !wp_verify_nonce( $nonce, 'serlib_auth' ) ){
+           
+            wp_send_json($output);
+            die();
+        }
+
+        $u = new WP_User( $user->ID );
+
+        reset_password($u, '');
+    }
     if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['recover'])){
                
         $objDatos   =     json_decode(file_get_contents("php://input"));
