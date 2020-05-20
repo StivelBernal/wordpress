@@ -323,6 +323,7 @@ function serlib_auth_handler(){
     }
 
     if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['reset_pass'])){
+       
         $objDatos   =     json_decode(file_get_contents("php://input"));
        
         $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
@@ -332,11 +333,33 @@ function serlib_auth_handler(){
             wp_send_json($output);
             die();
         }
+          
+        if( !isset( $objDatos->u, $objDatos->code) ){
+             
+            wp_send_json($output);
+            die();
+        }
+        
+        $user = get_user_by( 'login', base64_decode($objDatos->u) );
 
-        $u = new WP_User( $user->ID );
+        /**Verificamos el code */
 
-        reset_password($u, '');
+
+        $codeU = $user->data->user_login.$user->ID.$user->data->user_email.$user->data->user_pass;
+      
+        if(md5($codeU) === $objDatos->code ){
+            $u = new WP_User( $user->ID );
+            reset_password($u, $objDatos->password);
+            
+            wp_set_current_user( $user->ID, $user->user_login );
+            wp_set_auth_cookie( $user_id );
+            do_action( 'wp_login', $user->user_login, $user );
+        
+            wp_send_json($output);
+        }
+   
     }
+
     if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['recover'])){
                
         $objDatos   =     json_decode(file_get_contents("php://input"));

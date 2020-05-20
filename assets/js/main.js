@@ -120,8 +120,6 @@ app.controller('resetPass', ['$scope', '$http',
 
                     $scope.submit = function(){
 
-                        console.log($scope.Model);
-                        return;
                         if($scope.is_submit) return;
                         
                          $scope.is_submit = true;
