@@ -61,6 +61,7 @@ function serlib_login_form_shortcode(){
           $i = count( $user->roles );
           
           wp_set_current_user( $user->ID, $user->data->user_login );
+          echo   $user->ID;
           //wp_set_auth_cookie( $user->ID );
           do_action( 'wp_login', $user->data->user_login, $user );
 
