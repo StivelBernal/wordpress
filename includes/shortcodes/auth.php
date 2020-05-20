@@ -39,6 +39,8 @@ function serlib_login_form_shortcode(){
   /**Activar cuenta */
   if( isset($_GET['confirm'], $_GET['u']) && $_GET['u'] !== '' &&  $_GET['confirm'] !== ''){
     
+    base64_decode($_GET['confirm']);
+    
     return 'hola';
     
   }

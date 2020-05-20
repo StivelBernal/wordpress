@@ -7,7 +7,7 @@ function serlib_auth_handler(){
         $headers[]= 'From: Contacto <contact@golfomorrosquillo.com>';
 
         $code = md5($email);
-        $user = md5($username);
+        $user = base64_encode($username);
         $code  = base64_encode($code);
         
         $message = '<html>
