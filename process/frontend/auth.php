@@ -392,12 +392,15 @@ function serlib_auth_handler(){
 
          /**Obtener meta para verificar la forma como se accedio si es diferente a directo*/
         $user_modo = get_user_meta( $user->ID, 'user_modo', true );
+        var_dump($user_modo);
         if($user_modo && $user_modo !== 'directo' ){
             $output     =     [ 'error' => __('La cuenta esta vinculada a ', 'serlib'),
             'code' => 401];
             wp_send_json($output);
             die();
         } 
+
+        die();
 
         for($i = 0; $i < count( $user->roles); $i++){
         
