@@ -216,7 +216,6 @@ function serlib_auth_handler(){
         
         }else if($modo === 'instagram' || $modo === 'facebook' ||  $modo === 'google' ){
             
-            //esto seria para dejarlo loguiado en caso de registro con redes sociales
             $user   =   get_user_by( 'id', $user_id );
             wp_set_current_user( $user_id, $user->user_login );
             wp_set_auth_cookie( $user_id );
@@ -235,14 +234,14 @@ function serlib_auth_handler(){
                             'code' => 401];
 
         $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
-        
+       
         if( !wp_verify_nonce( $nonce, 'serlib_auth' ) ){
            
             wp_send_json($output);
             die();
         }
         
-        if( !isset( $objDatos->email, $objDatos->password ) ){
+        if( !isset( $objDatos->email ) ){
              
             wp_send_json($output);
             die();
@@ -280,10 +279,19 @@ function serlib_auth_handler(){
 
                 break;
             case 'facebook':
+
+                $creds                   =  [
+                    'user_login'          =>  sanitize_text_field($objDatos->email),
+                    'user_password'       =>  md5('ser'.$objDatos->email),
+                    'remember'            =>  true
+                  ];
+
+                break;
+
             case 'google':   
                 $creds                   =  [
                     'user_login'          =>  sanitize_text_field($objDatos->email),
-                    'user_password'       =>  sanitize_text_field('ser'+$objDatos->email),
+                    'user_password'       =>  md5('ser'.$objDatos->email),
                     'remember'            =>  true
                   ];
 
@@ -298,7 +306,7 @@ function serlib_auth_handler(){
                 if(isset($datos)){
                     $creds                   =  [
                         'user_login'          =>  sanitize_text_field($datos->email),
-                        'user_password'       =>  sanitize_text_field( md5('ser'+$datos->email) ),
+                        'user_password'       =>  md5('ser'.$datos->email),
                         'remember'            =>  true
                   ];
                 }else{
@@ -308,13 +316,13 @@ function serlib_auth_handler(){
 
                 break;
         }
-
-        
+       
         if($creds !== null){
 
             $user   =   wp_signon( $creds, is_ssl());
-           
+          
             if( is_wp_error($user) ){
+                $output['error'] = _x('correo electrónico o contraseña invalida', 'login form mensaje error contraseña', 'serlib');
                 wp_send_json($output);
             }
                     

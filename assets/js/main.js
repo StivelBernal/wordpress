@@ -59,7 +59,7 @@ app.controller('loginController', ['$scope', '$http', '$controller',
                              
                              if(response.data.success){
                                  $scope.user_login = true;
-                                 setTimeout(() => { window.location = "/blog"; }, 1000);
+                                 setTimeout(() => { window.location = "/blog"; }, 5000);
                              }else if(response.data.error){
                                  $scope.error = response.data.error;
                                  $scope.is_submit = false;
@@ -160,12 +160,12 @@ app.controller('registerController', ['$scope', '$http', '$controller',
        
         $scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
         
-        $scope.UpdateInstance = function(load){
+        $scope.UpdateInstance = function(load = false){
             if(load) $scope.Model = {};
             if( !hasValue($scope.Instance ) ){
                 $scope.Model = { modo: 'directo', _wpnonce: angular.element('#_wpnonce').val() };
             }else{
-                $scope.Model = {};
+                
                 $scope.profile_photo = hasValue($scope.Instance.picture) ? $scope.Instance.picture: $scope.profile_photo;
                 
                 if($scope.Instance.modo === 'instagram'){
@@ -296,7 +296,9 @@ app.controller('registerController', ['$scope', '$http', '$controller',
            
             $scope.user_created = true;
 
-            if($scope.Model.modo === 'directo'){  
+            sessionStorage.removeItem('auth');
+
+            if($scope.Model.modo === 'directo' || $scope.Model.rol === 'comerciante'){  
                 setTimeout(() => { window.location = "/gracias?pending="+$scope.Model.rol; }, 2000);
             }else{
                 setTimeout(() => { window.location = "/gracias"; }, 2000);
