@@ -344,10 +344,20 @@ function serlib_auth_handler(){
         }
         
         
-        $user = get_user_by('email', $objDatos->email);
+        $user = get_user_by( 'email', $objDatos->email );
        
-        if(!$user)  die();
         
+        if( !$user )  die();
+
+         /**Obtener meta para verificar la forma como se accedio si es diferente a directo*/
+        $user_modo = get_user_meta( $user->ID, 'user_modo', true );
+        if($user_modo && $user_modo !== 'directo' ){
+            $output     =     [ 'error' => __('La cuenta esta vinculada a ', 'serlib'),
+            'code' => 401];
+            wp_send_json($output);
+            die();
+        } 
+
         for($i = 0; $i < count( $user->roles); $i++){
         
             if( $user->roles[$i] === 'pendiente' ){
@@ -356,7 +366,6 @@ function serlib_auth_handler(){
         
         }
         
-        /** Generamos un md5 con el correo la password y el id */
         $username = base64_encode($user->data->user_login);
         $code = base64_encode(md5($user->data->user_login.$user->ID.$user->data->user_email.$user->data->user_pass));
         

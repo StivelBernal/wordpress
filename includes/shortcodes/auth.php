@@ -91,31 +91,33 @@ function serlib_recover_account_shortcode(){
       $codeU = $user->data->user_login.$user->ID.$user->data->user_email.$user->data->user_pass;
       
       
-      echo md5($codeU).'<br>'.$code;
       if(md5($codeU) === $code ){
-        echo 'son iguales';
-        $formHTML = '';
+        
+        $formHTML = file_get_contents( 'templates/auth-form-reset-password.php', true );;
       }
     }
     
-  }else{
-
-    $formHTML               = str_replace(
-      ['recover_account_I18N', 'email_I18N', 'required_I18N', 'email_error_I18N', 'recover_I18N', 'email_info_I18N'],
-      [ 
-        __('Recuperar Cuenta', 'serlib'), __('Correo electrónico', 'serlib'), __('requerido', 'serlib'),
-        __('Por favor coloca un email valido', 'serlib'), __('Recuperar', 'serlib'),
-        __('Hemos enviado un correo electronico con la información para recuperar su cuenta', 'serlib')
-      ],
-      $formHTML
-    );
-
-    $formHTML               = str_replace( 
-      'NONCE_FIELD_PH', 
-      wp_nonce_field( 'serlib_auth', '_wpnonce', true, false ),
-      $formHTML
-    );
   }
+
+  $formHTML               = str_replace(
+    ['recover_account_I18N', 'email_I18N', 'required_I18N', 'email_error_I18N', 'recover_I18N', 'email_info_I18N',
+      'reset_pass_I18N', 'password1_I18N', 'password_error_I18N', 'repeat_password_I18N', 'password_error_matchI18N'],
+    [ 
+      __('Recuperar Cuenta', 'serlib'), __('Correo electrónico', 'serlib'), __('requerido', 'serlib'),
+      __('Por favor coloca un email valido', 'serlib'), __('Recuperar', 'serlib'),
+      __('Hemos enviado un correo electronico con la información para recuperar su cuenta', 'serlib'),
+      __('Restablecer Contraseña', 'serlib'), __('Contraseña', 'serlib'), 
+      __('Por favor ingresa una contraseña que contenga, mayusculas, minisculas, un numero y mayor de 6 digitos', 'serlib'),
+      __('Repetir contraseña', 'serlib'), __('Las contraseñas no son iguales', 'serlib')
+    ],
+    $formHTML
+  );
+
+  $formHTML               = str_replace( 
+    'NONCE_FIELD_PH', 
+    wp_nonce_field( 'serlib_auth', '_wpnonce', true, false ),
+    $formHTML
+  );
 
   return $formHTML;
 }
