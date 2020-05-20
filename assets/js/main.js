@@ -160,12 +160,12 @@ app.controller('registerController', ['$scope', '$http', '$controller',
        
         $scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
         
-        $scope.UpdateInstance = function(){
-          
+        $scope.UpdateInstance = function(load){
+            if(load) $scope.Model = true;
             if( !hasValue($scope.Instance ) ){
                 $scope.Model = { modo: 'directo', _wpnonce: angular.element('#_wpnonce').val() };
             }else{
-                
+                $scope.Model = {};
                 $scope.profile_photo = hasValue($scope.Instance.picture) ? $scope.Instance.picture: $scope.profile_photo;
                 
                 if($scope.Instance.modo === 'instagram'){
@@ -183,7 +183,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             
         }
 
-        $scope.UpdateInstance();
+        $scope.UpdateInstance(true);
 
         /**Options */
         $scope.error  = false;
