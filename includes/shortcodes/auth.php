@@ -35,6 +35,14 @@ function serlib_login_form_shortcode(){
   if( is_user_logged_in() ){
     return '';
   }
+ 
+  /**Activar cuenta */
+  if( isset($_GET['confirm'], $_GET['u']) && $_GET['u'] !== '' &&  $_GET['confirm'] !== ''){
+    
+    return 'hola';
+    
+  }
+
   $opts = get_option( 'serlib' );
 
   if(isset($_GET['code'])){
@@ -62,6 +70,8 @@ function serlib_login_form_shortcode(){
   }else{
     echo '<script> var Inst = false; </script>';
   }
+  /**Activar cuenta */
+  
 
   add_action('wp_footer', 'serlib_footer_scripts');
 

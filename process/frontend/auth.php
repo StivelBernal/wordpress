@@ -8,6 +8,7 @@ function serlib_auth_handler(){
 
         $code = md5($email);
         $user = md5($username);
+        $code  = base64_encode($code);
         
         $message = '<html>
                         <head>	
@@ -235,12 +236,34 @@ function serlib_auth_handler(){
         if( !wp_verify_nonce( $nonce, 'serlib_auth' ) ){
            
             wp_send_json($output);
+            die();
         }
         
         if( !isset( $objDatos->email, $objDatos->password ) ){
              
             wp_send_json($output);
+            die();
         }
+
+        
+        $userActive = get_user_by('email', $objDatos->email);
+       
+        $isActive = true;
+
+        for($i = 0; $i < count( $userActive->roles); $i++){
+            if($userActive->roles[$i] === 'pendiente' ) $isActive = false;  
+        }       
+
+        if( !$isActive ){ 
+            
+            $output     =     [ 'error' => __('Su cuenta aún no esta activada', 'serlib'),
+                            'code' => 401];
+            wp_send_json($output);
+
+            die();
+        }
+        
+
         $creds = null;
 
         switch ($objDatos->modo) {
