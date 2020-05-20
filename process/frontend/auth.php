@@ -123,7 +123,8 @@ function serlib_auth_handler(){
         $document_type = validateIsset( $objDatos->numero_documento );
         $document_number = validateIsset( $objDatos->tipo_documento );
         $photo = validateIsset( $objDatos->photo_url );
-        
+        var_dump($objDatos);
+        return;
         if( username_exists($username) ){
             $username = $username.$user_random;
         }
