@@ -64,7 +64,7 @@ function serlib_login_form_shortcode(){
           wp_set_auth_cookie( $user->ID );
           do_action( 'wp_login', $user->data->user_login, $user );
 
-          echo '<script> window.location = "/gracias?pending"; </script>';
+          //echo '<script> window.location = "/gracias?pending"; </script>';
         } 
        
       } 
