@@ -74,6 +74,43 @@ app.controller('loginController', ['$scope', '$http', '$controller',
 
 }]);
 
+app.controller('recoverController', ['$scope', '$http', 
+                function recoverController($scope, $http) {       
+                                       
+                    $scope.error  = false;
+                    $scope.user_recover = false;
+                    $scope.is_submit = false;
+                    $scope.Model = { _wpnonce: angular.element('#_wpnonce').val(), email: '' }
+
+                    $scope.submit = function(){
+                        if($scope.is_submit) return;
+                        
+                         $scope.is_submit = true;
+                         $scope.error  = false;
+                          
+                         $http( {
+                             method: 'POST',
+                             params: { action: 'serlib_auth_handler', 'recover': ''},
+                             url:    front_obj.ajax_url,
+                             data:   $scope.Model,
+                         }).then(function successCallback(response) {
+                             
+                             if(response.data.success){
+                                 $scope.user_login = true;
+                             }else if(response.data.error){
+                                 $scope.error = response.data.error;
+                                 $scope.is_submit = false;
+                             }
+                         }, function errorCallback(error) {
+                             $scope.is_submit = false;
+                             $scope.error =  error.data;            
+                         });
+             
+                        
+                     }
+
+}]);
+
 
 app.controller('registerController', ['$scope', '$http', '$controller',  
                 function registerController($scope, $http, $controller ) {

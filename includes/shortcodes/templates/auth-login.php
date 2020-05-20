@@ -43,7 +43,7 @@ NONCE_FIELD_PH
                         
                         <div class="row s-100 center-center" style="margin-top:20px;">
                             <div>
-                                <button ng-click="submit()" ng-disabled="registerForm.$invalid" class="bttn default s-100">
+                                <button ng-click="submit()" ng-disabled="loginForm.$invalid" class="bttn default s-100">
                                 <div ng-if="is_submit" class="lds-ripple-small"><div></div><div></div></div>login_I18N</button>
                             </div>
                         </div>

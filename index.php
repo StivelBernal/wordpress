@@ -56,4 +56,5 @@ add_action ('wp_loaded', 'login_redirect');
 // Shortcodes
 add_shortcode( 'serlib_login_form', 'serlib_login_form_shortcode' );
 add_shortcode( 'serlib_register_form', 'serlib_register_form_shortcode' );
+add_shortcode( 'serlib_recover_account', 'serlib_recover_account_shortcode' );
 add_shortcode( 'serlib_gracias', 'serlib_register_gracias_shortcode' );

@@ -56,7 +56,6 @@ function login_redirect() {
           $i = count( $user->roles );
           
           wp_set_current_user( $user->ID, $user->data->user_login );
-          
  
           wp_set_auth_cookie( $user->ID );
           do_action( 'wp_login', $user->data->user_login, $user );
@@ -72,12 +71,35 @@ function login_redirect() {
     
   }
 }
+
+function serlib_recover_account_shortcode(){
+ 
+  add_action('wp_footer', 'serlib_footer_scripts');
+
+  $formHTML = file_get_contents( 'templates/auth-recover.php', true );
+
+  $formHTML               = str_replace(
+    ['recover_account_I18N', 'email_I18N', 'required_I18N', 'email_error_I18N', 'recover_I18N', 'email_info_I18N'],
+     [ 
+       __('Recuperar Cuenta', 'serlib'), __('Correo electrónico', 'serlib'), __('requerido', 'serlib'),
+       __('Por favor coloca un email valido', 'serlib'), __('Recuperar', 'serlib'),
+       __('Hemos enviado un correo electronico con la información para recuperar su cuenta', 'serlib')
+     ],
+    $formHTML
+  );
+
+  $formHTML               = str_replace( 
+    'NONCE_FIELD_PH', 
+    wp_nonce_field( 'serlib_auth', '_wpnonce', true, false ),
+    $formHTML
+  );
+
+  return $formHTML;
+}
 function serlib_login_form_shortcode(){
   if( is_user_logged_in() ){
     return '';
   }
- 
-  
 
   $opts = get_option( 'serlib' );
 
@@ -107,8 +129,6 @@ function serlib_login_form_shortcode(){
     echo '<script> var Inst = false; </script>';
   }
   /**Activar cuenta */
-  
-
   add_action('wp_footer', 'serlib_footer_scripts');
 
   $formHTML               = file_get_contents( 'templates/auth-login.php', true );
@@ -178,7 +198,6 @@ function serlib_register_form_shortcode(){
     if( is_user_logged_in() ){
       return '';
     }
-    add_action('wp_head', 'head_login_includes');
     add_action('wp_footer', 'serlib_footer_scripts');
 
     $formHTML = file_get_contents( 'templates/auth-register.php', true );
@@ -213,6 +232,8 @@ function serlib_register_form_shortcode(){
   
     return $formHTML;
   }
+
+  /**INSTAGRAM */
 
   function GetAccessToken( $client_secret, $client_id, $redirect_uri, $code ) {		
     $url = 'https://api.instagram.com/oauth/access_token';

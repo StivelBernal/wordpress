@@ -24,8 +24,8 @@ function serlib_auth_handler(){
                                 <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
                                 
                             
-                                Correo: '.$email.' <br>
-                                Contraseña: '.$pass.'<br>
+                                '._x('Correo', 'plantilla email', 'serlib').': '.$email.' <br>
+                                '._x('Contraseña', 'plantilla email', 'serlib').': '.$pass.'<br>
                                 
 
                                 </p>
@@ -34,7 +34,7 @@ function serlib_auth_handler(){
                             <div style="margin: auto; display: block; text-align: left;">
                                 <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
                                 
-                                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth?confirm='.$code.'&u='.$user.'" target="_blank">Darse de alta</a>
+                                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth?confirm='.$code.'&u='.$user.'" target="_blank">'._x('Activar cuenta','plantilla email', 'serlib').'</a>
 
                                 </p>
                                 
@@ -56,7 +56,7 @@ function serlib_auth_handler(){
        
         // $email = 'brayan.bernalg@gmail.com';
 
-        $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Confirmación de cuenta', $message, $headers );
+        $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] '._x('Confirmación de cuenta', 'asunto email', 'serlib') , $message, $headers );
 
         return $mail_res;
     }
@@ -322,7 +322,100 @@ function serlib_auth_handler(){
 
     }
 
-  
+    if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['recover'])){
+                 
+        $objDatos   =     json_decode(file_get_contents("php://input"));
+        
+        $output     =     [ 'error' => __('Usuario no encontrado', 'serlib'),
+                            'code' => 401];
+
+        $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
+        
+        if( !wp_verify_nonce( $nonce, 'serlib_auth' ) ){
+           
+            wp_send_json($output);
+            die();
+        }
+        
+        if( !isset( $objDatos->email ) ){
+             
+            wp_send_json($output);
+            die();
+        }
+        
+        
+        $user = get_user_by('email', $objDatos->email);
+       
+        if(!$user)  die();
+        
+        for($i = 0; $i < count( $user->roles); $i++){
+        
+            if( $user->roles[$i] === 'pendiente' ){
+                die();
+            }
+        
+        }
+        
+        /** Generamos un md5 con el correo la password y el id */
+        $user = base64_encode($username);
+        $code = base64_encode(md5($user->data->user_login.$user->ID.$user->data->email.$user->data->user_pass));
+    
+        $headers[]= 'From: Contacto <contact@golfomorrosquillo.com>';
+
+        $message = '<html>
+        <head>	
+        </head>
+        <body>
+            <div style="margin: auto; display: block; flex-direction: column; text-align: center;">
+                <a class="logo" href="https://golfodemorrosquillo.com">
+                <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
+                </a>
+            </div>
+            <div style="margin: auto; display: block; text-align: left;">
+            
+                <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
+                
+            
+                '._x('Correo', 'plantilla email recuperar cuenta', 'serlib').': '.$user->data->email.' <br>
+                
+
+                </p>
+                
+            </div>
+            <div style="margin: auto; display: block; text-align: left;">
+                <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
+                
+                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth?confirm='.$code.'&u='.$user.'" target="_blank">'._x('Recuperar cuenta',  'plantilla email recuperar cuenta', 'serlib').'</a>
+
+                </p>
+                
+            </div>
+        </body>
+    }
+    </html> '; 
+
+
+
+        /**
+        *Funcion para enviar el mensaje
+        */ 
+        function tipo_de_contenido_html() {
+        return 'text/html';
+        }
+
+        add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
+
+        $email = 'brayan.bernalg@gmail.com';
+
+        $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] '._x('Recuperación de cuenta', 'asunto email', 'serlib'), $message, $headers );
+
+        if($mail_res){
+            $output     =     [ 'success' => '',
+            'code' => 200];
+        }
+
+        wp_send_json($output);
+    }
 
 
     die();
