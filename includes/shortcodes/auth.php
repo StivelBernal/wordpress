@@ -39,9 +39,32 @@ function serlib_login_form_shortcode(){
   /**Activar cuenta */
   if( isset($_GET['confirm'], $_GET['u']) && $_GET['u'] !== '' &&  $_GET['confirm'] !== ''){
     
-    base64_decode($_GET['confirm']);
+    $user = base64_decode($_GET['u']);
+
+    $code = base64_decode($_GET['confirm']);
+
+    $user = get_user_by('login', $user);
+    $email = $user->data->user_email;
+   
     
-    return 'hola';
+    if(md5($email) === $code ){
+           
+      for($i = 0; $i < count( $user->data->roles); $i++){
+        
+        if( $user->roles[$i] === 'pendiente' ){
+
+          $u = new WP_User( $user->data->ID );
+          $u->set_role( 'turista' );
+    
+          $i =  count( $user->data->roles );
+          echo '<script> window.location = "/gracias?pending"; </script>';
+        } 
+       
+      } 
+
+    }
+   
+    return '';
     
   }
 
@@ -128,10 +151,14 @@ function serlib_register_gracias_shortcode(){
        [__('Gracias', 'serlib'), __('ya estas registrado.', 'serlib'), __('Ir al Inicio', 'serlib')  ],
        $formHTML );
     }
-
+  
+    return $formHTML;
+  
+  }else{
+    return '';
   }
 
-  return $formHTML;
+  
 
 }
 
