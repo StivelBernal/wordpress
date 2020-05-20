@@ -46,6 +46,7 @@ function serlib_login_form_shortcode(){
     $user = get_user_by('login', $user);
     $email = $user->data->user_email;
    var_dump($user);
+   var_dump($user->data);
     if(md5($email) === $code ){
            echo 'son iguales';
       for($i = 0; $i < count( $user->data->roles); $i++){
