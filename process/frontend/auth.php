@@ -201,7 +201,7 @@ function serlib_auth_handler(){
         }
         
         
-        if( $modo === 'directo'){
+        if( $modo === 'directo' || $role === 'comerciante'){
             
             if( $role === 'turista'){
  
