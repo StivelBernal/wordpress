@@ -51,14 +51,14 @@ function serlib_login_form_shortcode(){
    
     if(md5($email) === $code ){
 
-      for($i = 0; $i < count( $user->data->roles); $i++){
+      for($i = 0; $i < count( $user->roles); $i++){
         
         if( $user->roles[$i] === 'pendiente' ){
-          
-          $u = new WP_User( $user->data->ID );
+
+          $u = new WP_User( $user->ID );
           $u->set_role( 'turista' );
     
-          $i = count( $user->data->roles );
+          $i = count( $user->roles );
           echo '<script> window.location = "/gracias?pending"; </script>';
         } 
        
