@@ -58,3 +58,10 @@ add_shortcode( 'serlib_login_form', 'serlib_login_form_shortcode' );
 add_shortcode( 'serlib_register_form', 'serlib_register_form_shortcode' );
 add_shortcode( 'serlib_recover_account', 'serlib_recover_account_shortcode' );
 add_shortcode( 'serlib_gracias', 'serlib_register_gracias_shortcode' );
+
+// Modificaciones funciones de wordpress}
+
+/* Desactivar emails a admins de restablecimiento de contraseñas */
+if ( !function_exists( 'wp_password_change_notification' ) ) {
+    function wp_password_change_notification() {}
+}

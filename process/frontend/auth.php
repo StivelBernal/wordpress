@@ -84,7 +84,14 @@ function serlib_auth_handler(){
         $objDatos   =     json_decode(file_get_contents("php://input"));
         
         function validateIsset($var){
-            return isset($var) ? sanitize_text_field($var): '';
+            if (is_array($var)) {
+                foreach($var as $key => $value){
+                    $var[$key] = sanitize_text_field($value);
+                }
+                return $var;
+            }else{
+                return isset($var) ? sanitize_text_field($var): '';
+            }
         }
         
         $output     =     [ 'status' => 400 ];
