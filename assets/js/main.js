@@ -59,7 +59,7 @@ app.controller('loginController', ['$scope', '$http', '$controller',
                              
                              if(response.data.success){
                                  $scope.user_login = true;
-                                 setTimeout(() => { window.location = "/blog"; }, 5000);
+                                 setTimeout(() => { window.location = "/blog"; }, 2500);
                              }else if(response.data.error){
                                  $scope.error = response.data.error;
                                  $scope.is_submit = false;
