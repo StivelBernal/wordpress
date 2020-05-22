@@ -335,11 +335,9 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                 $scope.is_submit = false;
                 $scope.error =  error.data;            
             });
-
            
         }
     
-
 }])
 .directive('appFilereader', function($q) {
     var slice = Array.prototype.slice;
