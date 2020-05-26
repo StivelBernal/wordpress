@@ -1,4 +1,6 @@
-(function($){
+(function($){ 
+    
+   
     $("#destino_rating").bind( 'rated', function(){
         
         $(this).rateit( 'readonly', true );
@@ -13,7 +15,23 @@
             
         });
     });
+    /**Carruseles */
+  $(document).ready(function () {
+    //initialize swiper when document ready
+    var mySwiper = new Swiper ('.swiper-container', {
+        speed: 400,
+        slidesPerView: 3,
+        spaceBetween: 0,
+        loop: true,
+        height: 400
+    })
+  });
 })(jQuery);
+
+
+
+
+
 
 var app = angular.module('serAuth', ['SER.selector', 'ngMaterial', 'ngMessages', 'SER.match', 'socialLogin', '720kb.datepicker'])
     .config(function ($mdThemingProvider) {

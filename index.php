@@ -31,6 +31,7 @@ include( 'includes/admin/init.php' );
 include( 'includes/admin/menus.php' );
 include( 'includes/shortcodes/auth.php' );
 include( 'process/upload-media.php' );
+include( 'includes/shortcodes/carrusel.php' );
 
 // Hooks
 register_activation_hook( __FILE__ , 'serlib_activate_plugin' );
@@ -58,6 +59,7 @@ add_shortcode( 'serlib_login_form', 'serlib_login_form_shortcode' );
 add_shortcode( 'serlib_register_form', 'serlib_register_form_shortcode' );
 add_shortcode( 'serlib_recover_account', 'serlib_recover_account_shortcode' );
 add_shortcode( 'serlib_gracias', 'serlib_register_gracias_shortcode' );
+add_shortcode( 'serlib_carrusel_destinos', 'serlib_carrusel_destinos_shortcode' );
 
 // Modificaciones funciones de wordpress}
 

@@ -270,6 +270,15 @@ label[for="fotocopia_documento"]{
     background-color: antiquewhite !important;
 }
 
+
+.carrusel-destinos .item-destino{
+    height:100vh !important;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+}
 /*LOADER*/
 
 .lds-ripple {
