@@ -22,12 +22,16 @@ function serlib_carrusel_destinos_shortcode($atts){
         <div class="swiper-slide item-destino" style="background-image: url('.$urlImg.')">
             <div class="container-opts">
                
-            <h3 class="mkdf-als-item-link-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vacaciones en el mar</font></font></h3>
-                <h5 class="mkdf-als-item-link-subtitle"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Simplemente hermoso</font></font></h5>
-                <a class="mkdf-als-item-link mkdf-btn mkdf-btn-large mkdf-btn-solid" href="https://roam.qodeinteractive.com/tour-item/costarica-panama/" target="_self">
-                    <span class="mkdf-als-item-link-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Reservar ahora</font></font></span>
+                <h3 class="title-destino">
+                    '.$value->post_title.'
+                </h3>
+                <h5 class="subtitle-destino">
+                    '.$value->post_name.'
+                </h5>
+                <a class="button-destino" href="/destino/'.$value->post_name.'" >
+                    Ver ahora
                 </a>
-               
+                
             </div>
         </div>';
 

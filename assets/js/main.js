@@ -22,8 +22,7 @@
         speed: 400,
         slidesPerView: 3,
         spaceBetween: 0,
-        loop: true,
-        height: 400
+        loop: true
     })
   });
 })(jQuery);
