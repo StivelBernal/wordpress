@@ -56,6 +56,7 @@ function serlib_fovea_init(){
 			'show_in_rest'          =>  true
 		)
 	);
+
 	/**
 	 * POST TYPE SITIOS
 	 */

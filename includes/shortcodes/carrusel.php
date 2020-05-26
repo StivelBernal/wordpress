@@ -14,10 +14,15 @@ function serlib_carrusel_destinos_shortcode($atts){
     
     $destinos   =   $wpdb->get_results($consulta);
     $itemsCarrusel = '';
+    
+    
 
     foreach ($destinos as $key => $value) {
                 
         $urlImg = get_the_post_thumbnail_url($value->ID);
+        $subtitle = get_post_meta( $value->ID, 'subtitle');
+        if(!isset($subtitle[0])) {$subtitle[0] = $value->post_title; } 
+       
         $itemsCarrusel .= '
         <div class="swiper-slide item-destino" style="background-image: url('.$urlImg.')">
             <div class="container-opts">
@@ -26,7 +31,7 @@ function serlib_carrusel_destinos_shortcode($atts){
                     '.$value->post_title.'
                 </h3>
                 <h5 class="subtitle-destino">
-                    '.$value->post_name.'
+                    '.$subtitle[0].'
                 </h5>
                 <a class="button-destino" href="/destino/'.$value->post_name.'" >
                     Ver ahora
