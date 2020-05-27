@@ -42,7 +42,45 @@
   });
 })(jQuery);
 
+var search_app = angular.module('search', ['SER.selector', 'ngMessages',])
+    .config(['$compileProvider', function ($compileProvider) {
+        $compileProvider.debugInfoEnabled(false);
+    }])
+   
 
+
+search_app.controller('formController', ['$scope', '$http', 
+    function loginController($scope, $http) {
+
+    $scope.submit = function(){
+    if($scope.is_submit) return;
+
+        $scope.is_submit = true;
+        $scope.error  = false;
+        
+        $http( {
+            method: 'POST',
+            params: { action: 'serlib_auth_handler', 'login': ''},
+            url:    front_obj.ajax_url,
+            data:   $scope.Model,
+        }).then(function successCallback(response) {
+            
+            if(response.data.success){
+                $scope.user_login = true;
+                setTimeout(() => { window.location = "/blog"; }, 2500);
+            }else if(response.data.error){
+                $scope.error = response.data.error;
+                $scope.is_submit = false;
+            }
+        }, function errorCallback(error) {
+            $scope.is_submit = false;
+            $scope.error =  error.data;            
+        });
+
+
+    }
+
+}]);
 
 
 
@@ -63,117 +101,117 @@ var app = angular.module('serAuth', ['SER.selector', 'ngMaterial', 'ngMessages',
 app.controller('loginController', ['$scope', '$http', '$controller', 
                 function loginController($scope, $http, $controller) {
 
-                    $controller('authSocialController', {
-                        $scope: $scope,
-                        Config: {
-                            action: 'login',
-                        }
-                    });
-                    
-                                       
-                    $scope.error  = false;
-                    $scope.user_login = false;
-                    $scope.is_submit = false;
-                    $scope.Model = { remembermme: false, _wpnonce: angular.element('#_wpnonce').val(), modo: 'directo' }
+        $controller('authSocialController', {
+            $scope: $scope,
+            Config: {
+                action: 'login',
+            }
+        });
+        
+                            
+        $scope.error  = false;
+        $scope.user_login = false;
+        $scope.is_submit = false;
+        $scope.Model = { remembermme: false, _wpnonce: angular.element('#_wpnonce').val(), modo: 'directo' }
 
-                    $scope.submit = function(){
-                        if($scope.is_submit) return;
-                        
-                         $scope.is_submit = true;
-                         $scope.error  = false;
-                          
-                         $http( {
-                             method: 'POST',
-                             params: { action: 'serlib_auth_handler', 'login': ''},
-                             url:    front_obj.ajax_url,
-                             data:   $scope.Model,
-                         }).then(function successCallback(response) {
-                             
-                             if(response.data.success){
-                                 $scope.user_login = true;
-                                 setTimeout(() => { window.location = "/blog"; }, 2500);
-                             }else if(response.data.error){
-                                 $scope.error = response.data.error;
-                                 $scope.is_submit = false;
-                             }
-                         }, function errorCallback(error) {
-                             $scope.is_submit = false;
-                             $scope.error =  error.data;            
-                         });
-             
-                        
-                     }
+        $scope.submit = function(){
+            if($scope.is_submit) return;
+            
+                $scope.is_submit = true;
+                $scope.error  = false;
+                
+                $http( {
+                    method: 'POST',
+                    params: { action: 'serlib_auth_handler', 'login': ''},
+                    url:    front_obj.ajax_url,
+                    data:   $scope.Model,
+                }).then(function successCallback(response) {
+                    
+                    if(response.data.success){
+                        $scope.user_login = true;
+                        setTimeout(() => { window.location = "/blog"; }, 2500);
+                    }else if(response.data.error){
+                        $scope.error = response.data.error;
+                        $scope.is_submit = false;
+                    }
+                }, function errorCallback(error) {
+                    $scope.is_submit = false;
+                    $scope.error =  error.data;            
+                });
+    
+            
+            }
 
 }]);
 
 app.controller('recoverController', ['$scope', '$http', 
                 function recoverController($scope, $http) {       
                                        
-                    $scope.error  = false;
-                    $scope.user_recover = false;
+        $scope.error  = false;
+        $scope.user_recover = false;
+        $scope.is_submit = false;
+        $scope.Model = { _wpnonce: angular.element('#_wpnonce').val(), email: '' }
+
+        $scope.submit = function(){
+            if($scope.is_submit) return;
+            
+                $scope.is_submit = true;
+                $scope.error  = false;
+                
+                $http( {
+                    method: 'POST',
+                    params: { action: 'serlib_auth_handler', 'recover': ''},
+                    url:    front_obj.ajax_url,
+                    data:   $scope.Model,
+                }).then(function successCallback(response) {
+
+                    if(response.data.success){
+                        $scope.user_recover = true;
+                    }else if(response.data.error){
+                        $scope.error = response.data.error;
+                        $scope.is_submit = false;
+                    }
+                }, function errorCallback(error) {
                     $scope.is_submit = false;
-                    $scope.Model = { _wpnonce: angular.element('#_wpnonce').val(), email: '' }
-
-                    $scope.submit = function(){
-                        if($scope.is_submit) return;
-                        
-                         $scope.is_submit = true;
-                         $scope.error  = false;
-                          
-                         $http( {
-                             method: 'POST',
-                             params: { action: 'serlib_auth_handler', 'recover': ''},
-                             url:    front_obj.ajax_url,
-                             data:   $scope.Model,
-                         }).then(function successCallback(response) {
-
-                             if(response.data.success){
-                                 $scope.user_recover = true;
-                             }else if(response.data.error){
-                                 $scope.error = response.data.error;
-                                 $scope.is_submit = false;
-                             }
-                         }, function errorCallback(error) {
-                             $scope.is_submit = false;
-                             $scope.error =  error.data;            
-                         });
-             
-                        
-                     }
+                    $scope.error =  error.data;            
+                });
+    
+            
+        }
 
 }]);
 app.controller('resetPass', ['$scope', '$http', 
                 function resetPass($scope, $http) {       
                                        
-                    $scope.error  = false;
-                    $scope.user_recover = false;
+        $scope.error  = false;
+        $scope.user_recover = false;
+        $scope.is_submit = false;
+        $scope.Model = { _wpnonce: angular.element('#_wpnonce').val(), u: o.u, code: o.code }
+
+        $scope.submit = function(){
+
+            if($scope.is_submit) return;
+            
+                $scope.is_submit = true;
+                $scope.error  = false;
+                
+                $http( {
+                    method: 'POST',
+                    params: { action: 'serlib_auth_handler', 'reset_pass': ''},
+                    url:    front_obj.ajax_url,
+                    data:   $scope.Model,
+                }).then(function successCallback(response) {
+
+                    if(response.data.success){
+                        window.location = '/';
+                    }
+                }, function errorCallback(error) {
                     $scope.is_submit = false;
-                    $scope.Model = { _wpnonce: angular.element('#_wpnonce').val(), u: o.u, code: o.code }
+                    $scope.error =  error.data;            
+                });
 
-                    $scope.submit = function(){
-
-                        if($scope.is_submit) return;
-                        
-                         $scope.is_submit = true;
-                         $scope.error  = false;
-                          
-                         $http( {
-                             method: 'POST',
-                             params: { action: 'serlib_auth_handler', 'reset_pass': ''},
-                             url:    front_obj.ajax_url,
-                             data:   $scope.Model,
-                         }).then(function successCallback(response) {
-
-                             if(response.data.success){
-                                 window.location = '/';
-                             }
-                         }, function errorCallback(error) {
-                             $scope.is_submit = false;
-                             $scope.error =  error.data;            
-                         });
-             
-                        
-                     }
+            
+        }
 
 }]);
 

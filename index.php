@@ -32,6 +32,7 @@ include( 'includes/admin/menus.php' );
 include( 'includes/shortcodes/auth.php' );
 include( 'process/upload-media.php' );
 include( 'includes/shortcodes/carrusel.php' );
+include( 'includes/shortcodes/search.php' );
 
 // Hooks
 register_activation_hook( __FILE__ , 'serlib_activate_plugin' );
@@ -60,7 +61,8 @@ add_shortcode( 'serlib_register_form', 'serlib_register_form_shortcode' );
 add_shortcode( 'serlib_recover_account', 'serlib_recover_account_shortcode' );
 add_shortcode( 'serlib_gracias', 'serlib_register_gracias_shortcode' );
 add_shortcode( 'serlib_carrusel_destinos', 'serlib_carrusel_destinos_shortcode' );
-
+add_shortcode( 'serlib_buscador_home_input', 'serlib_buscador_home_input_shortcode' );
+add_shortcode( 'serlib_buscador_home_results', 'serlib_buscador_home_results_shortcode' );
 // Modificaciones funciones de wordpress}
 
 /* Desactivar emails a admins de restablecimiento de contraseñas */

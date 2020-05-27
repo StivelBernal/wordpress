@@ -13,9 +13,7 @@ function serlib_carrusel_destinos_shortcode($atts){
     
     
     $destinos   =   $wpdb->get_results($consulta);
-    $itemsCarrusel = '';
-    
-    
+    $itemsCarrusel = '';   
 
     foreach ($destinos as $key => $value) {
                 
@@ -34,7 +32,7 @@ function serlib_carrusel_destinos_shortcode($atts){
                     '.$subtitle[0].'
                 </h5>
                 <a class="button-destino" href="/destinos/'.$value->post_name.'" >
-                    Ver ahora
+                   '._x('Ver más', 'boton carrusel', 'serlib').'
                 </a>
                 
             </div>

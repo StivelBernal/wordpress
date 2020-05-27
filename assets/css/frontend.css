@@ -281,7 +281,51 @@ label[for="fotocopia_documento"]{
         height:45vh !important;
     }
   }
+.search_home{
+    margin: 35px 5%;
+}
+/*BUSCADOR INPUTS HOME*/
+.search_home  .selector-container{
+    background-color: transparent !important;
+    border:none;
+}
+.search_home .selector-input, .search_home input{
+    padding-left: 20px !important;
+    border: 3px solid #e4e4e4;
+    background-color: transparent;
+    line-height: 18px;
+    font-weight: 400;
+    font-size: 12px;
+    transition: border-color .2s ease-in-out;
+    color: grey;
+    letter-spacing: -.005em;
+    cursor: pointer;
+    padding: 16px 24px 15px 43px;
+}
 
+.search_home .input-text:focus{
+    
+    border: 3px solid #88bc42 !important;
+    
+}
+
+.search_home button{
+   border: 3px solid transparent !important;
+   background:  #88bc42 !important;
+   width: 100% !important;
+    
+}
+
+.search_home button:hover{
+    border: 3px solid rgb(15, 191, 214) !important;
+    background:  #49bec2 !important;
+     
+ }
+
+
+
+
+/*CARRUSEL HOME*/
 .carrusel-destinos .item-destino{
     text-align: center;
     display: flex;
