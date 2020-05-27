@@ -20,9 +20,24 @@
     //initialize swiper when document ready
     var mySwiper = new Swiper ('.swiper-container', {
         speed: 400,
-        slidesPerView: 3,
         spaceBetween: 0,
-        loop: true
+        loop: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false
+        },
+        speed: 500,
+        breakpoints: {
+            200: {
+              slidesPerView: 1
+            },
+            700: {
+              slidesPerView: 2
+            },
+            1000: {
+              slidesPerView: 3
+            }
+        }
     })
   });
 })(jQuery);
