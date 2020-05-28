@@ -83,8 +83,6 @@ search_app.controller('formController', ['$scope', '$http',
 }]);
 
 
-
-
 var app = angular.module('serAuth', ['SER.selector', 'ngMaterial', 'ngMessages', 'SER.match', 'socialLogin', '720kb.datepicker'])
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
