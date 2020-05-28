@@ -9,8 +9,7 @@ function serlib_carrusel_destinos_shortcode($atts){
 
     global $wpdb;
 
-    $consulta   =    'SELECT * FROM  `'.$wpdb->prefix.'posts` WHERE (`post_type` = "destino" AND `post_status` = "publish") ORDER BY ID DESC LIMIT '.$params['LIMIT'].'';
-    
+    $consulta   =    'SELECT * FROM  `'.$wpdb->prefix.'posts` WHERE (`post_type` = "destino" AND `post_status` = "publish") ORDER BY post_date DESC LIMIT '.$params['LIMIT'].'';
     
     $destinos   =   $wpdb->get_results($consulta);
     $itemsCarrusel = '';   
