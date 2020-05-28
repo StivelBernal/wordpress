@@ -45,7 +45,7 @@ function serlib_fovea_init(){
 			'show_ui'               =>  true,
 			'show_in_menu'          =>  true,
 			'query_var'             =>  true,
-			'rewrite'               =>  ['slug' => ''],
+			'rewrite'               =>  ['slug' => 'destinos'],
 			'capability_type'       =>  'post',
 			'has_archive'           =>  true,
 			'hierarchical'          =>  false,
