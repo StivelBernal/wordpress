@@ -28,7 +28,7 @@ function serlib_buscador_home_input_shortcode(){
 
 function serlib_buscador_home_results_shortcode(){
     $formHTML = '
-    <div class="row">
+    <div class="row" id="search-results">
     <!--CONTROLADOR PARA MOSTRAR SERVICIOS-->
     <div class="row-wrap">
     ';

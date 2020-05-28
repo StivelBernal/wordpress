@@ -42,7 +42,9 @@
   });
 })(jQuery);
 
-var search_app = angular.module('search', ['SER.selector', 'ngMessages',])
+
+
+var search_app = angular.module('search', ['SER.selector', 'ngMaterial', 'ngMessages',])
     .config(['$compileProvider', function ($compileProvider) {
         $compileProvider.debugInfoEnabled(false);
     }])
@@ -50,14 +52,21 @@ var search_app = angular.module('search', ['SER.selector', 'ngMessages',])
 
 
 search_app.controller('formController', ['$scope', '$http', 
-    function loginController($scope, $http) {
-
+    function formController($scope, $http) {
+    
+ 
+    $scope.options_ciudades = [ 'Lorica', 'San Onofre', 'Tolú Viejo', 'Santiago de Tolú', 'Cobeñas', 'Moñitos', 'San Bernardo del viento', 'San Antero' ]
+  
     $scope.submit = function(){
-    if($scope.is_submit) return;
+     
+        if($scope.is_submit) return;
 
+        $("html,body").animate({ scrollTop: $('#search-results').offset().top+200}, 1500);
+       
+
+        /* 
         $scope.is_submit = true;
         $scope.error  = false;
-        
         $http( {
             method: 'POST',
             params: { action: 'serlib_auth_handler', 'login': ''},
@@ -76,6 +85,8 @@ search_app.controller('formController', ['$scope', '$http',
             $scope.is_submit = false;
             $scope.error =  error.data;            
         });
+
+        */
 
 
     }

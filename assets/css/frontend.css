@@ -597,6 +597,7 @@ label[for="fotocopia_documento"]{
     border: 1px solid #e1e1e1;
 }
 
+
 .selector-input{
     line-height: 45px;
     height: 55px;
@@ -620,10 +621,17 @@ label[for="fotocopia_documento"]{
     width: 100%;
 }
 
+.serlib-gallery-item:hover .serlib-simple-item-image{
+    background-color: rgba(0,0,0,0);
+    -webkit-transition: all .3s cubic-bezier(.29,.22,.11,1.33);
+    -moz-transition: all .3s cubic-bezier(.29,.22,.11,1.33);
+    transition: all .3s cubic-bezier(.29,.22,.11,1.33);
+}
 
 .serlib-gallery-item:hover .serlib-simple-item-image{
-    background-color: rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,0.4);
 }
+
 .serlib-gallery-item:hover img{
     
     transform : scale(1.1);
