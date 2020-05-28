@@ -319,7 +319,7 @@ function serlib_fovea_init(){
 		}
 	}
 	add_action( 'pre_get_posts', 'na_parse_request' );
-/*
+
 	function prevent_slug_duplicates( $slug, $post_ID, $post_status, $post_type, $post_parent, $original_slug ) {
 		$check_post_types = array(
 			'post',
@@ -351,5 +351,5 @@ function serlib_fovea_init(){
 		return $slug;
 	}
 	add_filter( 'wp_unique_post_slug', 'prevent_slug_duplicates', 10, 6 );
-	*/
+	
 }
