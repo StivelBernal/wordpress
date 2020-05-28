@@ -617,7 +617,9 @@ label[for="fotocopia_documento"]{
     z-index: -5;
     transition: all .6s;
     height: 100%;
+    width: 100%;
 }
+
 
 .serlib-gallery-item:hover .serlib-simple-item-image{
     background-color: rgba(0,0,0,.6);
