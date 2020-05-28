@@ -45,7 +45,7 @@ function serlib_fovea_init(){
 			'show_ui'               =>  true,
 			'show_in_menu'          =>  true,
 			'query_var'             =>  true,
-			'rewrite'               =>  array( 'slug' => '/' ),
+			'rewrite'               =>  ['slug' => ''],
 			'capability_type'       =>  'post',
 			'has_archive'           =>  true,
 			'hierarchical'          =>  false,
@@ -303,6 +303,53 @@ function serlib_fovea_init(){
 			'show_in_rest'          =>  true
 		)
 	);
-	 
+
+
+
+	/**Urls */
+	
+	function na_parse_request( $query ) {
+
+		if ( ! $query->is_main_query() || 2 != count( $query->query ) || ! isset( $query->query['page'] ) ) {
+			return;
+		}
+	
+		if ( ! empty( $query->query['name'] ) ) {
+			$query->set( 'post_type', array( 'post', 'destino', 'page' ) );
+		}
+	}
+	add_action( 'pre_get_posts', 'na_parse_request' );
+
+	function prevent_slug_duplicates( $slug, $post_ID, $post_status, $post_type, $post_parent, $original_slug ) {
+		$check_post_types = array(
+			'post',
+			'page',
+			'destino'
+		);
+	
+		if ( ! in_array( $post_type, $check_post_types ) ) {
+			return $slug;
+		}
+	
+		if ( 'destino' == $post_type ) {
+			// Saving a custom_post_type post, check for duplicates in POST or PAGE post types
+			$post_match = get_page_by_path( $slug, 'OBJECT', 'post' );
+			$page_match = get_page_by_path( $slug, 'OBJECT', 'page' );
+	
+			if ( $post_match || $page_match ) {
+				$slug .= '-duplicate';
+			}
+		} else {
+			// Saving a POST or PAGE, check for duplicates in custom_post_type post type
+			$custom_post_type_match = get_page_by_path( $slug, 'OBJECT', 'destino' );
+	
+			if ( $custom_post_type_match ) {
+				$slug .= '-duplicate';
+			}
+		}
+	
+		return $slug;
+	}
+	add_filter( 'wp_unique_post_slug', 'prevent_slug_duplicates', 10, 6 );
 	
 }
