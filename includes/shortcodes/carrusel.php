@@ -30,7 +30,7 @@ function serlib_carrusel_destinos_shortcode($atts){
                 <h5 class="subtitle-destino">
                     '.$subtitle[0].'
                 </h5>
-                <a class="button-destino" href="/destinos/'.$value->post_name.'" >
+                <a class="button-destino"  >
                    '._x('Ver más', 'boton carrusel', 'serlib').'
                 </a>
                 

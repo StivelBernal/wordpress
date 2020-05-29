@@ -27,11 +27,16 @@ function serlib_buscador_home_input_shortcode(){
 
 
 function serlib_buscador_home_results_shortcode(){
-    $formHTML = '
+    
+  $formHTML = '
     <div class="row" id="search-results">
     <!--CONTROLADOR PARA MOSTRAR SERVICIOS-->
     <div class="row-wrap">
     ';
+    
+    $formHTML .= file_get_contents( 'templates/results-home.php', true );
+
+    
 
     $items = '';
     $iconos = [ 'hospedaje' , 'emergencias' , 'hospedaje', 'hospedaje', 'hospedaje', 

@@ -40,6 +40,13 @@
         }
     })
   });
+
+  $('.button-destino').click(function(e){
+    e.preventDefault();
+    $('#search-results').fadeIn();
+    $("html,body").animate({ scrollTop: $('#search-results').offset().top+500}, 1500);
+  });
+
 })(jQuery);
 
 
