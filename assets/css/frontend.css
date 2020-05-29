@@ -629,8 +629,9 @@ label[for="fotocopia_documento"]{
 }
 .serlib-gallery-item img.icono{
     position: relative;
-    height: 100%;
-    width: 100%;
+    height: 72%;
+    width: 72%;
+    display: flex;
     visibility: hidden; 
 }
 .serlib-gallery-item:hover .serlib-simple-item-image{
