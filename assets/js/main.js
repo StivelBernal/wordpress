@@ -58,37 +58,12 @@ search_app.controller('formController', ['$scope', '$http',
     $scope.options_ciudades = [ 'Lorica', 'San Onofre', 'Tolú Viejo', 'Santiago de Tolú', 'Cobeñas', 'Moñitos', 'San Bernardo del viento', 'San Antero' ]
   
     $scope.submit = function(){
-     
+        
         if($scope.is_submit) return;
-
-        $("html,body").animate({ scrollTop: $('#search-results').offset().top+200}, 1500);
-       
-
-        /* 
         $scope.is_submit = true;
-        $scope.error  = false;
-        $http( {
-            method: 'POST',
-            params: { action: 'serlib_auth_handler', 'login': ''},
-            url:    front_obj.ajax_url,
-            data:   $scope.Model,
-        }).then(function successCallback(response) {
-            
-            if(response.data.success){
-                $scope.user_login = true;
-                setTimeout(() => { window.location = "/blog"; }, 2500);
-            }else if(response.data.error){
-                $scope.error = response.data.error;
-                $scope.is_submit = false;
-            }
-        }, function errorCallback(error) {
-            $scope.is_submit = false;
-            $scope.error =  error.data;            
-        });
-
-        */
-
-
+        window.location = $scope.Model.ciudad+'?busqueda='+$scope.Model.busqueda;
+        //$("html,body").animate({ scrollTop: $('#search-results').offset().top+200}, 1500);
+       
     }
 
 }]);

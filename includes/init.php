@@ -52,7 +52,7 @@ function serlib_fovea_init(){
 			'menu_position'         =>  115,
 			'menu_icon'				=>  'dashicons-palmtree',
 			'supports'              =>  [ 'title', 'editor', 'author', 'thumbnail', 'comments' ],
-			'taxonomies'            =>  ['post_tag'],
+			'taxonomies'            =>  [],
 			'show_in_rest'          =>  true
 		)
 	);

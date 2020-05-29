@@ -597,6 +597,10 @@ label[for="fotocopia_documento"]{
     border: 1px solid #e1e1e1;
 }
 
+.selector-container{
+    background: #f9f9f9;
+    border: 1px solid #e1e1e1;
+}
 
 .selector-input{
     line-height: 45px;
@@ -613,14 +617,19 @@ label[for="fotocopia_documento"]{
     height: 335px;
 }
 
- .serlib-gallery-item img{
+ .serlib-gallery-item img.fondo{
     position: relative;
     z-index: -5;
     transition: all .6s;
     height: 100%;
     width: 100%;
 }
-
+.serlib-gallery-item img.icono{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    visibility: hidden; 
+}
 .serlib-gallery-item:hover .serlib-simple-item-image{
     background-color: rgba(0,0,0,0);
     -webkit-transition: all .3s cubic-bezier(.29,.22,.11,1.33);
@@ -629,15 +638,23 @@ label[for="fotocopia_documento"]{
 }
 
 .serlib-gallery-item:hover .serlib-simple-item-image{
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.7);
 }
-
-.serlib-gallery-item:hover img{
+.serlib-gallery-item h4{
+    text-align: center;
+    color: white; 
+}
+.serlib-gallery-item:hover img.fondo{
     
     transform : scale(1.1);
     -moz-transform : scale(1.1); 
     -webkit-transform : scale(1.1);  
     -o-transform : scale(1.1);    
+}
+
+.serlib-gallery-item:hover img.icono{
+    
+    visibility: visible;   
 }
 
 .serlib-gallery-item .serlib-simple-item-image{

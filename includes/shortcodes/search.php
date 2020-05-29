@@ -34,26 +34,18 @@ function serlib_buscador_home_results_shortcode(){
     ';
 
     $items = '';
+    $iconos = [ 'hospedaje' , 'emergencias' , 'hospedaje', 'hospedaje', 'hospedaje', 
+                'hospedaje', 'hospedaje', 'hospedaje', 'hospedaje','hospedaje'];
 
     for($i = 0; $i < 10; $i++){
         $items .='
           <div class="s-20">
               <div class="serlib-gallery-item">
                   <div class="serlib-simple-item-image">
-                      <img src="http://localhost/wordpress/wp-content/uploads/2017/08/h5-tour-f-img-1.jpg" class="" >
-                      <span class="serlib-gallery-simple-item-top-holder">
-
-                          <span class="mkdf-tours-item-text">$1870</span>                            
-
-                      </span>
+                      <img class="fondo" src="http://localhost/wordpress/wp-content/uploads/2017/08/h5-tour-f-img-1.jpg" class="" >
                       <div class="serlib-gallery-simple-item-content-holder">
                           <div class="serlib-gallery-simple-item-content-inner">
-                              <h5 class="serlib-gallery-simple-item-destination-holder">
-
-                                  <a class="mkdf-tour-item-destination" href="http://localhost/wordpress/index.php/destinations/discover-costa-rica/">
-                                      Discover Costa Rica </a>
-
-                              </h5>
+                              <img class="icono" src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-11MICOSCOLOR-1.png">
                               <div class="mkdf-tours-gallery-simple-title-holder">
                                   <h4 class="mkdf-tour-title">
                                       Costarica, Panama </h4>
