@@ -627,6 +627,11 @@ label[for="fotocopia_documento"]{
     height: 100%;
     width: 100%;
 }
+.serlib-gallery-item nifsdfi{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .serlib-gallery-item img.icono{
     position: relative;
     height: 72%;
