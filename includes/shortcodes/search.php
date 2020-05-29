@@ -25,7 +25,6 @@ function serlib_buscador_home_input_shortcode(){
 
 }
 
-
 function serlib_buscador_home_results_shortcode(){
     
   $formHTML = '
@@ -39,29 +38,41 @@ function serlib_buscador_home_results_shortcode(){
     
 
     $items = '';
-    $iconos = [ 'hospedaje' , 'emergencias' , 'hospedaje', 'hospedaje', 'hospedaje', 
-                'hospedaje', 'hospedaje', 'hospedaje', 'hospedaje','hospedaje'];
+    $iconos = [
+       'Hospedaje'    => ['hospedaje', 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Hospedaje.png'],
+       'Transporte'  => ['transporte' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Transporte.png'],
+       'Cultura'    => ['cultura' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Cultura.png'],
+       'Sitios'   => ['sitios' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Sitios.png'], 
+       'Diverisión'  => ['diversion' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Diversion.png'],
+       'Comercio'    => ['comercio' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Comercio.png'],
+       'Emergencias'   => ['emergencias' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Emergencias.png'], 
+       'Eventos'  => ['eventos' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Eventos.png'],
+       'Gastronomía'    => ['gastronomia' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Gastronomia.png'],
+       'Ferias y Fiestas'   => ['ferias-y-fiestas' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Ferias-y-Fiestas.png']
+    ];
 
-    for($i = 0; $i < 10; $i++){
+    foreach( $iconos as $key => $value ){
+
         $items .='
-          <div class="s-20">
+          <a href="'.$value[0].'" class="s-20 item-servicio-home">
               <div class="serlib-gallery-item">
                   <div class="serlib-simple-item-image">
                       <img class="fondo" src="http://localhost/wordpress/wp-content/uploads/2017/08/h5-tour-f-img-1.jpg" class="" >
                       <div class="serlib-gallery-simple-item-content-holder">
                           <div class="serlib-gallery-simple-item-content-inner">
-                              <img class="icono" src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-11MICOSCOLOR-1.png">
+                              <img class="icono" src="'.$value[1].'">
                               <div class="mkdf-tours-gallery-simple-title-holder">
                                   <h4 class="mkdf-tour-title">
-                                      Costarica, Panama </h4>
+                                  '.$key.' </h4>
                               </div>
                           </div>
                       </div>
                   </div>
               </div>
-          </div>';
+          </a>';
 
-      }
+    }
+
       $formHTML .= $items.'</div></div>';
 
     

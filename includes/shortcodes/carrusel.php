@@ -17,8 +17,9 @@ function serlib_carrusel_destinos_shortcode($atts){
     foreach ($destinos as $key => $value) {
                 
         $urlImg = get_the_post_thumbnail_url($value->ID);
-        $subtitle = get_post_meta( $value->ID, 'subtitle');
-        if(!isset($subtitle[0])) {$subtitle[0] = $value->post_title; } 
+        $meta = get_post_meta( $value->ID);
+
+        if(!isset($meta['subtitle'])) {$meta['subtitle'][0] = $value->post_title; } 
        
         $itemsCarrusel .= '
         <div class="swiper-slide item-destino" style="background-image: url('.$urlImg.')">
@@ -28,10 +29,10 @@ function serlib_carrusel_destinos_shortcode($atts){
                     '.$value->post_title.'
                 </h3>
                 <h5 class="subtitle-destino">
-                    '.$subtitle[0].'
+                    '.$meta['subtitle'][0].'
                 </h5>
-                <a class="button-destino"  >
-                   '._x('Ver más', 'boton carrusel', 'serlib').'
+                <a class="button-destino" url="'.$value->post_name.'" municipio="'.$value->post_title.'" excerpt="'.$value->post_excerpt.'" alcaldia="'.$meta['alcaldía'][0].'" gobernacion="'.$meta['gobernacion'][0].'" departamento="'.$meta['departamento'][0].'">
+                   '._x('Ver más', 'boton carrusel destinos', 'serlib').'
                 </a>
                 
             </div>

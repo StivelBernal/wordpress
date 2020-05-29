@@ -51,7 +51,7 @@ function serlib_fovea_init(){
 			'hierarchical'          =>  false,
 			'menu_position'         =>  115,
 			'menu_icon'				=>  'dashicons-palmtree',
-			'supports'              =>  [ 'title', 'editor', 'author', 'thumbnail', 'comments' ],
+			'supports'              =>  [ 'title', 'editor', 'author', 'thumbnail', 'comments', 'excerpt' ],
 			'taxonomies'            =>  [],
 			'show_in_rest'          =>  true
 		)

@@ -43,9 +43,23 @@
 
   $('.button-destino').click(function(e){
     e.preventDefault();
-    $('#search-results').fadeIn();
-    $("html,body").animate({ scrollTop: $('#search-results').offset().top+500}, 1500);
+    
+    console.log($(this).attr('alcaldia'),$(this).attr('gobernacion'),$(this).attr('excerpt'),);
+    
+    $('#results-home-extracto').html($(this).attr('excerpt'));
+    $('#results-home-departamento').html($(this).attr('departamento'));
+    $('#results-home-municipio').html($(this).attr('municipio'));
+
+    $('#search-results').show();
+    var municipio = $(this).attr('url')+'/';
+    
+    $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('href') ));
+
+    $("html,body").animate({ scrollTop: $('#search-results').offset().top+300}, 1500);
+    
   });
+
+  
 
 })(jQuery);
 

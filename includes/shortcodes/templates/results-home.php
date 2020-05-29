@@ -4,11 +4,11 @@
             <div class="mkdf-eh-item-content mkdf-eh-custom-4131" style="padding: 30px 0 30px">
                 <div class="mkdf-section-title-holder  " style="text-align: center">
                     <div class="mkdf-st-inner">
-                        <h5 class="mkdf-st-subtitle">
-                            Subtitulo </h5>
-                        <h2 class="mkdf-st-title">
+                        <h5 id="results-home-departamento"class="mkdf-st-subtitle">
+                            </h5>
+                        <h2 id="results-home-municipio" class="mkdf-st-title">
                             Nombre de Ciudad </h2>
-                        <p class="mkdf-st-text">
+                        <p id="results-home-extracto" class="mkdf-st-text">
                             Extracto </p>
                     </div>
                 </div>
