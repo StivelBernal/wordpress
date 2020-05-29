@@ -55,7 +55,7 @@
     
     $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('href') ));
 
-    $("html,body").animate({ scrollTop: $('#search-results').offset().top+300}, 1500);
+    $("html,body").animate({ scrollTop: $('#search-results').offset().top+500}, 500);
     
   });
 
