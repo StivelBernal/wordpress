@@ -40,7 +40,7 @@
         }
     })
   });
-
+    var offset = $('#search-results').offset().top;
   $('.button-destino').click(function(e){
     e.preventDefault();
     
@@ -50,12 +50,16 @@
     $('#results-home-departamento').html($(this).attr('departamento'));
     $('#results-home-municipio').html($(this).attr('municipio'));
 
-    $('#search-results').show();
+    $('#search-results .row-wrap').css('display', 'flex');
     var municipio = $(this).attr('url')+'/';
     
-    $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('href') ));
-   
-    $("html,body").animate({ scrollTop: $('#results-home-extracto').offset().top+500}, 1500);
+    $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('base') ));
+    console.log(offset);
+    
+
+    $('body').animate({ scrollTop: offset}, 1500);
+    
+    
     
   });
 

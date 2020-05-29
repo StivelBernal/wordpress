@@ -54,7 +54,7 @@ function serlib_buscador_home_results_shortcode(){
     foreach( $iconos as $key => $value ){
 
         $items .='
-          <a href="'.$value[0].'" class="s-20 item-servicio-home">
+          <a  base="'.$value[0].'" class="s-20 item-servicio-home">
               <div class="serlib-gallery-item">
                   <div class="serlib-simple-item-image">
                       <img class="fondo" src="http://localhost/wordpress/wp-content/uploads/2017/08/h5-tour-f-img-1.jpg" class="" >
