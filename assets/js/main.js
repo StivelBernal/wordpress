@@ -45,7 +45,7 @@
     e.preventDefault();
     
     console.log($(this).attr('alcaldia'),$(this).attr('gobernacion'),$(this).attr('excerpt'),);
-    
+    /**Aqui toca pegarle a wordpress y traer las entradas correspondiente a estos users Ids*/
     $('#results-home-extracto').html($(this).attr('excerpt'));
     $('#results-home-departamento').html($(this).attr('departamento'));
     $('#results-home-municipio').html($(this).attr('municipio'));
@@ -54,7 +54,7 @@
     var municipio = $(this).attr('url')+'/';
     
     $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('base') ));
-    console.log(offset);
+    
     
 
     $('body').animate({ scrollTop: offset}, 1500);

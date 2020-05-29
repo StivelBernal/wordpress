@@ -45,7 +45,7 @@ function serlib_fovea_init(){
 			'show_ui'               =>  true,
 			'show_in_menu'          =>  true,
 			'query_var'             =>  true,
-			'rewrite'               =>  ['slug' => 'destinos'],
+			'rewrite'               =>  ['slug' => '/'],
 			'capability_type'       =>  'post',
 			'has_archive'           =>  true,
 			'hierarchical'          =>  false,
@@ -56,7 +56,9 @@ function serlib_fovea_init(){
 			'show_in_rest'          =>  true
 		)
 	);
-
+	
+	
+	
 	/**
 	 * POST TYPE SITIOS
 	 */
@@ -98,6 +100,9 @@ function serlib_fovea_init(){
 			'show_in_rest'          =>  true
 		)
 	);
+
+	
+
 	/**
 	 *  NEGOCIOS CUSTOM POST TYPE 
 	 */
@@ -292,7 +297,7 @@ function serlib_fovea_init(){
 			'show_ui'               =>  true,
 			'show_in_menu'          =>  true,
 			'query_var'             =>  true,
-			'rewrite'               =>  array( 'slug' => 'emergencias' ),
+			'rewrite'               =>  false,
 			'capability_type'       =>  'post',
 			'has_archive'           =>  true,
 			'hierarchical'          =>  false,
@@ -306,9 +311,18 @@ function serlib_fovea_init(){
 
 
 
-	/**Urls */
+	/**Urls 
+	global $wp_rewrite;
+
+	$emergencias = '/%destino%/%emergencias%/';
+
+	$wp_rewrite->add_rewrite_tag("%emergencias%", '([^/]+)', "emergencia=");
+
+	$wp_rewrite->add_permastruct('emergencias', $emergencias, false);
+	*/
 	
-	function na_parse_request( $query ) {
+	
+	function ser_parse_request( $query ) {
 
 		if ( ! $query->is_main_query() || 2 != count( $query->query ) || ! isset( $query->query['page'] ) ) {
 			return;
@@ -318,7 +332,7 @@ function serlib_fovea_init(){
 			$query->set( 'post_type', array( 'post', 'destino', 'page' ) );
 		}
 	}
-	add_action( 'pre_get_posts', 'na_parse_request' );
+	add_action( 'pre_get_posts', 'ser_parse_request' );
 
 	function prevent_slug_duplicates( $slug, $post_ID, $post_status, $post_type, $post_parent, $original_slug ) {
 		$check_post_types = array(
