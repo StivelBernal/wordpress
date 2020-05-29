@@ -54,8 +54,8 @@
     var municipio = $(this).attr('url')+'/';
     
     $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('href') ));
-
-    $("html,body").animate({ scrollTop: $('#search-results').offset().top+500}, 500);
+   
+    $("html,body").animate({ scrollTop: $('#results-home-extracto').offset().top+500}, 1500);
     
   });
 
