@@ -26,6 +26,7 @@ include( 'process/filter_content.php' );
 include( 'includes/frontend/enqueue.php' );
 include( 'process/frontend/auth.php' );
 include( 'process/rate_destino.php' );
+include( 'process/entries.php' );
 include( 'process/admin/options.php' );
 include( 'includes/admin/init.php' );
 include( 'includes/admin/menus.php' );
@@ -48,6 +49,7 @@ add_action( 'wp_ajax_serlib_options_handler', 'serlib_options_handler' );
 add_action( 'wp_ajax_serlib_rate_destino', 'serlib_rate_destino' );
 
 /**publicos login*/
+add_action( 'wp_ajax_nopriv_serlib_entries', 'serlib_entries' );
 add_action( 'wp_ajax_nopriv_serlib_auth_handler', 'serlib_auth_handler' );
 add_action( 'wp_ajax_nopriv_serlib_uploader', 'serlib_uploader' );
 

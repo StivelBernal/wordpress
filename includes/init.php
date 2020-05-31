@@ -52,31 +52,28 @@ function serlib_fovea_init(){
 			'menu_position'         =>  4,
 			'menu_icon'				=>  'dashicons-palmtree',
 			'supports'              =>  [ 'title', 'editor', 'author', 'thumbnail', 'comments', 'excerpt' ],
-			'taxonomies'            =>  [],
+			'taxonomies'            =>  ['category'],
 			'show_in_rest'          =>  true
 		)
 	);
 
-	register_taxonomy( 'municipio', 'post',
+	register_taxonomy( 'municipios', 'destino',
 		[
-			'label'			=>	_x('Municipios', 'Nombre de la taxonomia municipio', 'serlib'),
-			'rewrite'		=>	['slug' => '/'],
-			'hierarchical' 	=> 	false,
-			'public'		=>	true,
-			'show_in_rest'	=>	true,
-			'show_ui'		=> 	true, 
-			'query_var' 	=> 	'municipio'
+			'label'			=>	'Municipios',
+			'rewrite'		=>	true,
+			'show_in_rest'	=>	true
 		]
 	);
 
-	
+
 	/**Definimos urls */
+
 	function municipio_permalink($permalink, $post_id, $leavename) { 
 		if (strpos($permalink, '%municipio%') === false) return $permalink;
 		$post = get_post($post_id); if (!$post) return $permalink;
-		$terms = wp_get_object_terms($post->ID, 'municipio');
+		$terms = wp_get_object_terms($post->ID, 'municipios');
 		if ( !is_wp_error($terms) && !empty($terms) && is_object($terms[0]) ) $taxonomy_slug = $terms[0]->slug;
-		else $taxonomy_slug = 'municipio';
+		else $taxonomy_slug = 'municipios';
 		return str_replace('%municipio%', $taxonomy_slug, $permalink); 
 	}
 
@@ -93,7 +90,6 @@ function serlib_fovea_init(){
 			$query->set( 'post_type', array( 'post', 'destino', 'page' ) );
 		}
 	}
- 
 
 	add_action( 'pre_get_posts', 'ser_parse_request_post' );
 

@@ -44,7 +44,6 @@
   $('.button-destino').click(function(e){
     e.preventDefault();
     
-    console.log($(this).attr('alcaldia'),$(this).attr('gobernacion'),$(this).attr('excerpt'),);
     /**Aqui toca pegarle a wordpress y traer las entradas correspondiente a estos users Ids*/
     $('#results-home-extracto').html($(this).attr('excerpt'));
     $('#results-home-departamento').html($(this).attr('departamento'));
@@ -52,6 +51,16 @@
 
     $('#search-results .row-wrap').css('display', 'flex');
     var municipio = $(this).attr('url')+'/';
+
+    var form        =   {
+        action:         'serlib_entries',
+        alcaldia:       $(this).attr('alcaldia'),
+        gobernacion:    $(this).attr('gobernacion')
+    };
+
+    $.post( front_obj.ajax_url, form, function(data){
+            console.log(data);
+    });
     
     $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('base') ));
     
