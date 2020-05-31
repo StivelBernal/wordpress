@@ -45,85 +45,86 @@ function serlib_fovea_init(){
 			'show_ui'               =>  true,
 			'show_in_menu'          =>  true,
 			'query_var'             =>  true,
-			'rewrite'               =>  true,
+			'rewrite'               =>  ['slug' => 'municipios'],
 			'capability_type'       =>  'post',
 			'has_archive'           =>  true,
 			'hierarchical'          =>  false,
-			'menu_position'         =>  4,
+			'menu_position'         =>  5,
 			'menu_icon'				=>  'dashicons-palmtree',
 			'supports'              =>  [ 'title', 'editor', 'author', 'thumbnail', 'comments', 'excerpt' ],
-			'taxonomies'            =>  ['category'],
+			'taxonomies'            =>  [],
 			'show_in_rest'          =>  true
 		)
 	);
 
-	register_taxonomy( 'municipios', 'destino',
-		[
-			'label'			=>	'Municipios',
-			'rewrite'		=>	true,
-			'show_in_rest'	=>	true
-		]
+	$blog_labels = array( 
+		'name'                  =>    _x( 'Articulos', 'post type general name articulo', 'serlib' ),
+		'singular_name'         =>    _x( 'Articulo', 'post type singular name articulo', 'serlib' ),
+		'menu_name'             =>    _x( 'Articulos', 'admin menu articulo', 'serlib' ),
+		'name_admin_bar'        =>    _x( 'Articulo', 'Agregar nuevo en la admin bar articulo', 'serlib' ),
+		'add_new'               =>    _x( 'Agregar Nuevo', 'agregar nuevo articulo articulo', 'serlib' ),
+		'add_new_item'          =>    __( 'Agregar nuevo articulo', 'serlib' ),
+		'new_item'              =>    __( 'Nuevo articulo', 'serlib' ),
+		'edit_item'             =>    __( 'Editar articulo', 'serlib' ),
+		'view_item'             =>    __( 'Ver articulo', 'serlib' ),
+		'all_items'             =>    __( 'Todos los articulo', 'serlib' ),
+		'search_items'          =>    __( 'Buscar articulos', 'serlib' ),
+		'parent_item_colon'     =>    __( 'Articulos principal:', 'serlib' ),
+		'not_found'             =>    __( 'Articulo no encontrado.', 'serlib' ),
+		'not_found_in_trash'    =>    __( 'No hay articulos en la papelera.', 'serlib' )
+	);	
+
+	register_post_type(
+		'blog' , 
+		array(
+			'labels'                =>  $blog_labels,
+			'description'           =>  __( 'Blog para usuarios turistas.', 'serlib' ),
+			'public'                =>  true,
+			'publicly_queryable'    =>  true,
+			'show_ui'               =>  true,
+			'show_in_menu'          =>  true,
+			'query_var'             =>  true,
+			'rewrite'               =>  true,
+			'capability_type'       =>  'post',
+			'has_archive'           =>  true,
+			'hierarchical'          =>  false,
+			'menu_position'         =>  5,
+			'menu_icon'				=>  'dashicons-format-status',
+			'supports'              =>  [ 'title', 'editor', 'author', 'thumbnail', 'comments', 'excerpt' ],
+			'taxonomies'            =>  ['category', 'tags'],
+			'show_in_rest'          =>  true
+		)
 	);
 
+	
 
+	register_taxonomy( 'municipio', 'post',
+		[
+			'label'			=>	'Municipios',
+			'show_in_rest'	=>	true,
+			'hierarchical' => true,
+			'show_ui' => true,
+			'show_admin_column' => true,
+			'query_var' => true,
+			'rewrite' => array( 
+				'with_front' => false,      
+      			'hierarchical' => true  
+			)
+		]
+	);
 	/**Definimos urls */
-
 	function municipio_permalink($permalink, $post_id, $leavename) { 
 		if (strpos($permalink, '%municipio%') === false) return $permalink;
 		$post = get_post($post_id); if (!$post) return $permalink;
-		$terms = wp_get_object_terms($post->ID, 'municipios');
+		$terms = wp_get_object_terms($post->ID, 'municipio');
 		if ( !is_wp_error($terms) && !empty($terms) && is_object($terms[0]) ) $taxonomy_slug = $terms[0]->slug;
-		else $taxonomy_slug = 'municipios';
+		else $taxonomy_slug = 'municipio';
 		return str_replace('%municipio%', $taxonomy_slug, $permalink); 
 	}
 
-
 	add_filter('post_link', 'municipio_permalink', 10, 3);
 	
-	function ser_parse_request_post( $query ) {
+	
 
-		if ( ! $query->is_main_query() || 2 != count( $query->query ) || ! isset( $query->query['page'] ) ) {
-			return;
-		}
-	
-		if ( ! empty( $query->query['name'] ) ) {
-			$query->set( 'post_type', array( 'post', 'destino', 'page' ) );
-		}
-	}
-
-	add_action( 'pre_get_posts', 'ser_parse_request_post' );
-
-	function prevent_slug_duplicates( $slug, $post_ID, $post_status, $post_type, $post_parent, $original_slug ) {
-		$check_post_types = array(
-			'post',
-			'page',
-			'destino'
-		);
-	
-		if ( ! in_array( $post_type, $check_post_types ) ) {
-			return $slug;
-		}
-		
-	
-		if ( 'destino' == $post_type ) {
-			// Saving a custom_post_type post, check for duplicates in POST or PAGE post types
-			$post_match = get_page_by_path( $slug, 'OBJECT', 'post' );
-			$page_match = get_page_by_path( $slug, 'OBJECT', 'page' );
-	
-			if ( $post_match || $page_match ) {
-				$slug .= '-duplicate';
-			}
-		} else {
-			// Saving a POST or PAGE, check for duplicates in custom_post_type post type
-			$custom_post_type_match = get_page_by_path( $slug, 'OBJECT', 'destino' );
-	
-			if ( $custom_post_type_match ) {
-				$slug .= '-duplicate';
-			}
-		}
-	
-		return $slug;
-	}
-	add_filter( 'wp_unique_post_slug', 'prevent_slug_duplicates', 10, 6 );
 	
 }

@@ -12,7 +12,7 @@ function serlib_admin_menus(){
     'serlib_plugin_opts',
     'serlib_plugin_opts_page',
     'dashicons-admin-network',
-    8
+    9
   );
 
   add_submenu_page(
