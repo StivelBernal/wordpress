@@ -323,6 +323,10 @@ label[for="fotocopia_documento"]{
     background:  #49bec2 !important;  
 }
 
+#search-results{
+    margin-bottom:30px;
+}
+
 
 /*CARRUSEL HOME*/
 .carrusel-destinos .item-destino{
