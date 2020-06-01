@@ -29,13 +29,11 @@ function serlib_buscador_home_results_shortcode(){
     
   $formHTML = '
     <div class="row" id="search-results">
-    <!--CONTROLADOR PARA MOSTRAR SERVICIOS-->
-    <div class="row-wrap">
+      <!--CONTROLADOR PARA MOSTRAR SERVICIOS-->
+      <div class="row-wrap">
     ';
     
     $formHTML .= file_get_contents( 'templates/results-home.php', true );
-
-    
 
     $items = '';
     $iconos = [
@@ -76,22 +74,19 @@ function serlib_buscador_home_results_shortcode(){
       $formHTML .= $items.'
         </div>
       </div>
-      <div id="entradas_alcaldia" class="entradas_alcaldia" >
-          <div class="swiper-container-alcaldia">
-              <div class="swiper-wrapper"> 
-              </div>
-          </div>
-      </div>
-      <div id="entradas_gobernacion" class="entradas_gobernacion" >
-          <div class="swiper-container-gobernacion">
-              <div class="swiper-wrapper"> 
-              </div>
-          </div>
-      </div>';
+      ';
+
+      return $formHTML;
 
     
-    return $formHTML;
-    
+}
+
+function serlib_buscador_home_results_blog_shortcode(){
+
+$formHTML = file_get_contents( 'templates/results-home-posts.php', true );
+
+return $formHTML;
+
 }
 
 

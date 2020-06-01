@@ -68,9 +68,7 @@
 
   $('.button-destino').click(function(e){
 
-    e.preventDefault();
-  
-    
+    e.preventDefault();   
     
     /**Aqui toca pegarle a wordpress y traer las entradas correspondiente a estos users Ids*/
     $('#results-home-extracto').html($(this).attr('excerpt'));
@@ -89,8 +87,8 @@
    
     /**Llamar a las entradas de las alcaldias a mostrar */
     $.post( front_obj.ajax_url, form, function(data){
-        $('#entradas_alcaldia').show();
-        $('#entradas_gobernacion').show();
+        $('#entradas_alcaldia_gobernacion').show();
+        
         var slides_alcaldia =  [];
         for(var i = 1; i < data.alcaldia.length; i++){ 
              
@@ -113,7 +111,7 @@
                 slidesPerView: 2
                 },
                 1000: {
-                slidesPerView: 4
+                slidesPerView: 3
                 }
             }
             });

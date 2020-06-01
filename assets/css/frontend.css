@@ -697,10 +697,12 @@ label[for="fotocopia_documento"]{
 .entradas_alcaldia, .entradas_gobernacion{
     overflow:hidden;
     width: 100%;
-    height:250px;
+    
+}
+#entradas_alcaldia_gobernacion{
     display:none;
 }
 
-.entradas_alcaldia img, .entradas_gobernacion img{
-    height:250px;
+.entradas_alcaldia .swiper-container-alcaldia img, .entradas_gobernacion .swiper-container-gobernacion img{
+    height:200px;
 }
