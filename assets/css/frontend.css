@@ -372,6 +372,10 @@ label[for="fotocopia_documento"]{
     padding: 13px 46px;
 }
 
+.mkdf-page-footer .mkdf-footer-top-holder .mkdf-footer-top-inner.mkdf-grid {
+    padding: 84px 0 !important;
+}
+
 .carrusel-destinos .item-destino .button-destino:hover{
     background-color: #151515;
     color: #fff;
