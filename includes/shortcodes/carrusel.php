@@ -21,7 +21,7 @@ function serlib_carrusel_destinos_shortcode($atts){
         $meta = get_post_meta( $value->ID);
        
         $categoria_link = get_category($meta['municipio'][0], 'ARRAY_A');
-   
+        
         if(!isset($meta['subtitle'])) {$meta['subtitle'][0] = $value->post_title; } 
        
         $itemsCarrusel .= '
@@ -34,7 +34,7 @@ function serlib_carrusel_destinos_shortcode($atts){
                 <h5 class="subtitle-destino">
                     '.$meta['subtitle'][0].'
                 </h5>
-                <a class="button-destino" url="'. $categoria_link['slug'].'" municipio="'.$value->post_title.'" excerpt="'.$value->post_excerpt.'" alcaldia="'.$meta['alcaldía'][0].'" gobernacion="'.$meta['gobernacion'][0].'" departamento="'.$meta['departamento'][0].'">
+                <a class="button-destino" url="'.$categoria_link['slug'].'" municipio="'.$value->post_title.'" excerpt="'.$value->post_excerpt.'" alcaldia="'.$meta['alcaldiau'][0].'" gobernacion="'.$meta['gobernacion'][0].'" departamento="'.$meta['departamento'][0].'">
                    '._x('Ver más', 'boton carrusel destinos', 'serlib').'
                 </a>
                 
