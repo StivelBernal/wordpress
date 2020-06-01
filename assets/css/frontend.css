@@ -694,3 +694,13 @@ label[for="fotocopia_documento"]{
     -moz-transition: all .3s cubic-bezier(.29,.22,.11,1.33);
     transition: all .3s cubic-bezier(.29,.22,.11,1.33);
 }
+.entradas_alcaldia, .entradas_gobernacion{
+    overflow:hidden;
+    width: 100%;
+    height:250px;
+    display:none;
+}
+
+.entradas_alcaldia img, .entradas_gobernacion img{
+    height:250px;
+}

@@ -76,9 +76,15 @@ function serlib_buscador_home_results_shortcode(){
       $formHTML .= $items.'
         </div>
       </div>
-      <div class="carrusel-destinos">
-          <div class="swiper-container">
-              <div class="swiper-wrapper">  
+      <div id="entradas_alcaldia" class="entradas_alcaldia" >
+          <div class="swiper-container-alcaldia">
+              <div class="swiper-wrapper"> 
+              </div>
+          </div>
+      </div>
+      <div id="entradas_gobernacion" class="entradas_gobernacion" >
+          <div class="swiper-container-gobernacion">
+              <div class="swiper-wrapper"> 
               </div>
           </div>
       </div>';

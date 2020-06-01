@@ -12,13 +12,16 @@ function serlib_carrusel_destinos_shortcode($atts){
     $consulta   =    'SELECT * FROM  `'.$wpdb->prefix.'posts` WHERE (`post_type` = "destino" AND `post_status` = "publish") ORDER BY post_date DESC LIMIT '.$params['LIMIT'].'';
     
     $destinos   =   $wpdb->get_results($consulta);
-    $itemsCarrusel = '';   
+    $itemsCarrusel = '';
+    
 
     foreach ($destinos as $key => $value) {
                 
         $urlImg = get_the_post_thumbnail_url($value->ID);
         $meta = get_post_meta( $value->ID);
-
+       
+        $categoria_link = get_category($meta['municipio'][0], 'ARRAY_A');
+   
         if(!isset($meta['subtitle'])) {$meta['subtitle'][0] = $value->post_title; } 
        
         $itemsCarrusel .= '
@@ -31,7 +34,7 @@ function serlib_carrusel_destinos_shortcode($atts){
                 <h5 class="subtitle-destino">
                     '.$meta['subtitle'][0].'
                 </h5>
-                <a class="button-destino" url="'.$value->post_name.'" municipio="'.$value->post_title.'" excerpt="'.$value->post_excerpt.'" alcaldia="'.$meta['alcaldía'][0].'" gobernacion="'.$meta['gobernacion'][0].'" departamento="'.$meta['departamento'][0].'">
+                <a class="button-destino" url="'. $categoria_link['slug'].'" municipio="'.$value->post_title.'" excerpt="'.$value->post_excerpt.'" alcaldia="'.$meta['alcaldía'][0].'" gobernacion="'.$meta['gobernacion'][0].'" departamento="'.$meta['departamento'][0].'">
                    '._x('Ver más', 'boton carrusel destinos', 'serlib').'
                 </a>
                 

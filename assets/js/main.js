@@ -12,7 +12,7 @@
         };
 
         $.post( front_obj.ajax_url, form, function(data){
-            
+            console.log('datos', data);
         });
     });
     /**Carruseles */
@@ -40,9 +40,37 @@
         }
     })
   });
+  if(document.querySelector('#search-results')){
     var offset = $('#search-results').offset().top;
+  }
+  const media_url = '';
+
+  function item_blog(url, img, title){
+    return '<div class="swiper-slide mkdf-team mkdf-item-space info-hover">'
+        +'<div class="mkdf-team-inner">'
+            +'<div class="mkdf-team-image">'
+                +'<img style="width:100%;" src="'+img+'" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" >'
+                +'<div class="mkdf-team-info-tb">'
+                    +'<div class="mkdf-team-info-tc">'
+                        +'<div class="mkdf-team-title-holder">'
+                            +'<h4 itemprop="name" class="mkdf-team-name entry-title">'
+                                +'<a itemprop="url" href="'+url+'">'+title+'</a>'
+                            +'</h4>'
+                            +'<h6 class="mkdf-team-position">Adventure travel guide</h6>'
+                        +'</div>'
+                    +'</div>'
+                +'</div>'
+            +'</div>'
+        +'</div>'
+    +'</div>'
+  }
+
+
   $('.button-destino').click(function(e){
+
     e.preventDefault();
+  
+    
     
     /**Aqui toca pegarle a wordpress y traer las entradas correspondiente a estos users Ids*/
     $('#results-home-extracto').html($(this).attr('excerpt'));
@@ -57,10 +85,49 @@
         alcaldia:       $(this).attr('alcaldia'),
         gobernacion:    $(this).attr('gobernacion')
     };
-
+    
+   
+    /**Llamar a las entradas de las alcaldias a mostrar */
     $.post( front_obj.ajax_url, form, function(data){
-            console.log(data);
-    });
+        $('#entradas_alcaldia').show();
+        $('#entradas_gobernacion').show();
+        var slides_alcaldia =  [];
+        for(var i = 1; i < data.alcaldia.length; i++){ 
+             
+            slides_alcaldia.push( item_blog(data.alcaldia[i].post_name, data.alcaldia[i].thumbnail, data.alcaldia[i].post_title) );
+        }
+
+        var swiper1 = new Swiper('.swiper-container-alcaldia', {            
+            spaceBetween: 10,
+            loop: true,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: true
+            },
+            speed: 1500,
+            breakpoints: {
+                200: {
+                slidesPerView: 1
+                },
+                700: {
+                slidesPerView: 2
+                },
+                1000: {
+                slidesPerView: 4
+                }
+            }
+            });
+            swiper1.removeAllSlides();
+            console.log(slides_alcaldia);
+            swiper1.appendSlide(slides_alcaldia);
+
+        
+        
+        
+        /**Aqui se invocaria el carrusel y se colocaria la primera entrada de la alcaldia*/
+
+
+     });
     
     $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('base') ));
     

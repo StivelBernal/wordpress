@@ -96,11 +96,9 @@ function serlib_fovea_init(){
 		)
 	);
 
-	
-
-	register_taxonomy( 'municipio', 'post',
+	register_taxonomy( 'tipos_entradas', 'post',
 		[
-			'label'			=>	'Municipios',
+			'label'			=>	'Tipos de post',
 			'show_in_rest'	=>	true,
 			'hierarchical' => true,
 			'show_ui' => true,
@@ -113,18 +111,28 @@ function serlib_fovea_init(){
 		]
 	);
 	/**Definimos urls */
-	function municipio_permalink($permalink, $post_id, $leavename) { 
-		if (strpos($permalink, '%municipio%') === false) return $permalink;
+	function tipos_entradas_permalink($permalink, $post_id, $leavename) { 
+		if (strpos($permalink, '%tipos_entradas%') === false) return $permalink;
+		
 		$post = get_post($post_id); if (!$post) return $permalink;
-		$terms = wp_get_object_terms($post->ID, 'municipio');
+		$terms = wp_get_object_terms($post->ID, 'tipos_entradas');
 		if ( !is_wp_error($terms) && !empty($terms) && is_object($terms[0]) ) $taxonomy_slug = $terms[0]->slug;
-		else $taxonomy_slug = 'municipio';
-		return str_replace('%municipio%', $taxonomy_slug, $permalink); 
+		else $taxonomy_slug = 'todos';
+		return str_replace('%tipos_entradas%', $taxonomy_slug, $permalink); 
 	}
 
-	add_filter('post_link', 'municipio_permalink', 10, 3);
-	
-	
+	add_filter('post_link', 'tipos_entradas_permalink', 10, 3);
 
-	
+	/**Cambiar valor de los labels de entradas para que funcionen para os municipios */
+
+	function modificar_post_label() {
+		global $menu;
+		global $submenu;
+		$menu[5][0] = 'Publicaciones Municipios';
+		$submenu['edit.php'][15][0] = 'Municipios';
+		echo '';
+	}
+
+	add_action( 'admin_menu', 'modificar_post_label' );
+
 }
