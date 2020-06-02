@@ -285,6 +285,7 @@ label[for="fotocopia_documento"]{
     .carrusel-destinos .item-destino{
         height:45vh !important;
     }
+    
   }
 .search_home{
     margin: 35px 5%;
@@ -713,4 +714,36 @@ label[for="fotocopia_documento"]{
 
 .entradas_alcaldia .swiper-container-alcaldia img, .entradas_gobernacion .swiper-container-gobernacion img{
     height:200px;
+}
+
+@media (max-width: 800px) {
+    /*CATEGORIAS HOME*/
+    .item-servicio-home{
+     
+    -webkit-flex: 1 1 50% !important;
+    flex: 1 1 50% !important;
+    max-width: 50% !important;
+    }
+    .serlib-gallery-item .icono{
+        height: 52% !important;
+        width: 52% !important;
+       
+    }
+   
+  }
+
+@media (max-width: 480px) {
+    .serlib-gallery-item .icono{
+        height: 72% !important;
+         width: 72% !important;
+    }
+}  
+
+@media (max-width: 680px) {
+    .serlib-gallery-item{
+        height: 180px;
+    }
+    .serlib-gallery-item h4{
+        font-size:21px;
+    }
 }

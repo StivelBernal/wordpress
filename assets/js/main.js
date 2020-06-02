@@ -64,6 +64,40 @@
         +'</div>'
     +'</div>'
   }
+  
+  function item_blog2(){
+      return '<div class="mkdf-bli-inner">'
+      +'<div class="mkdf-post-image">'
+          +'<a itemprop="url" href="https://roam.qodeinteractive.com/my-experience/" title="My Experience">'
+              +'<img width="1300" height="719" src="https://roam.qodeinteractive.com/wp-content/uploads/2017/08/blog-post-img-9.jpg" class="attachment-full size-full wp-post-image" alt="m" > </a>'
+      +'</div>'
+      +'<div class="mkdf-bli-content">'
+         +'<div class="mkdf-bli-info">'
+              +'<div itemprop="dateCreated" class="mkdf-post-info-date entry-date published updated">'
+                  +'<a itemprop="url" href="https://roam.qodeinteractive.com/2017/08/">'
+                      +'<div class="mkdf-post-date-wrap">August 10, 2017 </div>'
+                  +'</a>'
+                  +'<meta itemprop="interactionCount" content="UserComments: 0">'
+              +'</div>'
+              +'<div class="mkdf-post-info-category">'
+                  +'<span aria-hidden="true" class="icon_tag"></span><a href="https://roam.qodeinteractive.com/category/exploring/" rel="category tag">Exploring</a>, <a href="https://roam.qodeinteractive.com/category/travel/" rel="category tag">Travel</a></div>'
+              +'<div class="mkdf-post-info-author">'
+                  +'<span class="mkdf-post-info-author-text">  By </span>'
+                  +'<a itemprop="author" class="mkdf-post-info-author-link" href="https://roam.qodeinteractive.com/author/thomaswhite/">'
+                      +'Thomas White </a>'
+              +'</div>'
+          +'</div>'
+          +'<h4 itemprop="name" class="entry-title mkdf-post-title">'
+              +'<a itemprop="url" href="https://roam.qodeinteractive.com/my-experience/" title="My Experience">'
+                  +'My Experience </a>'
+          +'</h4>'
+          +'<div class="mkdf-bli-excerpt">'
+              +'<div class="mkdf-post-read-more-button">'
+                 +'<a itemprop="url" href="https://roam.qodeinteractive.com/my-experience/" target="_self" class="mkdf-btn mkdf-btn-medium mkdf-btn-simple mkdf-blog-list-button"> <span class="mkdf-btn-text">READ MORE</span> </a> </div>'
+          +'</div>'
+      +'</div>'
+  +'</div>';
+  }
 
 
   $('.button-destino').click(function(e){
