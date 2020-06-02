@@ -708,7 +708,7 @@ label[for="fotocopia_documento"]{
     width: 100%;
     
 }
-#entradas_alcaldia_gobernacion{
+#entradas_alcaldia_fila, #entradas_gobernacion_fila{
     display:none;
 }
 
@@ -746,4 +746,11 @@ label[for="fotocopia_documento"]{
     .serlib-gallery-item h4{
         font-size:21px;
     }
+}
+#post_reciente_alcaldia .mkdf-post-image{
+    width: 100%;
+}
+#post_reciente_alcaldia .mkdf-post-image img{
+    width: 100%;
+    height: 450px;
 }

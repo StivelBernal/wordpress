@@ -45,7 +45,7 @@
   }
   const media_url = '';
 
-  function item_blog(url, img, title){
+  function item_blog(url, img, title, municipio){
     return '<div class="swiper-slide mkdf-team mkdf-item-space info-hover">'
         +'<div class="mkdf-team-inner">'
             +'<div class="mkdf-team-image">'
@@ -65,35 +65,26 @@
     +'</div>'
   }
   
-  function item_blog2(){
-      return '<div class="mkdf-bli-inner">'
+  function item_blog2(url, img, title, gobernacion){
+      return '<div class="swiper-slide mkdf-bli-inner">'
       +'<div class="mkdf-post-image">'
-          +'<a itemprop="url" href="https://roam.qodeinteractive.com/my-experience/" title="My Experience">'
-              +'<img width="1300" height="719" src="https://roam.qodeinteractive.com/wp-content/uploads/2017/08/blog-post-img-9.jpg" class="attachment-full size-full wp-post-image" alt="m" > </a>'
+          +'<a itemprop="url" href="'+url+'" title="My Experience">'
+              +'<img width="1300" height="719" src="'+img+'" class="attachment-full size-full wp-post-image" alt="m" > </a>'
       +'</div>'
       +'<div class="mkdf-bli-content">'
          +'<div class="mkdf-bli-info">'
               +'<div itemprop="dateCreated" class="mkdf-post-info-date entry-date published updated">'
-                  +'<a itemprop="url" href="https://roam.qodeinteractive.com/2017/08/">'
+                  +'<a >'
                       +'<div class="mkdf-post-date-wrap">August 10, 2017 </div>'
                   +'</a>'
-                  +'<meta itemprop="interactionCount" content="UserComments: 0">'
               +'</div>'
-              +'<div class="mkdf-post-info-category">'
-                  +'<span aria-hidden="true" class="icon_tag"></span><a href="https://roam.qodeinteractive.com/category/exploring/" rel="category tag">Exploring</a>, <a href="https://roam.qodeinteractive.com/category/travel/" rel="category tag">Travel</a></div>'
-              +'<div class="mkdf-post-info-author">'
-                  +'<span class="mkdf-post-info-author-text">  By </span>'
-                  +'<a itemprop="author" class="mkdf-post-info-author-link" href="https://roam.qodeinteractive.com/author/thomaswhite/">'
-                      +'Thomas White </a>'
-              +'</div>'
-          +'</div>'
           +'<h4 itemprop="name" class="entry-title mkdf-post-title">'
-              +'<a itemprop="url" href="https://roam.qodeinteractive.com/my-experience/" title="My Experience">'
-                  +'My Experience </a>'
+              +'<a itemprop="url" href="'+url+'" title="'+title+'">'
+                  +title+' </a>'
           +'</h4>'
           +'<div class="mkdf-bli-excerpt">'
               +'<div class="mkdf-post-read-more-button">'
-                 +'<a itemprop="url" href="https://roam.qodeinteractive.com/my-experience/" target="_self" class="mkdf-btn mkdf-btn-medium mkdf-btn-simple mkdf-blog-list-button"> <span class="mkdf-btn-text">READ MORE</span> </a> </div>'
+                 +'<a itemprop="url" href="'+url+'" target="_self" class="mkdf-btn mkdf-btn-medium mkdf-btn-simple mkdf-blog-list-button"> <span class="mkdf-btn-text">VER MÁS</span> </a> </div>'
           +'</div>'
       +'</div>'
   +'</div>';
@@ -117,19 +108,30 @@
         alcaldia:       $(this).attr('alcaldia'),
         gobernacion:    $(this).attr('gobernacion')
     };
-    
    
     /**Llamar a las entradas de las alcaldias a mostrar */
     $.post( front_obj.ajax_url, form, function(data){
-        $('#entradas_alcaldia_gobernacion').show();
+        $('#entradas_gobernacion_fila').show();
+        $('#entradas_alcaldia_fila').show();
         
-        var slides_alcaldia =  [];
+        var slides_alcaldia =  [], slides_gobernacion =  [];
         for(var i = 1; i < data.alcaldia.length; i++){ 
              
-            slides_alcaldia.push( item_blog(data.alcaldia[i].post_name, data.alcaldia[i].thumbnail, data.alcaldia[i].post_title) );
+            slides_alcaldia.push( item_blog(data.alcaldia[i].post_name, data.alcaldia[i].thumbnail, data.alcaldia[i].post_title, municipio) );
         }
 
-        var swiper1 = new Swiper('.swiper-container-alcaldia', {            
+        if(data.alcaldia[0]){
+            $('#post_reciente_alcaldia img').attr('src', data.alcaldia[0].thumbnail);
+            $('#post_reciente_alcaldia h3').text(data.alcaldia[0].post_title);
+            
+            $('#post_reciente_alcaldia .mkdf-post-excerpt').text(data.alcaldia[0].post_excerpt );
+        }
+
+        for(var i = 0; i < data.gobernacion.length; i++){ 
+            slides_gobernacion.push( item_blog2(data.gobernacion[i].post_name, data.gobernacion[i].thumbnail, data.gobernacion[i].post_title) );
+        }
+
+        var swiper1 = new Swiper('.swiper-container-gobernacion', {            
             spaceBetween: 10,
             loop: true,
             autoplay: {
@@ -148,10 +150,33 @@
                 slidesPerView: 3
                 }
             }
-            });
-            swiper1.removeAllSlides();
-            console.log(slides_alcaldia);
-            swiper1.appendSlide(slides_alcaldia);
+        });
+        swiper1.removeAllSlides();
+        swiper1.appendSlide(slides_gobernacion);
+
+        
+        var swiper2 = new Swiper('.swiper-container-alcaldia', {            
+            spaceBetween: 10,
+            loop: true,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: true
+            },
+            speed: 1500,
+            breakpoints: {
+                200: {
+                slidesPerView: 1
+                },
+                700: {
+                slidesPerView: 2
+                },
+                1000: {
+                slidesPerView: 3
+                }
+            }
+        });
+        swiper2.removeAllSlides();
+        swiper2.appendSlide(slides_alcaldia);
 
         
         

@@ -81,11 +81,19 @@ function serlib_buscador_home_results_shortcode(){
     
 }
 
-function serlib_buscador_home_results_blog_shortcode(){
+function serlib_buscador_home_results_blog_shortcode($atts){
 
-$formHTML = file_get_contents( 'templates/results-home-posts.php', true );
+  $a = shortcode_atts( array(
+		'tipo_usuario' => 'alcaldia'
+  ), $atts );
+  
+  if($a['tipo_usuario'] === 'alcaldia'){
+    $HTML = file_get_contents( 'templates/results-home-alcaldia.php', true );
+  }else if($a['tipo_usuario'] === 'gobernacion'){
+    $HTML = file_get_contents( 'templates/results-home-gobernacion.php', true );
+  }
 
-return $formHTML;
+return $HTML;
 
 }
 

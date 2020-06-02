@@ -67,6 +67,7 @@ add_shortcode( 'serlib_carrusel_destinos', 'serlib_carrusel_destinos_shortcode' 
 add_shortcode( 'serlib_buscador_home_input', 'serlib_buscador_home_input_shortcode' );
 add_shortcode( 'serlib_buscador_home_results', 'serlib_buscador_home_results_shortcode' );
 add_shortcode( 'serlib_buscador_home_results_blog', 'serlib_buscador_home_results_blog_shortcode' );
+
 // Modificaciones funciones de wordpress}
 
 /* Desactivar emails a admins de restablecimiento de contraseñas */
