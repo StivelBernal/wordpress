@@ -754,3 +754,6 @@ label[for="fotocopia_documento"]{
     width: 100%;
     height: 450px;
 }
+footer ul li{
+	padding:5px !important;
+}
