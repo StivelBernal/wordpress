@@ -797,37 +797,19 @@ admin_frontend.controller('BaseCrud', ['$scope', '$timeout',
 
 admin_frontend.factory('Posts', ['$http', function ($http) {
 
-    var url = API_URL + 'Appointment/';
-
-    var resource = $resource(url + ':Id/', { Id: '@Id' }, {
-        calendar: {
-            url: url + 'GetBooking/',
-            isArray: true   
-        },
-        saveAppointment: {
-            url: url + 'AddPatient/:Id/',
-            method: "POST"
-        },
-        deleteAppointment: {
-            url: url + 'RemovePatient/:Id/:PatientId',
-            method: "DELETE",
-            params: {
-                Id: '@Id',
-                patientId: '@PatientId'
-            }
-        }
+    var posts = [];
+   
+    $http({
+        method: 'GET',
+        params: { action: 'serlib_users_info', 'post_type': 'post'},
+        url:    front_obj.ajax_url,
+    }).then(function successCallback(response) {
+        posts = response.data;
+        
+    }, function errorCallback(response) {
+        console.log('fallo cargando states', response);            
     });
 
-    // cambiamos los valores a una variable para hacer pruebas en la vista con full calendar
-
-    resource.getUrl = function () {
-        return url;
-    };
-
-    resource.prototype.getUrl = function () {
-        return url;
-    };
-
-    return resource;
+    return 'algo';
 
 }]);

@@ -35,6 +35,7 @@ include( 'process/upload-media.php' );
 include( 'includes/shortcodes/carrusel.php' );
 include( 'includes/shortcodes/search.php' );
 include( 'includes/shortcodes/admin_frontend/main.php' );
+include( 'process/frontend/user_info.php' );
 
 // Hooks
 register_activation_hook( __FILE__ , 'serlib_activate_plugin' );
@@ -54,6 +55,10 @@ add_action( 'wp_ajax_nopriv_serlib_entries', 'serlib_entries' );
 add_action( 'wp_ajax_serlib_entries', 'serlib_entries' );
 add_action( 'wp_ajax_nopriv_serlib_auth_handler', 'serlib_auth_handler' );
 add_action( 'wp_ajax_nopriv_serlib_uploader', 'serlib_uploader' );
+
+
+/**obtener post desde la vista frontal */
+add_action( 'wp_ajax_serlib_users_info', 'serlib_users_info' );
 
 add_action( 'admin_init', 'serlib_admin_init' );
 add_action( 'admin_menu', 'serlib_admin_menus' );
