@@ -42,7 +42,9 @@ body{
     flex-direction: column;
     -webkit-box-direction: normal;
 }
-
+.text-center{
+    text-align: center !important;
+}
 .form-group input{
    margin-bottom: 0;
 }
@@ -815,7 +817,6 @@ input[type=submit]{
     color:#000;
     border-top:1px solid gray;
     padding: 10px 0;
-    
 
 }
 #admin_frontend  sidebar ul > li.menu .title{
@@ -895,4 +896,22 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
     -webkit-box-direction: normal;
     -webkit-flex-direction: row;
     flex-direction: row;
+}
+
+.btnn-edit{
+    background-color: orange;
+    padding: 17px;
+
+    text-align: center;
+    line-height: 20px;
+    border-radius: 100%;
+    font-size: 24px;
+    color: black;
+}
+
+.date {
+    font-weight: 500;
+    color: rgb(39, 34, 34);
+    font-style: inherit;
+    font-size: 0.9em;
 }

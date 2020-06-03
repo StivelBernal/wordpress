@@ -11,7 +11,7 @@
             <div class="navigation">
                 <ul>
                     <li class="menu"  ui-sref-active="{'active': 'publicaciones'}" aria-hidden="false">
-                           <div class="title">PUBLICACIONES</div>
+                        <div class="title">PUBLICACIONES</div>
                         <ul class="submenu">
                             <li ><a ui-sref-active="{'active': 'publicaciones.all'}" ui-sref="publicaciones.all">Publicaciones </a></li>
                             <li ><a ui-sref-active="{'active': 'publicaciones.form'}" ui-sref="publicaciones.form">Agregar nueva</a></li>

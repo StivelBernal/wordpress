@@ -20,6 +20,7 @@ function serlib_entries(){
          
             for($i = 0; $i < count($results['alcaldia']); $i++){
                 $results['alcaldia'][$i]->thumbnail = get_the_post_thumbnail_url($results['alcaldia'][$i]->ID);
+                $results['alcaldia'][$i]->permalink = get_permalink($results['alcaldia'][$i]->ID);
             }
 
         }
@@ -38,6 +39,7 @@ function serlib_entries(){
          
             for($i = 0; $i < count($results['gobernacion']); $i++){
                 $results['gobernacion'][$i]->thumbnail = get_the_post_thumbnail_url($results['gobernacion'][$i]->ID);
+                $results['gobernacion'][$i]->permalink = get_permalink($results['gobernacion'][$i]->ID);
             }
 
         }

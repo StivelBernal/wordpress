@@ -17,13 +17,25 @@ echo'
 ?>
     <div class="crud-wrapper">
         <div class="item-wrapper">
-            <strong class="s-flex uppercase">Nombre</strong>
-            <strong class="s-flex uppercase">Preguntas</strong>
+            <strong class="s-flex uppercase">Titulo</strong>
+            <strong class="s-flex uppercase">Extracto</strong>
+            <strong class="s-flex uppercase text-center">Imagen</strong>
+            <div style="width:50px"></div>
         </div>
 
         <div class="item-wrapper" md-virtual-repeat="object in ObjectList">
-            <strong class="s-flex uppercase"><a ng-href=""" target="_blank">Nombre</a></strong>
-            <strong class="s-flex uppercase">Preguntas</strong>
+            <div class="s-flex column uppercase">
+                <strong><a ng-href="{{object.permalink}}" target="_blank">{{object.post_title}}</a></strong>
+                <strong class="date">{{object.post_date }}</strong>
+            </div>
+            
+            <strong class="s-flex uppercase">{{object.post_excerpt}}</strong>
+            <div class="s-flex text-center"> 
+                <img ng-src="{{object.thumbnail ? object.thumbnail: '/wp-content/plugins/ser_lib/assets/img/images.png'}}" width="80px">
+            </div>
+            <div style="width:50px">
+                 <span class="dashicons btnn-edit dashicons-edit-large"></span>
+            </div>
         </div>
     </div>
 

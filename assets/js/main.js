@@ -57,7 +57,7 @@
                     +'<div class="mkdf-team-info-tc">'
                         +'<div class="mkdf-team-title-holder">'
                             +'<h4 itemprop="name" class="mkdf-team-name entry-title">'
-                                +'<a itemprop="url" href="'+municipio+publicacion.post_name+'">'+publicacion.post_title+'</a>'
+                                +'<a itemprop="url" href="'+publicacion.permalink+'">'+publicacion.post_title+'</a>'
                             +'</h4>'
                             +'<h6>'+months[date.getMonth()]+' '+date.getDay()+', '+date.getFullYear()+'</h6>'
                         +'</div>'
@@ -73,7 +73,7 @@
     
       return '<div class="swiper-slide mkdf-bli-inner">'
       +'<div class="mkdf-post-image">'
-          +'<a itemprop="url" href="'+publicacion.post_title+'" title="My Experience">'
+          +'<a itemprop="url" href="'+publicacion.permalink+'" title="My Experience">'
               +'<img width="1300" height="719" src="'+publicacion.thumbnail+'" class="attachment-full size-full wp-post-image" alt="m" > </a>'
       +'</div>'
       +'<div class="mkdf-bli-content">'
@@ -84,12 +84,12 @@
                   +'</a>'
               +'</div>'
           +'<h4 itemprop="name" class="entry-title mkdf-post-title">'
-              +'<a itemprop="url" href="'+publicacion.post_title+'" title="'+publicacion.post_title+'">'
+              +'<a itemprop="url" href="'+publicacion.permalink+'" title="'+publicacion.post_title+'">'
                   +publicacion.post_title+' </a>'
           +'</h4>'
           +'<div class="mkdf-bli-excerpt">'
               +'<div class="mkdf-post-read-more-button">'
-                 +'<a itemprop="url" href="'+publicacion.post_title+'" target="_self" class="mkdf-btn mkdf-btn-medium mkdf-btn-simple mkdf-blog-list-button"> <span class="mkdf-btn-text">VER MÁS</span> </a> </div>'
+                 +'<a itemprop="url" href="'+publicacion.permalink+'" target="_self" class="mkdf-btn mkdf-btn-medium mkdf-btn-simple mkdf-blog-list-button"> <span class="mkdf-btn-text">VER MÁS</span> </a> </div>'
           +'</div>'
       +'</div>'
   +'</div>';
@@ -128,6 +128,7 @@
         if(data.alcaldia[0]){
             var date = new Date(data.alcaldia[0].post_date);
             $('#post_reciente_alcaldia img').attr('src', data.alcaldia[0].thumbnail);
+            $('#post_reciente_alcaldia a').attr('src', data.alcaldia[0].permalink);
             $('#post_reciente_alcaldia h3').text(data.alcaldia[0].post_title);
             $('#post_reciente_alcaldia .mkdf-post-date-day').text(date.getDay());
             $('#post_reciente_alcaldia .mkdf-post-date-month').text(months[date.getMonth()]);
@@ -762,11 +763,16 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
             templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/all-post.php',
             controller: 'BaseCrud',
             resolve: {
-                Posts: ['Posts', function (Model) {
-                    return  Model;
+                Posts: ['$http', function ($http) {
+                    return  $http({
+                                    method: 'GET',
+                                    params: { action: 'serlib_users_info', 'post_type': 'post'},
+                                    url:    front_obj.ajax_url,
+                                });
                 }] 
             }
         })
+      
         .state('publicaciones.form', {
             url: "/form",
             templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
@@ -788,10 +794,10 @@ admin_frontend.controller('AppCtrl', ['$scope', '$timeout',
 
 }]);
 
-admin_frontend.controller('BaseCrud', ['$scope', '$timeout', 
-    function BaseCrud($scope, $timeout) {
+admin_frontend.controller('BaseCrud', ['$scope', 'Posts', 
+    function BaseCrud($scope, Posts) {
         
-      
+        $scope.ObjectList = Posts.data;
 
 }]);
 
@@ -810,6 +816,6 @@ admin_frontend.factory('Posts', ['$http', function ($http) {
         console.log('fallo cargando states', response);            
     });
 
-    return 'algo';
+    return posts;
 
 }]);
