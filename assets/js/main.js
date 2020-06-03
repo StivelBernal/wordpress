@@ -746,11 +746,39 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
 
 
 
-var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMaterial', 'ngMessages',])
+var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMaterial', 'ngMessages','ui.router'])
     .config(['$compileProvider', function ($compileProvider) {
         $compileProvider.debugInfoEnabled(false);
     }])
-   
+    .config(['$stateProvider', function ($stateProvider) {
+
+        $stateProvider.state('publicaciones', {
+            abstract: true,
+            url: "/publicaciones",
+            template: '<ui-view/>'
+        })
+        .state('publicaciones.all', {
+            url: "/all",
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/all-post.php',
+            controller: 'BaseCrud',
+            resolve: {
+                Posts: ['Posts', function (Model) {
+                    return  Model;
+                }] 
+            }
+        })
+        .state('publicaciones.form', {
+            url: "/form",
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
+            controller: 'BaseCrud'
+        })
+        .state('profile', {
+            url: "/profile",
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
+            controller: 'BaseCrud'
+        });
+
+    }]);
 
 
 admin_frontend.controller('AppCtrl', ['$scope', '$timeout', 
@@ -760,3 +788,46 @@ admin_frontend.controller('AppCtrl', ['$scope', '$timeout',
 
 }]);
 
+admin_frontend.controller('BaseCrud', ['$scope', '$timeout', 
+    function BaseCrud($scope, $timeout) {
+        
+      
+
+}]);
+
+admin_frontend.factory('Posts', ['$http', function ($http) {
+
+    var url = API_URL + 'Appointment/';
+
+    var resource = $resource(url + ':Id/', { Id: '@Id' }, {
+        calendar: {
+            url: url + 'GetBooking/',
+            isArray: true   
+        },
+        saveAppointment: {
+            url: url + 'AddPatient/:Id/',
+            method: "POST"
+        },
+        deleteAppointment: {
+            url: url + 'RemovePatient/:Id/:PatientId',
+            method: "DELETE",
+            params: {
+                Id: '@Id',
+                patientId: '@PatientId'
+            }
+        }
+    });
+
+    // cambiamos los valores a una variable para hacer pruebas en la vista con full calendar
+
+    resource.getUrl = function () {
+        return url;
+    };
+
+    resource.prototype.getUrl = function () {
+        return url;
+    };
+
+    return resource;
+
+}]);

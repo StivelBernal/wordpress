@@ -865,3 +865,30 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
 #admin_frontend  .page{
     background-color: #f7f7f7
 }
+
+/*CRUD*/
+.crud-wrapper{
+    position: relative;
+    margin: 16px;
+    border-radius: 4px;
+    background-color: var(--light-grey-1dp);
+    transition: all .5s;
+    background: white;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.crud-wrapper .item-wrapper {
+    position: relative;
+    padding: 24px 16px;
+    border-bottom: 1px solid var(--grey-border);
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
