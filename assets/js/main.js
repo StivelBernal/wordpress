@@ -128,7 +128,7 @@
         if(data.alcaldia[0]){
             var date = new Date(data.alcaldia[0].post_date);
             $('#post_reciente_alcaldia img').attr('src', data.alcaldia[0].thumbnail);
-            $('#post_reciente_alcaldia a').attr('src', data.alcaldia[0].permalink);
+            $('#post_reciente_alcaldia a').attr('href', data.alcaldia[0].permalink);
             $('#post_reciente_alcaldia h3').text(data.alcaldia[0].post_title);
             $('#post_reciente_alcaldia .mkdf-post-date-day').text(date.getDay());
             $('#post_reciente_alcaldia .mkdf-post-date-month').text(months[date.getMonth()]);
@@ -778,6 +778,30 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
             templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
             controller: 'BaseCrud'
         })
+        .state('publicaciones.create', {
+            url: "/form",
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
+            controller: 'BaseForm',
+            resolve: {
+                Instance: function () {
+                    return null;
+                }
+            }
+        })
+        .state('publicaciones.update', {
+            url: '/form/:ID',
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
+            controller: 'BaseForm',
+            resolve: {
+                Instance: ['$stateParams', '$http', function ($stateParams, $http) {
+                    return  $http({
+                                method: 'GET',
+                                params: { action: 'serlib_users_info', post_type: 'post', ID: $stateParams.ID },
+                                url:    front_obj.ajax_url,
+                            });
+                }] 
+            }
+        })
         .state('profile', {
             url: "/profile",
             templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
@@ -797,7 +821,14 @@ admin_frontend.controller('AppCtrl', ['$scope', '$timeout',
 admin_frontend.controller('BaseCrud', ['$scope', 'Posts', 
     function BaseCrud($scope, Posts) {
         
-        $scope.ObjectList = Posts.data;
+    $scope.ObjectList = Posts.data;
+    
+}]);
+
+admin_frontend.controller('BaseForm', ['$scope', 'Instance', 
+    function BaseForm($scope, Instance) {
+    
+        console.log(Instance);
 
 }]);
 
@@ -813,7 +844,7 @@ admin_frontend.factory('Posts', ['$http', function ($http) {
         posts = response.data;
         
     }, function errorCallback(response) {
-        console.log('fallo cargando states', response);            
+        console.log('fallo cargando posts', response);            
     });
 
     return posts;

@@ -33,8 +33,8 @@ echo'
             <div class="s-flex text-center"> 
                 <img ng-src="{{object.thumbnail ? object.thumbnail: '/wp-content/plugins/ser_lib/assets/img/images.png'}}" width="80px">
             </div>
-            <div style="width:50px">
-                 <span class="dashicons btnn-edit dashicons-edit-large"></span>
+            <div style="width:50px" >
+                 <span ui-sref="publicaciones.update({ID: object.ID})" class="dashicons btnn-edit dashicons-edit-large"></span>
             </div>
         </div>
     </div>
