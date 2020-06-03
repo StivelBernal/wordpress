@@ -781,4 +781,87 @@ input[type=submit]{
     color: #fff !important;
     border: 1px solid transparent;
     cursor: pointer;
-    z-index: 3;}
+    z-index: 3;
+}
+
+
+
+
+/**
+*
+*   PANEL DE USUARIO
+*
+*/
+
+#admin_frontend  .main{
+    height:100vh;
+}
+
+#admin_frontend  sidebar{
+    background-color: #abce56;
+    padding: 15px;
+    box-shadow: 1px -1px 1px #c5c5c5;
+    border-right: 2px solid #00000040;
+}
+#admin_frontend  sidebar ul{
+    list-style: none;
+    font-size:14px;
+}
+#admin_frontend  sidebar ul > li.menu{
+    color:#000;
+    border-top:1px solid gray;
+    padding: 10px 0;
+    
+
+}
+#admin_frontend  sidebar ul > li.menu .title{
+  
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px 
+    
+}
+#admin_frontend .toolbar-actions{
+    font-size:16px;
+    background-color: black;
+    color: #fff;
+    padding:7px;
+    align-items: center;
+}
+#admin_frontend .toolbar-actions h2{
+    font-size:16px;
+    margin-left:20px !important;
+    color: inherit;
+    margin: 0;
+}
+#admin_frontend .toolbar-actions button{
+    margin: 0;
+}
+
+#admin_frontend .imagen-usuario{
+    border-radius: 50%;
+    border:4px solid white;
+    width: 55%;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+#admin_frontend .name{
+    color:black;
+    text-align: center;
+}
+#admin_frontend .rol{
+    color:black;
+    font-size:12px;
+    font-weight: 700;
+    background-color: white;
+    display:inline;
+    padding:5px;
+    border-radius:4px;
+}
+body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-full-width-inner{
+    padding: 0 !important;
+}
+#admin_frontend  .page{
+    background-color: #f7f7f7
+}
