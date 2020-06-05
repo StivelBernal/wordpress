@@ -32,7 +32,7 @@ NONCE_FIELD_PH
                         </div>
                         <div class="s-100 options-login row space-around-center">
                            
-                            <md-checkbox class="margin-0" ng-model="Model.remembermme">
+                            <md-checkbox class="margin-0 md-primary" ng-model="Model.remembermme">
                                 Remember_me_I18N
                             </md-checkbox>
                               
