@@ -916,7 +916,7 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
     font-size: 0.9em;
 }
 
-.rounted-item, .mkdf-post-date-wrap,
- .input-holder, #post_reciente_alcaldia img, 
- .mkdf-team-image img, .mkdf-post-image img, input, .serlib-simple-item-image .fondo,
- .carrusel-destinos .swiper-container, .bttn  { border-radius: 18px !important; }
+.rounted-item, .mkdf-post-date-wrap, .input-holder, #post_reciente_alcaldia img, 
+.mkdf-team-image img, .mkdf-post-image img, input, .serlib-simple-item-image .fondo,
+.carrusel-destinos .swiper-container, .bttn, .selector-container, .selector-container label,
+div[ng-controller="loginController"], .socials-buttons-auth > div, .input-file-label { border-radius: 18px !important; }

@@ -10,7 +10,7 @@ NONCE_FIELD_PH
                     <md-radio-group class="row options-users" ng-model="Model.rol">
 
                         <md-radio-button value="turista" class="md-primary">turista_rol_I18N</md-radio-button>
-                        <md-radio-button value="comerciante">comerciante_rol_I18N </md-radio-button>
+                        <md-radio-button value="comerciante" class="md-primary">comerciante_rol_I18N </md-radio-button>
 
                     </md-radio-group>
                 </div>
@@ -107,7 +107,7 @@ NONCE_FIELD_PH
                         <div class="form-group row space-around-center s-45">
                          
                             <div class="S-50">
-                                <md-checkbox  aria-label="terminos_condiciones_I18N" ng-model="Model.terms">
+                                <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
                                     <a href="/terminos" target="_blank" >terminos_condiciones_I18N</a>
                                 </md-checkbox>
                                 <div ng-messages >
@@ -116,7 +116,7 @@ NONCE_FIELD_PH
                             </div>
 
                             <div class="S-50">
-                                <md-checkbox  aria-label="politica_privacidad_I18N" ng-model="Model.policy">
+                                <md-checkbox  aria-label="politica_privacidad_I18N" class="md-primary" ng-model="Model.policy">
                                     <a href="/politicas" target="_blank" >politica_privacidad_I18N</a>
                                 </md-checkbox>
                                 <div ng-messages >
@@ -287,7 +287,7 @@ NONCE_FIELD_PH
                         <div class="form-group row space-around-center s-45">
                          
                             <div class="S-50">
-                                <md-checkbox aria-label="terminos_condiciones_I18N" ng-model="Model.terms">
+                                <md-checkbox aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
                                     <a href="/terminos" target="_blank" >terminos_condiciones_I18N</a>
                                 </md-checkbox>
                                 <div ng-messages >
@@ -296,7 +296,7 @@ NONCE_FIELD_PH
                             </div>
 
                             <div class="S-50">
-                                <md-checkbox aria-label="politica_privacidad_I18N" ng-model="Model.policy">
+                                <md-checkbox aria-label="politica_privacidad_I18N" class="md-primary" ng-model="Model.policy">
                                     <a href="/politicas" target="_blank" >politica_privacidad_I18N</a>
                                 </md-checkbox>
                                 <div ng-messages >
