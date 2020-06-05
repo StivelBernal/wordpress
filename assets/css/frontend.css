@@ -919,4 +919,4 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
 .rounted-item, .mkdf-post-date-wrap,
  .input-holder, #post_reciente_alcaldia img, 
  .mkdf-team-image img, .mkdf-post-image img, input, .serlib-simple-item-image .fondo,
- .carrusel-destinos .swiper-container, .bttn  { border-radius: 18px; }
+ .carrusel-destinos .swiper-container, .bttn  { border-radius: 18px !important; }
