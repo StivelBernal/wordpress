@@ -80,7 +80,7 @@ body{
     text-transform: uppercase;
     padding: 10px 46px;
     color: #fff;
-    background-color: #ff681a;
+    background-color: #88bc42;
     border: 1px solid transparent;
     white-space: nowrap;
     cursor: pointer;
@@ -915,3 +915,8 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
     font-style: inherit;
     font-size: 0.9em;
 }
+
+.rounted-item, .mkdf-post-date-wrap,
+ .input-holder, #post_reciente_alcaldia img, 
+ .mkdf-team-image img, .mkdf-post-image img input, .serlib-simple-item-image .fondo,
+ .carrusel-destinos .swiper-container, .bttn  { border-radius: 18px; }
