@@ -915,3 +915,21 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
 .mkdf-team-image img, .mkdf-post-image img, input, .serlib-simple-item-image .fondo,
 .carrusel-destinos .swiper-container, .bttn, .selector-container, .selector-container label,
 div[ng-controller="loginController"], .socials-buttons-auth > div, .input-file-label { border-radius: 18px !important; }
+
+.content-post{
+    padding-top: 0;
+    padding:20px;
+    height: 90vh;
+}
+.main-view{
+    overflow-x: hidden !important;
+}
+.md-errors-spacer{
+    display:none;
+}
+
+.titulo-post{
+    margin-bottom:0 !important;
+    margin-left:20px;
+    width: 100%;
+}

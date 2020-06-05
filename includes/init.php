@@ -14,6 +14,7 @@ function serlib_fovea_init(){
 	 *  {*} TODOS SE VAN A PODER RESEÑAR MENOS EMERGENCIAS  
 	 */
 
+
 	 /**
 	  * DESTINOS PRINCIPAL PAGINAS SECUNDARIAS [Puede que se elimine totalmente mikado tours porque lo reemplazariamos por el que
 	  * 										usaramos aca]
