@@ -745,7 +745,7 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
     }       
 }]);
 
-var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMaterial', 'ngMessages','ui.router'])
+var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMaterial', 'ngMessages', 'ui.router', 'summernote'])
     .config(['$compileProvider', function ($compileProvider) {
         $compileProvider.debugInfoEnabled(false);
     }])
@@ -775,18 +775,13 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
             }
         })
       
-        .state('publicaciones.form', {
-            url: "/form",
-            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
-            controller: 'BaseCrud'
-        })
         .state('publicaciones.create', {
             url: "/form",
             templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
             controller: 'BaseForm',
             resolve: {
                 Instance: function () {
-                    return null;
+                    return {data: null};
                 }
             }
         })
@@ -827,55 +822,80 @@ admin_frontend.controller('BaseCrud', ['$scope', 'Posts',
     
 }]);
 
-admin_frontend.controller('BaseForm', ['$scope', 'Instance', 
-    function BaseForm($scope, Instance) {
+admin_frontend.controller('BaseForm', ['$scope', 'Instance', '$http',
+    function BaseForm($scope, Instance, $http) {
        
-        console.log(Instance);
-
-}]);
-
-admin_frontend.factory('Posts', ['$http', function ($http) {
-
-    var posts = [];
-   
-    $http({
-        method: 'GET',
-        params: { action: 'serlib_users_info', 'post_type': 'post'},
-        url:    front_obj.ajax_url,
-    }).then(function successCallback(response) {
-        posts = response.data;
+        $scope.loader = false;
+        $scope.Instance = Instance.data;
+        $scope.is_submit = 0;
         
-    }, function errorCallback(response) {
-        console.log('fallo cargando posts', response);            
-    });
+        var params = {};
+        $scope.Model = {};
 
-    return posts;
+        $scope.options = {
+            height: 450,
+            shortcuts: false,
+            lang: "es-ES",
+            placeholder: '...',
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+              ]
+        };
+       
+        if($scope.Instance){
+            $scope.Model = $scope.Instance;
+            params =  { action: 'serlib_users_info', post_type: 'post', ID: '$stateParams.ID' };
+        }else{
+            params =  { action: 'serlib_users_info', post_type: 'post' };
+        }
+
+        /**Validaciones de campos no llenos imagen destacada poder subir inmagenes si es comerciante si no colcoar un limite 
+         * lo podemos hacer en la funcion de subir imagenes 
+        */ 
+       
+        $scope.submit = function(){
+            
+           if($scope.is_submit !== 0) return;
+            $scope.is_submit = 1;
+            $scope.loader = true;
+            var data = angular.copy($scope.Model);
+            data._wpnonce = angular.element('#_wpnonce').val();
+            $http({
+                method: 'POST',
+                params: params,
+                url:    front_obj.ajax_url,
+                data: data
+            }).then(function successCallback(response) {
+                
+                if(response.data.status === 1 ){
+                    $scope.error = true;
+                }
+                if(response.data.status === 2 ){
+                    $scope.revition = true;
+                    /**Ahi que enviar a la url de edicion */
+                }
+                if(response.data.status === 3 ){
+                    $scope.send = true;
+                }
+                $scope.loader = false;
+                $scope.is_submit = 0;
+                
+
+            }, function errorCallback(error) {
+                $scope.loader = false;
+                $scope.is_submit = 0;
+                $scope.error =  error.data;            
+            });
+
+        }
+
 
 }]);
-admin_frontend.directive('summernote', function () {
-    return {
-        restrict: 'E',
-        link: function(scope, elem, attrs){
-          
-            $('summernote').summernote({
-                height: 450,
-                shortcuts: false,
-                lang: "es-ES",
-                placeholder: 'type with apple, orange, watermelon and lemon',
-                toolbar: [
-                    ['style', ['bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']]
-                  ]
-            });
-        } 
-    };
-});
-
-
 
 (function($) {
     $.extend($.summernote.lang, {
