@@ -14,7 +14,7 @@
                         <div class="title">PUBLICACIONES</div>
                         <ul class="submenu">
                             <li ><a ui-sref-active="{'active': 'publicaciones.all'}" ui-sref="publicaciones.all">Publicaciones </a></li>
-                            <li ><a ui-sref-active="{'active': 'publicaciones.form'}" ui-sref="publicaciones.form">Agregar nueva</a></li>
+                            <li ><a ui-sref-active="{'active': 'publicaciones.create'}" ui-sref="publicaciones.create">Agregar nueva</a></li>
                         </ul>
                     </li>
 

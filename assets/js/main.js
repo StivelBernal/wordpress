@@ -780,9 +780,14 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
             templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
             controller: 'BaseForm',
             resolve: {
-                Instance: function () {
-                    return {data: null};
-                }
+                Instance: ['$stateParams', '$http', function ($stateParams, $http) {
+                    return $http({
+                        method: 'GET',
+                        params: { action: 'serlib_users_info', categories: 'all'},
+                        url:    front_obj.ajax_url,
+                    });
+                }],
+                Config:  () => { return { redirectTo: 'publicaciones.all'}; }
             }
         })
         .state('publicaciones.update', {
@@ -793,10 +798,11 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
                 Instance: ['$stateParams', '$http', function ($stateParams, $http) {
                     return  $http({
                                 method: 'GET',
-                                params: { action: 'serlib_users_info', post_type: 'post', ID: $stateParams.ID },
+                                params: { action: 'serlib_users_info', categories: 'all', post_type: 'post', ID: $stateParams.ID },
                                 url:    front_obj.ajax_url,
                             });
-                }] 
+                }],
+                Config:  () => { return { redirectTo: 'publicaciones.all'}; }
             }
         })
         .state('profile', {
@@ -811,20 +817,21 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
 admin_frontend.controller('AppCtrl', ['$scope', '$timeout', 
     function AppCtrl($scope, $timeout) {
         
-      
+      /**main */
 
 }]);
 
 admin_frontend.controller('BaseCrud', ['$scope', 'Posts', 
     function BaseCrud($scope, Posts) {
         
-    $scope.ObjectList = Posts.data;
+    $scope.ObjectList = Posts.data.posts;
     
 }]);
 
-admin_frontend.controller('BaseForm', ['$scope', 'Instance', '$http',
-    function BaseForm($scope, Instance, $http) {
-       
+admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance', '$http',
+    function BaseForm($scope, $state, Config, Instance, $http) {
+        
+        $scope.categories = [];
         $scope.loader = false;
         $scope.Instance = Instance.data;
         $scope.is_submit = 0;
@@ -847,17 +854,17 @@ admin_frontend.controller('BaseForm', ['$scope', 'Instance', '$http',
               ]
         };
        
-        if($scope.Instance){
-            $scope.Model = $scope.Instance;
+        if($scope.Instance.post){
+            $scope.Model = $scope.Instance.post;
             params =  { action: 'serlib_users_info', post_type: 'post', ID: '$stateParams.ID' };
         }else{
             params =  { action: 'serlib_users_info', post_type: 'post' };
         }
+        $scope.categories = $scope.Instance.categories;
 
         /**Validaciones de campos no llenos imagen destacada poder subir inmagenes si es comerciante si no colcoar un limite 
          * lo podemos hacer en la funcion de subir imagenes 
-        */ 
-       
+        */    
         $scope.submit = function(){
             
            if($scope.is_submit !== 0) return;
@@ -877,6 +884,7 @@ admin_frontend.controller('BaseForm', ['$scope', 'Instance', '$http',
                 }
                 if(response.data.status === 2 ){
                     $scope.revition = true;
+                    $state.go(Config.redirectTo);
                     /**Ahi que enviar a la url de edicion */
                 }
                 if(response.data.status === 3 ){

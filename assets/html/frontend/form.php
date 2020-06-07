@@ -12,7 +12,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
         <h2 md-truncate="" flex="">'.__('FORM', 'serlib').'</h2>
         <div class="s-flex"></div>
         <md-button ng-click="submit()">
-        {{ (Instance) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
+        {{ (Instance.post) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
         </md-button>
     </div>
 
@@ -30,28 +30,24 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                 <div class="form-group s-100">
                     <md-input-container  titulo-post">
                             <label>Nombre</label>
-                            <input class="md-primary" ng-model="Model.title" >
+                            <input class="md-primary" ng-model="Model.post_title" >
                     </md-input-container>
                 </div>
             </div>
             
-            <summernote config="options" ng-model="Model.content"></summernote>
+            <summernote config="options" ng-model="Model.post_content"></summernote>
             
         </div>
 
-        <div class="s-25 row-wrap center-start options-post">
+        <div class="s-25 row-wrap center-start options-post" style="padding-right:20px;">
             <div class="s-100">
-                <md-input-container  titulo-post">
-                        <label>Nombre</label>
-                        <input class="md-primary" ng-model="Model.titulo" >
-                </md-input-container>
+              Aqui ira imagen destacada y abra terminado
             </div>
             <div class="s-100">
-                <md-input-container>
-                    <md-select ng-model="Model.state_id" placeholder="Selecciona departamento">
-                    <md-option ng-value="opt.ID" ng-repeat="opt in FormData">{{ opt.nombre }}</md-option>
-                    </md-select>
-                </md-input-container>
+                <div class="form-group s-flex">
+                    <label>'.__('Categorias', 'serlib').'</label>      
+                    <selector model="Model.post_category" name="categories" value-attr="term_id" Label-attr="name" multi="true" options="categories"></selector>
+                </div>
             </div>
         </div>
 

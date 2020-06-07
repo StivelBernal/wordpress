@@ -14,7 +14,7 @@ NONCE_FIELD_PH
                         <div class="form-group s-100">
                             <label for="email">email_I18N</label>
                             
-                            <input type="email" class="fovea-input input-text"  autocomplete="on" ng-model="Model.email" name="email" id="email" maxlength="150" required>
+                            <input autocomplete="on" type="email" class="fovea-input input-text"  ng-model="Model.email" name="email" id="email" maxlength="150" required>
                             <div class="row-wrap" ng-messages="loginForm.email.$error">
                                 <div ng-message="required">required_I18N</div>
                                 <div style="margin-left:10px;" ng-message="email">email_error_I18N</div>

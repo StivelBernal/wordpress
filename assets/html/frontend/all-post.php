@@ -9,7 +9,7 @@ echo'
     <div class="row toolbar-actions">
         <h2 md-truncate="" flex="">'.__('PUBLICACIONES', 'serlib').'</h2>
         <div class="s-flex"></div>
-        <md-button  ui-sref="publicaciones.form">
+        <md-button  ui-sref="publicaciones.create">
             '.__('Agregar Nueva', 'serlib').'
         </md-button>
     </div>
@@ -17,15 +17,15 @@ echo'
 ?>
     <div class="crud-wrapper">
         <div class="item-wrapper">
-            <strong class="s-flex uppercase">Titulo</strong>
-            <strong class="s-flex uppercase">Extracto</strong>
-            <strong class="s-flex uppercase text-center">Imagen</strong>
+            <strong class="s-flex uppercase"><?php echo __('Titulo', 'serlib'); ?></strong>
+            <strong class="s-flex uppercase"><?php echo __('Extracto', 'serlib'); ?></strong>
+            <strong class="s-flex uppercase text-center"><?php echo __('Imagen', 'serlib'); ?></strong>
             <div style="width:50px"></div>
         </div>
 
         <div class="item-wrapper" md-virtual-repeat="object in ObjectList">
             <div class="s-flex column uppercase">
-                <strong><a ng-href="{{object.permalink}}" target="_blank">{{object.post_title}}</a></strong>
+                <strong><a ng-href="{{object.permalink}}" target="_blank">{{object.post_title}} <br>( {{ object.post_status === 'pending' ?'<?php echo __('Pendiente', 'serlib'); ?>': '<?php echo __('Publicada', 'serlib'); ?>' }} )</a></strong>
                 <strong class="date">{{object.post_date }}</strong>
             </div>
             

@@ -68,7 +68,7 @@ function serlib_fovea_init(){
 		'new_item'              =>    __( 'Nuevo articulo', 'serlib' ),
 		'edit_item'             =>    __( 'Editar articulo', 'serlib' ),
 		'view_item'             =>    __( 'Ver articulo', 'serlib' ),
-		'all_items'             =>    __( 'Todos los articulo', 'serlib' ),
+		'all_items'             =>    __( 'Todos los articulos', 'serlib' ),
 		'search_items'          =>    __( 'Buscar articulos', 'serlib' ),
 		'parent_item_colon'     =>    __( 'Articulos principal:', 'serlib' ),
 		'not_found'             =>    __( 'Articulo no encontrado.', 'serlib' ),
@@ -92,7 +92,7 @@ function serlib_fovea_init(){
 			'menu_position'         =>  5,
 			'menu_icon'				=>  'dashicons-format-status',
 			'supports'              =>  [ 'title', 'editor', 'author', 'thumbnail', 'comments', 'excerpt' ],
-			'taxonomies'            =>  ['category', 'tags'],
+			'taxonomies'            =>  [],
 			'show_in_rest'          =>  true
 		)
 	);
@@ -100,6 +100,22 @@ function serlib_fovea_init(){
 	register_taxonomy( 'tipos_entradas', 'post',
 		[
 			'label'			=>	'Tipos de post',
+			'show_in_rest'	=>	true,
+			'hierarchical' => true,
+			'show_ui' => true,
+			'show_admin_column' => true,
+			'query_var' => true,
+			'rewrite' => array( 
+				'with_front' => false,      
+      			'hierarchical' => true  
+			)
+		]
+	);
+
+	
+	register_taxonomy( 'categorias_articulos', 'blog',
+		[
+			'label'			=>	'Categorias articulos',
 			'show_in_rest'	=>	true,
 			'hierarchical' => true,
 			'show_ui' => true,
@@ -123,6 +139,18 @@ function serlib_fovea_init(){
 	}
 
 	add_filter('post_link', 'tipos_entradas_permalink', 10, 3);
+
+	function blog_category_permalink($permalink, $post_id, $leavename) { 
+		if (strpos($permalink, '%categorias_articulos%') === false) return $permalink;
+		
+		$post = get_post($post_id); if (!$post) return $permalink;
+		$terms = wp_get_object_terms($post->ID, 'categorias_articulos');
+		if ( !is_wp_error($terms) && !empty($terms) && is_object($terms[0]) ) $taxonomy_slug = $terms[0]->slug;
+		else $taxonomy_slug = 'sin-categoria';
+		return str_replace('%categorias_articulos%', $taxonomy_slug, $permalink); 
+	}
+
+	add_filter('post_type_link', 'tipos_entradas_permalink', 10, 3);
 
 	/**Cambiar valor de los labels de entradas para que funcionen para os municipios */
 
