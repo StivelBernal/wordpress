@@ -71,6 +71,7 @@ function serlib_users_info(){
         }
        
         $post_id                        =   wp_insert_post([
+            'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
             'post_content'                =>    $content,
             'post_name'                   =>    $title,
             'post_title'                  =>    $title,
