@@ -843,6 +843,7 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
         $scope.loader = false;
         $scope.Instance = Instance.data;
         $scope.is_submit = 0;
+        $scope.img_destacada = '../wp-content/plugins/ser_lib/assets/img/images.png'
         
         var params = {};
         $scope.Model = {};

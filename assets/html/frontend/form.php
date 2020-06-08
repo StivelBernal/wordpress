@@ -4,8 +4,28 @@
 require('../../../../../../wp-load.php' );
 
 $user = wp_get_current_user();
+$roles =  $user->roles[0];
 
-$ACCION = 'blog';
+$TIPO = '';
+if($roles === 'turista'){
+    $TIPO = __('Blog', 'serlib');
+}
+else if($roles === 'comerciante'){
+    $TIPO = __('Negocios', 'serlib');
+}
+
+else if($roles === 'alcaldia'){
+    $TIPO = __('Publicaciones alcaldia', 'serlib');
+}
+else if($roles === 'gobernacion'){
+    $TIPO = __('Publicaciones gobernación', 'serlib');
+}
+else if($roles === 'staff'){
+    $TIPO = __('Publicaciones Staff', 'serlib');
+}
+else if($roles === 'administrator'){
+    $TIPO = __('Publicaciones Adminsitrador', 'serlib');
+}
 
 echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
@@ -13,7 +33,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 </div>
 <form>
     <div class="row toolbar-actions">
-        <h2 md-truncate="" flex="">'.__('FORM', 'serlib').'</h2>
+        <h2 md-truncate="" flex="">'.$TIPO.'</h2>
         <div class="s-flex"></div>
         <md-button ng-click="submit()">
         {{ (Instance.post) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
@@ -43,15 +63,24 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             
         </div>
 
-        <div class="s-25 row-wrap center-start options-post" style="padding-right:20px;">
-            <div class="s-100">
-              Aqui ira imagen destacada y abra terminado
-            </div>
+        <div class="s-25 row-wrap center-start options-post" style="padding-right:20px; padding-top:45px;">
+          
             <div class="s-100">
                 <div class="form-group s-flex">
                     <label>'.__('Categorias', 'serlib').'</label>      
                     <selector model="Model.post_category" name="categories" value-attr="term_id" Label-attr="name" multi="true" options="categories"></selector>
                 </div>
+            </div>
+            <div class="s-100 ">       
+                <label>'.__('Imagen destacada','serlib').'</label>
+                <div class="destacada-image-container">
+                    <div><img class="img-destacada"  ng-src="{{img_destacada}}"></div> 
+                </div>
+                <div class="form-group s-100">
+                <label for="featured" class="input-file-label">{{ !File.name ? "'.__('Seleccionar imagen','serlib').'": File.name }} </label>      
+                <input class="input_file" type="file" ng-model="Featured" accept="image/png, image/jpeg" app-filereader style="display:none;"  id="featured"></selector>
+                
+            </div>
             </div>
         </div>
 

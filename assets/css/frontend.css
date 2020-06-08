@@ -202,6 +202,8 @@ button[disabled]{
       border:2px solid #bbbaba;
 }
 
+
+
       
 .profile-image-container div img{
         width:100%;
@@ -978,3 +980,38 @@ div[ng-controller="loginController"], .socials-buttons-auth > div, .input-file-l
       opacity: 0;
     }
   }
+
+.img-destacada{
+    overflow:hidden;
+    width:100%;
+    height:100%;
+    border:2px solid #bbbaba;
+}
+
+.destacada-image-container{
+    width:150px;
+    margin:10px auto 10px;
+}
+
+.input_file{
+
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+        
+}
+label.input-file-label{
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(101, 92, 92);
+    background-color: rgb(224, 224, 224);
+    display: inline-block;
+    transition: all .5s;
+    cursor: pointer;
+    padding: 14px 25px !important;
+    text-transform: uppercase;
+    text-align: center;
+}
