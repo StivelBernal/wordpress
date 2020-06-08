@@ -10,8 +10,32 @@
             </div>
             <div class="navigation">
                 <ul>
-                    <li class="menu"  ui-sref-active="{'active': 'publicaciones'}" aria-hidden="false">
-                        <div class="title">PUBLICACIONES</div>
+                    <li ng-if="rol === 'turista'" class="menu"  ui-sref-active="{'active': 'publicaciones'}" aria-hidden="false">
+                        <div  class="title">PUBLICACIONES</div>
+                        <ul class="submenu">
+                            <li ><a ui-sref-active="{'active': 'publicaciones.all'}" ui-sref="publicaciones.all">Publicaciones </a></li>
+                            <li ><a ui-sref-active="{'active': 'publicaciones.create'}" ui-sref="publicaciones.create">Agregar nueva</a></li>
+                        </ul>
+                    </li>
+
+                    <li ng-if="rol === 'comerciante'" class="menu"  ui-sref-active="{'active': 'publicaciones'}" aria-hidden="false">
+                        <div  class="title">NEGOCIOS</div>
+                        <ul class="submenu">
+                            <li ><a ui-sref-active="{'active': 'negocios.all'}" ui-sref="negocios.all">Negocios </a></li>
+                            <li ><a ui-sref-active="{'active': 'negocios.create'}" ui-sref="negocios.create">Agregar nuevo</a></li>
+                        </ul>
+                    </li>
+
+                    <li ng-if="rol === 'alcaldia'" class="menu"  ui-sref-active="{'active': 'publicaciones'}" aria-hidden="false">
+                        <div  class="title">PUBLICACIONES</div>
+                        <ul class="submenu">
+                            <li ><a ui-sref-active="{'active': 'publicaciones.all'}" ui-sref="publicaciones.all">Publicaciones </a></li>
+                            <li ><a ui-sref-active="{'active': 'publicaciones.create'}" ui-sref="publicaciones.create">Agregar nueva</a></li>
+                        </ul>
+                    </li>
+
+                    <li ng-if="rol === 'gobernacion'" class="menu"  ui-sref-active="{'active': 'publicaciones'}" aria-hidden="false">
+                        <div  class="title">PUBLICACIONES</div>
                         <ul class="submenu">
                             <li ><a ui-sref-active="{'active': 'publicaciones.all'}" ui-sref="publicaciones.all">Publicaciones </a></li>
                             <li ><a ui-sref-active="{'active': 'publicaciones.create'}" ui-sref="publicaciones.create">Agregar nueva</a></li>

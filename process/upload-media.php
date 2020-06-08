@@ -57,16 +57,19 @@ function serlib_uploader(){
                 update_user_meta( $_GET['id'], 'file_document', $new_file_path );
             }
             
-            wp_send_json($output);
-        
+            if($_GET["destino"] === 'image'){
+                echo wp_get_attachment_image_src($upload_id)[0];
+            }else{
+                wp_send_json($output);
+            }
+            
         }
 
         die();
- 
     
     }
 
-    if( $_GET['destino'] === 'featured' || $_GET['destino'] ===  'photo_profile' || $_GET['destino'] ===  'file_document' ){
+    if( $_GET['destino'] === 'featured' || $_GET['destino'] === 'image' || $_GET['destino'] ===  'photo_profile' || $_GET['destino'] ===  'file_document' ){
         guardar_archivo();
     }
 

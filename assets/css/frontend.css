@@ -870,6 +870,12 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
 #admin_frontend  .page{
     background-color: #f7f7f7
 }
+@media (min-width: 768px){
+    .note-modal-content {
+        width: 600px;
+        margin: 400px auto;
+    }
+}
 
 /*CRUD*/
 .crud-wrapper{
