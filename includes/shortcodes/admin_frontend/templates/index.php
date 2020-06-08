@@ -4,9 +4,9 @@
 
         <sidebar class="s-15">
             <div class="avatar">
-                <img class="imagen-usuario" src="/wp-content/plugins/ser_lib/assets/img/avatar-default.jpg">
-                <div class="name">Brayan Stivel Bernal Garcia</div>
-                <div class="rol">Admin</div>
+                <img class="imagen-usuario" ng-src="{{img_profile}}">
+                <div class="name">{{name}}</div>
+                <div class="rol">{{rol}}</div>
             </div>
             <div class="navigation">
                 <ul>

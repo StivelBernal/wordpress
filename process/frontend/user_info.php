@@ -21,7 +21,11 @@ function serlib_users_info(){
             for($i = 0; $i < count($terms); $i++ ) { 
                 $terms[$i] = $terms[$i]->term_id;
             }
+
+            $results['post']->thumbnail = get_the_post_thumbnail_url($results['post']->ID);
+
             $results['post']->post_category = $terms;
+
         }else if( isset($_GET['post_type']) ){
          
             $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE post_author = '.$user_id.'  AND (post_type = "post" OR post_type = "blog") ORDER BY post_date DESC';
@@ -79,20 +83,18 @@ function serlib_users_info(){
             'post_type'                   =>    'blog'
         ]);
 
-
-
        
         if( !is_wp_error($post_id) ){
 
             wp_set_post_terms($post_id, $objDatos->post_category, 'categorias_articulos');
            
-            //update_post_meta( $post_id, 'recipe_data', $recipe_data );
-            /*
-                    if(isset($_POST['attachment_id']) && !empty($_POST['attachment_id'])){
-                        require_once( ABSPATH . 'wp-admin/includes/image.php' );
-                        set_post_thumbnail( $post_id, absint($_POST['attachment_id']) );
-                    }
-            */
+            //update_post_meta( $post_id, 'ser_data', $ser_data );
+            
+            if( isset($_GET['id_featured']) && $_GET['id_featured'] !== 0 ){
+                require_once( ABSPATH . 'wp-admin/includes/image.php' );
+                set_post_thumbnail( $post_id, absint($_GET['id_featured']) );
+            }
+            
             $results['status']  =   2;
             $results['id']  =   $post_id;
             $results['permalink'] = get_permalink( $post_id );

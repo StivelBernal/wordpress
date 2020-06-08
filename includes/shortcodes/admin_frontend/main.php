@@ -4,10 +4,26 @@
 function serlib_admin_frontend_shortcode(){
    /**Obtenemos datos del usuario y lo pasamos como un objeto que es lo que se veria en la sidebar*/
     if( is_user_logged_in() ){  
-      
-        $user = json_encode(wp_get_current_user(), true);
+        
+        $user = wp_get_current_user();
+        $file_document = '';
+        if( $user->roles[0] === 'comerciante' ){
+            $file_document = get_user_meta($user->ID, 'file_document', true );  var_dump($file_document );
+        }
 
-        echo '<script> var userinfo = '.$user.' </script>';
+        $user_photo = get_user_meta($user->ID, 'user_photo', true );
+        var_dump($user_photo );
+        if(!$user_photo){
+            $user_photo = '/wp-content/plugins/ser_lib/assets/img/avatar-default.jpg';
+        }
+
+       
+
+        echo    '<script> var userinfo = { 
+                          rol: "'.$user->roles[0].'", name: "'.$user->user_nicename.'", email: "'.$user->user_email.'",  
+                          img_profile: "'.$user_photo.'", file_document: "'.$file_document.'"
+                     }; 
+                </script>';
 
         $HTML = file_get_contents( 'templates/index.php', true );  
         

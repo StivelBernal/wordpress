@@ -24,7 +24,7 @@ else if($roles === 'staff'){
     $TIPO = __('Publicaciones Staff', 'serlib');
 }
 else if($roles === 'administrator'){
-    $TIPO = __('Publicaciones Adminsitrador', 'serlib');
+    $TIPO = __('Publicaciones Administrador', 'serlib');
 }
 
 echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
@@ -35,7 +35,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
     <div class="row toolbar-actions">
         <h2 md-truncate="" flex="">'.$TIPO.'</h2>
         <div class="s-flex"></div>
-        <md-button ng-click="submit()">
+        <md-button ng-click="submitFiles()">
         {{ (Instance.post) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
         </md-button>
     </div>
@@ -74,11 +74,11 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             <div class="s-100 ">       
                 <label>'.__('Imagen destacada','serlib').'</label>
                 <div class="destacada-image-container">
-                    <div><img class="img-destacada"  ng-src="{{img_destacada}}"></div> 
+                    <div><img class="img-destacada"  ng-src="{{featured}}"></div> 
                 </div>
                 <div class="form-group s-100">
-                <label for="featured" class="input-file-label">{{ !File.name ? "'.__('Seleccionar imagen','serlib').'": File.name }} </label>      
-                <input class="input_file" type="file" ng-model="Featured" accept="image/png, image/jpeg" app-filereader style="display:none;"  id="featured"></selector>
+                <label for="featured" class="input-file-label">{{ !featured_file.name ? "'.__('Seleccionar imagen','serlib').'": featured_file.name }} </label>      
+                <input class="input_file" type="file" ng-model="featured_file" preview="featured" app-filereader accept="image/png, image/jpeg" app-filereader style="display:none;"  id="featured"></selector>
                 
             </div>
             </div>

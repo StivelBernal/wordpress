@@ -844,7 +844,8 @@ input[type=submit]{
 #admin_frontend .imagen-usuario{
     border-radius: 50%;
     border:4px solid white;
-    width: 55%;
+    width: 100px;
+    height: 100px;
     display: block;
     margin: 0 auto;
     cursor: pointer;
@@ -861,6 +862,7 @@ input[type=submit]{
     display:inline;
     padding:5px;
     border-radius:4px;
+    text-transform: capitalize;
 }
 body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-full-width-inner{
     padding: 0 !important;

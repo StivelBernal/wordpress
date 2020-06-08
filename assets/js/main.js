@@ -586,6 +586,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                     scope.$apply() 
             
                 }
+
                 
             }); 
 
@@ -808,12 +809,12 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
         })
         .state('profile', {
             url: "/profile",
-            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/profile.php',
             controller: 'BaseCrud'
         })
         .state('root', {
             url: "",
-            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/profile.php',
             controller: 'BaseCrud'
         });
 
@@ -822,10 +823,15 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
     }]);
 
 
-admin_frontend.controller('AppCtrl', ['$scope', '$timeout', 
-    function AppCtrl($scope, $timeout) {
-        
-      /**main */
+admin_frontend.controller('AppCtrl', ['$scope', 
+    function AppCtrl($scope) {
+    $scope.name =  userinfo.name;
+    $scope.rol =  userinfo.rol;
+    $scope.img_profile = userinfo.img_profile;
+
+      console.log('userinfo', userinfo);
+
+
 
 }]);
 
@@ -836,6 +842,7 @@ admin_frontend.controller('BaseCrud', ['$scope', 'Posts',
     
 }]);
 
+
 admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance', '$http',
     function BaseForm($scope, $state, Config, Instance, $http) {
         
@@ -843,7 +850,7 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
         $scope.loader = false;
         $scope.Instance = Instance.data;
         $scope.is_submit = 0;
-        $scope.img_destacada = '../wp-content/plugins/ser_lib/assets/img/images.png'
+        $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png'
         
         var params = {};
         $scope.Model = {};
@@ -862,25 +869,71 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
                 ['height', ['height']]
               ]
         };
-       
+        params =  { action: 'serlib_users_info', post_type: 'post', id_featured: 0 };
+        
         if($scope.Instance.post){
-            $scope.Model = $scope.Instance.post;
-            params =  { action: 'serlib_users_info', post_type: 'post', ID: '$stateParams.ID' };
-        }else{
-            params =  { action: 'serlib_users_info', post_type: 'post' };
+            $scope.Model = $scope.Instance.post;  
+            if($scope.Model.thumbnail) $scope.featured = $scope.Model.thumbnail;
+            
         }
+
         $scope.categories = $scope.Instance.categories;
+
+        /**Subida de archivos */
+        $scope.submitFiles = function(){
+            
+            if($scope.is_submit !== 0) return;
+           
+            $scope.is_submit = 1;
+            $scope.loader = true;
+
+            if(hasValue($scope.featured_file) ){
+                                
+                var formData = new FormData();
+                formData.append('files', $scope.featured_file);
+            
+                angular.element.ajax({
+                    type: 'POST',
+                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=featured',
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(response){
+                        if(response.success){
+                            $scope.submit(response.success);
+                        }else if(response.data.error){
+                            $scope.error =  response.error; 
+                            $scope.submit();
+
+                        }
+                       
+                    },
+                    error: function(error){
+                        $scope.error =  error; 
+                        $scope.submit();
+                    }
+                });
+
+            }else{
+                $scope.submit();
+            }
+            
+        }
+
 
         /**Validaciones de campos no llenos imagen destacada poder subir inmagenes si es comerciante si no colcoar un limite 
          * lo podemos hacer en la funcion de subir imagenes 
         */    
-        $scope.submit = function(){
-            
-           if($scope.is_submit !== 0) return;
-            $scope.is_submit = 1;
-            $scope.loader = true;
+        $scope.submit = function(id_featured = false){
+          
+            if(id_featured){
+                params.id_featured = id_featured;
+            }    
+        
             var data = angular.copy($scope.Model);
             data._wpnonce = angular.element('#_wpnonce').val();
+            
             $http({
                 method: 'POST',
                 params: params,
@@ -892,6 +945,7 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
                     $scope.error = true;
                 }
                 if(response.data.status === 2 ){
+                   /// response.data.status
                     $scope.revition = true;
                     $state.go(Config.redirectTo);
                     /**Ahi que enviar a la url de edicion */
@@ -913,6 +967,43 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
 
 
 }]);
+
+admin_frontend.directive('appFilereader', function($q) {
+    var slice = Array.prototype.slice;
+
+    return {
+        restrict: 'A',
+        require: '?ngModel',
+        scope: { preview: '@' },
+        link: function(scope, element, attrs, ngModel) {
+           
+            if (!ngModel && attrs.type !== 'file') return;
+
+            ngModel.$render = function() {};
+            element.bind('change', function(e) {
+                
+                var element = e.target;
+                var files = element.files[0]
+                ngModel.$setViewValue(files);
+                
+                if(attrs.preview){
+                   
+                    var urlObject = URL.createObjectURL(files);
+                                      
+                    scope.$parent[attrs.preview] = urlObject;
+                    
+                    scope.$apply() 
+            
+                }
+
+                
+            }); 
+
+
+        } 
+    }; 
+});
+
 
 (function($) {
     $.extend($.summernote.lang, {
