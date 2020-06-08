@@ -753,8 +753,9 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
         $mdThemingProvider.theme('default')
             .primaryPalette('light-green');
     })
-    .config(['$stateProvider', function ($stateProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
+      
         $stateProvider.state('publicaciones', {
             abstract: true,
             url: "/publicaciones",
@@ -809,7 +810,14 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
             url: "/profile",
             templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
             controller: 'BaseCrud'
+        })
+        .state('root', {
+            url: "",
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
+            controller: 'BaseCrud'
         });
+
+        $urlRouterProvider.otherwise("/profile");
 
     }]);
 

@@ -3,6 +3,10 @@
 // WordPress environment
 require('../../../../../../wp-load.php' );
 
+$user = wp_get_current_user();
+
+$ACCION = 'blog';
+
 echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 <div ng-if="loader" class="loader"><div class="ser-ripple"><div></div><div></div></div></div>
