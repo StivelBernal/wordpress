@@ -15,27 +15,21 @@ echo'
     </div>
 ';
 ?>
-    <div class="crud-wrapper">
-        <div class="item-wrapper">
-            <strong class="s-flex uppercase"><?php echo __('Titulo', 'serlib'); ?></strong>
-            <strong class="s-flex uppercase"><?php echo __('Extracto', 'serlib'); ?></strong>
-            <strong class="s-flex uppercase text-center"><?php echo __('Imagen', 'serlib'); ?></strong>
-            <div style="width:50px"></div>
-        </div>
-
-        <div class="item-wrapper" md-virtual-repeat="object in ObjectList">
-            <div class="s-flex column uppercase">
+    <div class="crud-wrapper row-wrap">
+       
+        <div class="item-wrapper s-20" md-virtual-repeat="object in ObjectList">
+            <div class="column uppercase"> 
+                <img ng-src="{{object.thumbnail ? object.thumbnail: '/wp-content/plugins/ser_lib/assets/img/images.png'}}" 
+                width="100%" style="height: 150px">
+                
                 <strong><a ng-href="{{object.permalink}}" target="_blank">{{object.post_title}} <br>( {{ object.post_status === 'pending' ?'<?php echo __('Pendiente', 'serlib'); ?>': '<?php echo __('Publicada', 'serlib'); ?>' }} )</a></strong>
                 <strong class="date">{{object.post_date }}</strong>
+
+                <div style="width:50px">
+                    <span ui-sref="negocios.update({ID: object.ID})" class="dashicons btnn-edit dashicons-edit-large"></span>
+                </div>
             </div>
             
-            <strong class="s-flex uppercase">{{object.post_excerpt}}</strong>
-            <div class="s-flex text-center"> 
-                <img ng-src="{{object.thumbnail ? object.thumbnail: '/wp-content/plugins/ser_lib/assets/img/images.png'}}" width="80px">
-            </div>
-            <div style="width:50px">
-                 <span ui-sref="negocios.update({ID: object.ID})" class="dashicons btnn-edit dashicons-edit-large"></span>
-            </div>
         </div>
     </div>
 
