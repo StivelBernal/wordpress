@@ -1,5 +1,29 @@
 <?php
 
+function custom_wpkses_post_tags( $tags, $context ) {
+
+	if ( 'post' === $context ) {
+		$tags['iframe'] = array(
+			'src'             => true,
+			'height'          => true,
+			'width'           => true,
+			'frameborder'     => true,
+			'allowfullscreen' => true,
+        );
+        $tags['style'] = array(
+            'src'             => true,
+			'height'          => true,
+			'width'           => true,
+			'frameborder'     => true,
+			'allowfullscreen' => true,
+        );
+	}
+
+	return $tags;
+}
+
+add_filter( 'wp_kses_allowed_html', 'custom_wpkses_post_tags', 10, 2 );
+
 function serlib_users_info(){
    
     $results = [];  
@@ -10,7 +34,6 @@ function serlib_users_info(){
     if($user === 0){
         return;
     }
-
     
     $rol = $user->roles[0];
     if($rol === 'turista'){
@@ -118,6 +141,18 @@ function serlib_users_info(){
                 $results['post'] =  $wpdb->get_row( $query );
                 $terms = get_the_terms( $results['post']->ID , 'category', 'term_id' );
                 
+                $results['post']->mapa_negocio = get_post_meta($results['post']->ID, 'mapa_negocio')[0];
+
+                $results['post']->galery_ids = get_post_meta($results['post']->ID, 'galeria_negocio')[0];
+                
+                $results['post']->galery = [];
+                
+                for($i = 0; $i < count($results['post']->galery_ids); $i++ ) { 
+                    $results['post']->galery[$i] = wp_get_attachment_image_src($results['post']->galery_ids[$i])[0];
+                }
+
+                $results['post']->servicios_negocio = get_post_meta($results['post']->ID, 'servicios_negocio')[0];                
+                
                 for($i = 0; $i < count($terms); $i++ ) { 
                     $terms[$i] = $terms[$i]->term_id;
                 }
@@ -191,6 +226,7 @@ function serlib_users_info(){
 
             $title  =   sanitize_text_field( $objDatos->post_title );
             $content    =   wp_kses_post( $objDatos->post_content );
+            $objDatos->mapa = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $objDatos->mapa);
             $mapa    =   wp_kses_post( $objDatos->mapa );
             $servicios = [];
             

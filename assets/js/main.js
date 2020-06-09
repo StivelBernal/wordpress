@@ -1067,6 +1067,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.galery_ids = [];
         $scope.preview_galery = [];
         $scope.servicios = [];
+        $scope.mapa = '';
         var Mapa = '';
         var params = {};
         $scope.Model = {};
@@ -1074,6 +1075,9 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.set_step = function(step){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
             $scope.step = step;
+            if(step === 4){
+                $scope.bind_mapa($scope.mapa);
+            }
         }
 
         $scope.add_galery = function(){
@@ -1135,19 +1139,35 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
 
         params =  { action: 'serlib_users_info', post_type: 'post', id_featured: 0 };
         
+        $scope.bind_mapa = function(mapa){
+            Mapa = mapa;
+            document.querySelector('#mapa').innerHTML = mapa;
+        }
+
         if($scope.Instance.post){
             $scope.Model = $scope.Instance.post;  
             if($scope.Model.thumbnail) $scope.featured = $scope.Model.thumbnail;
+            if($scope.Model.mapa_negocio) $scope.mapa = $scope.Model.mapa_negocio;
+            if($scope.Model.galery_ids){ 
+                $scope.galery = $scope.Model.galery_ids;
+                for(var i = 0; i < $scope.Model.galery.length; i++){
+                 
+                    $scope.preview_galery.push(($scope.Model.galery[i]));
+                } 
+            }
+            if($scope.Model.servicios_negocio){
+                
+                for(var i = 0; i < $scope.Model.servicios_negocio.length; i++){
+                    $scope.servicios.push({ text: $scope.Model.servicios_negocio[i] });
+                } 
+            } 
             
         }
 
         $scope.tipos = $scope.Instance.tipos;
         $scope.municipios = $scope.Instance.municipios;
 
-        $scope.bind_mapa = function(mapa){
-            Mapa = mapa;
-            document.querySelector('#mapa').innerHTML = mapa;
-        }
+        
         /**Subida de archivos */
         $scope.submitFiles = function(){
             

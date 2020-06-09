@@ -141,7 +141,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 </div>
 
-<div ng-if="step === 4">
+<div ng-show="step === 4">
 
     <div class="row-wrap">
         
