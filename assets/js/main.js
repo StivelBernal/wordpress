@@ -1064,6 +1064,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png'
         $scope.galery = [1,2,3,4];
         $scope.preview_galery = [];
+        $scope.servicios = [];
         var params = {};
         $scope.Model = {};
 
@@ -1075,7 +1076,11 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.add_galery = function(){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
             $scope.galery.push({id: 1});
-            console.log($scope.preview_galery);
+        }
+
+        $scope.add_service = function(){
+            /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
+            $scope.servicios.push({id: 1});
         }
 
         $scope.options = {
@@ -1255,7 +1260,6 @@ admin_frontend.directive('appFilereader', function($q) {
                 
                 if(attrs.previewArray && attrs.indice){
 
-                    console.log(attrs.previewArray) ;
                     scope.$parent[attrs.previewArray][attrs.indice] = urlObject;
                     scope.$apply() 
                 }

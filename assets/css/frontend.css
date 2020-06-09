@@ -1057,15 +1057,43 @@ label.input-file-label{
 .galery-image-container.more-images{
     width: 150px; margin: 10px auto 10px;
 }
+
 .galery-image-container.more-images img{
     opacity: 0.6;
     cursor:pointer;
-    height: 150px;
-   
+    height: 150px;  
 }
 .galery-image-container.more-images:hover img {
     opacity: 0.8;
 }
+.service-image-container img{
+    width:100px;
+    height: auto;
+}
+.service-image-container:hover button {
+    opacity: 1;
+    background-color: #abce55;
+    
+}
+.service-image-container button{
+    color: black;
+    background-color: #fff;
+    border: 2px solid #abce55;
+    border-radius: 20px;
+    font-weight: 600;
+    padding:10px 20px;
+    width:200px;
+}
+.service-image-container {
+    padding:10px;
+    text-align: center;
+}
+.mapa-image-container img{
+width: 100%;
+margin:10px auto;
+display: block;
+}
+
 .galery-image-container {
     width: 80%;
     margin: 30px auto 10px;

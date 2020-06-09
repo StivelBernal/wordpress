@@ -23,7 +23,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 3}" ng-click="set_step(3)">'.$STEP3.'</p></div>
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 4}" ng-click="set_step(4)">'.$STEP4.'</p></div>
     <div class="s-7"></div>
-    <md-button  class="s-flex" ng-class="{finish: step === 4}"  ng-disabled=" step < 4" ng-click="submitFiles()">
+    <md-button  class="s-flex" ng-class="{finish: step === 4}" ';  ?> ng-disabled=" step < 4 || (Model.post_title !== '' && !Model.post_title)" <?php echo 'ng-click="submitFiles()">
     {{ (Instance.post) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
     </md-button>
 </div>
@@ -65,55 +65,100 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 </div>
 
-    <div ng-if="step === 2">
+<div ng-if="step === 2">
 
-        <div class="row-wrap"> 
+    <div class="row-wrap"> 
+        
+        <div class="s-flex content-post">
             
-            <div class="s-flex content-post">
-                
-                <div class="s-100">
-                    <div class="form-group s-100">
-                        <md-input-container  titulo-post">
-                                <label>Nombre del negocio</label>
-                                <input class="md-primary" ng-model="Model.post_title" >
-                        </md-input-container>
-                    </div>
+            <div class="s-100">
+                <div class="form-group s-100">
+                    <md-input-container  titulo-post">
+                            <label>Nombre del negocio</label>
+                            <input class="md-primary" ng-model="Model.post_title" >
+                    </md-input-container>
                 </div>
-                
-                <summernote config="options" id="summernote" ng-model="Model.post_content"></summernote>
-                
             </div>
-
-            <div class="s-25 row-wrap center-start options-post" style="padding-right:20px; padding-top:45px;">
             
-                <div class="s-100">
-                    <div class="form-group s-flex">
-                        <label>'.__('Municipio', 'serlib').'</label>      
-                        <selector model="Model.post_category" name="municipios" value-attr="term_id" Label-attr="name" options="municipios"></selector>
-                    </div>
-                </div>
+            <summernote config="options" id="summernote" ng-model="Model.post_content"></summernote>
+            
+        </div>
 
-                <div class="s-100">
-                    <div class="form-group s-flex">
-                        <label>'.__('Categoria', 'serlib').'</label>      
-                        <selector model="Model.tipo_entrada" name="tipo_entrada" value-attr="term_id" Label-attr="name" options="tipos"></selector>
-                    </div>
-                </div>
-
-                <div class="s-100 ">       
-                    <label>'.__('Imagen destacada','serlib').'</label>
-                    <div class="destacada-image-container">
-                        <div><img class="img-destacada"  ng-src="{{featured}}"></div> 
-                    </div>
-                    <div class="form-group s-100">
-                    <label for="featured" class="input-file-label">{{ !featured_file.name ? "'.__('Seleccionar imagen','serlib').'": featured_file.name }} </label>      
-                    <input class="input_file" type="file" ng-model="featured_file" preview="featured" app-filereader accept="image/png, image/jpeg" app-filereader style="display:none;"  id="featured"></selector>
-                    
-                </div>
+        <div class="s-25 row-wrap center-start options-post" style="padding-right:20px; padding-top:45px;">
+        
+            <div class="s-100">
+                <div class="form-group s-flex">
+                    <label>'.__('Municipio', 'serlib').'</label>      
+                    <selector model="Model.post_category" name="municipios" value-attr="term_id" Label-attr="name" options="municipios"></selector>
                 </div>
             </div>
 
+            <div class="s-100">
+                <div class="form-group s-flex">
+                    <label>'.__('Categoria', 'serlib').'</label>      
+                    <selector model="Model.tipo_entrada" name="tipo_entrada" value-attr="term_id" Label-attr="name" options="tipos"></selector>
+                </div>
+            </div>
+
+            <div class="s-100 ">       
+                <label>'.__('Imagen destacada','serlib').'</label>
+                <div class="destacada-image-container">
+                    <div><img class="img-destacada"  ng-src="{{featured}}"></div> 
+                </div>
+                <div class="form-group s-100">
+                <label for="featured" class="input-file-label">{{ !featured_file.name ? "'.__('Seleccionar imagen','serlib').'": featured_file.name }} </label>      
+                <input class="input_file" type="file" ng-model="featured_file" preview="featured" app-filereader accept="image/png, image/jpeg" app-filereader style="display:none;"  id="featured"></selector>
+                
+            </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div ng-if="step === 3">
+    
+    <div class="s-100 row ">       
+                
+        <div class="service-image-container">
+            <div><button ng-click="add_service()">Agregar Servicio</button></div> 
+        </div>
+
+    </div>
+
+    <div class="row-wrap">        
+            
+        <div class="s-50" ng-repeat="servicio in servicios">       
+            
+            <div class="form-group s-100">
+                
+                <textarea row="5" ng-model="servicio" indice="{{$index}}">
+                </textarea>
+            </div>
+        </div>         
+
+    </div>
+
+</div>
+
+<div ng-if="step === 4">
+
+    <div class="row-wrap center-center">
+
+        <div class="s-40 ">       
+            
+            <div class="mapa-image-container">
+                <div><img class="img-destacada" ng-src="{{mapa ? mapa:featured}}"></div> 
+            </div>
+            <div class="form-group s-100">
+                <label for="mapa" class="input-file-label">{{ !mapa_file.name ? "'.__('Seleccionar imagen','serlib').'": mapa_file.name }} </label>      
+                <input class="input_file" type="file" ng-model="mapa_file" preview="mapa" app-filereader accept="image/png, image/jpeg" app-filereader style="display:none;"  id="mapa"></selector>
+            </div>
         </div>
     </div>
+
+</div>
+
+
 </form>';
 ?>
