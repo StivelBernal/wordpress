@@ -115,14 +115,23 @@ function serlib_users_info(){
             
                 $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE post_author = '.$user->ID.'  AND ID = '.$_GET['ID'].'';
                 $results['post'] =  $wpdb->get_row( $query );
-                $terms = get_the_terms( $results['post']->ID , 'categorias', 'term_id' );
+                $terms = get_the_terms( $results['post']->ID , 'category', 'term_id' );
+                
                 for($i = 0; $i < count($terms); $i++ ) { 
                     $terms[$i] = $terms[$i]->term_id;
+                }
+
+                $tipos_entradas = get_the_terms( $results['post']->ID , 'tipos_entradas', 'term_id' );
+                
+                for($i = 0; $i < count($tipos_entradas); $i++ ) { 
+                    $tipos_entradas[$i] = $tipos_entradas[$i]->term_id;
                 }
 
                 $results['post']->thumbnail = get_the_post_thumbnail_url($results['post']->ID);
 
                 $results['post']->post_category = $terms;
+
+                $results['post']->tipo_entrada = $tipos_entradas;
 
             }else if( isset($_GET['post_type']) ){
             
@@ -133,7 +142,7 @@ function serlib_users_info(){
                     $results['posts'][$i]->permalink = get_permalink($results['posts'][$i]->ID);
 
                     /**Si role es = a turista si no entonces toca generar la consulta para entradas */
-                    $results['posts'][$i]->post_category = get_the_terms( $results['posts'][$i]->ID , 'categorias_articulos' );
+                    //$results['posts'][$i]->post_category = get_the_terms( $results['posts'][$i]->ID , 'categorias_articulos' );
                 }    
                 
             }
@@ -170,7 +179,7 @@ function serlib_users_info(){
         if( $method == 'POST' ){
     
             $objDatos = json_decode(file_get_contents("php://input"));
-        
+            
             $results = [ 'status' => 1 ];
         
             if( empty($objDatos->post_title) ){
@@ -196,13 +205,14 @@ function serlib_users_info(){
                 'post_name'                   =>    $title,
                 'post_title'                  =>    $title,
                 'post_status'                 =>    'pending',
-                'post_type'                   =>    'blog'
+                'post_type'                   =>    'post'
             ]);
 
         
             if( !is_wp_error($post_id) ){
 
-                wp_set_post_terms($post_id, $objDatos->post_category, 'categorias_articulos');
+                wp_set_post_terms($post_id, $objDatos->post_category, 'category');
+                wp_set_post_terms($post_id, $objDatos->tipo_entrada, 'tipos_entradas');
             
                 //update_post_meta( $post_id, 'ser_data', $ser_data );
                 
@@ -215,8 +225,6 @@ function serlib_users_info(){
                 $results['id']  =   $post_id;
                 $results['permalink'] = get_permalink( $post_id );
             }
-
-            
 
         }
     }

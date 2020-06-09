@@ -9,7 +9,7 @@ echo'
     <div class="row toolbar-actions">
         <h2 md-truncate="" flex="">'.__('PUBLICACIONES', 'serlib').'</h2>
         <div class="s-flex"></div>
-        <md-button  ui-sref="publicaciones.create">
+        <md-button  ui-sref="negocios.create">
             '.__('Agregar Nueva', 'serlib').'
         </md-button>
     </div>
@@ -33,8 +33,8 @@ echo'
             <div class="s-flex text-center"> 
                 <img ng-src="{{object.thumbnail ? object.thumbnail: '/wp-content/plugins/ser_lib/assets/img/images.png'}}" width="80px">
             </div>
-            <div style="width:50px" >
-                 <span ui-sref="publicaciones.update({ID: object.ID})" class="dashicons btnn-edit dashicons-edit-large"></span>
+            <div style="width:50px">
+                 <span ui-sref="negocios.update({ID: object.ID})" class="dashicons btnn-edit dashicons-edit-large"></span>
             </div>
         </div>
     </div>

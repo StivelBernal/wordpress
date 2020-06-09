@@ -909,15 +909,50 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
             shortcuts: false,
             lang: "es-ES",
             placeholder: '...',
+            dialogsInBody: true,
             toolbar: [
                 ['style', ['bold', 'italic', 'underline', 'clear']],
                 ['font', ['strikethrough', 'superscript', 'subscript']],
                 ['fontsize', ['fontsize']],
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']]
-              ]
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+               
+            ],
+            callbacks : {
+                onImageUpload: function(image) {
+                    uploadImage(image[0]);
+                }
+            }
+            
         };
+
+
+        function uploadImage(image) {
+            var data = new FormData();
+            data.append("files",image);
+          
+            angular.element.ajax({
+                type: 'POST',
+                url: front_obj.ajax_url+'?action=serlib_uploader&destino=image',
+                data: data,
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(url) {
+                    
+                    $('#summernote').summernote('editor.insertImage', url);
+
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        }
+
+
         params =  { action: 'serlib_users_info', post_type: 'post', id_featured: 0 };
         
         if($scope.Instance.post){
@@ -1023,12 +1058,17 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.tipos = [];
         $scope.municipios = [];
         $scope.loader = false;
+        $scope.step = 1;
         $scope.Instance = Instance.data;
         $scope.is_submit = 0;
         $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png'
         
         var params = {};
         $scope.Model = {};
+
+        $scope.set_step = function(step){
+            $scope.step = step;
+        }
 
         $scope.options = {
             height: 450,
