@@ -43,7 +43,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                 
                 <div class="galery-image-container">';
                 ?>
-                    <div><img class="img-galeria"  ng-src="{{preview_galery[$index] ? preview_galery[$index]: featured}}"></div> 
+                    <div><img class="img-galeria"  ng-src="{{preview_galery[$index] ? preview_galery[$index]: preview_default}}"></div> 
                 <?php echo '
                 </div>
                 <div class="form-group s-100">
@@ -65,7 +65,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 </div>
 
-<div ng-if="step === 2">
+<div ng-show="step === 2">
 
     <div class="row-wrap"> 
         
@@ -96,7 +96,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             <div class="s-100">
                 <div class="form-group s-flex">
                     <label>'.__('Categoria', 'serlib').'</label>      
-                    <selector model="Model.tipo_entrada" name="tipo_entrada" value-attr="term_id" Label-attr="name" options="tipos"></selector>
+                    <selector model="Model.tipo_entrada" multi="true" name="tipo_entrada" value-attr="term_id" Label-attr="name" options="tipos"></selector>
                 </div>
             </div>
 
@@ -132,7 +132,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             
             <div class="form-group s-100">
                 
-                <textarea row="5" ng-model="servicio" indice="{{$index}}">
+                <textarea rows="5" ng-model="servicio.text" indice="{{$index}}">
                 </textarea>
             </div>
         </div>         
@@ -143,18 +143,20 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 <div ng-if="step === 4">
 
-    <div class="row-wrap center-center">
+    <div class="row-wrap">
+        
+        <div style="padding:30px;" class="s-50 ">  
+        
+        <h4>
+            Pega a qui el codigo de google maps para mostrar el mapa o
+            <a style="text-decoration:underline;" href="https://www.embedgooglemap.net/en/" target="_blank" >
+            generalo en este enlace</a> 
+        </h4>
 
-        <div class="s-40 ">       
-            
-            <div class="mapa-image-container">
-                <div><img class="img-destacada" ng-src="{{mapa ? mapa:featured}}"></div> 
-            </div>
-            <div class="form-group s-100">
-                <label for="mapa" class="input-file-label">{{ !mapa_file.name ? "'.__('Seleccionar imagen','serlib').'": mapa_file.name }} </label>      
-                <input class="input_file" type="file" ng-model="mapa_file" preview="mapa" app-filereader accept="image/png, image/jpeg" app-filereader style="display:none;"  id="mapa"></selector>
-            </div>
+            <textarea style="width:100%;" ng-change="bind_mapa(mapa)" rows="10" ng-model="mapa" >
+            </textarea>
         </div>
+        <div class="s-50" style="padding:30px;" id="mapa"></div>
     </div>
 
 </div>

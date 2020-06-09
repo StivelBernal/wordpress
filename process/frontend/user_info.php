@@ -109,6 +109,7 @@ function serlib_users_info(){
     }
     
     if($rol === 'comerciante'){
+
         if( $method == 'GET' ){
             
             if( isset($_GET['ID']) && is_numeric($_GET['ID']) ){
@@ -137,13 +138,15 @@ function serlib_users_info(){
             
                 $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE post_author = '.$user->ID.'  AND (post_type = "post") ORDER BY post_date DESC';
                 $results['posts'] =  $wpdb->get_results( $query );
+               
                 for($i = 0; $i < count($results['posts']); $i++){
                     $results['posts'][$i]->thumbnail = get_the_post_thumbnail_url($results['posts'][$i]->ID);
                     $results['posts'][$i]->permalink = get_permalink($results['posts'][$i]->ID);
 
                     /**Si role es = a turista si no entonces toca generar la consulta para entradas */
                     //$results['posts'][$i]->post_category = get_the_terms( $results['posts'][$i]->ID , 'categorias_articulos' );
-                }    
+                }  
+
                 
             }
             
@@ -186,9 +189,17 @@ function serlib_users_info(){
                 wp_send_json( $results );
             }
 
-            
             $title  =   sanitize_text_field( $objDatos->post_title );
             $content    =   wp_kses_post( $objDatos->post_content );
+            $mapa    =   wp_kses_post( $objDatos->mapa );
+            $servicios = [];
+            
+            if(!empty($objDatos->servicios)){
+                for($i = 0; $i < count($objDatos->servicios); $i++){
+                    $servicios[$i] = sanitize_text_field($objDatos->servicios[$i]->text);
+                }
+            }
+            
             // OBTENER ROL Y VERIFICAR QUE LOS CONTENIDOS VENGAN BIEN
         
             if (is_array($objDatos->post_category)) {
@@ -208,13 +219,15 @@ function serlib_users_info(){
                 'post_type'                   =>    'post'
             ]);
 
-        
             if( !is_wp_error($post_id) ){
 
                 wp_set_post_terms($post_id, $objDatos->post_category, 'category');
                 wp_set_post_terms($post_id, $objDatos->tipo_entrada, 'tipos_entradas');
+                
             
-                //update_post_meta( $post_id, 'ser_data', $ser_data );
+                update_post_meta( $post_id, 'galeria_negocio', $objDatos->galery_ids );
+                update_post_meta( $post_id, 'mapa_negocio', $mapa );
+                update_post_meta( $post_id, 'servicios_negocio', $servicios );
                 
                 if( isset($_GET['id_featured']) && $_GET['id_featured'] !== 0 ){
                     require_once( ABSPATH . 'wp-admin/includes/image.php' );

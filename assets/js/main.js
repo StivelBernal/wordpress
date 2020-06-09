@@ -1061,10 +1061,13 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.step = 1;
         $scope.Instance = Instance.data;
         $scope.is_submit = 0;
-        $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png'
-        $scope.galery = [1,2,3,4];
+        $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png';
+        $scope.preview_default = '../wp-content/plugins/ser_lib/assets/img/images.png';
+        $scope.galery = [];
+        $scope.galery_ids = [];
         $scope.preview_galery = [];
         $scope.servicios = [];
+        var Mapa = '';
         var params = {};
         $scope.Model = {};
 
@@ -1075,12 +1078,12 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
 
         $scope.add_galery = function(){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
-            $scope.galery.push({id: 1});
+            $scope.galery.push({text: ''});
         }
 
         $scope.add_service = function(){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
-            $scope.servicios.push({id: 1});
+            $scope.servicios.push({text: ''});
         }
 
         $scope.options = {
@@ -1141,15 +1144,56 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.tipos = $scope.Instance.tipos;
         $scope.municipios = $scope.Instance.municipios;
 
+        $scope.bind_mapa = function(mapa){
+            Mapa = mapa;
+            document.querySelector('#mapa').innerHTML = mapa;
+        }
         /**Subida de archivos */
         $scope.submitFiles = function(){
             
             if($scope.is_submit !== 0) return;
-           
+            
             $scope.is_submit = 1;
             $scope.loader = true;
 
+            var promises = 0;
+
+            for(var i = 0; i < $scope.galery.length; i++ ){
+                if($scope.galery[i].name) promises++;
+            }
+
+            for(var i = 0; i < $scope.galery.length; i++ ){
+                var formData = new FormData();
+                formData.append('files', $scope.galery[i]);
+            
+                angular.element.ajax({
+                    type: 'POST',
+                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=featured',
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(response){
+                        if(response.success){
+                            $scope.galery_ids.push(response.success);
+                        }else if(response.data.error){
+                            $scope.error =  response.error; 
+                        }
+                        
+                        finally_promises();
+                       
+                    },
+                    error: function(error){
+                        $scope.error =  error; 
+                       
+                        finally_promises();
+                    }
+                });
+            }
+
             if(hasValue($scope.featured_file) ){
+               
+                promises++;
                                 
                 var formData = new FormData();
                 formData.append('files', $scope.featured_file);
@@ -1166,19 +1210,26 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
                             $scope.submit(response.success);
                         }else if(response.data.error){
                             $scope.error =  response.error; 
-                            $scope.submit();
-
                         }
+                        
+                        finally_promises();
                        
                     },
                     error: function(error){
                         $scope.error =  error; 
-                        $scope.submit();
+                       
+                        finally_promises();
                     }
                 });
 
-            }else{
-                $scope.submit();
+            }
+
+
+            function finally_promises(){
+                 promises--;
+                 if(promises < 1){
+                       $scope.submit();
+                 }
             }
             
         }
@@ -1192,8 +1243,14 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             if(id_featured){
                 params.id_featured = id_featured;
             }    
+            var obj =  {
+                        servicios: angular.copy($scope.servicios) ,
+                        galery_ids: angular.copy($scope.galery_ids) ,
+                        mapa: Mapa 
+                    }; 
         
-            var data = angular.copy($scope.Model);
+            var data = angular.merge(angular.copy($scope.Model), obj) ;
+            
             data._wpnonce = angular.element('#_wpnonce').val();
             
             $http({
