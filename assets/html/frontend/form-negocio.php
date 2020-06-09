@@ -7,12 +7,10 @@ $user = wp_get_current_user();
 $roles =  $user->roles[0];
 
 
-$STEP1 = __('Negocios', 'serlib');
-$STEP2 = __('Negocios', 'serlib');
-$STEP3 = __('Negocios', 'serlib');
-$STEP4 = __('Negocios', 'serlib');
-$STEP5 = __('Negocios', 'serlib');
-
+$STEP1 = __('Galeria', 'serlib');
+$STEP2 = __('información', 'serlib');
+$STEP3 = __('Servicios', 'serlib');
+$STEP4 = __('Localización', 'serlib');
 
 echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
@@ -23,10 +21,9 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 1}" ng-click="set_step(1)">'.$STEP1.'</p></div>
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 2}" ng-click="set_step(2)">'.$STEP2.'</p></div>
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 3}" ng-click="set_step(3)">'.$STEP3.'</p></div>
-    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 4}" ng-click="set_step(4)">'.$STEP4.'</p></div>
-    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 5}" ng-click="set_step(5)">'.$STEP5.'</p></div>
-    
-    <md-button  class="s-flex" ng-class="{finish: step === 5}"  ng-disabled=" step < 5" ng-click="submitFiles()">
+    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 4}" ng-click="set_step(4)">'.$STEP4.'</p></div>
+    <div class="s-7"></div>
+    <md-button  class="s-flex" ng-class="{finish: step === 4}"  ng-disabled=" step < 4" ng-click="submitFiles()">
     {{ (Instance.post) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
     </md-button>
 </div>
@@ -38,7 +35,37 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 </div>
 
 <form>
-    <div ng-if="step === 1">
+<div ng-if="step === 1">
+
+    <div class="row-wrap"> 
+        
+            <div class="s-25" ng-repeat="image in galery">       
+                
+                <div class="galery-image-container">';
+                ?>
+                    <div><img class="img-galeria"  ng-src="{{preview_galery[$index] ? preview_galery[$index]: featured}}"></div> 
+                <?php echo '
+                </div>
+                <div class="form-group s-100">
+                    <label for="featured{{$index}}" class="input-file-label">{{ !galery[$index].name ? "'.__('Seleccionar imagen','serlib').'": galery[$index].name }} </label>      
+                    <input class="input_file" type="file" ng-model="galery[$index]" indice="{{$index}}" preview-array="preview_galery" app-filereader accept="image/png, image/jpeg" app-filereader style="display:none;"  id="featured{{$index}}">
+                </div>
+            </div> 
+
+
+            <div class="s-25 row center-center">       
+                
+                <div class="galery-image-container more-images">
+                    <div><img ng-click="add_galery()" src="/wp-content/plugins/ser_lib/assets/img/more_images2.png"></div> 
+                </div>
+    
+            </div>
+
+    </div>
+
+</div>
+
+    <div ng-if="step === 2">
 
         <div class="row-wrap"> 
             

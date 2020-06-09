@@ -1052,5 +1052,32 @@ label.input-file-label{
     color: black;
     background-color: #abce55;
     border: 2px solid #abce55;
+}
+
+.galery-image-container.more-images{
+    width: 150px; margin: 10px auto 10px;
+}
+.galery-image-container.more-images img{
+    opacity: 0.6;
+    cursor:pointer;
+    height: 150px;
    
+}
+.galery-image-container.more-images:hover img {
+    opacity: 0.8;
+}
+.galery-image-container {
+    width: 80%;
+    margin: 30px auto 10px;
+}
+
+.galery-image-container img {
+    
+    height: 240px;
+    
+}
+
+.galery-image-container + .form-group{
+    width: 90%;
+    margin: 10px auto 10px;
 }

@@ -1062,12 +1062,20 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.Instance = Instance.data;
         $scope.is_submit = 0;
         $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png'
-        
+        $scope.galery = [1,2,3,4];
+        $scope.preview_galery = [];
         var params = {};
         $scope.Model = {};
 
         $scope.set_step = function(step){
+            /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
             $scope.step = step;
+        }
+
+        $scope.add_galery = function(){
+            /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
+            $scope.galery.push({id: 1});
+            console.log($scope.preview_galery);
         }
 
         $scope.options = {
@@ -1116,8 +1124,6 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
                 }
             });
         }
-
-       
 
         params =  { action: 'serlib_users_info', post_type: 'post', id_featured: 0 };
         
@@ -1237,17 +1243,23 @@ admin_frontend.directive('appFilereader', function($q) {
                 var files = element.files[0]
                 ngModel.$setViewValue(files);
                 
+                var urlObject = URL.createObjectURL(files);
+                
                 if(attrs.preview){
-                   
-                    var urlObject = URL.createObjectURL(files);
-                                      
+                                                       
                     scope.$parent[attrs.preview] = urlObject;
                     
                     scope.$apply() 
             
                 }
-
                 
+                if(attrs.previewArray && attrs.indice){
+
+                    console.log(attrs.previewArray) ;
+                    scope.$parent[attrs.previewArray][attrs.indice] = urlObject;
+                    scope.$apply() 
+                }
+
             }); 
 
 
