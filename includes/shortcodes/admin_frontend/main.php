@@ -12,6 +12,12 @@ function serlib_admin_frontend_shortcode(){
 
         $user_photo = get_user_meta($user->ID, 'user_photo', true );
         
+        $user_photo                = str_replace( 
+            '/home/brayan/Escritorio/FOVEA/', 
+            '',
+            $user_photo 
+        );
+
         if(!$user_photo){
             $user_photo = '/wp-content/plugins/ser_lib/assets/img/avatar-default.jpg';
         }
@@ -31,6 +37,40 @@ function serlib_admin_frontend_shortcode(){
 
         echo '<script> window.location = "/auth" </script>';
 
+    }
+
+}
+
+
+function menu_top_user_shortcode(){
+
+    if( is_user_logged_in() ){  
+
+        $user = wp_get_current_user();
+
+        $user_photo = get_user_meta($user->ID, 'user_photo', true );
+       
+        $user_photo                = str_replace( 
+            '/home/brayan/Escritorio/FOVEA', 
+            '',
+            $user_photo 
+        );
+
+        if(!$user_photo){
+            $user_photo = '/wp-content/plugins/ser_lib/assets/img/avatar-default.jpg';
+        }
+          
+        return '<div class="row center-center menu_user_top">
+                    <a  href="/mi-cuenta">
+                    <img src="'.$user_photo.'" ></a>
+                    <a  href="/mi-cuenta">
+                  <p>'.__('Mi Cuenta', 'serlib').'</p></a>
+                  <p>'.wp_loginout(home_url( '/') , false ).'</p>
+                   
+                </div>';
+    }else{
+        
+        return '<div class="menu_user_top_login row center-center"> <a href="/auth"> <p style="margin-right:6px;">'.__('Ingresar').'</a></p> | <a href="/auth/register"><p style="margin-left:6px;"> '.__('Registrarse').'</p></a></div>';
     }
 
 }

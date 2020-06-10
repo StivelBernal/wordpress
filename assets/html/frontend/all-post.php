@@ -2,7 +2,7 @@
 
 // WordPress environment
 require('../../../../../../wp-load.php' );
-
+echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false );
 echo'
 <div md-virtual-repeat-container>
 
@@ -34,7 +34,9 @@ echo'
                 <img ng-src="{{object.thumbnail ? object.thumbnail: '/wp-content/plugins/ser_lib/assets/img/images.png'}}" width="80px">
             </div>
             <div style="width:50px" >
-                 <span ui-sref="publicaciones.update({ID: object.ID})" class="dashicons btnn-edit dashicons-edit-large"></span>
+                <span title="<?php echo __('editar', 'serlib'); ?>" ui-sref="publicaciones.update({ID: object.ID})" class="dashicons btnn-edit dashicons-edit-large"></span>
+                <span title="<?php echo __('eliminar', 'serlib'); ?>"   ng-click="delete({ID: object.ID})" class="dashicons btnn-delete dashicons-trash"></span>
+            
             </div>
         </div>
     </div>

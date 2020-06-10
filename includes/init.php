@@ -164,4 +164,17 @@ function serlib_fovea_init(){
 
 	add_action( 'admin_menu', 'modificar_post_label' );
 
+
+
+	/**Quitamos el admin bar */
+	$user = wp_get_current_user();
+	if(isset($user->roles[0])){
+			//echo var_dump(in_array($user->roles[0], ['administrator', 'staff']));
+		if( !in_array($user->roles[0], ['administrator', 'staff']) !== false){
+			add_filter( 'show_admin_bar', '__return_false' );
+		}
+	
+	}
+	
+
 }

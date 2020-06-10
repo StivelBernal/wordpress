@@ -78,6 +78,7 @@ add_shortcode( 'serlib_buscador_home_results', 'serlib_buscador_home_results_sho
 add_shortcode( 'serlib_buscador_home_results_blog', 'serlib_buscador_home_results_blog_shortcode' );
 // Admin frontend 
 add_shortcode( 'serlib_admin_frontend', 'serlib_admin_frontend_shortcode' );
+add_shortcode( 'menu_top_user', 'menu_top_user_shortcode' );
 
 // Modificaciones funciones de wordpress}
 

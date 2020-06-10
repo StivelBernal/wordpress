@@ -914,6 +914,7 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
     border-radius: 100%;
     font-size: 24px;
     color: black;
+    margin:2px;
 }
 
 .btnn-delete{
@@ -925,6 +926,7 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
     border-radius: 100%;
     font-size: 24px;
     color: rgb(49, 39, 39);
+    margin:2px;
 }
 
 .date {
@@ -1120,4 +1122,28 @@ display: block;
 .galery-image-container + .form-group{
     width: 90%;
     margin: 10px auto 10px;
+}
+
+.menu_user_top{
+    height: fit-content;
+    overflow: hidden;
+    
+
+}
+
+.menu_user_top img{
+    height: 30px;
+    width: 33px;
+    border-radius:50%;
+    border:1px solid white;
+    margin-right: 5px;
+    margin-top:2px;
+    margin-bottom:2px;
+
+}
+
+.menu_user_top a{
+    
+    margin-right: 5px;
+
 }
