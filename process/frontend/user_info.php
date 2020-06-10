@@ -54,7 +54,7 @@ function serlib_users_info(){
 
             }else if( isset($_GET['post_type']) ){
             
-                $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE post_type = "blog" post_author = '.$user->ID.'  AND  post_type = "blog" ORDER BY post_date DESC';
+                $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE post_author = '.$user->ID.'  AND  post_type = "blog" ORDER BY post_date DESC';
                 $results['posts'] =  $wpdb->get_results( $query );
                 for($i = 0; $i < count($results['posts']); $i++){
                     $results['posts'][$i]->thumbnail = get_the_post_thumbnail_url($results['posts'][$i]->ID);
