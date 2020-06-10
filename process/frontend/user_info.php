@@ -278,6 +278,46 @@ function serlib_users_info(){
         }
     }
 
+    if( $method == 'DELETE' ){
+        $objDatos = json_decode(file_get_contents("php://input"));
+        $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
+        
+        if( !wp_verify_nonce( $nonce, 'serlib_form' ) ){
+            wp_send_json('403');
+        }   
+       
+        if( isset($objDatos->ID ) ){
+    
+            $objDatos->ID = $objDatos->ID->ID;
+            $results =  $wpdb->query( 
+                $wpdb->prepare( 
+                    "
+                        DELETE FROM $wpdb->posts
+                        WHERE ID = %d
+                        AND post_author = %d
+                    ",
+                    intval($objDatos->ID) ,  $user->ID )
+            );
+                   
+            if($resulsts !== false && $results !== 0 ){
+            
+                $wpdb->query( 
+                    $wpdb->prepare( 
+                        "
+                            DELETE FROM $wpdb->postmeta
+                            WHERE post_id = %d
+                        ",
+                        intval($objDatos->ID) 
+                        )
+                );
+            }
+           
+        }
+    
+    }
+
+
     wp_send_json($results);
     die();
+
 }

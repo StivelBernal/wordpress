@@ -753,6 +753,16 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('light-green');
+
+          
+    })
+    .config(function ($sceDelegateProvider) {
+        $sceDelegateProvider.resourceUrlWhitelist([
+        // Allow same origin resource loads.
+        'self',
+        // Allow loading from our assets domain. **.
+        'https://maps.google.com/**'
+        ]);
     })
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -884,13 +894,34 @@ admin_frontend.controller('AppCtrl', ['$scope',
 
 }]);
 
-admin_frontend.controller('BaseCrud', ['$scope', 'Posts', 
-    function BaseCrud($scope, Posts) {
+admin_frontend.controller('BaseCrud', ['$scope', 'Posts', '$http',
+    function BaseCrud($scope, Posts,  $http ) {
         
     $scope.ObjectList = Posts.data.posts;
+
+    $scope.delete = function(ID){
+          
+        
+        var data = { ID: ID};
+        
+        data._wpnonce = angular.element('#_wpnonce').val();
+       
+        $http({
+            method: 'DELETE',
+            params:  { action: 'serlib_users_info'},
+            url:    front_obj.ajax_url,
+            data: data
+        }).then(function successCallback(response) {
+            
+           location.reload();
+
+        }, function errorCallback(error) {
+            location.reload();          
+        });
+
+    }
     
 }]);
-
 
 admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance', '$http',
     function BaseForm($scope, $state, Config, Instance, $http) {
@@ -1059,6 +1090,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.municipios = [];
         $scope.loader = false;
         $scope.step = 1;
+        $scope.busqueda_mapa = '';
         $scope.Instance = Instance.data;
         $scope.is_submit = 0;
         $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png';
@@ -1067,17 +1099,13 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.galery_ids = [];
         $scope.preview_galery = [];
         $scope.servicios = [];
-        $scope.mapa = '';
-        var Mapa = '';
         var params = {};
         $scope.Model = {};
 
         $scope.set_step = function(step){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
             $scope.step = step;
-            if(step === 4){
-                $scope.bind_mapa($scope.mapa);
-            }
+        
         }
 
         $scope.add_galery = function(){
@@ -1114,7 +1142,6 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             
         };
 
-
         function uploadImage(image) {
             var data = new FormData();
             data.append("files",image);
@@ -1139,17 +1166,13 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
 
         params =  { action: 'serlib_users_info', post_type: 'post', id_featured: 0 };
         
-        $scope.bind_mapa = function(mapa){
-            Mapa = mapa;
-            document.querySelector('#mapa').innerHTML = mapa;
-        }
-
         if($scope.Instance.post){
             $scope.Model = $scope.Instance.post;  
             if($scope.Model.thumbnail) $scope.featured = $scope.Model.thumbnail;
-            if($scope.Model.mapa_negocio) $scope.mapa = $scope.Model.mapa_negocio;
+            if($scope.Model.mapa_negocio) $scope.busqueda = $scope.Model.mapa_negocio;
             if($scope.Model.galery_ids){ 
                 $scope.galery = $scope.Model.galery_ids;
+                $scope.galery_ids = angular.copy($scope.Model.galery_ids);
                 for(var i = 0; i < $scope.Model.galery.length; i++){
                  
                     $scope.preview_galery.push(($scope.Model.galery[i]));
@@ -1172,43 +1195,45 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.submitFiles = function(){
             
             if($scope.is_submit !== 0) return;
-            
+           
             $scope.is_submit = 1;
             $scope.loader = true;
 
             var promises = 0;
+            var featured = false;
+            var files =  angular.copy($scope.galery).length;
+            var ids =  angular.copy($scope.galery_ids);
+            for(var i = 0; i < files; i++ ){
+               
+                if($scope.galery[i].name) {
+                   
+                    promises++;
+                    var formData = new FormData();
+                    formData.append('files', $scope.galery[i]);
+                    
+                    angular.element.ajax({
+                        type: 'POST',
+                        url: front_obj.ajax_url+'?action=serlib_uploader&destino=featured&order='+i,
+                        data: formData,
+                        contentType: false,
+                        cache: false,
+                        processData:false,
+                        success: function(response){
 
-            for(var i = 0; i < $scope.galery.length; i++ ){
-                if($scope.galery[i].name) promises++;
-            }
+                            if(response.success){
+                                ids[response.success.order] = response.success.id;
+                            }
 
-            for(var i = 0; i < $scope.galery.length; i++ ){
-                var formData = new FormData();
-                formData.append('files', $scope.galery[i]);
-            
-                angular.element.ajax({
-                    type: 'POST',
-                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=featured',
-                    data: formData,
-                    contentType: false,
-                    cache: false,
-                    processData:false,
-                    success: function(response){
-                        if(response.success){
-                            $scope.galery_ids.push(response.success);
-                        }else if(response.data.error){
-                            $scope.error =  response.error; 
-                        }
+                            finally_promises();
                         
-                        finally_promises();
-                       
-                    },
-                    error: function(error){
-                        $scope.error =  error; 
-                       
-                        finally_promises();
-                    }
-                });
+                        },
+                        error: function(error){
+                            $scope.error =  error; 
+                        
+                            finally_promises();
+                        }
+                    });
+                }
             }
 
             if(hasValue($scope.featured_file) ){
@@ -1227,7 +1252,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
                     processData:false,
                     success: function(response){
                         if(response.success){
-                            $scope.submit(response.success);
+                            featured = response.success;
                         }else if(response.data.error){
                             $scope.error =  response.error; 
                         }
@@ -1246,9 +1271,9 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
 
 
             function finally_promises(){
-                 promises--;
-                 if(promises < 1){
-                       $scope.submit();
+                promises--;
+                 if(promises === 0){
+                       $scope.submit(featured, ids);
                  }
             }
             
@@ -1258,15 +1283,16 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         /**Validaciones de campos no llenos imagen destacada poder subir inmagenes si es comerciante si no colcoar un limite 
          * lo podemos hacer en la funcion de subir imagenes 
         */    
-        $scope.submit = function(id_featured = false){
-          
+        $scope.submit = function(id_featured = false, galery_ids){
+         
             if(id_featured){
                 params.id_featured = id_featured;
             }    
+          
             var obj =  {
-                        servicios: angular.copy($scope.servicios) ,
-                        galery_ids: angular.copy($scope.galery_ids) ,
-                        mapa: Mapa 
+                        servicios: angular.copy($scope.servicios),
+                        galery_ids: galery_ids,
+                        mapa: angular.copy($scope.busqueda)
                     }; 
         
             var data = angular.merge(angular.copy($scope.Model), obj) ;
@@ -1303,6 +1329,8 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             });
 
         }
+
+      
 
 
 }]);

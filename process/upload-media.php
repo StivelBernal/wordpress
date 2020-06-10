@@ -57,6 +57,12 @@ function serlib_uploader(){
                 update_user_meta( $_GET['id'], 'file_document', $new_file_path );
             }
             
+            if(isset($_GET["order"])){
+                
+                $output  =    [ 'success' => ["id" => $upload_id, "order" => $_GET["order"] ] ];
+           
+            }   
+            
             if($_GET["destino"] === 'image'){
                 echo wp_get_attachment_image_src($upload_id)[0];
             }else{

@@ -2,7 +2,7 @@
 
 // WordPress environment
 require('../../../../../../wp-load.php' );
-
+echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false );
 echo'
 <div md-virtual-repeat-container>
 
@@ -25,8 +25,9 @@ echo'
                 <strong><a ng-href="{{object.permalink}}" target="_blank">{{object.post_title}} <br>( {{ object.post_status === 'pending' ?'<?php echo __('Pendiente', 'serlib'); ?>': '<?php echo __('Publicada', 'serlib'); ?>' }} )</a></strong>
                 <strong class="date">{{object.post_date }}</strong>
 
-                <div style="width:50px">
-                    <span ui-sref="negocios.update({ID: object.ID})" class="dashicons btnn-edit dashicons-edit-large"></span>
+                <div class="row">
+                    <span title="<?php echo __('editar', 'serlib'); ?>"  ui-sref="negocios.update({ID: object.ID})" class="dashicons btnn-edit dashicons-edit-large"></span>
+                    <span title="<?php echo __('eliminar', 'serlib'); ?>"   ng-click="delete({ID: object.ID})" class="dashicons btnn-delete dashicons-trash"></span>
                 </div>
             </div>
             
