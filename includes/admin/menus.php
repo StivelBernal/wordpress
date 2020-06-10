@@ -6,8 +6,8 @@ include( 'pages/states.php' );
    
 function serlib_admin_menus(){
   add_menu_page(
-    'Ser Options',
-    'Ser Options',
+    'Fovea Options',
+    'Fovea Options',
     'edit_theme_options',
     'serlib_plugin_opts',
     'serlib_plugin_opts_page',

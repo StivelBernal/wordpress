@@ -1131,19 +1131,17 @@ display: block;
 
 }
 
-.menu_user_top img{
+.menu_user_top.menu_user_top img{
     height: 30px;
     width: 33px;
     border-radius:50%;
     border:1px solid white;
-    margin-right: 5px;
+    margin-right: 7px;
     margin-top:2px;
     margin-bottom:2px;
 
 }
 
-.menu_user_top a{
-    
-    margin-right: 5px;
-
+.menu_user_top_login .separator, .menu_user_top .separator{
+    margin:0 6px;
 }

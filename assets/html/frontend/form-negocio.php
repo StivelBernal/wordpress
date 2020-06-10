@@ -147,13 +147,15 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
         
         <div style="padding:30px;" class="s-50">  
         
-            <h4>'.__('Usa el siguiente campo de texto para buscar tu negocio', 'serlib').'</h4>
-            <input type="text" ng-model="busqueda" ng-change="set_map_search()" placeholder="'.__('Buscar ubicación', 'serlib').'">
+            <h4>'.__('Incrustra aqui el mapa  de ubicación de tu negocio', 'serlib').'</h4>
+            
+            <textarea style="width:100%;" class="s-100" ng-model="busqueda" ng-change="set_map_search(busqueda)" placeholder="'.__('Pega aqui el codigo de google maps', 'serlib').'"rows="6"></textarea>
            
         </div>
 
-        <div class="s-50" style="padding:30px;">
-            <iframe width="600" height="500" id="gmap_canvas"';?> ng-src="{{ 'https://maps.google.com/maps?q='+(busqueda ?  busqueda: 'golfo%20de%20morrosquillo' )+'&t=&z=9&ie=UTF8&iwloc=&output=embed'}}" <?php echo'frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>           
+        <div class="s-50" style="padding:30px;" id="mapa">
+             <iframe width="600" height="500" id="gmap_canvas"';?> src=https://maps.google.com/maps?q=golfo%20de%20morrosquillo&t=&z=9&ie=UTF8&iwloc=&output=embed'}}" <?php echo'frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>           
+               
         </div>
         
     </div>

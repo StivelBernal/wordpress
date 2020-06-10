@@ -62,15 +62,20 @@ function menu_top_user_shortcode(){
           
         return '<div class="row center-center menu_user_top">
                     <a  href="/mi-cuenta">
-                    <img src="'.$user_photo.'" ></a>
+                        <img src="'.$user_photo.'" ></a>
                     <a  href="/mi-cuenta">
-                  <p>'.__('Mi Cuenta', 'serlib').'</p></a>
-                  <p>'.wp_loginout(home_url( '/') , false ).'</p>
+                    <p>'.__('Mi Cuenta', 'serlib').'</p></a>
+                    <span class="separator">|</span>
+                    <p>'.wp_loginout(home_url( '/') , false ).'</p>
                    
                 </div>';
     }else{
         
-        return '<div class="menu_user_top_login row center-center"> <a href="/auth"> <p style="margin-right:6px;">'.__('Ingresar').'</a></p> | <a href="/auth/register"><p style="margin-left:6px;"> '.__('Registrarse').'</p></a></div>';
+        return '<div class="menu_user_top_login row center-center"> 
+                    <a href="/auth"> <p>'.__('Ingresar').'</a> </p>
+                    <span class="separator">|</span> 
+                    <a href="/auth/register"><p> '.__('Registrarse').'</p></a>
+                </div>';
     }
 
 }

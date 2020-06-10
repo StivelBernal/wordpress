@@ -3,24 +3,23 @@
 // WordPress environment
 require('../../../../../../wp-load.php' );
 echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false );
-echo'
+?>
 <div md-virtual-repeat-container>
 
     <div class="row toolbar-actions">
-        <h2 md-truncate="" flex="">'.__('PUBLICACIONES', 'serlib').'</h2>
+        <h2 md-truncate="" flex=""><?php echo __('PUBLICACIONES', 'serlib'); ?></h2>
         <div class="s-flex"></div>
-        <md-button  ui-sref="publicaciones.create">
-            '.__('Agregar Nueva', 'serlib').'
-        </md-button>
+        <md-button ng-if="rol === 'turista'" ui-sref="publicaciones.create"><?php echo __('Agregar Nueva', 'serlib'); ?></md-button>
+        <md-button ng-if="rol !== 'turista'" ui-sref="articulos.create"><?php echo __('Agregar Nuevo', 'serlib'); ?></md-button>   
     </div>
-';
-?>
+
     <div class="crud-wrapper">
         <div class="item-wrapper">
             <strong class="s-flex uppercase"><?php echo __('Titulo', 'serlib'); ?></strong>
             <strong class="s-flex uppercase"><?php echo __('Extracto', 'serlib'); ?></strong>
             <strong class="s-flex uppercase text-center"><?php echo __('Imagen', 'serlib'); ?></strong>
-            <div style="width:50px"></div>
+            <strong class="s-10 uppercase text-center"><?php echo __('Acciones', 'serlib'); ?></strong>
+           
         </div>
 
         <div class="item-wrapper" md-virtual-repeat="object in ObjectList">
@@ -33,10 +32,11 @@ echo'
             <div class="s-flex text-center"> 
                 <img ng-src="{{object.thumbnail ? object.thumbnail: '/wp-content/plugins/ser_lib/assets/img/images.png'}}" width="80px">
             </div>
-            <div style="width:50px" >
-                <span title="<?php echo __('editar', 'serlib'); ?>" ui-sref="publicaciones.update({ID: object.ID})" class="dashicons btnn-edit dashicons-edit-large"></span>
-                <span title="<?php echo __('eliminar', 'serlib'); ?>"   ng-click="delete({ID: object.ID})" class="dashicons btnn-delete dashicons-trash"></span>
-            
+            <div class="s-10 text-center" >
+                <span ng-if="rol === 'turista'" title="<?php echo __('editar', 'serlib'); ?>" ui-sref="publicaciones.update({ID: object.ID})" class="dashicons btnn-edit "><i class="fa fa-pencil"></i></span>
+                <span ng-if="rol !== 'turista'" title="<?php echo __('editar', 'serlib'); ?>" ui-sref="articulos.update({ID: object.ID})" class="dashicons btnn-edit "><i class="fa fa-pencil"></i></span>
+                <span title="<?php echo __('eliminar', 'serlib'); ?>"   ng-click="delete({ID: object.ID})" class="dashicons btnn-delete"> <i class="fa fa-trash-o"></i></span>
+               
             </div>
         </div>
     </div>

@@ -278,6 +278,125 @@ function serlib_users_info(){
         }
     }
 
+
+    if($rol === 'alcaldia' || $rol === 'gobernacion'){
+
+        if( $method == 'GET' ){
+            
+            if( isset($_GET['ID']) && is_numeric($_GET['ID']) ){
+            
+                $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE post_author = '.$user->ID.'  AND ID = '.$_GET['ID'].'';
+                $results['post'] =  $wpdb->get_row( $query );
+                $terms = get_the_terms( $results['post']->ID , 'category', 'term_id' );             
+                
+                for($i = 0; $i < count($terms); $i++ ) { 
+                    $terms[$i] = $terms[$i]->term_id;
+                }
+
+                $tipos_entradas = get_the_terms( $results['post']->ID , 'tipos_entradas', 'term_id' );
+                
+                for($i = 0; $i < count($tipos_entradas); $i++ ) { 
+                    $tipos_entradas[$i] = $tipos_entradas[$i]->term_id;
+                }
+
+                $results['post']->thumbnail = get_the_post_thumbnail_url($results['post']->ID);
+
+                $results['post']->post_category = $terms;
+
+                $results['post']->tipo_entrada = $tipos_entradas;
+
+            }else if( isset($_GET['post_type']) ){
+            
+                $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE post_author = '.$user->ID.'  AND (post_type = "post") ORDER BY post_date DESC';
+                $results['posts'] =  $wpdb->get_results( $query );
+               
+                for($i = 0; $i < count($results['posts']); $i++){
+                    $results['posts'][$i]->thumbnail = get_the_post_thumbnail_url($results['posts'][$i]->ID);
+                    $results['posts'][$i]->permalink = get_permalink($results['posts'][$i]->ID);
+                }  
+                
+            }
+            
+            if( isset($_GET['municipios'] )){
+            
+                $results['municipios'] = get_terms([
+                    'hide_empty' => false,
+                    'order' => 'DESC',
+                    'taxonomy' => 'category' ]);
+                
+            }
+
+            if( isset($_GET['tipos'] )){
+                
+                $tipos_alcaldia = ['emergencias', 'transporte' ];
+                $arrayTaxAlcaldia = [];
+                $results['tipos'] = get_terms([
+                    'hide_empty' => false,
+                    'order' => 'DESC',
+                    'taxonomy' => 'tipos_entradas' ]);
+                    
+                for( $i = 0; $i < count($results['tipos']); $i++ ){
+                    
+                    if( in_array( $results['tipos'][$i]->slug, $tipos_alcaldia ) ) { 
+                        //var_dump(in_array( $results['tipos'][$i]->slug, $tipos_alcaldia));
+                        array_push($arrayTaxAlcaldia,  $results['tipos'][$i] );
+                    }
+                }
+
+                $results['tipos'] = $arrayTaxAlcaldia;
+            }
+        
+        }
+
+        if( $method == 'POST' ){
+    
+            $objDatos = json_decode(file_get_contents("php://input"));
+            
+            $results = [ 'status' => 1 ];
+        
+            if( empty($objDatos->post_title) ){
+                wp_send_json( $results );
+            }
+
+            $title  =   sanitize_text_field( $objDatos->post_title );
+            $content    =   wp_kses_post( $objDatos->post_content );
+                        
+            if (is_array($objDatos->post_category)) {
+                foreach ($objDatos->post_category as $key => $cat ) {
+                    $cat = esc_attr($cat);
+                }
+            } else {
+                $objDatos->post_category = esc_attr($objDatos->post_category);
+            }
+        
+            $post_id                        =   wp_insert_post([
+                'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
+                'post_content'                =>    $content,
+                'post_name'                   =>    $title,
+                'post_title'                  =>    $title,
+                'post_status'                 =>    'published',
+                'post_type'                   =>    'post'
+            ]);
+
+            if( !is_wp_error($post_id) ){
+
+                wp_set_post_terms($post_id, $objDatos->post_category, 'category');
+                wp_set_post_terms($post_id, $objDatos->tipo_entrada, 'tipos_entradas');
+
+                  
+                if( isset($_GET['id_featured']) && $_GET['id_featured'] !== 0 ){
+                    require_once( ABSPATH . 'wp-admin/includes/image.php' );
+                    set_post_thumbnail( $post_id, absint($_GET['id_featured']) );
+                }
+                
+                $results['status']  =   2;
+                $results['id']  =   $post_id;
+                $results['permalink'] = get_permalink( $post_id );
+            }
+
+        }
+    }
+
     if( $method == 'DELETE' ){
         $objDatos = json_decode(file_get_contents("php://input"));
         $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';

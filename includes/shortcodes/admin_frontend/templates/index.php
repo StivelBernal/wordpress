@@ -26,19 +26,19 @@
                         </ul>
                     </li>
 
-                    <li ng-if="rol === 'alcaldia'" class="menu"  ui-sref-active="{'active': 'publicaciones'}" aria-hidden="false">
+                    <li ng-if="rol === 'alcaldia'" class="menu"  ui-sref-active="{'active': 'articulos'}" aria-hidden="false">
                         <div  class="title">PUBLICACIONES</div>
                         <ul class="submenu">
-                            <li ><a ui-sref-active="{'active': 'publicaciones.all'}" ui-sref="publicaciones.all">Publicaciones alcaldia</a></li>
-                            <li ><a ui-sref-active="{'active': 'publicaciones.create'}" ui-sref="publicaciones.create">Agregar nueva</a></li>
+                            <li ><a ui-sref-active="{'active': 'articulos.all'}" ui-sref="articulos.all">Publicaciones alcaldia</a></li>
+                            <li ><a ui-sref-active="{'active': 'articulos.create'}" ui-sref="articulos.create">Agregar nueva</a></li>
                         </ul>
                     </li>
 
-                    <li ng-if="rol === 'gobernacion'" class="menu"  ui-sref-active="{'active': 'publicaciones'}" aria-hidden="false">
+                    <li ng-if="rol === 'gobernacion'" class="menu"  ui-sref-active="{'active': 'articulos'}" aria-hidden="false">
                         <div  class="title">PUBLICACIONES</div>
                         <ul class="submenu">
-                            <li ><a ui-sref-active="{'active': 'publicaciones.all'}" ui-sref="publicaciones.all">Publicaciones gobernación </a></li>
-                            <li ><a ui-sref-active="{'active': 'publicaciones.create'}" ui-sref="publicaciones.create">Agregar nueva</a></li>
+                            <li ><a ui-sref-active="{'active': 'articulos.all'}" ui-sref="articulos.all">Publicaciones gobernación </a></li>
+                            <li ><a ui-sref-active="{'active': 'articulos.create'}" ui-sref="articulos.create">Agregar nueva</a></li>
                         </ul>
                     </li>
 

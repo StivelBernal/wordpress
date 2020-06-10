@@ -26,8 +26,8 @@ echo'
                 <strong class="date">{{object.post_date }}</strong>
 
                 <div class="row">
-                    <span title="<?php echo __('editar', 'serlib'); ?>"  ui-sref="negocios.update({ID: object.ID})" class="dashicons btnn-edit dashicons-edit-large"></span>
-                    <span title="<?php echo __('eliminar', 'serlib'); ?>"   ng-click="delete({ID: object.ID})" class="dashicons btnn-delete dashicons-trash"></span>
+                    <span title="<?php echo __('editar', 'serlib'); ?>"  ui-sref="negocios.update({ID: object.ID})" class="dashicons btnn-edit "><i class="fa fa-pencil"></i></span>
+                    <span title="<?php echo __('eliminar', 'serlib'); ?>"   ng-click="delete({ID: object.ID})" class="dashicons btnn-delete"> <i class="fa fa-trash-o"></i></span>
                 </div>
             </div>
             

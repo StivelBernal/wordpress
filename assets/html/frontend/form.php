@@ -64,13 +64,34 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
         </div>
 
         <div class="s-25 row-wrap center-start options-post" style="padding-right:20px; padding-top:45px;">
-          
-            <div class="s-100">
-                <div class="form-group s-flex">
-                    <label>'.__('Categorias', 'serlib').'</label>      
-                    <selector model="Model.post_category" name="categories" value-attr="term_id" Label-attr="name" multi="true" options="categories"></selector>
+            ';
+            if($roles === 'turista'){
+                echo ' 
+                <div class="s-100">
+                    <div class="form-group s-flex">
+                        <label>'.__('Categorias', 'serlib').'</label>      
+                        <selector model="Model.post_category" name="categories" value-attr="term_id" Label-attr="name" multi="true" options="categories"></selector>
+                    </div>
+                </div>';
+            }else if($roles === 'alcaldia' || $roles === 'gobernacion'){
+                echo'
+                <div class="s-100">
+                    <div class="form-group s-flex">
+                        <label>'.__('Municipio', 'serlib').'</label>      
+                        <selector model="Model.post_category" name="municipios" value-attr="term_id" Label-attr="name" options="municipios"></selector>
+                    </div>
                 </div>
-            </div>
+
+                <div class="s-100">
+                    <div class="form-group s-flex">
+                        <label>'.__('Categoria', 'serlib').'</label>      
+                        <selector model="Model.tipo_entrada" multi="true" name="tipo_entrada" value-attr="term_id" Label-attr="name" options="tipos"></selector>
+                    </div>
+                </div>
+                ';
+            }
+            echo '
+           
             <div class="s-100 ">       
                 <label>'.__('Imagen destacada','serlib').'</label>
                 <div class="destacada-image-container">

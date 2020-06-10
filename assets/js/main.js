@@ -866,6 +866,56 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
                 Config:  () => { return { redirectTo: 'negocios.all'}; }
             }
         })
+        
+        .state('articulos', {
+            abstract: true,
+            url: "/articulos",
+            template: '<ui-view/>'
+        })
+        .state('articulos.all', {
+            url: "/all",
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/all-post.php',
+            controller: 'BaseCrud',
+            resolve: {
+                Posts: ['$http', function ($http) {
+                    return  $http({
+                                    method: 'GET',
+                                    params: { action: 'serlib_users_info', 'post_type': 'post'},
+                                    url:    front_obj.ajax_url,
+                                });
+                }] 
+            }
+        })
+        .state('articulos.create', {
+            url: "/form",
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
+            controller: 'BaseFormGobierno',
+            resolve: {
+                Instance: ['$stateParams', '$http', function ($stateParams, $http) {
+                    return $http({
+                        method: 'GET',
+                        params: { action: 'serlib_users_info', tipos: 'all',  municipios: 'all'},
+                        url:    front_obj.ajax_url,
+                    });
+                }],
+                Config:  () => { return { redirectTo: 'articulos.all'}; }
+            }
+        })
+        .state('articulos.update', {
+            url: '/form/:ID',
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
+            controller: 'BaseFormGobierno',
+            resolve: {
+                Instance: ['$stateParams', '$http', function ($stateParams, $http) {
+                    return  $http({
+                                method: 'GET',
+                                params: { action: 'serlib_users_info',  tipos: 'all',  municipios: 'all', post_type: 'post', ID: $stateParams.ID },
+                                url:    front_obj.ajax_url,
+                            });
+                }],
+                Config:  () => { return { redirectTo: 'articulos.all'}; }
+            }
+        })
         .state('profile', {
             url: "/profile",
             templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/profile.php',
@@ -896,7 +946,7 @@ admin_frontend.controller('AppCtrl', ['$scope',
 
 admin_frontend.controller('BaseCrud', ['$scope', 'Posts', '$http',
     function BaseCrud($scope, Posts,  $http ) {
-        
+    $scope.rol =  userinfo.rol;
     $scope.ObjectList = Posts.data.posts;
 
     $scope.delete = function(ID){
@@ -1083,6 +1133,169 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
 
 }]);
 
+admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'Instance', '$http',
+    function BaseFormGobierno($scope, $state, Config, Instance, $http) {
+        
+        $scope.tipos = [];
+        $scope.municipios = [];
+        $scope.loader = false;
+        $scope.Instance = Instance.data;
+        $scope.is_submit = 0;
+        $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png'
+        
+        var params = {};
+        $scope.Model = {};
+
+        $scope.options = {
+            height: 450,
+            shortcuts: false,
+            lang: "es-ES",
+            placeholder: '...',
+            dialogsInBody: true,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+               
+            ],
+            callbacks : {
+                onImageUpload: function(image) {
+                    uploadImage(image[0]);
+                }
+            }
+            
+        };
+
+
+        function uploadImage(image) {
+            var data = new FormData();
+            data.append("files",image);
+          
+            angular.element.ajax({
+                type: 'POST',
+                url: front_obj.ajax_url+'?action=serlib_uploader&destino=image',
+                data: data,
+                contentType: false,
+                cache: false,
+                processData:false,
+                success: function(url) {
+                    
+                    $('#summernote').summernote('editor.insertImage', url);
+
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        }
+
+
+        params =  { action: 'serlib_users_info', post_type: 'post', id_featured: 0 };
+        
+        if($scope.Instance.post){
+            $scope.Model = $scope.Instance.post;  
+            if($scope.Model.thumbnail) $scope.featured = $scope.Model.thumbnail;
+            
+        }
+
+
+        $scope.tipos = $scope.Instance.tipos;
+        $scope.municipios = $scope.Instance.municipios;
+
+        /**Subida de archivos */
+        $scope.submitFiles = function(){
+            
+            if($scope.is_submit !== 0) return;
+           
+            $scope.is_submit = 1;
+            $scope.loader = true;
+
+            if(hasValue($scope.featured_file) ){
+                                
+                var formData = new FormData();
+                formData.append('files', $scope.featured_file);
+            
+                angular.element.ajax({
+                    type: 'POST',
+                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=featured',
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(response){
+                        if(response.success){
+                            $scope.submit(response.success);
+                        }else if(response.data.error){
+                            $scope.error =  response.error; 
+                            $scope.submit();
+
+                        }
+                       
+                    },
+                    error: function(error){
+                        $scope.error =  error; 
+                        $scope.submit();
+                    }
+                });
+
+            }else{
+                $scope.submit();
+            }
+            
+        }
+
+
+        /**Validaciones de campos no llenos imagen destacada poder subir inmagenes si es comerciante si no colcoar un limite 
+         * lo podemos hacer en la funcion de subir imagenes 
+        */    
+        $scope.submit = function(id_featured = false){
+          
+            if(id_featured){
+                params.id_featured = id_featured;
+            }    
+        
+            var data = angular.copy($scope.Model);
+            data._wpnonce = angular.element('#_wpnonce').val();
+            
+            $http({
+                method: 'POST',
+                params: params,
+                url:    front_obj.ajax_url,
+                data: data
+            }).then(function successCallback(response) {
+                
+                if(response.data.status === 1 ){
+                    $scope.error = true;
+                }
+                if(response.data.status === 2 ){
+                   /// response.data.status
+                    $scope.revition = true;
+                    $state.go(Config.redirectTo);
+                    /**Ahi que enviar a la url de edicion */
+                }
+                if(response.data.status === 3 ){
+                    $scope.send = true;
+                }
+                $scope.loader = false;
+                $scope.is_submit = 0;
+                
+
+            }, function errorCallback(error) {
+                $scope.loader = false;
+                $scope.is_submit = 0;
+                $scope.error =  error.data;            
+            });
+
+        }
+
+
+}]);
+
 admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Instance', '$http',
     function FormComerciante($scope, $state, Config, Instance, $http) {
         
@@ -1116,6 +1329,10 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.add_service = function(){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
             $scope.servicios.push({text: ''});
+        }
+
+        $scope.set_map_search = function(html){
+            document.querySelector('#mapa').innerHTML = html;
         }
 
         $scope.options = {
@@ -1169,7 +1386,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         if($scope.Instance.post){
             $scope.Model = $scope.Instance.post;  
             if($scope.Model.thumbnail) $scope.featured = $scope.Model.thumbnail;
-            if($scope.Model.mapa_negocio) $scope.busqueda = $scope.Model.mapa_negocio;
+            if($scope.Model.mapa_negocio) $scope.set_map_search($scope.Model.mapa_negocio);
             if($scope.Model.galery_ids){ 
                 $scope.galery = $scope.Model.galery_ids;
                 $scope.galery_ids = angular.copy($scope.Model.galery_ids);

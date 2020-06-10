@@ -157,7 +157,7 @@ function serlib_fovea_init(){
 	function modificar_post_label() {
 		global $menu;
 		global $submenu;
-		$menu[5][0] = 'Publicaciones Municipios';
+		$menu[5][0] = 'Publicaciones';
 		$submenu['edit.php'][15][0] = 'Municipios';
 		echo '';
 	}
