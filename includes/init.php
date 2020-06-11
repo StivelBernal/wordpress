@@ -171,16 +171,16 @@ function serlib_fovea_init(){
 	if(isset($user->roles[0])){
 			
 		if( !in_array($user->roles[0], ['administrator', 'staff']) !== false){
+			
 			add_filter( 'show_admin_bar', '__return_false' );
+			
+			add_action( 'admin_init', 'restrict_admin_area_by_rol' );			
 			
 			function restrict_admin_area_by_rol(){
 				wp_redirect( site_url('404') );
 				exit;		
 				}
 			}
-
-			add_action( 'admin_init', 'restrict_admin_area_by_rol', 1 );			
-	
 	}
 	
 

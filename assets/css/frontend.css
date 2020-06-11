@@ -1132,6 +1132,20 @@ display: block;
 
 }
 
+.menu_user_top a, .menu_user_top p{
+    
+    color: #ffffff;
+    font-weight: 600;
+    
+}
+
+.menu_user_top a:hover, .menu_user_top p:hover{
+    
+    color: #000000;
+    font-weight: 600;
+    
+}
+
 .menu_user_top.menu_user_top img{
     height: 30px;
     width: 33px;
