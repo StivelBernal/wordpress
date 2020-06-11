@@ -169,10 +169,17 @@ function serlib_fovea_init(){
 	/**Quitamos el admin bar */
 	$user = wp_get_current_user();
 	if(isset($user->roles[0])){
-			//echo var_dump(in_array($user->roles[0], ['administrator', 'staff']));
+			
 		if( !in_array($user->roles[0], ['administrator', 'staff']) !== false){
 			add_filter( 'show_admin_bar', '__return_false' );
-		}
+			
+			function restrict_admin_area_by_rol(){
+				wp_redirect( site_url('404') );
+				exit;		
+				}
+			}
+
+			add_action( 'admin_init', 'restrict_admin_area_by_rol', 1 );			
 	
 	}
 	

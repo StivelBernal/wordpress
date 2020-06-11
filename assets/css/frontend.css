@@ -826,8 +826,8 @@ input[type=submit]{
 }
 #admin_frontend .toolbar-actions{
     font-size:16px;
-    background-color: black;
-    /*background-image: linear-gradient(360deg, #55a1ce, #3e76a7);*/
+    
+    background-image: linear-gradient(535deg, #4683a7 10%, #abce55 80%, #9aa581);
     color: #fff;
     padding:7px;
     align-items: center;
@@ -1048,7 +1048,7 @@ label.input-file-label{
     text-align: center;
 }
 #admin_frontend .toolbar-actions p.active_step{
-    color:#abce55;
+    color:#fff;
     padding-bottom: 5px;
     
 }
@@ -1063,9 +1063,10 @@ label.input-file-label{
 }
 
 #admin_frontend .toolbar-actions  button.finish:hover{
-    color: black;
-    background-color: #abce55;
-    border: 2px solid #abce55;
+    background-color: #4683a7;
+    color: white;
+    opacity: 0.97;
+    border: 2px solid #e2efc3;
 }
 
 .galery-image-container.more-images{
@@ -1144,4 +1145,14 @@ display: block;
 
 .menu_user_top_login .separator, .menu_user_top .separator{
     margin:0 6px;
+}
+#admin_frontend .toolbar-actions > a{
+    padding:0 15px;
+    border-radius:10px;
+}
+
+#admin_frontend .toolbar-actions > a:hover{
+    color:white;
+    background-color: #4780cad8;
+    
 }
