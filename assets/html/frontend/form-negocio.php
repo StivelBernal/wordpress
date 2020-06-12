@@ -17,13 +17,13 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 <div ng-if="loader" class="loader"><div class="ser-ripple"><div></div><div></div></div></div>
 </div>
 <div class="row toolbar-actions">
-    
+    {{hasValue(featured_file)}}
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 1}" ng-click="set_step(1)">'.$STEP1.'</p></div>
-    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 2}" ng-click="set_step(2)">'.$STEP2.'</p></div>
-    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 3}" ng-click="set_step(3)">'.$STEP3.'</p></div>
-    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 4}" ng-click="set_step(4)">'.$STEP4.'</p></div>
+    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 2}" ng-disabled="galery.length < 1" ng-click="set_step(2, (galery.length < 1))">'.$STEP2.'</p></div>
+    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 3}" ng-disabled="content.$invalid" ng-click="set_step(3, content.$invalid)">'.$STEP3.'</p></div>
+    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 4}" ng-disabled="servicios.length < 1" ng-click="set_step(4, (servicios.length < 1))">'.$STEP4.'</p></div>
     <div class="s-7"></div>
-    <md-button  class="s-flex" ng-class="{finish: step === 4}" ';  ?> ng-disabled=" step < 4 || (Model.post_title !== '' && !Model.post_title)" <?php echo 'ng-click="submitFiles()">
+    <md-button  class="s-flex" ng-class="{finish: step === 4}" ';  ?> ng-disabled=" step < 4 || (busqueda !== '' && !busqueda)" <?php echo 'ng-click="submitFiles()">
     {{ (Instance.post) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
     </md-button>
 </div>
@@ -34,7 +34,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
     <div ng-if="error">'.__('Hubo un error en su publicación', 'serlib').'</div>
 </div>
 
-<form>
+
 <div ng-if="step === 1">
 
     <div class="row-wrap"> 
@@ -67,7 +67,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 <div ng-show="step === 2">
 
-    <div class="row-wrap"> 
+    <form name="content" class="row-wrap"> 
         
         <div class="s-flex content-post">
             
@@ -75,28 +75,28 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                 <div class="form-group s-100">
                     <md-input-container  titulo-post">
                             <label>Nombre del negocio</label>
-                            <input class="md-primary" ng-model="Model.post_title" >
+                            <input class="md-primary" ng-model="Model.post_title"  required>
                     </md-input-container>
                 </div>
             </div>
             
-            <summernote config="options" id="summernote" ng-model="Model.post_content"></summernote>
+            <summernote config="options" id="summernote" ng-model="Model.post_content" required></summernote>
             
         </div>
-
+        
         <div class="s-25 row-wrap center-start options-post" style="padding-right:20px; padding-top:45px;">
         
             <div class="s-100">
                 <div class="form-group s-flex">
                     <label>'.__('Municipio', 'serlib').'</label>      
-                    <selector model="Model.post_category" name="municipios" value-attr="term_id" Label-attr="name" options="municipios"></selector>
+                    <selector model="Model.post_category" name="municipios" value-attr="term_id" Label-attr="name" require="true" options="municipios"></selector>
                 </div>
             </div>
 
             <div class="s-100">
                 <div class="form-group s-flex">
                     <label>'.__('Categoria', 'serlib').'</label>      
-                    <selector model="Model.tipo_entrada"  name="tipo_entrada" value-attr="term_id" Label-attr="name" options="tipos"></selector>
+                    <selector model="Model.tipo_entrada"  name="tipo_entrada" value-attr="term_id" Label-attr="name" require="true" options="tipos"></selector>
                 </div>
             </div>
 
@@ -113,7 +113,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             </div>
         </div>
 
-    </div>
+    </form>
 </div>
 
 <div ng-if="step === 3">

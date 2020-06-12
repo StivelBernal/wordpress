@@ -936,23 +936,27 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
     font-size: 0.9em;
 }
 
-.rounted-item, .mkdf-post-date-wrap, .input-holder, #post_reciente_alcaldia img, 
-.mkdf-team-image img, .mkdf-post-image img, input, .serlib-simple-item-image .fondo,
-.carrusel-destinos .swiper-container, .bttn, .selector-container, .selector-container label,
-div[ng-controller="loginController"], .socials-buttons-auth > div, .input-file-label { border-radius: 18px !important; }
-
 .mkdf-page-not-found input[type="search"]{
     border-radius: 10px 0 0 10px  !important; 
 
 
 }
 
-.mkdf-page-not-found button[type="submit"]{
+.mkdf-page-not-found input[type="search"]+button[type="submit"]{
     border-radius: 0 10px 10px 0  !important;
 }
-aside button[type="submit"]{
-    border-radius: 0 10px 10px 0  !important; 
+
+.input-holder{
+    overflow: hidden;
 }
+
+
+.rounted-item, .mkdf-post-date-wrap, .input-holder, #post_reciente_alcaldia img, 
+.mkdf-team-image img, .mkdf-post-image img, input, .serlib-simple-item-image .fondo,
+.carrusel-destinos .swiper-container, .bttn, .selector-container, .selector-container label,
+div[ng-controller="loginController"], .socials-buttons-auth > div, .input-file-label { border-radius: 18px !important; }
+
+
 .content-post{
     padding-top: 0;
     padding:20px;
@@ -1180,5 +1184,10 @@ display: block;
 #admin_frontend .toolbar-actions > a:hover{
     color:white;
     background-color: #4780cad8;
+    
+}
+
+p[disabled = "disabled"]{
+    opacity:0.6;
     
 }

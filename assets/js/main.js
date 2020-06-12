@@ -235,6 +235,16 @@ search_app.controller('formController', ['$scope', '$http',
 }]);
 
 
+var comercio_page_app = angular.module('comercio_page', [])
+   .controller('pageController', ['$scope', 
+    function pageController($scope) {
+    
+     $scope.tab = 1;
+    
+
+}]);
+
+
 var app = angular.module('serAuth', ['SER.selector', 'ngMaterial', 'ngMessages', 'SER.match', 'socialLogin', '720kb.datepicker'])
     .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
@@ -1315,10 +1325,11 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         var params = {};
         $scope.Model = {};
 
-        $scope.set_step = function(step){
+        $scope.set_step = function(step, invalid = true){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
-            $scope.step = step;
-        
+            if(!invalid){
+                $scope.step = step;
+            }
         }
 
         $scope.add_galery = function(){
