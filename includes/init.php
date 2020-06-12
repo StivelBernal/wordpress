@@ -89,8 +89,47 @@ function serlib_fovea_init(){
 			'capability_type'       =>  'post',
 			'has_archive'           =>  true,
 			'hierarchical'          =>  false,
-			'menu_position'         =>  5,
+			'menu_position'         =>  4,
 			'menu_icon'				=>  'dashicons-format-status',
+			'supports'              =>  [ 'title', 'editor', 'author', 'thumbnail', 'comments', 'excerpt' ],
+			'taxonomies'            =>  [],
+			'show_in_rest'          =>  true
+		)
+	);
+
+	$publicaciones_categorias = array( 
+		'name'                  =>    _x( 'Publicaciones categorias', 'post type general name publicaciones categorias', 'serlib' ),
+		'singular_name'         =>    _x( 'Categoria publicaciones', 'post type singular name publicaciones categorias', 'serlib' ),
+		'menu_name'             =>    _x( 'Categoria publicaciones', 'admin menu articulo', 'serlib' ),
+		'name_admin_bar'        =>    _x( 'Categoria publicaciones', 'Agregar nuevo en la admin bar categoria de publicaciones', 'serlib' ),
+		'add_new'               =>    _x( 'Agregar Nuevo', 'agregar nuevo articulo categoria de publicaciones', 'serlib' ),
+		'add_new_item'          =>    __( 'Agregar nuevo categoria', 'serlib' ),
+		'new_item'              =>    __( 'Nuevo categoria de publicaciones', 'serlib' ),
+		'edit_item'             =>    __( 'Editar categoria de publicaciones', 'serlib' ),
+		'view_item'             =>    __( 'Ver categoria de publicaciones', 'serlib' ),
+		'all_items'             =>    __( 'Todos las categorias de publicaciones', 'serlib' ),
+		'search_items'          =>    __( 'Buscar categoria de publicaciones', 'serlib' ),
+		'parent_item_colon'     =>    __( 'Categoria de publicaciones principal:', 'serlib' ),
+		'not_found'             =>    __( 'Categoria de publicaciones no encontrada.', 'serlib' ),
+		'not_found_in_trash'    =>    __( 'No hay categorias de publicaciones en la papelera.', 'serlib' )
+	);	
+
+	register_post_type(
+		'post-categorias' , 
+		array(
+			'labels'                =>  $publicaciones_categorias,
+			'description'           =>  __( 'Categoria de publicaciones para subcategorizar a los municipios.', 'serlib' ),
+			'public'                =>  true,
+			'publicly_queryable'    =>  true,
+			'show_ui'               =>  true,
+			'show_in_menu'          =>  true,
+			'query_var'             =>  true,
+			'rewrite'               =>  false,
+			'capability_type'       =>  'post',
+			'has_archive'           =>  true,
+			'hierarchical'          =>  false,
+			'menu_position'         =>  3,
+			'menu_icon'				=>  'dashicons-filter',
 			'supports'              =>  [ 'title', 'editor', 'author', 'thumbnail', 'comments', 'excerpt' ],
 			'taxonomies'            =>  [],
 			'show_in_rest'          =>  true
@@ -121,10 +160,7 @@ function serlib_fovea_init(){
 			'show_ui' => true,
 			'show_admin_column' => true,
 			'query_var' => true,
-			'rewrite' => array( 
-				'with_front' => false,      
-      			'hierarchical' => true  
-			)
+			'rewrite' => false
 		]
 	);
 	/**Definimos urls */
@@ -142,11 +178,11 @@ function serlib_fovea_init(){
 
 	function blog_category_permalink($permalink, $post_id, $leavename) { 
 		if (strpos($permalink, '%categorias_articulos%') === false) return $permalink;
-		
+		ECHO 'ALGO';
 		$post = get_post($post_id); if (!$post) return $permalink;
 		$terms = wp_get_object_terms($post->ID, 'categorias_articulos');
 		if ( !is_wp_error($terms) && !empty($terms) && is_object($terms[0]) ) $taxonomy_slug = $terms[0]->slug;
-		else $taxonomy_slug = 'sin-categoria';
+		else $taxonomy_slug = 'sin-catFGegoria';
 		return str_replace('%categorias_articulos%', $taxonomy_slug, $permalink); 
 	}
 
@@ -166,7 +202,7 @@ function serlib_fovea_init(){
 
 
 
-	/**Quitamos el admin bar */
+	
 	$user = wp_get_current_user();
 	if(isset($user->roles[0])){
 			
@@ -174,14 +210,22 @@ function serlib_fovea_init(){
 			
 			add_filter( 'show_admin_bar', '__return_false' );
 			
-			add_action( 'admin_init', 'restrict_admin_area_by_rol' );			
+			/**Solo permitimos las peticiones ajax al admin */
 			
+			if(strpos($_SERVER['REQUEST_URI'], '/wp-admin/admin-ajax.php') === false){
+				
+				add_action( 'admin_init', 'restrict_admin_area_by_rol' );
+
+			}
+
 			function restrict_admin_area_by_rol(){
 				wp_redirect( site_url('404') );
 				exit;		
-				}
 			}
+					
+				
+		}
+		
 	}
-	
 
 }
