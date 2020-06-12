@@ -941,6 +941,18 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
 .carrusel-destinos .swiper-container, .bttn, .selector-container, .selector-container label,
 div[ng-controller="loginController"], .socials-buttons-auth > div, .input-file-label { border-radius: 18px !important; }
 
+.mkdf-page-not-found input[type="search"]{
+    border-radius: 10px 0 0 10px  !important; 
+
+
+}
+
+.mkdf-page-not-found button[type="submit"]{
+    border-radius: 0 10px 10px 0  !important;
+}
+aside button[type="submit"]{
+    border-radius: 0 10px 10px 0  !important; 
+}
 .content-post{
     padding-top: 0;
     padding:20px;
