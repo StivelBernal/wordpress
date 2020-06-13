@@ -1319,6 +1319,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png';
         $scope.preview_default = '../wp-content/plugins/ser_lib/assets/img/images.png';
         $scope.galery = [];
+        $scope.busqueda = 'golfo%20de%20morrosquillo';
         $scope.galery_ids = [];
         $scope.preview_galery = [];
         $scope.servicios = [];
@@ -1339,12 +1340,15 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
 
         $scope.add_service = function(){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
-            $scope.servicios.push({text: ''});
+            $scope.servicios.push({title: '', text: '', valor: ''});
         }
 
-        $scope.set_map_search = function(html){
-            document.querySelector('#mapa').innerHTML = html;
+        $scope.set_map_src = function(src){
+            if(src === '') src = 'golfo%20de%20morrosquillo';
+            $scope.busqueda = src;
+        
         }
+
 
         $scope.options = {
             height: 450,
@@ -1397,7 +1401,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         if($scope.Instance.post){
             $scope.Model = $scope.Instance.post;  
             if($scope.Model.thumbnail) $scope.featured = $scope.Model.thumbnail;
-            if($scope.Model.mapa_negocio) $scope.set_map_search($scope.Model.mapa_negocio);
+            if($scope.Model.mapa_negocio) $scope.busqueda = $scope.Model.mapa_negocio;
             if($scope.Model.galery_ids){ 
                 $scope.galery = $scope.Model.galery_ids;
                 $scope.galery_ids = angular.copy($scope.Model.galery_ids);
@@ -1417,7 +1421,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
 
         $scope.tipos = $scope.Instance.tipos;
         $scope.municipios = $scope.Instance.municipios;
-
+        $scope.mapa_option = $scope.Instance.mapa_option;
         
         /**Subida de archivos */
         $scope.submitFiles = function(){

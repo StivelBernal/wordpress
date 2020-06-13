@@ -211,7 +211,8 @@ function serlib_users_info(){
 
                 $results['tipos'] = array_values($results['tipos']);
             }
-        
+
+              
         }
 
         if( $method == 'POST' ){
@@ -226,8 +227,7 @@ function serlib_users_info(){
 
             $title  =   sanitize_text_field( $objDatos->post_title );
             $content    =   wp_kses_post( $objDatos->post_content );
-            $objDatos->mapa = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $objDatos->mapa);
-            $mapa    =   wp_kses_post( $objDatos->mapa );
+            $mapa    =   sanitize_text_field( $objDatos->mapa );
             $servicios = [];
             
             if(!empty($objDatos->servicios)){
