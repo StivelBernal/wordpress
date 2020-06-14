@@ -1331,16 +1331,16 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             if(!invalid){
                 $scope.step = step;
             }
-        }
-
-        $scope.add_galery = function(){
-            /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
-            $scope.galery.push({text: ''});
-        }
+        }   
 
         $scope.add_service = function(){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
-            $scope.servicios.push({title: '', text: '', valor: ''});
+            $scope.servicios.push({title: '', text: '', price: ''});
+        }
+
+        $scope.delete_service = function(index){
+            /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
+            $scope.servicios.splice(index, 1);
         }
 
         $scope.set_map_src = function(src){
@@ -1401,7 +1401,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         if($scope.Instance.post){
             $scope.Model = $scope.Instance.post;  
             if($scope.Model.thumbnail) $scope.featured = $scope.Model.thumbnail;
-            if($scope.Model.mapa_negocio) $scope.busqueda = $scope.Model.mapa_negocio;
+            if($scope.Model.mapa_negocio){  $scope.busqueda_mapa = $scope.Model.mapa_negocio; $scope.busqueda = $scope.Model.mapa_negocio;}
             if($scope.Model.galery_ids){ 
                 $scope.galery = $scope.Model.galery_ids;
                 $scope.galery_ids = angular.copy($scope.Model.galery_ids);
@@ -1410,12 +1410,10 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
                     $scope.preview_galery.push(($scope.Model.galery[i]));
                 } 
             }
-            if($scope.Model.servicios_negocio){
-                
-                for(var i = 0; i < $scope.Model.servicios_negocio.length; i++){
-                    $scope.servicios.push({ text: $scope.Model.servicios_negocio[i] });
-                } 
-            } 
+            if($scope.Model.servicios){ 
+                $scope.servicios = $scope.Model.servicios;
+            }
+           
             
         }
 
@@ -1423,6 +1421,19 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.municipios = $scope.Instance.municipios;
         $scope.mapa_option = $scope.Instance.mapa_option;
         
+
+        $scope.add_galery = function(){
+            /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
+            $scope.galery.push({text: ''});
+        }
+
+        $scope.delete_image = function(index){
+            if(Instance) $scope.galery_ids.splice(index, 1);
+              $scope.galery.splice(index, 1);
+              $scope.preview_galery.splice(index, 1);
+        }
+
+
         /**Subida de archivos */
         $scope.submitFiles = function(){
             
@@ -1501,6 +1512,10 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
 
             }
 
+            if(promises === 0){
+                promises++;
+                finally_promises();
+            }
 
             function finally_promises(){
                 promises--;

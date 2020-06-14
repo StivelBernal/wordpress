@@ -954,7 +954,7 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
 .rounted-item, .mkdf-post-date-wrap, .input-holder, #post_reciente_alcaldia img, 
 .mkdf-team-image img, .mkdf-post-image img, input, .serlib-simple-item-image .fondo,
 .carrusel-destinos .swiper-container, .bttn, .selector-container, .selector-container label,
-div[ng-controller="loginController"], .socials-buttons-auth > div, .input-file-label { border-radius: 18px !important; }
+div[ng-controller="loginController"], .socials-buttons-auth > div, .input-file-label, textarea { border-radius: 18px !important; }
 
 
 .content-post{
@@ -1190,4 +1190,36 @@ display: block;
 p[disabled = "disabled"]{
     opacity:0.6;
     
+}
+
+
+.galery-image-container .btnn-delete{
+    position: absolute;
+    top: 20%;
+    padding: 10px;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.form-group textarea{
+    color: #303030;
+    background-color: #f9f9f9;
+    border: 1px solid #e1e1e1;
+    margin: 15px 0;
+    padding: 16px 24px 15px;
+    font-size: 14px;
+}
+
+.servicios-border {
+    border-bottom: 2px solid #b9b0b0;
+    margin: 0 10px 20px 10px;
+    padding-bottom:20px;
+}
+.delete-service{
+    background: red;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    float:right;
 }

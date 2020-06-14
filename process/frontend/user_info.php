@@ -151,8 +151,16 @@ function serlib_users_info(){
                     $results['post']->galery[$i] = wp_get_attachment_image_src($results['post']->galery_ids[$i])[0];
                 }
 
-                $results['post']->servicios_negocio = get_post_meta($results['post']->ID, 'servicios_negocio')[0];                
+                $results['post']->servicios = get_post_meta($results['post']->ID, 'servicios_negocio')[0];  
                 
+                
+                $results['post']->telefono = get_post_meta($results['post']->ID, 'telefono_negocio')[0];  
+                $results['post']->whatsapp = get_post_meta($results['post']->ID, 'whatsapp_negocio')[0];  
+                $results['post']->facebook = get_post_meta($results['post']->ID, 'facebook_negocio')[0];  
+                $results['post']->web = get_post_meta($results['post']->ID, 'web_negocio')[0];  
+                $results['post']->correo = get_post_meta($results['post']->ID, 'correo_negocio')[0];  
+                $results['post']->direccion = get_post_meta($results['post']->ID, 'direccion_negocio')[0];  
+              
                 for($i = 0; $i < count($terms); $i++ ) { 
                     $terms[$i] = $terms[$i]->term_id;
                 }
@@ -228,11 +236,19 @@ function serlib_users_info(){
             $title  =   sanitize_text_field( $objDatos->post_title );
             $content    =   wp_kses_post( $objDatos->post_content );
             $mapa    =   sanitize_text_field( $objDatos->mapa );
+            $telefono    =   sanitize_text_field( $objDatos->telefono );
+            $whatsapp    =   sanitize_text_field( $objDatos->whatsapp );
+            $facebook    =   sanitize_text_field( $objDatos->facebook );
+            $web    =   sanitize_text_field( $objDatos->web );
+            $correo    =   sanitize_text_field( $objDatos->correo );
+            $direccion    =   sanitize_text_field( $objDatos->direccion );
             $servicios = [];
             
             if(!empty($objDatos->servicios)){
                 for($i = 0; $i < count($objDatos->servicios); $i++){
-                    $servicios[$i] = sanitize_text_field($objDatos->servicios[$i]->text);
+                    $servicios[$i]->title = sanitize_text_field($objDatos->servicios[$i]->title);
+                    $servicios[$i]->text = sanitize_text_field($objDatos->servicios[$i]->text);
+                    $servicios[$i]->price = sanitize_text_field($objDatos->servicios[$i]->price);
                 }
             }
             
@@ -260,7 +276,13 @@ function serlib_users_info(){
                 wp_set_post_terms($post_id, $objDatos->post_category, 'category');
                 wp_set_post_terms($post_id, $objDatos->tipo_entrada, 'tipos_entradas');
                 
-            
+                update_post_meta( $post_id, 'telefono_negocio', $telefono );
+                update_post_meta( $post_id, 'whatsapp_negocio', $whatsapp );
+                update_post_meta( $post_id, 'facebook_negocio', $facebook );
+                update_post_meta( $post_id, 'web_negocio', $web );
+                update_post_meta( $post_id, 'correo_negocio', $correo );
+                update_post_meta( $post_id, 'direccion_negocio', $direccion );
+
                 update_post_meta( $post_id, 'galeria_negocio', $objDatos->galery_ids );
                 update_post_meta( $post_id, 'mapa_negocio', $mapa );
                 update_post_meta( $post_id, 'servicios_negocio', $servicios );

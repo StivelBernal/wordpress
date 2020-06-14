@@ -22,7 +22,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 3}" ng-disabled="content.$invalid" ng-click="set_step(3, content.$invalid)">'.$STEP3.'</p></div>
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 4}" ng-disabled="servicios.length < 1" ng-click="set_step(4, (servicios.length < 1))">'.$STEP4.'</p></div>
     <div class="s-7"></div>
-    <md-button  class="s-flex" ng-class="{finish: step === 4}" ';  ?> ng-disabled=" step < 4 || (busqueda !== '' && !busqueda)" <?php echo 'ng-click="submitFiles()">
+    <md-button  class="s-flex" ng-class="{finish: step === 4}" ';  ?> ng-disabled="content.$invalid || servicios.length < 1 || (busqueda !== '' && !busqueda)" <?php echo 'ng-click="submitFiles()">
     {{ (Instance.post) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
     </md-button>
 </div>
@@ -44,8 +44,11 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                 ?>
                     <div><img class="img-galeria"  ng-src="{{preview_galery[$index] ? preview_galery[$index]: preview_default}}"></div> 
                 <?php echo '
+                    <span title="eliminar" ng-click="delete_image($index)" class="dashicons btnn-delete " role="button" tabindex="0"> <i class="fa fa-trash-o"></i></span>
+             
                 </div>
-                <div class="form-group s-100">
+
+                 <div class="form-group s-100">
                     <label for="featured{{$index}}" class="input-file-label">{{ !galery[$index].name ? "'.__('Seleccionar imagen','serlib').'": galery[$index].name }} </label>      
                     <input class="input_file" type="file" ng-model="galery[$index]" indice="{{$index}}" preview-array="preview_galery" app-filereader accept="image/png, image/jpeg" app-filereader style="display:none;"  id="featured{{$index}}">
                 </div>
@@ -78,8 +81,40 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                     </md-input-container>
                 </div>
             </div>
-            
-            <summernote config="options" id="summernote" ng-model="Model.post_content" required></summernote>
+
+            <div class="row-wrap space-around-end""> 
+                <div class="s-49" > 
+                    <label>'.__('Telefono:', 'serlib').'</label>
+                    <input ng-model="Model.telefono"  type="text"  >
+                </div>
+                <div class="s-49" > 
+                    <label>'.__('Whatsapp:', 'serlib').'</label>
+                    <input ng-model="Model.whatsapp"  type="text"  >
+                </div>
+                <div class="s-49" > 
+                    <label>'.__('Facebook:', 'serlib').'</label>
+                    <input ng-model="Model.facebook"  type="text"  >
+                </div>
+
+                <div class="s-49" > 
+                    <label>'.__('Página web:', 'serlib').'</label>
+                    <input ng-model="Model.web"  type="text"  >
+                </div>
+
+                <div class="s-49" > 
+                    <label>'.__('Correo:', 'serlib').'</label>
+                    <input ng-model="Model.correo"  type="text"  >
+                </div>
+
+                <div class="s-49" > 
+                    <label>'.__('Dirección:', 'serlib').'</label>
+                    <input ng-model="Model.direccion"  type="text"  >
+                </div>
+
+
+            </div>
+
+            <summernote config="options" id="summernote" ng-model="Model.post_content" required>descripcion</summernote>
             
         </div>
         
@@ -115,25 +150,41 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
     </form>
 </div>
 
-<div ng-if="step === 3">
+<div ng-if="step === 3" style="padding:15px;">
     
     <div class="s-100 row ">       
                 
         <div class="service-image-container">
-            <div><button ng-click="add_service()">Agregar Servicio</button></div> 
+            <div><button ng-click="add_service()">'.__('Agregar Servicio', 'serlib').'</button></div> 
         </div>
 
     </div>
 
     <div class="row-wrap">        
-            
-        <div class="s-50" ng-repeat="servicio in servicios">       
+             
+        <div class="s-50 " ng-repeat="servicio in servicios" >       
             
             <div class="form-group s-100">
-                
+                <label>'.__('Titulo:', 'serlib').'</label>
+                <input ng-model="servicio.title"  placeholder="'.__('Titulo del servicio', 'serlib').'" type="text"  style="width:100%;" class="s-100" >
+            </div>
+            <div class="form-group s-100">
+                <label>'.__('Descripcion:', 'serlib').'</label>
                 <textarea rows="5" ng-model="servicio.text" indice="{{$index}}">
                 </textarea>
             </div>
+            <div class="form-group s-100 servicios-border">
+              
+                <div class="row space-around-end""> 
+                    <div class="s-field" > 
+                        <label>'.__('Precio:', 'serlib').'</label>
+                        <input ng-model="servicio.price"  placeholder="$ 0,00" type="text"  >
+                    </div>
+                    <button class="s-field delete-service" ng-click="delete_service($index)">'.__('Eliminar Servicio', 'serlib').'</button>
+                </div>
+              
+            </div>
+            
         </div>         
 
     </div>
