@@ -17,7 +17,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 </div>
 <div class="row toolbar-actions">
     {{hasValue(featured_file)}}
-    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 1}" ng-click="set_step(1)">'.$STEP1.'</p></div>
+    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 1}" ng-click="set_step(1, false)">'.$STEP1.'</p></div>
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 2}" ng-disabled="galery.length < 1" ng-click="set_step(2, (galery.length < 1))">'.$STEP2.'</p></div>
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 3}" ng-disabled="content.$invalid" ng-click="set_step(3, content.$invalid)">'.$STEP3.'</p></div>
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 4}" ng-disabled="servicios.length < 1" ng-click="set_step(4, (servicios.length < 1))">'.$STEP4.'</p></div>
@@ -91,14 +91,19 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                     <label>'.__('Whatsapp:', 'serlib').'</label>
                     <input ng-model="Model.whatsapp"  type="text"  >
                 </div>
-                <div class="s-49" > 
+                <div class="s-32" > 
                     <label>'.__('Facebook:', 'serlib').'</label>
                     <input ng-model="Model.facebook"  type="text"  >
                 </div>
 
-                <div class="s-49" > 
+                <div class="s-32" > 
                     <label>'.__('Página web:', 'serlib').'</label>
                     <input ng-model="Model.web"  type="text"  >
+                </div>
+
+                <div class="s-32" > 
+                    <label>'.__('Instagram:', 'serlib').'</label>
+                    <input ng-model="Model.instagram"  type="text"  >
                 </div>
 
                 <div class="s-49" > 

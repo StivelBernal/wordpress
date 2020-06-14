@@ -159,7 +159,8 @@ function serlib_users_info(){
                 $results['post']->facebook = get_post_meta($results['post']->ID, 'facebook_negocio')[0];  
                 $results['post']->web = get_post_meta($results['post']->ID, 'web_negocio')[0];  
                 $results['post']->correo = get_post_meta($results['post']->ID, 'correo_negocio')[0];  
-                $results['post']->direccion = get_post_meta($results['post']->ID, 'direccion_negocio')[0];  
+                $results['post']->direccion = get_post_meta($results['post']->ID, 'direccion_negocio')[0]; 
+                $results['post']->instagram = get_post_meta($results['post']->ID, 'instagram_negocio')[0];  
               
                 for($i = 0; $i < count($terms); $i++ ) { 
                     $terms[$i] = $terms[$i]->term_id;
@@ -242,6 +243,8 @@ function serlib_users_info(){
             $web    =   sanitize_text_field( $objDatos->web );
             $correo    =   sanitize_text_field( $objDatos->correo );
             $direccion    =   sanitize_text_field( $objDatos->direccion );
+            $instagram    =   sanitize_text_field( $objDatos->instagram );
+
             $servicios = [];
             
             if(!empty($objDatos->servicios)){
@@ -282,6 +285,7 @@ function serlib_users_info(){
                 update_post_meta( $post_id, 'web_negocio', $web );
                 update_post_meta( $post_id, 'correo_negocio', $correo );
                 update_post_meta( $post_id, 'direccion_negocio', $direccion );
+                update_post_meta( $post_id, 'instagram_negocio', $instagram );
 
                 update_post_meta( $post_id, 'galeria_negocio', $objDatos->galery_ids );
                 update_post_meta( $post_id, 'mapa_negocio', $mapa );
