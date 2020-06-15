@@ -128,7 +128,7 @@ function serlib_fovea_init(){
 			'capability_type'       =>  'post',
 			'has_archive'           =>  true,
 			'hierarchical'          =>  false,
-			'menu_position'         =>  3,
+			'menu_position'         =>  4,
 			'menu_icon'				=>  'dashicons-filter',
 			'supports'              =>  [ 'title', 'editor', 'author', 'thumbnail', 'comments', 'excerpt' ],
 			'taxonomies'            =>  [],

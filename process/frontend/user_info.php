@@ -249,6 +249,7 @@ function serlib_users_info(){
             
             if(!empty($objDatos->servicios)){
                 for($i = 0; $i < count($objDatos->servicios); $i++){
+                   
                     $servicios[$i]->title = sanitize_text_field($objDatos->servicios[$i]->title);
                     $servicios[$i]->text = sanitize_text_field($objDatos->servicios[$i]->text);
                     $servicios[$i]->price = sanitize_text_field($objDatos->servicios[$i]->price);
@@ -271,7 +272,8 @@ function serlib_users_info(){
                 'post_name'                   =>    $title,
                 'post_title'                  =>    $title,
                 'post_status'                 =>    'pending',
-                'post_type'                   =>    'post'
+                'post_type'                   =>    'post',
+                'comment_status'              =>    'open'
             ]);
 
             if( !is_wp_error($post_id) ){
@@ -394,15 +396,28 @@ function serlib_users_info(){
             } else {
                 $objDatos->post_category = esc_attr($objDatos->post_category);
             }
-        
-            $post_id                        =   wp_insert_post([
-                'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
-                'post_content'                =>    $content,
-                'post_name'                   =>    $title,
-                'post_title'                  =>    $title,
-                'post_status'                 =>    'published',
-                'post_type'                   =>    'post'
-            ]);
+            if($objDatos->post_category === 'emergencias'){
+                $post_id                        =   wp_insert_post([
+                    'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
+                    'post_content'                =>    $content,
+                    'post_name'                   =>    $title,
+                    'post_title'                  =>    $title,
+                    'post_status'                 =>    'published',
+                    'post_type'                   =>    'post',
+                    'comment_status'              =>    'closed'
+                 ]);
+            }else{
+                $post_id                        =   wp_insert_post([
+                    'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
+                    'post_content'                =>    $content,
+                    'post_name'                   =>    $title,
+                    'post_title'                  =>    $title,
+                    'post_status'                 =>    'published',
+                    'post_type'                   =>    'post',
+                    'comment_status'              =>    'closed'
+                 ]);
+            }
+            
 
             if( !is_wp_error($post_id) ){
 

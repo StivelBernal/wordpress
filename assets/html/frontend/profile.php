@@ -48,7 +48,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
             <div class="s-100">
                 <div class="form-group s-100">
-                    <label>'.__('Contraseña', 'serlib').'</label>
+                    <label>'.__('Nueva ontraseña', 'serlib').'</label>
                     <input class="md-primary" type="text" name="password"  ng-pattern="/^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])).{6,}$/" ng-model="Model.password" >
 
                     <div ng-messages="profile.password.$error">

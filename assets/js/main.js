@@ -38,7 +38,30 @@
               slidesPerView: 3
             }
         }
-    })
+    });
+
+    var mySwiper = new Swiper ('.swiper-container-comercio', {
+        speed: 400,
+        spaceBetween: 0,
+        loop: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false
+        },
+        speed: 500,
+        breakpoints: {
+            200: {
+              slidesPerView: 1
+            },
+            700: {
+              slidesPerView: 2
+            },
+            1000: {
+              slidesPerView: 3
+            }
+        }
+    });
+
   });
   if(document.querySelector('#search-results')){
     var offset = $('#search-results').offset().top;
@@ -698,6 +721,7 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
                         testApi();
                     }else{
                         $scope.error = 'hubo un error con facebook por favor intente nuevamente';
+                        $scope.is_submit = false;
                     }
                 }
 
