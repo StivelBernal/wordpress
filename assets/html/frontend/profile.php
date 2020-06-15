@@ -7,7 +7,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 <div ng-if="loader" class="loader"><div class="ser-ripple"><div></div><div></div></div></div>
 </div>
 
-<form>
+<form name="profile">
 
     <div class="row toolbar-actions">
         <h2 md-truncate="" flex="">'.__('PERFIL', 'serlib').'</h2>
@@ -49,7 +49,12 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             <div class="s-100">
                 <div class="form-group s-100">
                     <label>'.__('Contraseña', 'serlib').'</label>
-                    <input class="md-primary" type="text" ng-model="Model.password" >
+                    <input class="md-primary" type="text" name="password"  ng-pattern="/^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])).{6,}$/" ng-model="Model.password" >
+
+                    <div ng-messages="profile.password.$error">
+                        <div ng-message="pattern">'.__('La contraseña debe tener mas de 6 caracteres, mayusculas, minusculas y numeros').'</div>
+                    </div>
+
                 </div>
             </div>
             
