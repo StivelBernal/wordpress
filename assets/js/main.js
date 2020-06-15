@@ -929,12 +929,12 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
         .state('profile', {
             url: "/profile",
             templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/profile.php',
-            controller: 'BaseCrud'
+            controller: 'BaseProfile'
         })
         .state('root', {
             url: "",
             templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/profile.php',
-            controller: 'BaseCrud'
+            controller: 'BaseProfile'
         });
 
         $urlRouterProvider.otherwise("/profile");
@@ -948,8 +948,76 @@ admin_frontend.controller('AppCtrl', ['$scope',
     $scope.rol =  userinfo.rol;
     $scope.img_profile = userinfo.img_profile;
 
-      console.log('userinfo', userinfo);
+}]);
 
+admin_frontend.controller('BaseProfile', ['$scope', '$http',
+    function BaseProfile($scope, $http ) {
+        
+        $scope.Model =  userinfo;
+        var img_default = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
+        $scope.profile_photo = $scope.Model.img_profile ? $scope.Model.img_profile: img_default;
+        $scope.photo = []; 
+        var id =  $scope.Model.ID;
+        
+        
+        
+        $scope.submitFiles = function(){
+           
+            if( hasValue($scope.photo) &&  $scope.photo !== [] ) {
+                                
+                var formData = new FormData();
+                formData.append('files', $scope.photo);
+            
+                angular.element.ajax({
+                    type: 'POST',
+                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=photo_profile&id='+id,
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(response){
+                        if(response.success){
+                            
+                        }else if(response.data.error){
+                            $scope.error =  response.error; 
+                        }
+                        $scope.submit();
+                    },
+                    error: function(error){
+                        $scope.error =  error; 
+                        $scope.submit();
+                    }
+                });
+
+            }else{
+                $scope.submit();
+            }
+
+        }
+
+        $scope.submit = function(){
+
+            var params =  { action: 'serlib_users_info' };
+            var data = angular.copy($scope.Model);
+            data._wpnonce = angular.element('#_wpnonce').val();
+            $http({
+                method: 'PUT',
+                params: params,
+                url:    front_obj.ajax_url,
+                data: data
+            }).then(function successCallback(response) {
+                
+                $scope.loader = false;     
+                if(response.data.user_update){
+                     location.reload();
+                }           
+              
+            }, function errorCallback(error) {
+                $scope.loader = false;
+                location.reload();
+                $scope.error =  error.data;            
+            });
+        }
 
 
 }]);

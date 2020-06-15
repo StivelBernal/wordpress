@@ -461,6 +461,45 @@ function serlib_users_info(){
     
     }
 
+    if( $method == 'PUT' ){
+        
+        $objDatos = json_decode(file_get_contents("php://input"));
+       
+        $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
+       
+        if( !wp_verify_nonce( $nonce, 'serlib_form' ) ){
+           
+            wp_send_json($output);
+            die();
+        }
+      
+        if(get_current_user_id() === 0 ){
+            wp_send_json($output);
+            die();
+        }
+       
+        if(isset($objDatos->password)){
+            $user_password       =  sanitize_text_field($objDatos->password);
+            $u = new WP_User( get_current_user_id() );
+            reset_password($u, $user_password);
+        }
+
+        $user_fields = [];
+
+        if(isset($objDatos->first_name)){
+            $user_fields['first_name'] = sanitize_text_field($objDatos->first_name);
+        }
+
+        if(isset($objDatos->last_name)){
+            $user_fields['last_name'] = sanitize_text_field($objDatos->last_name);
+        }
+
+        if(!empty($user_fields)){
+            $user_fields['ID'] = get_current_user_id();  
+            $results['user_update'] = wp_update_user($user_fields);
+        }          
+
+    }
 
     wp_send_json($results);
     die();
