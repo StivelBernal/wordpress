@@ -33,4 +33,23 @@ function serlib_admin_menus(){
     'serlib_plugin_states_page'
   );
 
+  $tipos = get_terms([
+    'hide_empty' => true,
+    'order' => 'DESC',
+    'taxonomy' => 'tipos_entradas' ]);
+    
+  foreach ($tipos as $key => $value) {
+    add_submenu_page(
+        'edit.php',
+        $value->name,
+        $value->name,
+        'manage_options',
+        'edit.php?tipos_entradas='.$value->name,
+        ''
+      );
+  }
+  
+
+ 
+
 }
