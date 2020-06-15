@@ -958,11 +958,10 @@ admin_frontend.controller('BaseProfile', ['$scope', '$http',
         $scope.profile_photo = $scope.Model.img_profile ? $scope.Model.img_profile: img_default;
         $scope.photo = []; 
         var id =  $scope.Model.ID;
-        
-        
+        $scope.loader = false;
         
         $scope.submitFiles = function(){
-           
+            $scope.loader = true;
             if( hasValue($scope.photo) &&  $scope.photo !== [] ) {
                                 
                 var formData = new FormData();
