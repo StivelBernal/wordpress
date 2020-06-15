@@ -57,7 +57,8 @@ function menu_top_user_shortcode(){
         $user_photo = get_user_meta($user->ID, 'user_photo', true );
        
         $user_photo                = str_replace( 
-            '/home/brayan/Escritorio/FOVEA', 
+            ['/home/brayan/Escritorio/FOVEA/', '/home/u135059516/domains/golfodemorrosquillo.com/public_html',
+             '/home/u135059516/domains/golfodemorrosquillo.co/public_html', '/home/u135059516/domains/golfodemorrosquillo.com.co/public_html'], 
             '',
             $user_photo 
         );
