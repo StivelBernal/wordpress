@@ -106,7 +106,8 @@ function serlib_users_info(){
                 'post_name'                   =>    $title,
                 'post_title'                  =>    $title,
                 'post_status'                 =>    'pending',
-                'post_type'                   =>    'blog'
+                'post_type'                   =>    'blog',
+                'comment_status'              =>    'open'
             ]);
 
         
