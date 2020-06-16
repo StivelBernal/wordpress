@@ -227,6 +227,15 @@
     
   });
 
+
+  $('.fovea-category-2').mouseover(function(){
+      console.log('sdf');
+    $(this).addClass('reveal');
+  });
+
+  $('.fovea-category-2').mouseout(function(){
+    $(this).removeClass('reveal');
+  });
   
 
 })(jQuery);
