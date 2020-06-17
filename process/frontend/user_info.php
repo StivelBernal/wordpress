@@ -36,7 +36,9 @@ function serlib_users_info(){
     }
     
     $rol = $user->roles[0];
+
     if($rol === 'turista'){
+
         if( $method == 'GET' ){
             
             if( isset($_GET['ID']) && is_numeric($_GET['ID']) ){
@@ -140,8 +142,12 @@ function serlib_users_info(){
             
                 $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE post_author = '.$user->ID.'  AND ID = '.$_GET['ID'].'';
                 $results['post'] =  $wpdb->get_row( $query );
-                $terms = get_the_terms( $results['post']->ID , 'category', 'term_id' );
+                $terms = get_the_terms( $results['post']->ID , 'category' );
+               
+                $tags = get_the_terms( $results['post']->ID , 'post_tag' );
                 
+
+
                 $results['post']->mapa_negocio = get_post_meta($results['post']->ID, 'mapa_negocio')[0];
 
                 $results['post']->galery_ids = get_post_meta($results['post']->ID, 'galeria_negocio')[0];
@@ -167,15 +173,21 @@ function serlib_users_info(){
                     $terms[$i] = $terms[$i]->term_id;
                 }
 
-                $tipos_entradas = get_the_terms( $results['post']->ID , 'tipos_entradas', 'term_id' );
+                $tipos_entradas = get_the_terms( $results['post']->ID , 'tipos_entradas' );
                 
                 for($i = 0; $i < count($tipos_entradas); $i++ ) { 
                     $tipos_entradas[$i] = $tipos_entradas[$i]->term_id;
+                }
+               
+                for($i = 0; $i < count($tags); $i++ ) { 
+                    $tags[$i] = $tags[$i]->term_id;
                 }
 
                 $results['post']->thumbnail = get_the_post_thumbnail_url($results['post']->ID);
 
                 $results['post']->post_category = $terms;
+
+                $results['post']->tags = $tags;
 
                 $results['post']->tipo_entrada = $tipos_entradas;
 
@@ -201,6 +213,10 @@ function serlib_users_info(){
                     'hide_empty' => false,
                     'order' => 'DESC',
                     'taxonomy' => 'category' ]);
+
+                $results['tags'] = get_terms('post_tag', [
+                    'hide_empty' => false,
+                    'order' => 'DESC']);
                 
             }
             if( isset($_GET['tipos'] )){
@@ -236,6 +252,7 @@ function serlib_users_info(){
             }
 
             $title  =   sanitize_text_field( $objDatos->post_title );
+            $excerpt = sanitize_text_field( $objDatos->post_excerpt );
             $content    =   wp_kses_post( $objDatos->post_content );
             $mapa    =   sanitize_text_field( $objDatos->mapa );
             $telefono    =   sanitize_text_field( $objDatos->telefono );
@@ -266,12 +283,22 @@ function serlib_users_info(){
             } else {
                 $objDatos->post_category = esc_attr($objDatos->post_category);
             }
-        
+
+            if (is_array($objDatos->tags)) {
+                foreach ($objDatos->tags as $key => $tag ) {
+                    $tag = esc_attr($tag);
+                }
+            } else {
+                $objDatos->tags = esc_attr($objDatos->tags);
+            }
+            
+
             $post_id                        =   wp_insert_post([
                 'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
                 'post_content'                =>    $content,
                 'post_name'                   =>    $title,
                 'post_title'                  =>    $title,
+                'post_excerpt'                =>    $excerpt,
                 'post_status'                 =>    'pending',
                 'post_type'                   =>    'post',
                 'comment_status'              =>    'open'
@@ -281,6 +308,7 @@ function serlib_users_info(){
 
                 wp_set_post_terms($post_id, $objDatos->post_category, 'category');
                 wp_set_post_terms($post_id, $objDatos->tipo_entrada, 'tipos_entradas');
+                wp_set_post_terms($post_id, $objDatos->tags, 'post_tag');
                 
                 update_post_meta( $post_id, 'telefono_negocio', $telefono );
                 update_post_meta( $post_id, 'whatsapp_negocio', $whatsapp );

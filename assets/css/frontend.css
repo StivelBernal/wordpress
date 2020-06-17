@@ -87,7 +87,7 @@ body{
 }
 .bttn.default:hover{
     color: #fff;
-    background-color: #1d1b1b; 
+    background-color: #0485a5; 
 }
 
 .actions-login{
@@ -184,7 +184,8 @@ button[disabled]{
 }
 
 .bttn.default[disabled="disabled"]:hover{
-    background-color: #ff681a !important;
+    background-color: #0485a5 !important;
+    
 }
 
 /*foto de perfil*/
@@ -956,7 +957,8 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
 .rounted-item, .mkdf-post-date-wrap, .input-holder, #post_reciente_alcaldia img, 
 .mkdf-team-image img, .mkdf-post-image img, input, .serlib-simple-item-image .fondo,
 .carrusel-destinos .swiper-container, .bttn, .selector-container, .selector-container label,
-div[ng-controller="loginController"], .socials-buttons-auth > div, .input-file-label, textarea { border-radius: 18px !important; }
+div[ng-controller="loginController"], .socials-buttons-auth > div, .input-file-label, textarea, 
+.border_radius { border-radius: 18px !important; }
 
 
 .content-post{
@@ -1225,3 +1227,17 @@ p[disabled = "disabled"]{
     border: none;
     float:right;
 }
+
+ .selector-container.multiple.remove-button label > ul > li{
+    background-color: #16acd1 !important;
+    border-radius: 10px;
+ }
+ .form-group textarea{
+    border:1px solid grey;
+    padding:10px;
+ }
+ .form-group textarea:focus{
+    border-radius:23px;
+    border:1px solid grey !important;
+    outline: none;
+ }

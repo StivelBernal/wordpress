@@ -20,7 +20,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 1}" ng-click="set_step(1, false)">'.$STEP1.'</p></div>
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 2}" ng-disabled="galery.length < 1" ng-click="set_step(2, (galery.length < 1))">'.$STEP2.'</p></div>
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 3}" ng-disabled="content.$invalid" ng-click="set_step(3, content.$invalid)">'.$STEP3.'</p></div>
-    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 4}" ng-disabled="servicios.length < 1" ng-click="set_step(4, (servicios.length < 1))">'.$STEP4.'</p></div>
+    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 4}" ng-disabled="content.$invalid || servicios.length < 1" ng-click="set_step(4, (servicios.length < 1))">'.$STEP4.'</p></div>
     <div class="s-7"></div>
     <md-button  class="s-flex" ng-class="{finish: step === 4}" ';  ?> ng-disabled="content.$invalid || servicios.length < 1 || (busqueda !== '' && !busqueda)" <?php echo 'ng-click="submitFiles()">
     {{ (Instance.post) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
@@ -82,6 +82,11 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                 </div>
             </div>
 
+            <div class="s-100 form-group ">
+                <label>'.__('Slogan del negocio:', 'serlib').'</label>
+                <textarea rows="3" maxlength="50" ng-model="Model.post_excerpt" required></textarea>
+            </div>
+
             <div class="row-wrap space-around-end""> 
                 <div class="s-49" > 
                     <label>'.__('Telefono:', 'serlib').'</label>
@@ -136,6 +141,13 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                 <div class="form-group s-flex">
                     <label>'.__('Categoria', 'serlib').'</label>      
                     <selector model="Model.tipo_entrada"  name="tipo_entrada" value-attr="term_id" Label-attr="name" require="true" options="tipos"></selector>
+                </div>
+            </div>
+
+            <div class="s-100">
+                <div class="form-group s-flex">
+                    <label>'.__('Etiquetas', 'serlib').'</label>      
+                    <selector model="Model.tags" multi="true" name="tags" value-attr="term_id" Label-attr="name" require="true" options="tags"></selector>
                 </div>
             </div>
 

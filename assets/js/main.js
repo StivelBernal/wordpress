@@ -1519,6 +1519,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
 
         $scope.tipos = $scope.Instance.tipos;
         $scope.municipios = $scope.Instance.municipios;
+        $scope.tags = $scope.Instance.tags;
         $scope.mapa_option = $scope.Instance.mapa_option;
         
 
