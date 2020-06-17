@@ -221,7 +221,7 @@
     
     
 
-    $('body').animate({ scrollTop: offset}, 1500);
+    $('body').animate({ scrollTop: offset+500}, 1500);
     
     
     
@@ -229,7 +229,7 @@
 
 
   $('.fovea-category-2').mouseover(function(){
-      console.log('sdf');
+     
     $(this).addClass('reveal');
   });
 

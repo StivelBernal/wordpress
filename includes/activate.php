@@ -7,14 +7,14 @@ function serlib_activate_plugin(){
     }
     
     require( ABSPATH . "/wp-admin/includes/upgrade.php" );
-  
+  /*
     global $wpdb;
 
     $createDestinosSQL      =   "
     CREATE TABLE `" . $wpdb->prefix . "destino_ratings` (
         `ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
         `destino_id` BIGINT(20) UNSIGNED NOT NULL,
-        `rating` FLOAT(3,2) UNSIGNED NOT NULL,
+        `rating` FLOAT(3,2) NOT NULL,
         `user_ip` VARCHAR(50) NOT NULL,
         PRIMARY KEY (`ID`)
     ) ENGINE=InnoDB " . $wpdb->get_charset_collate() . ";";
@@ -26,22 +26,23 @@ function serlib_activate_plugin(){
         `ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
         `nombre` VARCHAR(255) NOT NULL,
         `is_active` BIT NOT NULL,
-        PRIMARY KEY(ID) 
+        PRIMARY KEY(`ID`) 
     ) ENGINE=InnoDB " . $wpdb->get_charset_collate() . ";";
+
 
     dbDelta( $createStatesSQL );
 
     $createCitiesSQL      =   "
     CREATE TABLE `" . $wpdb->prefix . "cities` (
         `ID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `nombre` VARCHAR(255) NOT NULL,
+        `nombre` VARCHAR(255)  NOT NULL,
         `state_id` BIGINT(20) UNSIGNED NOT NULL,
-        `is_active` BIT NOT NULL,
-         PRIMARY KEY(ID)
+        `is_active` BIT  NOT NULL,
+         PRIMARY KEY(`ID`)
     ) ENGINE=InnoDB " . $wpdb->get_charset_collate() . ";";
  
     dbDelta( $createCitiesSQL );
-
+*/
     /**Opciones del plugin */
     $serlib_opts        =   get_option( 'serlib_opts' );
    
@@ -62,6 +63,8 @@ function serlib_activate_plugin(){
     remove_role( 'subscriber' );
 
     remove_role( 'author' );
+
+    remove_role( 'staff' );
 
     remove_role( 'editor' );
 
@@ -115,9 +118,27 @@ function serlib_activate_plugin(){
         'staff',
         __('Staff', 'serlib'),
         [
-            'read'          =>  true,
-            'edit_posts'    =>  true,
-            'upload_files'  =>  true
+            'read'                      =>  true,
+            'edit_posts'                =>  true,
+            'upload_files'              =>  true,
+            'create_users'              =>  true,
+            'delete_users'              =>  true,
+            'edit_users'                =>  true,
+            'list_users'                =>  true,
+            'remove_users'              =>  true,
+            'moderate_comments'         =>  true,
+            'manage_categories'         =>  true,
+            'manage_links'              =>  true,
+            'edit_others_posts'         =>  true,
+            'edit_pages'                =>  true,
+            'edit_others_pages'         =>  true,
+            'moderate_comments'         =>  true,
+            'manage_categories'         =>  true,
+            'manage_links'              =>  true,
+            'edit_others_posts'         =>  true,
+            'edit_pages'                =>  true,
+            'edit_others_pages'         =>  true
+            
         ]
     );
 

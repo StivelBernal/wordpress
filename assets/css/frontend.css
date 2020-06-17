@@ -364,6 +364,8 @@ label[for="fotocopia_documento"]{
     margin-bottom: 5px;
     padding: 13px 56px;
     border: 1px solid transparent;
+    border-radius:10px;
+    transition: all ease 0.4s;
     width: auto;
     cursor:pointer;
     font-size: 14px;
