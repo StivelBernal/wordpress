@@ -4,6 +4,7 @@
         <div class="row-wrap">
 
             <div class="form-group s-40">
+                <label>home</label>
                 <input class="fovea-input input-text" ng-model="Model.busqueda" placeholder="buscar_placeholder_I18N"  type="text">
                          
             </div>

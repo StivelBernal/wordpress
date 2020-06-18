@@ -71,6 +71,8 @@ add_shortcode( 'serlib_recover_account', 'serlib_recover_account_shortcode' );
 add_shortcode( 'serlib_gracias', 'serlib_register_gracias_shortcode' );
 add_shortcode( 'serlib_carrusel_destinos', 'serlib_carrusel_destinos_shortcode' );
 add_shortcode( 'serlib_buscador_home_input', 'serlib_buscador_home_input_shortcode' );
+
+
 add_shortcode( 'serlib_buscador_home_results', 'serlib_buscador_home_results_shortcode' );
 add_shortcode( 'serlib_buscador_home_results_blog', 'serlib_buscador_home_results_blog_shortcode' );
 // Admin frontend 

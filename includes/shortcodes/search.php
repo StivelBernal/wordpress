@@ -1,9 +1,46 @@
 <?php 
 
-function serlib_buscador_home_input_shortcode(){
 
+/**BUSCADORES */
+function serlib_buscador_home_input_shortcode (){
+  
+  $rutas = explode('/' ,$_SERVER['REQUEST_URI']);
+  if(isset($rutas[1]) ){
+    $municipio = get_term_by('slug', $rutas[1], 'category' );
+  }else{
+    $municipio = false;
+  }
 
-    $formHTML = file_get_contents( 'templates/search-input.php', true );
+  if( isset($rutas[2]) && $rutas !== ''){
+    $tipo_entrada = get_term_by('slug', $rutas[2], 'tipos_entradas' );
+  }else{
+    $tipo_entrada = false;
+  }
+  
+  $formHTML = '';
+  
+  var_dump($rutas);
+
+	if( !$municipio && !$tipo_entrada ){
+    
+    $formHTML = file_get_contents( 'templates/search-input-home.php', true );
+    
+  } else {
+
+    if( $tipo_entrada ){
+     
+      $formHTML = file_get_contents( 'templates/search-input-municipio.php', true );
+    
+    }else if($municipio && $tipo_entrada ){
+      
+      $formHTML = file_get_contents( 'templates/search-input-tipo.php', true );
+    
+    }
+
+   
+  }
+
+    
     
     $formHTML               = str_replace( 
       ['buscar_placeholder_I18N', 'buscar_button_I18N'], 
@@ -25,6 +62,11 @@ function serlib_buscador_home_input_shortcode(){
 
 }
 
+
+
+/**
+ * RESULTADOS HOME
+ */
 function serlib_buscador_home_results_shortcode(){
     
   $formHTML = '
