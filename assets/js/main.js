@@ -424,10 +424,24 @@ app.controller('loginController', ['$scope', '$http', '$controller',
                     url:    front_obj.ajax_url,
                     data:   $scope.Model,
                 }).then(function successCallback(response) {
-                    
+                   
                     if(response.data.success){
+                       
+                        var rol = response.data.success.roles[0];
+                        
+                        
+                        if(rol === 'turista'){
+                            setTimeout(() => { window.location = "/"; }, 2500);
+                        }else if(rol === 'comerciante'){
+                            setTimeout(() => { window.location = "/mi-cuenta#!/negocios/all"; }, 2500);
+                        }else if(rol === 'alcaldia' || rol === 'gobernacion'){
+                            setTimeout(() => { window.location = "/articulos/all"; }, 2500);
+                        }else if(rol === 'staff' || rol === 'administrator'){
+                            setTimeout(() => { window.location = "/wp-admin"; }, 2500);
+                        }
+
                         $scope.user_login = true;
-                        setTimeout(() => { window.location = "/blog"; }, 2500);
+                       
                     }else if(response.data.error){
                         $scope.error = response.data.error;
                         $scope.is_submit = false;

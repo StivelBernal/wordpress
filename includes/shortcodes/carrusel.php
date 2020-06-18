@@ -14,7 +14,7 @@ function serlib_carrusel_destinos_shortcode($atts){
     $destinos   =   $wpdb->get_results($consulta);
     $itemsCarrusel = '';
     
-
+    $rand = random_int(0,7);
     foreach ($destinos as $key => $value) {
                 
         $urlImg = get_the_post_thumbnail_url($value->ID);
@@ -23,7 +23,8 @@ function serlib_carrusel_destinos_shortcode($atts){
         $categoria_link = get_category($meta['municipio'][0], 'ARRAY_A');
         
         if(!isset($meta['subtitle'])) {$meta['subtitle'][0] = $value->post_title; } 
-       if($key === 0 ){
+      
+       if($key !== $rand){
            $id = '';
        }else {  $id = 'id="default_destino"'; }
         $itemsCarrusel .= '
@@ -39,13 +40,12 @@ function serlib_carrusel_destinos_shortcode($atts){
                 <a class="button-destino" '.$id.' url="'.$categoria_link['slug'].'" municipio="'.$value->post_title.'" excerpt="'.$value->post_excerpt.'" alcaldia="'.$meta['alcaldiau'][0].'" gobernacion="'.$meta['gobernacion'][0].'" departamento="'.$meta['departamento'][0].'">
                    '._x('Ver más', 'boton carrusel destinos', 'serlib').'
                 </a>
-                
             </div>
         </div>';
 
     }
     
-    return ' 
+    return  ' 
                 <div class="carrusel-destinos">
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
