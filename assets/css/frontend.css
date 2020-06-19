@@ -1229,7 +1229,7 @@ p[disabled = "disabled"]{
 }
 
  .selector-container.multiple.remove-button label > ul > li{
-    background-color: #16acd1 !important;
+    background-color: #3b93b6 !important;
     border-radius: 10px;
  }
  .form-group textarea{
@@ -1240,4 +1240,8 @@ p[disabled = "disabled"]{
     border-radius:23px;
     border:1px solid grey !important;
     outline: none;
+ }
+
+ .search-9 .search_home{
+    margin: 5px;
  }

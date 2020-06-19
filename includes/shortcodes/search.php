@@ -5,6 +5,9 @@
 function serlib_buscador_home_input_shortcode (){
   
   $rutas = explode('/' ,$_SERVER['REQUEST_URI']);
+  
+  $slug = '';
+
   if(isset($rutas[1]) ){
     $municipio = get_term_by('slug', $rutas[1], 'category' );
   }else{
@@ -18,21 +21,19 @@ function serlib_buscador_home_input_shortcode (){
   }
   
   $formHTML = '';
-  
-  var_dump($rutas);
 
 	if( !$municipio && !$tipo_entrada ){
-    
-    $formHTML = file_get_contents( 'templates/search-input-home.php', true );
+    $slug = '<div slug="/"></div>';
+    $formHTML = $slug.file_get_contents( 'templates/search-input-home.php', true );
     
   } else {
 
-    if( $tipo_entrada ){
-     
+    if( !$tipo_entrada && $municipio ){
+      $slug = '<div slug="/"></div>';
       $formHTML = file_get_contents( 'templates/search-input-municipio.php', true );
     
     }else if($municipio && $tipo_entrada ){
-      
+      $slug = '<div slug="/"></div>';
       $formHTML = file_get_contents( 'templates/search-input-tipo.php', true );
     
     }

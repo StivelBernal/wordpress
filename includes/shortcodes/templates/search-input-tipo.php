@@ -4,12 +4,12 @@
         <div class="row-wrap">
 
             <div class="form-group s-40">
-            <label>municipio tipo</label>
+            
                 <input class="fovea-input input-text" ng-model="Model.busqueda" placeholder="buscar_placeholder_I18N"  type="text">
                          
             </div>
             <div class="form-group s-35">
-                <selector model="Model.ciudad" options="options_ciudades"></selector>      
+                <selector model="Model.tags" multi="true" value-attr="slug" Label-attr="name" options="options_tags"></selector>      
             </div>
             
             <div class="s-flex">
