@@ -4,7 +4,13 @@
 /**BUSCADORES */
 function serlib_buscador_home_input_shortcode (){
   
-  $rutas = explode('/' ,$_SERVER['REQUEST_URI']);
+  if(isset($_GET["busqueda"])){
+    $rutas = explode('?' ,$_SERVER['REQUEST_URI']);
+    $rutas = explode('/' ,$rutas[0]);
+  }else{
+    $rutas = explode('/' ,$_SERVER['REQUEST_URI']);
+  }
+ 
   
   $slug = '';
 
@@ -23,18 +29,19 @@ function serlib_buscador_home_input_shortcode (){
   $formHTML = '';
 
 	if( !$municipio && !$tipo_entrada ){
-    $slug = '<div slug="/"></div>';
+    $slug = '<div id="slug-search" slug="/"></div>';
     $formHTML = $slug.file_get_contents( 'templates/search-input-home.php', true );
     
   } else {
 
     if( !$tipo_entrada && $municipio ){
-      $slug = '<div slug="/"></div>';
-      $formHTML = file_get_contents( 'templates/search-input-municipio.php', true );
+     
+      $slug = '<div id="slug-search" slug="/'.$municipio->slug.'/"></div>';
+      $formHTML = $slug.file_get_contents( 'templates/search-input-municipio.php', true );
     
     }else if($municipio && $tipo_entrada ){
-      $slug = '<div slug="/"></div>';
-      $formHTML = file_get_contents( 'templates/search-input-tipo.php', true );
+      $slug = '<div id="slug-search" slug="/'.$municipio->slug.'/'.$tipo_entrada->slug.'/"></div>';
+      $formHTML = $slug.file_get_contents( 'templates/search-input-tipo.php', true );
     
     }
 

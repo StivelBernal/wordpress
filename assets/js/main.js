@@ -382,15 +382,16 @@ search_app.controller('formController', ['$scope', '$http',
         
         if($scope.is_submit) return;
         $scope.is_submit = true;
-        if($scope.Model.ciudad){
-            window.location = $scope.Model.ciudad+'?busqueda='+$scope.Model.busqueda;
-        }else if($scope.Model.tipo){
-            window.location = $scope.Model.tipo+'?busqueda='+$scope.Model.busqueda;
-        }else if($scope.Model.tags){
-            window.location = $scope.Model.tags+'?busqueda='+$scope.Model.busqueda;
-        }
+
+        var slug = angular.element('#slug-search').attr('slug');
         
-        //$("html,body").animate({ scrollTop: $('#search-results').offset().top+200}, 1500);
+        if($scope.Model.ciudad){
+            window.location = slug+$scope.Model.ciudad+'?busqueda='+$scope.Model.busqueda;
+        }else if($scope.Model.tipo){
+            window.location = slug+$scope.Model.tipo+'?busqueda='+$scope.Model.busqueda;
+        }else if($scope.Model.tags){
+            window.location = slug+'?busqueda='+$scope.Model.busqueda+'&tags='+$scope.Model.tags;
+        }
        
     }
 
