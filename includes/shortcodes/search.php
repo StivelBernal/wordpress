@@ -76,36 +76,48 @@ function serlib_buscador_home_input_shortcode (){
  * RESULTADOS HOME
  */
 function serlib_buscador_home_results_shortcode(){
+  
+  $rutas = explode('/' ,$_SERVER['REQUEST_URI']);
+  $slug = '';
+
+  if(isset($rutas[1]) ){
+    $municipio = get_term_by('slug', $rutas[1], 'category' );
+
+  }
+
+  if( isset($municipio) && $municipio !== false){
+    global $wpdb;
+    $categorias_publicacion = $wpdb->get_results( "SELECT * FROM $wpdb->postmeta WHERE meta_value = ".$municipio->term_id." AND meta_key = 'municipio_relacion'" );
     
-  $formHTML = '
-    <div class="row" id="search-results">
-      <!--CONTROLADOR PARA MOSTRAR SERVICIOS-->
-      <div class="row-wrap">
-    ';
+    $iconos = [];
+    for($i = 0; $i < count($categorias_publicacion); $i++){
+        
+        $url = get_post_meta($categorias_publicacion[$i]->post_id, 'relacion_categoria' )[0];
+        $titulo = explode('/' ,$url);
+        $icono = wp_get_attachment_image_src( get_post_meta($categorias_publicacion[$i]->post_id, 'icono_publicacion_municipio' )[0], 'single-post-thumbnail')[0];
+        $imagen =  wp_get_attachment_image_src( get_post_thumbnail_id( $categorias_publicacion[$i]->post_id ), 'single-post-thumbnail' )[0];
+        $iconos[$titulo[1]] = [ $titulo[1], $icono, $imagen];
+    }
+
+    $formHTML = '
+      <div class="row" id="search-results">
+        <!--CONTROLADOR PARA MOSTRAR SERVICIOS-->
+        <div class="row-wrap">
+      ';
     
     $formHTML .= file_get_contents( 'templates/results-home.php', true );
 
+    // Obtener todas las categorias relacionadas a la categoria
+
     $items = '';
-    $iconos = [
-       'Hospedaje'    => ['hospedaje', 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Hospedaje.png'],
-       'Transporte'  => ['transporte' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Transporte.png'],
-       'Cultura'    => ['cultura' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Cultura.png'],
-       'Sitios'   => ['sitios' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Sitios.png'], 
-       'Diverisión'  => ['diversion' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Diversion.png'],
-       'Comercio'    => ['comercio' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Comercio.png'],
-       'Emergencias'   => ['emergencias' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Emergencias.png'], 
-       'Eventos'  => ['eventos' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Eventos.png'],
-       'Gastronomía'    => ['gastronomia' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Gastronomia.png'],
-       'Ferias y Fiestas'   => ['ferias-y-fiestas' ,'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/Ferias-y-Fiestas.png']
-    ];
 
     foreach( $iconos as $key => $value ){
 
         $items .='
-          <a  base="'.$value[0].'" class="s-20 item-servicio-home">
+          <a  href="'.$value[0].'" class="s-20 item-servicio-home">
               <div class="serlib-gallery-item">
                   <div class="serlib-simple-item-image">
-                      <img class="fondo" src="http://localhost/wordpress/wp-content/uploads/2017/08/h5-tour-f-img-1.jpg" class="" >
+                      <img class="fondo" src="'.$value[2].'" class="" >
                       <div class="serlib-gallery-simple-item-content-holder">
                           <div class="serlib-gallery-simple-item-content-inner">
                               <img class="icono" src="'.$value[1].'">
@@ -127,7 +139,7 @@ function serlib_buscador_home_results_shortcode(){
       ';
 
       return $formHTML;
-
+  }
     
 }
 
