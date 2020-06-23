@@ -28,6 +28,7 @@ include( 'process/frontend/auth.php' );
 include( 'process/rate_destino.php' );
 include( 'process/entries.php' );
 include( 'process/admin/options.php' );
+/**Incluyo aqui tambien para mostrar los campos de los usuarios comerciantes */
 include( 'includes/admin/init.php' );
 include( 'includes/admin/menus.php' );
 include( 'includes/shortcodes/auth.php' );
@@ -66,6 +67,7 @@ add_action( 'wp_ajax_nopriv_serlib_references', 'serlib_references');
 add_action( 'admin_init', 'serlib_admin_init' );
 add_action( 'admin_menu', 'serlib_admin_menus' );
 add_action ('wp_loaded', 'login_redirect');
+add_action ( 'edit_user_profile' , 'extra_profile_fields'  ) ;
 
 // Shortcodes
 add_shortcode( 'serlib_login_form', 'serlib_login_form_shortcode' );
