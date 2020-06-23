@@ -9,39 +9,65 @@ function serlib_entries(){
         global $wpdb;
 
         $results = [];
-       
-        $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE post_author = '.$_POST['alcaldia'].'  AND post_type = "post" AND post_status = "publish"  ORDER BY post_date LIMIT 10';
-    
-        $results['alcaldia'] =  $wpdb->get_results( $query );
-                 
-        if( !$results['alcaldia'] ) {
-            $results['errors'] =  _x('no hay posts de esta Alcaldia', 'post ajax respuesta alcaldia', 'serlib'); 
-        }else{
-         
+
+        $users = get_users( [ 'role__in' => [ 'alcaldia' ] ] );
+
+        $userif = '';
+        
+        for( $i = 0; $i < count($users); $i++ ){
+            if($i === 0){
+                $userif .= ' post_author = '.$users[$i]->ID;
+            }else{
+                $userif .= ' OR  post_author = '.$users[$i]->ID;
+            }
+        }
+
+        if(count($users) !== 0){
+        
+            $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE ('.$userif.')  AND post_type = "post" AND post_status = "publish"  ORDER BY post_date LIMIT 10';
+        
+            $results['alcaldia'] =  $wpdb->get_results( $query );
+            
             for($i = 0; $i < count($results['alcaldia']); $i++){
                 $results['alcaldia'][$i]->thumbnail = get_the_post_thumbnail_url($results['alcaldia'][$i]->ID);
                 $results['alcaldia'][$i]->permalink = get_permalink($results['alcaldia'][$i]->ID);
             }
-
+            
+        }else {
+            $results['errors'] =  _x('no hay posts de esta Alcaldia', 'post ajax respuesta alcaldia', 'serlib'); 
         }
+
         
     }
 
-    if( isset($_POST['gobernacion']) ){
+    if( isset($_POST['gobernacion']) ){   
+
+        $users = get_users( [ 'role__in' => [ 'gobernacion' ] ] );
+
+        $userif = '';
         
-        $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE post_author = '.$_POST['gobernacion'].'  AND post_type = "post" AND post_status = "publish"  ORDER BY post_date LIMIT 10';
-    
-        $results['gobernacion'] =  $wpdb->get_results( $query );
-         
-        if(!$results['gobernacion'] ) {   
-            $results['error'] =  _x('no hay posts de esta Gobernación', 'post ajax respuesta gobernacion', 'serlib'); 
-        }else{
-         
+        for( $i = 0; $i < count($users); $i++ ){
+            if($i === 0){
+                $userif .= ' post_author = '.$users[$i]->ID;
+            }else{
+                $userif .= ' OR  post_author = '.$users[$i]->ID;
+            }
+        }
+
+        if(count($users) !== 0){
+        
+            $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE ('.$userif.')  AND post_type = "post" AND post_status = "publish"  ORDER BY post_date LIMIT 10';
+        
+            $results['gobernacion'] =  $wpdb->get_results( $query );
+            
             for($i = 0; $i < count($results['gobernacion']); $i++){
                 $results['gobernacion'][$i]->thumbnail = get_the_post_thumbnail_url($results['gobernacion'][$i]->ID);
                 $results['gobernacion'][$i]->permalink = get_permalink($results['gobernacion'][$i]->ID);
             }
-
+            
+        }else {
+             
+            $results['error'] =  _x('no hay posts de esta Gobernación', 'post ajax respuesta gobernacion', 'serlib'); 
         }
     
     }

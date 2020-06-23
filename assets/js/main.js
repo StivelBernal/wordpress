@@ -119,7 +119,7 @@
   }
 
 
-  $('.button-destino-categoria').click(function(e){
+  $('.button-destinof').click(function(e){
 
     e.preventDefault();   
     
@@ -217,10 +217,117 @@
 
      });
     
-    $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('base') ));   
-     
+    $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('base') ));
+    
+    
+
+    $('body').animate({ scrollTop: offset+500}, 1500);
+    
+    
+    
   });
 
+
+  function primer_destino() {
+    
+    var destino = $('#default_desdtino');
+
+    $('#search-results .row-wrap').css('display', 'flex');
+    var municipio = destino.attr('url')+'/';
+
+    var form        =   {
+        action:         'serlib_entries',
+        alcaldia:       'ALL',
+        gobernacion:    'ALL'
+    };
+   
+    /**Llamar a las entradas de las alcaldias a mostrar */
+    $.post( front_obj.ajax_url, form, function(data){
+        $('#entradas_gobernacion_fila').show();
+        $('#entradas_alcaldia_fila').show();
+        
+        var slides_alcaldia =  [], slides_gobernacion =  [];
+        for(var i = 1; i < data.alcaldia.length; i++){ 
+             
+            slides_alcaldia.push( item_blog(data.alcaldia[i], municipio) );
+        }
+
+        if(data.alcaldia[0]){
+            var date = new Date(data.alcaldia[0].post_date);
+            $('#post_reciente_alcaldia img').attr('src', data.alcaldia[0].thumbnail);
+            $('#post_reciente_alcaldia a').attr('href', data.alcaldia[0].permalink);
+            $('#post_reciente_alcaldia h3').text(data.alcaldia[0].post_title);
+            $('#post_reciente_alcaldia .mkdf-post-date-day').text(date.getDay());
+            $('#post_reciente_alcaldia .mkdf-post-date-month').text(months[date.getMonth()]);
+            $('#post_reciente_alcaldia .mkdf-post-excerpt').text(data.alcaldia[0].post_excerpt );
+        }
+
+        for(var i = 0; i < data.gobernacion.length; i++){ 
+            slides_gobernacion.push( item_blog2(data.gobernacion[i]) );
+        }
+
+        var swiper1 = new Swiper('.swiper-container-gobernacion', {            
+            spaceBetween: 10,
+            loop: true,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: true
+            },
+            speed: 1500,
+            breakpoints: {
+                200: {
+                slidesPerView: 1
+                },
+                700: {
+                slidesPerView: 2
+                },
+                1000: {
+                slidesPerView: 3
+                }
+            }
+        });
+        swiper1.removeAllSlides();
+        swiper1.appendSlide(slides_gobernacion);
+
+        
+        var swiper2 = new Swiper('.swiper-container-alcaldia', {            
+            spaceBetween: 10,
+            loop: true,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: true
+            },
+            speed: 1500,
+            breakpoints: {
+                200: {
+                slidesPerView: 1
+                },
+                700: {
+                slidesPerView: 2
+                },
+                1000: {
+                slidesPerView: 3
+                }
+            }
+        });
+        swiper2.removeAllSlides();
+        swiper2.appendSlide(slides_alcaldia);
+
+        
+        
+        
+        /**Aqui se invocaria el carrusel y se colocaria la primera entrada de la alcaldia*/
+
+
+     });
+    
+    $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('base') ));
+       
+    
+    
+  }
+
+  primer_destino();
 
   $('.fovea-category-2').mouseover(function(){
      

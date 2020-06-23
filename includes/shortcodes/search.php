@@ -105,7 +105,7 @@ function serlib_buscador_home_results_shortcode(){
         <div class="row-wrap">
       ';
     
-    $formHTML .= file_get_contents( 'templates/results-home.php', true );
+   // $formHTML .= file_get_contents( 'templates/results-home.php', true );
 
     // Obtener todas las categorias relacionadas a la categoria
 

@@ -1,5 +1,5 @@
 <div id="entradas_alcaldia" class="mkdf-blog-holder mkdf-blog-standard-date-on-side  entradas_alcaldia">
-
+    
     <article id="post_reciente_alcaldia" class="mkdf-post-has-media post-917 post type-post status-publish format-standard has-post-thumbnail hentry category-holidays tag-adventure tag-exotic">
         <div class="mkdf-post-content">
             <div class="mkdf-post-heading">
