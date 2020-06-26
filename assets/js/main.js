@@ -15,6 +15,8 @@
             console.log('datos', data);
         });
     });
+
+
     /**Carruseles */
   $(document).ready(function () {
     //initialize swiper when document ready
@@ -399,6 +401,26 @@ var comercio_page_app = angular.module('comercio_page', [])
     
      $scope.tab = 1;
     
+
+}]);
+
+
+var comments_app = angular.module('comments', [])
+   .controller('commentsController', ['$scope',  '$http',
+    function commentsController($scope, $http) {
+    /**Aqui Guardaria el label y i para guardarlo */
+    /**Asignarle una calificación  tiene varias acciones hover y click para asignar el valor */
+    /**Colocar unos input para subir imagenes y validacion para enviar */
+
+    $scope.item_star = [];
+    $scope.item_selected = [];
+  
+
+    $scope.set_star = function (value, j, label){
+        console.log(value, j, label);
+        $scope.item_selected[j] = [value, label]
+        console.log($scope.item_selected[j]);
+    }
 
 }]);
 
