@@ -414,16 +414,70 @@ var comments_app = angular.module('comments', [])
 
     $scope.item_star = [];
     $scope.item_selected = [];
-  
-
-    $scope.set_star = function (value, j, label){
-        console.log(value, j, label);
-        $scope.item_selected[j] = [value, label]
-        console.log($scope.item_selected[j]);
+    $scope.comment_text = '';
+    $scope.galery = [];
+    $scope.preview_galery = [];
+    $scope.preview_default = '/wp-content/plugins/ser_lib/assets/img/images.png'
+    
+    $scope.add_galery = function(){
+        if($scope.galery.length  < 3){
+            $scope.galery.push({text: ''});
+        }
+              
     }
 
-}]);
+    $scope.delete_image = function(index){
+        
+          $scope.galery.splice(index, 1);
+          $scope.preview_galery.splice(index, 1);
+    }
 
+    $scope.set_star = function (value, j, label){
+       
+        $scope.item_selected[j] = [value, label]
+       
+    }
+
+}]).directive('appFilereader', function($q) {
+    var slice = Array.prototype.slice;
+
+    return {
+        restrict: 'A',
+        require: '?ngModel',
+        scope: { preview: '@' },
+        link: function(scope, element, attrs, ngModel) {
+           
+            if (!ngModel && attrs.type !== 'file') return;
+
+            ngModel.$render = function() {};
+            element.bind('change', function(e) {
+                
+                var element = e.target;
+                var files = element.files[0]
+                ngModel.$setViewValue(files);
+               
+                var urlObject = URL.createObjectURL(files);
+                
+                if(attrs.preview){
+                                                       
+                    scope.$parent[attrs.preview] = urlObject;
+                    
+                    scope.$apply() 
+            
+                }
+                
+                if(attrs.previewArray && attrs.indice){
+                    console.log(attrs.previewArray, attrs.indice);
+                    scope.$parent[attrs.previewArray][attrs.indice] = urlObject;
+                    scope.$apply() 
+                }
+
+            }); 
+
+
+        } 
+    }; 
+});
 
 var app = angular.module('serAuth', ['SER.selector', 'ngMaterial', 'ngMessages', 'SER.match', 'socialLogin', '720kb.datepicker'])
     .config(function ($mdThemingProvider) {
