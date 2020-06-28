@@ -417,10 +417,11 @@ var comments_app = angular.module('comments', [])
     $scope.comment_text = '';
     $scope.galery = [];
     $scope.preview_galery = [];
+    $scope.is_submit = false;
     $scope.preview_default = '/wp-content/plugins/ser_lib/assets/img/images.png'
-    
+    $scope.error = '', $scope.success = '';
     $scope.add_galery = function(){
-        if($scope.galery.length  < 3){
+        if($scope.galery.length  < 7){
             $scope.galery.push({text: ''});
         }
               
@@ -436,6 +437,119 @@ var comments_app = angular.module('comments', [])
        
         $scope.item_selected[j] = [value, label]
        
+    }
+
+    /**Subida de archivos */
+    $scope.submitFiles = function(success_text, id_comment){
+            
+        var promises = 0;
+       
+        var files =  angular.copy($scope.galery).length;
+
+        for(var i = 0; i < files; i++ ){
+           
+            if($scope.galery[i].name) {
+               
+                promises++;
+                
+                var formData = new FormData();
+                formData.append('files', $scope.galery[i]);
+                
+                angular.element.ajax({
+                    type: 'POST',
+                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=comments_media&id_comment='+id_comment,
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData:false,
+                    success: function(response){
+
+                        finally_promises();
+                    
+                    },
+                    error: function(error){
+                        $scope.error =  error; 
+                    
+                        finally_promises();
+                    }
+                });
+            }
+        }
+
+        if(promises === 0){
+            $scope.success = success_text;
+            setTimeout(() => { location.reload() }, 2000);
+        }
+
+        function finally_promises(){
+            promises--;
+             if(promises === 0){
+                 
+                $scope.success = success_text;
+                $scope.$apply();
+                $scope.is_submit = false;
+                //setTimeout(() => { location.reload() }, 2000);
+             }
+        }
+        
+    }
+
+
+
+    $scope.submit = function(){
+            
+            $scope.error = '', $scope.success = '';
+            
+            if($scope.is_submit === true){
+                return;
+            }
+
+            $scope.is_submit = true;
+            
+            var sel_stars = angular.copy( $scope.item_selected ),
+            stars_end = [];
+            
+            for(var i = 0; i < sel_stars.length; i++){
+               
+                if( sel_stars[i] ) {
+                    stars_end.push( { value: sel_stars[i][0], label: sel_stars[i][1]} ); 
+                }
+                
+            }
+            var data = {};
+            data.text = $scope.comment_text;
+            data.stars = stars_end;
+            data.post_id = post_id;
+
+            $http({
+                method: 'POST',
+                params: { action: 'serlib_comments' },
+                url:    front_obj.ajax_url,
+                data: data
+            }).then(function successCallback(response) {
+                
+                if(response.data.success){
+                
+                    $scope.submitFiles(response.data.success, response.data.comment_ID);
+                 
+                    
+                }else if( response.data.error ){
+                    $scope.error = response.data.error;
+                    $scope.is_submit = false;
+                }
+                
+                
+
+            }, function errorCallback(error) {
+                
+                $scope.is_submit = false;
+                $scope.error =  error.data;            
+            });
+
+    };
+
+    $scope.delete_comment = function(id, $event){
+        angular.element($event.toElement).parent().parent().parent().fadeOut();
     }
 
 }]).directive('appFilereader', function($q) {
@@ -467,7 +581,7 @@ var comments_app = angular.module('comments', [])
                 }
                 
                 if(attrs.previewArray && attrs.indice){
-                    console.log(attrs.previewArray, attrs.indice);
+                    
                     scope.$parent[attrs.previewArray][attrs.indice] = urlObject;
                     scope.$apply() 
                 }

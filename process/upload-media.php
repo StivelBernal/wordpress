@@ -55,6 +55,19 @@ function serlib_uploader(){
                 update_user_meta( $_GET['id'], 'user_photo', $new_file_path );
             }else if($_GET["destino"] === 'file_document'){
                 update_user_meta( $_GET['id'], 'file_document', $new_file_path );
+            }else if($_GET["destino"] === 'comments_media'){
+               
+                $media = get_comment_meta($_GET['id_comment'], 'comments_media')[0];
+            
+                
+                if(isset($media)){
+                    array_push( $media, wp_get_attachment_image_src($upload_id)[0] );
+                    
+                    update_comment_meta( $_GET['id_comment'], 'comments_media', $media );
+                }else{
+                    update_comment_meta( $_GET['id_comment'], 'comments_media', [ wp_get_attachment_image_src($upload_id)[0] ] );
+                }
+                
             }
             
             if(isset($_GET["order"])){
@@ -75,7 +88,7 @@ function serlib_uploader(){
     
     }
 
-    if( $_GET['destino'] === 'featured' || $_GET['destino'] === 'image' || $_GET['destino'] ===  'photo_profile' || $_GET['destino'] ===  'file_document' ){
+    if( $_GET['destino'] === 'featured' || $_GET['destino'] === 'image' || $_GET['destino'] ===  'photo_profile' || $_GET['destino'] ===  'file_document' || $_GET['destino'] ===  'comments_media'  ){
         guardar_archivo();
     }
 
