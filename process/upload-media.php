@@ -65,7 +65,7 @@ function serlib_uploader(){
                     
                     update_comment_meta( $_GET['id_comment'], 'comments_media', $media );
                 }else{
-                    update_comment_meta( $_GET['id_comment'], 'comments_media', [ wp_get_attachment_image_src($upload_id)[0] ] );
+                    update_comment_meta( $_GET['id_comment'], 'comments_media', [ wp_get_attachment_image_src($upload_id, 'full')[0] ] );
                 }
                 
             }

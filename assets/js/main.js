@@ -339,6 +339,21 @@
   $('.fovea-category-2').mouseout(function(){
     $(this).removeClass('reveal');
   });
+
+  $('.stars_r_c img').click(function(){
+
+    $('#img-comment-preview img').attr('src', $(this).attr('src'));
+    $('#img-comment-preview ').fadeIn();
+
+  });
+
+  $('#img-comment-preview  .cerrar').click(function(){
+
+    $('#img-comment-preview img').attr('src', '');
+    $('#img-comment-preview').fadeOut();
+
+  });
+
   
 
 })(jQuery);
@@ -411,10 +426,11 @@ var comments_app = angular.module('comments', [])
     /**Aqui Guardaria el label y i para guardarlo */
     /**Asignarle una calificación  tiene varias acciones hover y click para asignar el valor */
     /**Colocar unos input para subir imagenes y validacion para enviar */
-
+    var offset_textarea = $("#respond").offset();
     $scope.item_star = [];
     $scope.item_selected = [];
     $scope.comment_text = '';
+    $scope.reply_id = false;
     $scope.galery = [];
     $scope.preview_galery = [];
     $scope.is_submit = false;
@@ -488,7 +504,7 @@ var comments_app = angular.module('comments', [])
                 $scope.success = success_text;
                 $scope.$apply();
                 $scope.is_submit = false;
-                //setTimeout(() => { location.reload() }, 2000);
+                setTimeout(() => { location.reload() }, 2000);
              }
         }
         
@@ -521,6 +537,10 @@ var comments_app = angular.module('comments', [])
             data.stars = stars_end;
             data.post_id = post_id;
 
+            if($scope.reply_id){
+                data.parent = $scope.reply_id;
+            }
+
             $http({
                 method: 'POST',
                 params: { action: 'serlib_comments' },
@@ -548,8 +568,37 @@ var comments_app = angular.module('comments', [])
 
     };
 
-    $scope.delete_comment = function(id, $event){
-        angular.element($event.toElement).parent().parent().parent().fadeOut();
+    $scope.reply = function(id_comment, $event){
+        $scope.reply_id = id_comment;
+        $('body').animate( { scrollTop : offset_textarea.top }, 1500 );
+    }
+
+    $scope.cancel_reply = function(){
+        $scope.reply_id = false;
+    }
+
+    $scope.delete_comment = function(id, $event, child = false){
+       
+        $http({
+            method: 'DELETE',
+            params: { action: 'serlib_comments', id_comment: id },
+            url:    front_obj.ajax_url
+        }).then(function successCallback(response) {
+            
+            if(response.data.success){
+            
+                angular.element($event.toElement).parent().parent().parent().fadeOut();
+             
+                
+            }
+            
+            
+
+        }, function errorCallback(error) {
+            
+            $scope.is_submit = false;
+            $scope.error =  error.data;            
+        });
     }
 
 }]).directive('appFilereader', function($q) {
