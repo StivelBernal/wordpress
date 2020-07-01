@@ -96,7 +96,7 @@ function serlib_buscador_home_results_shortcode(){
         $titulo = explode('/' ,$url);
         $icono = wp_get_attachment_image_src( get_post_meta($categorias_publicacion[$i]->post_id, 'icono_publicacion_municipio' )[0], 'single-post-thumbnail')[0];
         $imagen =  wp_get_attachment_image_src( get_post_thumbnail_id( $categorias_publicacion[$i]->post_id ), 'single-post-thumbnail' )[0];
-        $iconos[$titulo[1]] = [ $titulo[1], $icono, $imagen];
+        $iconos[$titulo[1]] = [ $url, $icono, $imagen];
     }
 
     $formHTML = '
@@ -110,11 +110,11 @@ function serlib_buscador_home_results_shortcode(){
     // Obtener todas las categorias relacionadas a la categoria
 
     $items = '';
-
+    
     foreach( $iconos as $key => $value ){
-
+       
         $items .='
-          <a  href="'.$value[0].'" class="s-20 item-servicio-home">
+          <a  href="/'.$value[0].'" class="s-field">
               <div class="serlib-gallery-item">
                   <div class="serlib-simple-item-image">
                       <img class="fondo" src="'.$value[2].'" class="" >
