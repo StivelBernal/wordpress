@@ -107,7 +107,7 @@ function serlib_users_info(){
                 'post_content'                =>    $content,
                 'post_name'                   =>    $title,
                 'post_title'                  =>    $title,
-                'post_status'                 =>    'pending',
+                'post_status'                 =>    ($objDatos->ID ? 'published': 'pending'),
                 'post_type'                   =>    'blog',
                 'comment_status'              =>    'open'
             ]);
@@ -122,6 +122,9 @@ function serlib_users_info(){
                 if( isset($_GET['id_featured']) && $_GET['id_featured'] !== 0 ){
                     require_once( ABSPATH . 'wp-admin/includes/image.php' );
                     set_post_thumbnail( $post_id, absint($_GET['id_featured']) );
+                }else{
+                    require_once( ABSPATH . 'wp-admin/includes/image.php' );
+                    set_post_thumbnail( $post_id, 637 );
                 }
                 
                 $results['status']  =   2;
@@ -299,7 +302,7 @@ function serlib_users_info(){
                 'post_name'                   =>    $title,
                 'post_title'                  =>    $title,
                 'post_excerpt'                =>    $excerpt,
-                'post_status'                 =>    'pending',
+                'post_status'                 =>    ($objDatos->ID ? 'published': 'pending'),
                 'post_type'                   =>    'post',
                 'comment_status'              =>    'open'
             ]);

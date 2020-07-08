@@ -149,7 +149,44 @@ function serlib_buscador_home_results_blog_shortcode($atts){
 		'tipo_usuario' => 'alcaldia'
   ), $atts );
   
-  if($a['tipo_usuario'] === 'alcaldia'){
+  $rutas = explode('/' ,$_SERVER['REQUEST_URI']);
+
+  if(isset($rutas[1]) ){
+    $municipio = get_term_by('slug', $rutas[1], 'category' );
+  }
+ 
+  if( !$municipio ){
+   
+    if($a['tipo_usuario'] === 'alcaldia'){
+      $HTML = file_get_contents( 'templates/results-home-alcaldia.php', true );
+    }else if($a['tipo_usuario'] === 'gobernacion'){
+      $HTML = file_get_contents( 'templates/results-home-gobernacion.php', true );
+    }
+      
+  }else{
+   
+    if($a['tipo_usuario'] === 'alcaldia'){ 
+      $HTML = file_get_contents( 'templates/results-destino-alcaldia.php', true );
+
+    }else if($a['tipo_usuario'] === 'gobernacion'){
+      $HTML = file_get_contents( 'templates/results-destino-gobernacion.php', true );
+    }
+   
+  }
+
+echo $HTML;
+
+}
+
+
+
+function serlib_entradas_user_shortcode($atts){
+
+  $a = shortcode_atts( array(
+		'id_user' => 0
+  ), $atts );
+  
+  if($a['id_user'] === '0'){
     $HTML = file_get_contents( 'templates/results-home-alcaldia.php', true );
   }else if($a['tipo_usuario'] === 'gobernacion'){
     $HTML = file_get_contents( 'templates/results-home-gobernacion.php', true );
