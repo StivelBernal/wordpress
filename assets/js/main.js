@@ -336,12 +336,15 @@
   }
  
 
-  function noticias_destinos() {   
-    
+  
+
+
+  if(typeof(gobernacion_id) != 'undefined' ){
+     
     $('#search-results .row-wrap').css('display', 'flex');
 
     if(typeof(gobernacion_id) == undefined){
-        console.log('algo');
+       
         var id_gobernacion = null,
         id_municipio = null;
     }
@@ -423,11 +426,11 @@
 
     });  
 
-  }
 
 
-  if(typeof(gobernacion_id) !== undefined ){
-    noticias_destinos();
+
+
+
   }else{
     primer_destino();
   }
