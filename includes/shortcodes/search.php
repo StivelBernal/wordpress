@@ -174,7 +174,7 @@ function serlib_buscador_home_results_blog_shortcode($atts){
    
   }
 
-echo $HTML;
+return $HTML;
 
 }
 
