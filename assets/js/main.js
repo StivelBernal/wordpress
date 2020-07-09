@@ -16,6 +16,12 @@
         });
     });
 
+   
+
+    
+
+   // $('.reveal-category-item excerpt-category-item a').click(function(e){ e.preventDefault()})
+
 
     /**Carruseles */
   $(document).ready(function () {
@@ -334,6 +340,12 @@
     
     $('#search-results .row-wrap').css('display', 'flex');
 
+    if(typeof(gobernacion_id) == undefined){
+        console.log('algo');
+        var id_gobernacion = null,
+        id_municipio = null;
+    }
+
     var form        =   {
         action:         'serlib_entries',
         alcaldia:       id_municipio,
@@ -413,7 +425,8 @@
 
   }
 
-  if(typeof(gobernacion_id) !== undefined){
+
+  if(typeof(gobernacion_id) !== undefined ){
     noticias_destinos();
   }else{
     primer_destino();
@@ -499,7 +512,11 @@ search_app.controller('formController', ['$scope', '$http',
 }]);
 
 
-var comercio_page_app = angular.module('comercio_page', [])
+var comercio_page_app = angular.module('comercio_page', ['ngMaterial'])
+    .config(function ($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('light-green');
+    })
    .controller('pageController', ['$scope', 
     function pageController($scope) {
     
@@ -518,6 +535,7 @@ $scope.comment_text = '';
 $scope.reply_id = false;
 $scope.galery = [];
 $scope.preview_galery = [];
+$scope.cal_total = cal_total;
 $scope.is_submit = false;
 $scope.preview_default = '/wp-content/plugins/ser_lib/assets/img/images.png'
 $scope.error = '', $scope.success = '';
@@ -728,7 +746,11 @@ return {
 });
 
 
-var comments_app = angular.module('comments', [])
+var comments_app = angular.module('comments', ['ngMaterial'])
+    .config(function ($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('light-green');
+    })
    .controller('commentsController', ['$scope',  '$http',
     function commentsController($scope, $http) {
     /**Aqui Guardaria el label y i para guardarlo */
@@ -738,6 +760,7 @@ var comments_app = angular.module('comments', [])
     $scope.item_star = [];
     $scope.item_selected = [];
     $scope.comment_text = '';
+    $scope.cal_total = cal_total;
     $scope.reply_id = false;
     $scope.galery = [];
     $scope.preview_galery = [];
