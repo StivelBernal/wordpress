@@ -336,18 +336,12 @@
   }
  
 
-  
-
-
-  if(typeof(gobernacion_id) != 'undefined' ){
+  if (typeof(carrusel_instancia) !== 'undefined' ){
+    primer_destino();
+  }
+  else if (typeof(id_gobernacion) !== 'undefined' ){
      
     $('#search-results .row-wrap').css('display', 'flex');
-
-    if(typeof(gobernacion_id) == undefined){
-       
-        var id_gobernacion = null,
-        id_municipio = null;
-    }
 
     var form        =   {
         action:         'serlib_entries',
@@ -357,8 +351,6 @@
 
     /**Llamar a las entradas de las alcaldias a mostrar */
     $.post( front_obj.ajax_url, form, function(data){
-        $('#entradas_gobernacion_fila').show();
-        $('#entradas_alcaldia_fila').show();
         
         var slides_alcaldia =  [], slides_gobernacion =  [];
         for(var i = 0; i < data.alcaldia.length; i++){ 
@@ -431,8 +423,6 @@
 
 
 
-  }else{
-    primer_destino();
   }
  
 

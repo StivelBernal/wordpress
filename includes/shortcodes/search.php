@@ -160,7 +160,8 @@ function serlib_buscador_home_results_blog_shortcode($atts){
     if($a['tipo_usuario'] === 'alcaldia'){
       $HTML = file_get_contents( 'templates/results-home-alcaldia.php', true );
     }else if($a['tipo_usuario'] === 'gobernacion'){
-      $HTML = file_get_contents( 'templates/results-home-gobernacion.php', true );
+
+      $HTML = '<script>var carrusel_instancia = true;</script>'.file_get_contents( 'templates/results-home-gobernacion.php', true );
     }
       
   }else{
@@ -174,7 +175,7 @@ function serlib_buscador_home_results_blog_shortcode($atts){
    
   }
 
-return $HTML;
+echo $HTML;
 
 }
 

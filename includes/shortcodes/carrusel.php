@@ -45,7 +45,7 @@ function serlib_carrusel_destinos_shortcode($atts){
 
     }
     
-    return  ' 
+    return  '   
                 <div class="carrusel-destinos">
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
