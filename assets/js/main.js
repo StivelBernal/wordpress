@@ -1362,7 +1362,7 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
                 case 'instagram':
 
                     sessionStorage.setItem('auth', JSON.stringify(datos) );
-                    window.location = '/auth/register';
+                    setTimeout(() => { window.location = '/auth/register'; }, 3000); 
                     break;
                     
             }
@@ -1378,11 +1378,27 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
             }).then(function successCallback(response) {
                  
                 if(response.data.success){
+                       
+                    var rol = response.data.success.roles[0];
+                    
+                    
+                    if(rol === 'turista'){
+                        setTimeout(() => { window.location = "/"; }, 2500);
+                    }else if(rol === 'comerciante'){
+                        setTimeout(() => { window.location = "/mi-cuenta#!/negocios/all"; }, 2500);
+                    }else if(rol === 'alcaldia' || rol === 'gobernacion'){
+                        setTimeout(() => { window.location = "/articulos/all"; }, 2500);
+                    }else if(rol === 'staff' || rol === 'administrator'){
+                        setTimeout(() => { window.location = "/wp-admin"; }, 2500);
+                    }
+
                     $scope.user_login = true;
-                    setTimeout(() => { window.location = "/blog"; }, 1000);
                    
                 }else if(response.data.error){
+                    $scope.error = response.data.error;
+                    $scope.is_submit = false;
                     if( Config.action === 'login'){
+                     
                         $scope.error = response.data.error;
                         $scope.redirect_register_social(datos);
                    
@@ -1390,9 +1406,10 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
                        $scope.Instance = datos;
                        $scope.UpdateInstance();
                     }
-                    
-                    $scope.is_submit = false;
+
                 }
+
+                
 
             }, function errorCallback(error) {
                 $scope.is_submit = false;

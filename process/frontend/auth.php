@@ -327,6 +327,8 @@ function serlib_auth_handler(){
         if($creds !== null){
 
             $user   =   wp_signon( $creds, is_ssl());
+
+          //  var_dump($user);
           
             if( is_wp_error($user) ){
                 $output['error'] = _x('correo electrónico o contraseña invalida', 'login form mensaje error contraseña', 'serlib');
