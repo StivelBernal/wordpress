@@ -40,10 +40,8 @@ function serlib_auth_handler(){
                                 
                             </div>
                         </body>
-                    }
+                    
                     </html> '; 
-
-                
                 
         /**
         *Funcion para enviar el mensaje

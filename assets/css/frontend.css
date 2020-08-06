@@ -232,6 +232,27 @@ button[disabled]{
 .profile-image-container > label > span:before{ 
     font-size: 19px;
 }
+
+input[type=date] {
+    width: 100%;
+    margin: 0 0 15px;
+    padding: 16px 24px 15px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: inherit;
+    color: #303030;
+    background-color: #f9f9f9;
+    border: 1px solid #e1e1e1;
+    border-radius: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    -webkit-transition: border-color .2s ease-in-out;
+    -moz-transition: border-color .2s ease-in-out;
+    transition: border-color .2s ease-in-out;
+}
     
 #photo-profile{
     opacity:0;

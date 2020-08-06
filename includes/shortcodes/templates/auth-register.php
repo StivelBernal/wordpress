@@ -58,9 +58,8 @@ NONCE_FIELD_PH
                        
                         <div class="form-group s-45">
                             <label for="birthdate">fecha_nacimiento_I18N</label>
-                            <datepicker  date-format="yyyy-MM-dd" button-prev-title="previous month"  button-next-title="next month" date-year-title="Click aqui">
-                                <input  ng-model="Model.birthday" name="birthdate" id="birthdate" type="text" required/>
-                            </datepicker>
+                            <input  ng-model="Model.birthday" name="birthdate" id="birthdate" type="date" required/>
+                            
                             <div ng-messages="registerForm.birthdate.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
@@ -80,7 +79,7 @@ NONCE_FIELD_PH
                             <label for="password">password1_I18N</label>
                             <input  class="fovea-input input-text" type="password" ng-model="Model.password" name="password" id="password" maxlength="255"  
                                     ng-pattern="/^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])).{6,}$/" required>
-                            <div ng-messages="registerForm.password.$error" style="height:50px;">
+                            <div ng-messages="registerForm.password.$error" style="height:auto;">
                                 <div ng-message="required">required_I18N</div>
                                 <div ng-message="pattern">password_error_I18N</div>
                             </div>
@@ -90,7 +89,7 @@ NONCE_FIELD_PH
                             <label for="password2">repeat_password_I18N</label>
                             <input class="fovea-input input-text" type="password" match="Model.password" name="password2" 
                                     ng-model="Model.password_confirm" id="password2" maxlength="255" required>
-                            <div ng-messages="registerForm.password2.$error" style="height:50px;">
+                            <div ng-messages="registerForm.password2.$error" style="height:auto;">
                                 <div ng-message="required">required_I18N</div>
                                 <div ng-message="match">password_error_matchI18N</div>
                             </div>
@@ -260,7 +259,7 @@ NONCE_FIELD_PH
                             <label for="c_password">password1_I18N</label>
                             <input class="fovea-input input-text" type="password" ng-model="Model.password" name="password" id="c_password" maxlength="255"  
                              ng-pattern="/^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])).{6,}$/" required>
-                            <div ng-messages="c_Form.password.$error" style="height:50px;">
+                            <div ng-messages="c_Form.password.$error" style="height:auto;">
                                 <div ng-message="required">required_I18N</div>
                                 <div ng-message="pattern">password_error_I18N</div>
                             </div>
@@ -270,7 +269,7 @@ NONCE_FIELD_PH
                             <label for="c_password2">repeat_password_I18N</label>
                             <input class="fovea-input input-text" type="password" match="Model.password" name="password2" 
                              ng-model="Model.password_confirm" id="c_password2" maxlength="255" required>
-                            <div ng-messages="c_Form.password2.$error" style="height:50px;">
+                            <div ng-messages="c_Form.password2.$error" style="height:auto;">
                                 <div ng-message="required">required_I18N</div>
                                 <div ng-message="match">password_error_matchI18N</div>
                             </div>
