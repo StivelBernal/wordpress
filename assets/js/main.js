@@ -1387,7 +1387,7 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
                     }else if(rol === 'comerciante'){
                         setTimeout(() => { window.location = "/mi-cuenta#!/negocios/all"; }, 2500);
                     }else if(rol === 'alcaldia' || rol === 'gobernacion'){
-                        setTimeout(() => { window.location = "/articulos/all"; }, 2500);
+                        setTimeout(() => { window.location = "/mi-cuenta#!/articulos/all"; }, 2500);
                     }else if(rol === 'staff' || rol === 'administrator'){
                         setTimeout(() => { window.location = "/wp-admin"; }, 2500);
                     }
