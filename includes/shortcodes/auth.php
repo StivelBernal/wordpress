@@ -37,7 +37,7 @@ function login_redirect() {
     $user = base64_decode($_GET['u']);
 
     $code = base64_decode($_GET['confirm']);
-
+    echo 'algo';
     $user = get_user_by('login', $user);
   
     if(!$user) return '';
