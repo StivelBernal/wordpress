@@ -931,8 +931,7 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
 
 .btnn-edit{
     background-color: orange;
-    padding: 17px;
-
+    padding: 11px;
     text-align: center;
     line-height: 20px;
     border-radius: 100%;
@@ -943,8 +942,7 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
 
 .btnn-delete{
     background-color: red;
-    padding: 17px;
-
+    padding: 11px;
     text-align: center;
     line-height: 20px;
     border-radius: 100%;
