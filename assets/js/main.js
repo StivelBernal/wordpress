@@ -1122,23 +1122,20 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         });
         
         $scope.profile_photo = 'https://golfodemorrosquillo.com/wp-content/uploads/2020/05/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
-        if(sessionStorage.getItem('set_auth') !== 0){
-            sessionStorage.removeItem('auth'); sessionStorage.removeItem('auth_instagram');
-        }
-        
+                
         $scope.Instance = JSON.parse(sessionStorage.getItem('auth'));
         
         $scope.UpdateInstance = function(load = false){
             if(load) $scope.Model = {};
             if( !hasValue($scope.Instance ) ){
-                sessionStorage.setItem('set_auth', 1)
+                
                 $scope.Model = { modo: 'directo', _wpnonce: angular.element('#_wpnonce').val() };
-            }else{
+            }else if(sessionStorage.getItem('set_auth')){
                 
                 $scope.profile_photo = hasValue($scope.Instance.picture) ? $scope.Instance.picture: $scope.profile_photo;
                 
                 if($scope.Instance.modo === 'instagram'){
-                    sessionStorage.setItem('set_auth', 1)
+                    
                     var instagramForm = JSON.parse(sessionStorage.getItem('auth_instagram'));       
                     $scope.Model = angular.merge(instagramForm, { modo: $scope.Instance.modo, nombre: $scope.Instance.username, photo_url: '', _wpnonce: angular.element('#_wpnonce').val() });
             
@@ -1147,6 +1144,8 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                     $scope.Model = angular.merge( Form, { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, photo_url: '', _wpnonce: angular.element('#_wpnonce').val() } );
                     
                 }
+
+                sessionStorage.clear();
 
             }
             
@@ -1380,12 +1379,12 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
                 url:    front_obj.ajax_url,
                 data:   datos,
             }).then(function successCallback(response) {
-                 
+
                 if(response.data.success){
                        
                     var rol = response.data.success.roles[0];
                     
-                    
+
                     if(rol === 'turista'){
                         setTimeout(() => { window.location = "/"; }, 2500);
                     }else if(rol === 'comerciante'){
