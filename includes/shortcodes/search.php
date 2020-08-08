@@ -82,8 +82,8 @@ function serlib_buscador_home_results_shortcode(){
 
   if(isset($rutas[1]) ){
     $municipio = get_term_by('slug', $rutas[1], 'category' );
-
   }
+
 
   if( isset($municipio) && $municipio !== false){
     global $wpdb;
@@ -108,7 +108,7 @@ function serlib_buscador_home_results_shortcode(){
    // $formHTML .= file_get_contents( 'templates/results-home.php', true );
 
     // Obtener todas las categorias relacionadas a la categoria
-
+    var_dump($iconos);
     $items = '';
     
     foreach( $iconos as $key => $value ){
