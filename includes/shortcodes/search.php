@@ -95,10 +95,10 @@ function serlib_buscador_home_results_shortcode(){
         $url = get_post_meta($categorias_publicacion[$i]->post_id, 'relacion_categoria' )[0];
         $titulo = explode('/' ,$url);
         $icono = wp_get_attachment_image_src( get_post_meta($categorias_publicacion[$i]->post_id, 'icono_publicacion_municipio' )[0], 'single-post-thumbnail')[0];
-        $imagen =  wp_get_attachment_image_src( get_post_thumbnail_id( $categorias_publicacion[$i]->post_id ))[0];
+        $imagen =  wp_get_attachment_image_src( get_post_thumbnail_id( $categorias_publicacion[$i]->post_id ), 'medium' )[0];
         $iconos[$titulo[1]] = [ $url, $icono, $imagen];
     }
- 
+
     $formHTML = '
       <div class="row" id="search-results">
         <!--CONTROLADOR PARA MOSTRAR SERVICIOS-->
