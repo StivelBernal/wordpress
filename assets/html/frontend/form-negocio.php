@@ -121,7 +121,6 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                     <input ng-model="Model.direccion"  type="text"  >
                 </div>
 
-
             </div>
 
             <summernote config="options" id="summernote" ng-model="Model.post_content" required>descripcion</summernote>
