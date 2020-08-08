@@ -1857,6 +1857,7 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
                 processData:false,
                 success: function(url) {
                     /**BRAYAN */
+                    console.log(url);
                     angular.element('#summernote').summernote('editor.insertImage', url);
 
                 },

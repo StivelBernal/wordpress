@@ -59,7 +59,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                 </div>
             </div>
             
-            <summernote config="options" ng-model="Model.post_content"></summernote>
+            <summernote config="options" id="summernote" ng-model="Model.post_content"></summernote>
             
         </div>
 
