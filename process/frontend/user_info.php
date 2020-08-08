@@ -212,6 +212,7 @@ function serlib_users_info(){
             
             if( isset($_GET['municipios'] )){
             
+             
                 $results['municipios'] = get_terms([
                     'hide_empty' => false,
                     'order' => 'DESC',
@@ -222,6 +223,8 @@ function serlib_users_info(){
                     'order' => 'DESC']);
                 
             }
+
+
             if( isset($_GET['tipos'] )){
                 
                 $tipos_alcaldia = ['emergencias', 'transporte', 'eventos', 'cultura', 'sitios', 'ferias-y-fiestas'  ];
@@ -378,6 +381,10 @@ function serlib_users_info(){
             }
             
             if( isset($_GET['municipios'] )){
+
+                /**PONER CONDICION PARA QUE SOLO PASEN LOS MUNICIPIOS RELACIONADOS A ESTE USUARIO 
+                 * TRAER LOS DESTINOS Y ORGANIZARLOS Y COMPARAR
+                */
             
                 $results['municipios'] = get_terms([
                     'hide_empty' => false,
@@ -388,7 +395,7 @@ function serlib_users_info(){
 
             if( isset($_GET['tipos'] )){
                 
-                $tipos_alcaldia = ['emergencias', 'transporte' ];
+                $tipos_alcaldia = ['emergencias', 'transporte', 'eventos', 'cultura', 'sitios', 'ferias-y-fiestas'  ];
                 $arrayTaxAlcaldia = [];
                 $results['tipos'] = get_terms([
                     'hide_empty' => false,
