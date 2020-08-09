@@ -97,6 +97,8 @@ function serlib_buscador_home_results_shortcode(){
         $icono = wp_get_attachment_image_src( get_post_meta($categorias_publicacion[$i]->post_id, 'icono_publicacion_municipio' )[0], 'single-post-thumbnail')[0];
         $imagen =  wp_get_attachment_image_src( get_post_thumbnail_id( $categorias_publicacion[$i]->post_id ), 'medium' )[0];
         $iconos[$titulo[1]] = [ $url, $icono, $imagen];
+
+        var_dump(get_post_thumbnail_id( $categorias_publicacion[$i]->post_id));
     }
 
     $formHTML = '
@@ -108,7 +110,7 @@ function serlib_buscador_home_results_shortcode(){
    // $formHTML .= file_get_contents( 'templates/results-home.php', true );
 
     // Obtener todas las categorias relacionadas a la categoria
-    var_dump($iconos);
+    //var_dump($iconos);
     $items = '';
     
     foreach( $iconos as $key => $value ){
