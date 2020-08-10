@@ -77,7 +77,7 @@ function serlib_uploader(){
             }   
             
             if($_GET["destino"] === 'image'){
-                echo wp_get_attachment_image_src($upload_id)[0];
+                echo wp_get_attachment_image_src($upload_id, 'full')[0];
             }else{
                 wp_send_json($output);
             }
