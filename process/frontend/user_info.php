@@ -441,7 +441,7 @@ function serlib_users_info(){
                     'post_content'                =>    $content,
                     'post_name'                   =>    $title,
                     'post_title'                  =>    $title,
-                    'post_status'                 =>    'published',
+                    'post_status'                 =>    'publish',
                     'post_type'                   =>    'post',
                     'comment_status'              =>    'closed'
                  ]);
@@ -451,7 +451,7 @@ function serlib_users_info(){
                     'post_content'                =>    $content,
                     'post_name'                   =>    $title,
                     'post_title'                  =>    $title,
-                    'post_status'                 =>    'published',
+                    'post_status'                 =>    'publish',
                     'post_type'                   =>    'post',
                     'comment_status'              =>    'closed'
                  ]);
@@ -611,7 +611,7 @@ function serlib_users_info(){
                     'post_content'                =>    $content,
                     'post_name'                   =>    $title,
                     'post_title'                  =>    $title,
-                    'post_status'                 =>    'published',
+                    'post_status'                 =>    'publish',
                     'post_type'                   =>    'post',
                     'comment_status'              =>    'closed'
                  ]);
@@ -621,9 +621,9 @@ function serlib_users_info(){
                     'post_content'                =>    $content,
                     'post_name'                   =>    $title,
                     'post_title'                  =>    $title,
-                    'post_status'                 =>    'published',
+                    'post_status'                 =>    'publish',
                     'post_type'                   =>    'post',
-                    'comment_status'              =>    'closed'
+                    'comment_status'              =>    'open'
                  ]);
             }
             
