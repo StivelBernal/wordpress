@@ -98,7 +98,7 @@ function serlib_buscador_home_results_shortcode(){
         $imagen =  wp_get_attachment_image_src( get_post_thumbnail_id( $categorias_publicacion[$i]->post_id ), 'medium' )[0];
         $iconos[$titulo[1]] = [ $url, $icono, $imagen];
         
-        var_dump(get_post_thumbnail_id($categorias_publicacion[$i]->post_id));
+        var_dump(get_the_post_thumbnail_url($categorias_publicacion[$i]->post_id));
     }
 
     $formHTML = '
