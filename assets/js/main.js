@@ -1130,8 +1130,9 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             if( !hasValue($scope.Instance ) ){
                 
                 $scope.Model = { modo: 'directo', _wpnonce: angular.element('#_wpnonce').val() };
-            }else if(sessionStorage.getItem('set_auth')){
+            }else {
                 
+
                 $scope.profile_photo = hasValue($scope.Instance.picture) ? $scope.Instance.picture: $scope.profile_photo;
                 
                 if($scope.Instance.modo === 'instagram'){
@@ -1144,8 +1145,11 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                     $scope.Model = angular.merge( Form, { modo: $scope.Instance.modo, nombre: $scope.Instance.first_name, apellido: $scope.Instance.last_name, email: $scope.Instance.email, photo_url: '', _wpnonce: angular.element('#_wpnonce').val() } );
                     
                 }
-
-                sessionStorage.clear();
+                
+                if(sessionStorage.getItem('set_auth')){
+                    sessionStorage.clear();
+                }
+                
 
             }
             
