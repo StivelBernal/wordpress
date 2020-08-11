@@ -100,7 +100,7 @@ function serlib_buscador_home_results_shortcode(){
         
         var_dump(get_the_post_thumbnail_url($categorias_publicacion[$i]->post_id));
     }
-
+    var_dump(count($categorias_publicacion));
     $formHTML = '
       <div class="row" id="search-results">
         <!--CONTROLADOR PARA MOSTRAR SERVICIOS-->
