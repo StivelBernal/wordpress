@@ -107,7 +107,7 @@ function serlib_users_info(){
                 'post_content'                =>    $content,
                 'post_name'                   =>    $title,
                 'post_title'                  =>    $title,
-                'post_status'                 =>    ($objDatos->ID ? 'published': 'pending'),
+                'post_status'                 =>    'pending',
                 'post_type'                   =>    'blog',
                 'comment_status'              =>    'open'
             ]);
@@ -305,7 +305,7 @@ function serlib_users_info(){
                 'post_name'                   =>    $title,
                 'post_title'                  =>    $title,
                 'post_excerpt'                =>    $excerpt,
-                'post_status'                 =>    ($objDatos->ID ? 'published': 'pending'),
+                'post_status'                 =>    'pending',
                 'post_type'                   =>    'post',
                 'comment_status'              =>    'open'
             ]);
