@@ -6,7 +6,7 @@ function serlib_activate_plugin(){
         wp_die( __('Versión minima soportada de wordpress 5.*', 'serlib')  );
     }
     
-    require( ABSPATH . "/wp-admin/includes/upgrade.php" );
+//    require( ABSPATH . "/wp-admin/includes/upgrade.php" );
   /*
     global $wpdb;
 
