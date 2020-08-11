@@ -1017,7 +1017,7 @@ app.controller('loginController', ['$scope', '$http', '$controller',
                             setTimeout(() => { window.location = "/"; }, 2500);
                         }else if(rol === 'comerciante'){
                             setTimeout(() => { window.location = "/mi-cuenta#!/negocios/all"; }, 2500);
-                        }else if(rol === 'alcaldia' || rol === 'gobernacion'){
+                        }else if(rol === 'alcaldia' || rol === 'gobernacion' || rol === 'aliado'){
                             setTimeout(() => { window.location = "mi-cuenta/#!/articulos/all"; }, 2500);
                         }else if(rol === 'staff' || rol === 'administrator'){
                             setTimeout(() => { window.location = "/wp-admin"; }, 2500);

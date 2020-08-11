@@ -73,7 +73,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                         <selector model="Model.post_category" name="categories" value-attr="term_id" Label-attr="name" multi="true" options="categories"></selector>
                     </div>
                 </div>';
-            }else if($roles === 'alcaldia' || $roles === 'gobernacion'){
+            }else if($roles === 'alcaldia' || $roles === 'gobernacion' || $roles === 'aliado'){
                 echo'
                 <div class="s-100">
                     <div class="form-group s-flex">

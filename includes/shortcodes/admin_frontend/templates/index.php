@@ -42,6 +42,14 @@
                         </ul>
                     </li>
 
+                    <li ng-if="rol === 'aliado'" class="menu"  ui-sref-active="{'active': 'articulos'}" aria-hidden="false">
+                        <div  class="title">PUBLICACIONES</div>
+                        <ul class="submenu">
+                            <li ><a ui-sref-active="{'active': 'articulos.all'}" ui-sref="articulos.all">Publicaciones</a></li>
+                            <li ><a ui-sref-active="{'active': 'articulos.create'}" ui-sref="articulos.create">Agregar nueva</a></li>
+                        </ul>
+                    </li>
+
                     <li class="menu" ui-sref-active="{'active': 'profile'}" aria-hidden="false">
                         <div class="title">EDITAR PERFIL</div>
                         <ul class="submenu">

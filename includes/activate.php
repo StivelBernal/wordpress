@@ -115,6 +115,16 @@ function serlib_activate_plugin(){
     );
 
     add_role(
+        'aliado',
+        __('Aliado', 'serlib'),
+        [
+            'read'          =>  true,
+            'edit_posts'    =>  true,
+            'upload_files'  =>  true
+        ]
+    );
+
+    add_role(
         'staff',
         __('Staff', 'serlib'),
         [
