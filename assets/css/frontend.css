@@ -1281,6 +1281,7 @@ p[disabled = "disabled"]{
     padding:5px;
     border:#33333355;
     outline: none;
+    transition: all ease 0.4s;
 
 }
 
@@ -1294,8 +1295,34 @@ p[disabled = "disabled"]{
 
 .whatsapp-compartir{
     color: #00db42;
+    font-size:1.1rem;
+    font-weight: 700;
+}
+.history-back span{
+    margin-right:4px;
 }
 
 .me_gusta_post{
     color: #db1a00;
+}
+
+
+.facebook-compartir:hover:hover{
+    background-color: #00a2ff;
+    color: #fff;
+}
+
+.mail-compartir:hover{
+    background-color: #6b6b6b;
+    color: #fff;
+}
+
+.whatsapp-compartir:hover{
+    background-color: #00db42;
+    color: #fff;
+}
+
+.me_gusta_post:hover{
+    color: #fff;
+    background-color: #db1a00;
 }

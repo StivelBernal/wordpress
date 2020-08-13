@@ -471,6 +471,10 @@
 
   });
 
+  $('.history-back').click(function(){
+    history.back();
+  });
+
   $('.me_gusta_post').click(function(){
     
     $(this).addClass('load');

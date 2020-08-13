@@ -1,8 +1,10 @@
 <?php
 
 function ser_like_share_shortcode(){
-    $like_count  =   count(get_post_meta( get_the_ID(), 's_likes_data')[0]);
+    $like_count  =   get_post_meta( get_the_ID(), 's_likes_data');
+    $like_count  =  !empty($like_count) ? count($like_count[0]): 0;
     echo '<div class="s_socials_shared">
+                <button class="history-back"><span class="mkdf-social-icon-widget fa fa-reply"></span>'.__( 'Volver', 'serlib' ).'</button>
                 <button red="facebook" class="facebook-compartir ser-shared-sn"><span class="mkdf-social-icon-widget fa fa-facebook"></span></button>
                 <button red="email" class="mail-compartir ser-shared-sn"><span class="mkdf-social-icon-widget fa fa-envelope"></span></button>
                 <button red="whatsapp" class="whatsapp-compartir ser-shared-sn"><span class="mkdf-social-icon-widget ion-social-whatsapp-outline"></span></button>
