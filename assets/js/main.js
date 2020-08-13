@@ -471,17 +471,22 @@
 
   });
 
-  $('me_gusta_post').click(function(){
+  $('.me_gusta_post').click(function(){
+    
     $(this).addClass('load');
+    var contador = $(this).children('.number');
+   
     var form        =   {
-        action:         'serlib_like_destino'
+        action:         'serlib_like_destino',
+        ID: $(this).attr('id_post')
     };
+
     $.ajax({
         type: "POST",
         url: front_obj.ajax_url,
         data: form,
         success: function(data){
-            console.log(data);
+            contador.html(data);
         },
         error: function(error){
             console.log(error);
