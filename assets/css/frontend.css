@@ -1278,7 +1278,6 @@ p[disabled = "disabled"]{
 }
 
 .s_socials_shared button{
-    color:white;
     padding:5px;
     border:#33333355;
     outline: none;
@@ -1286,17 +1285,17 @@ p[disabled = "disabled"]{
 }
 
 .facebook-compartir{
-    background-color: #00a2ff;
+    color: #00a2ff;
 }
 
 .mail-compartir{
-    background-color: #ea00ff;
+    color: #6b6b6b;
 }
 
 .whatsapp-compartir{
-    background-color: #00db42;
+    color: #00db42;
 }
 
 .me_gusta_post{
-    background-color: #db1a00;
+    color: #db1a00;
 }
