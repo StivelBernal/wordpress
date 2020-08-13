@@ -699,7 +699,11 @@ label[for="fotocopia_documento"]{
 
 .serlib-gallery-item:hover img.icono{
     
-    visibility: hidden;   
+    /*visibility: hidden;*/   
+    transform : scale(1.1);
+    -moz-transform : scale(1.1); 
+    -webkit-transform : scale(1.1);  
+    -o-transform : scale(1.1);   
 }
 
 .serlib-gallery-item .serlib-simple-item-image{
