@@ -671,7 +671,7 @@ label[for="fotocopia_documento"]{
     height: 72%;
     width: 72%;
     display: flex;
-    visibility: hidden; 
+    visibility: visible; 
 }
 .serlib-gallery-item:hover .serlib-simple-item-image{
     background-color: rgba(0,0,0,0);
@@ -699,7 +699,7 @@ label[for="fotocopia_documento"]{
 
 .serlib-gallery-item:hover img.icono{
     
-    visibility: visible;   
+    visibility: hidden;   
 }
 
 .serlib-gallery-item .serlib-simple-item-image{
@@ -1272,18 +1272,27 @@ p[disabled = "disabled"]{
 .s_socials_shared{
     
 }
-.facebook-compartir{
 
+.s_socials_shared button{
+    color:white;
+    padding:5px;
+    border:#33333355;
+    outline: none;
+
+}
+
+.facebook-compartir{
+    background-color: #00a2ff;
 }
 
 .mail-compartir{
-
+    background-color: #ea00ff;
 }
 
 .whatsapp-compartir{
-
+    background-color: #00db42;
 }
 
 .me_gusta_post{
-
+    background-color: #db1a00;
 }

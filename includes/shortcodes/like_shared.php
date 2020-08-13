@@ -1,11 +1,12 @@
 <?php
 
 function ser_like_share_shortcode(){
+    $like_count  =   count(get_post_meta( get_the_ID(), 's_likes_data')[0]);
     echo '<div class="s_socials_shared">
                 <button red="facebook" class="facebook-compartir ser-shared-sn"><span class="mkdf-social-icon-widget fa fa-facebook"></span></button>
                 <button red="email" class="mail-compartir ser-shared-sn"><span class="mkdf-social-icon-widget fa fa-instagram"></span></button>
                 <button red="whatsapp" class="whatsapp-compartir ser-shared-sn"><span class="mkdf-social-icon-widget ion-social-whatsapp-outline"></span></button>
-                <button class="me_gusta_post" id_post="'.get_the_ID().'"><span class="mkdf-social-icon-widget fa fa-heart"></span> <span class="number">202</span></button>
+                <button class="me_gusta_post" id_post="'.get_the_ID().'"><span class="mkdf-social-icon-widget fa fa-heart"></span> <span class="number">'.$like_count.'</span></button>
             </div>
     ';
 }
