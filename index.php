@@ -39,6 +39,7 @@ include( 'includes/shortcodes/admin_frontend/main.php' );
 include( 'process/frontend/user_info.php' );
 include( 'process/frontend/references.php' );
 include( 'process/frontend/comments.php' );
+include( 'includes/shortcodes/like_shared.php' );
 
 // Hooks
 register_activation_hook( __FILE__ , 'serlib_activate_plugin' );
@@ -65,6 +66,9 @@ add_action( 'wp_ajax_serlib_uploader', 'serlib_uploader' );
 add_action( 'wp_ajax_serlib_references', 'serlib_references');
 add_action( 'wp_ajax_nopriv_serlib_references', 'serlib_references');
 add_action( 'wp_ajax_serlib_comments', 'serlib_comments');
+
+add_action( 'wp_ajax_serlib_like_destino' , 'serlib_like_destino' );
+
 add_filter( 'duplicate_comment_id', '__return_false');
 
 add_action( 'admin_init', 'serlib_admin_init' );
@@ -86,6 +90,11 @@ add_shortcode( 'serlib_buscador_home_results_blog', 'serlib_buscador_home_result
 // Admin frontend 
 add_shortcode( 'serlib_admin_frontend', 'serlib_admin_frontend_shortcode' );
 add_shortcode( 'menu_top_user', 'menu_top_user_shortcode' );
+
+
+/**Me gusta y compartir*/
+add_shortcode( 'ser_like_share', 'ser_like_share_shortcode' );
+
 
 // Modificaciones funciones de wordpress}
 

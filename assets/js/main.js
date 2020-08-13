@@ -449,6 +449,46 @@
 
   });
 
+  $('.ser-shared-sn').click(function(){
+    var url = '';
+    switch ($(this).attr('red')) {
+        case 'facebook':
+            url = 'http://www.facebook.com/sharer.php?u=https://golfodemorrosquillo.com';
+          break;
+        case 'email':
+            url = 'mailto:?subject=Visita%20este%20sitio%20en%20el%20golfo%20de%20morrosquillo&body==Echa%20un%20vistazo%20a%20este%20sitio%20en%20golfo%20de%20morrosquillo%20'+window.location;
+        break;
+    
+        case 'whatsapp':
+            url = 'https://api.whatsapp.com/send?text=Visita%20este%sitio%20en%Golfo%20de%20morrosquillo%20en%20'+window.location;
+          break;
+      
+      }
+
+      if(url !== ''){
+          window.open(url,'sharer','toolbar=0,status=0,width=648,height=395,top=100,left=100');
+      }
+
+  });
+
+  $('me_gusta_post').click(function(){
+    $(this).addClass('load');
+    var form        =   {
+        action:         'serlib_like_destino'
+    };
+    $.ajax({
+        type: "POST",
+        url: front_obj.ajax_url,
+        data: form,
+        success: function(data){
+            console.log(data);
+        },
+        error: function(error){
+            console.log(error);
+        }
+      });
+
+  });
   
 
 })(jQuery);
