@@ -102,3 +102,8 @@ add_shortcode( 'ser_like_share', 'ser_like_share_shortcode' );
 if ( !function_exists( 'wp_password_change_notification' ) ) {
     function wp_password_change_notification() {}
 }
+
+
+if ( !function_exists( 'wp_new_user_notification' ) ) {
+    function wp_new_user_notification() {}
+}
