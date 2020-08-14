@@ -1351,3 +1351,7 @@ p[disabled = "disabled"]{
 .swiper-container-aliado.swiper-container-initialized, .swiper-container.swiper-container-initialized{
     display:block !important;
 }
+
+.mkdf-team-image img{
+    height:210px;
+}
