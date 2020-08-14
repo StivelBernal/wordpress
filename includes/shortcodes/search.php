@@ -164,6 +164,9 @@ function serlib_buscador_home_results_blog_shortcode($atts){
     }else if($a['tipo_usuario'] === 'gobernacion'){
 
       $HTML = '<script>var carrusel_instancia = true;</script>'.file_get_contents( 'templates/results-home-gobernacion.php', true );
+    }else if($a['tipo_usuario'] === 'aliado'){
+
+      $HTML = '<script>var carrusel_instancia = true;</script>'.file_get_contents( 'templates/results-home-aliado.php', true );
     }
       
   }else{
@@ -173,6 +176,18 @@ function serlib_buscador_home_results_blog_shortcode($atts){
 
     }else if($a['tipo_usuario'] === 'gobernacion'){
       $HTML = file_get_contents( 'templates/results-destino-gobernacion.php', true );
+    }else if($a['tipo_usuario'] === 'aliado'){
+
+      $HTML = '<div class="mkdf-blog-holder mkdf-blog-standard-date-on-side entradas_tipo_usuario">
+                  <div class="swiper-container-tipo_usuario">
+                      <div class="swiper-wrapper">
+                          ';
+                  /**traemos los post de este tipo de usuario toca hacer toda la logica o llamar a la funcion */
+
+      $HTML .='
+                      </div>
+                  </div>
+              </div>';
     }
    
   }

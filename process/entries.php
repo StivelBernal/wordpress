@@ -2,35 +2,45 @@
 
 function serlib_entries(){
     
-    $results = [];  
+    $results = [];     
 
     if( isset($_POST['alcaldia']) ){
         
         global $wpdb;
 
-        $results = [];
+        $results = [];        
 
-        $users = get_users( [ 'role__in' => [ 'alcaldia' ] ] );
+        if($_POST['alcaldia'] === 'ALL'){
+       
+            $users = get_users( [ 'role__in' => [ 'alcaldia' ] ] );
 
-        $userif = '';
+            $userif = '';
         
-        for( $i = 0; $i < count($users); $i++ ){
-            if($i === 0){
-                $userif .= ' post_author = '.$users[$i]->ID;
-            }else{
-                $userif .= ' OR  post_author = '.$users[$i]->ID;
+            for( $i = 0; $i < count($users); $i++ ){
+                if($i === 0){
+                    $userif .= ' post_author = '.$users[$i]->ID;
+                }else{
+                    $userif .= ' OR  post_author = '.$users[$i]->ID;
+                }
             }
+        
+        }else{
+            $users = [$_POST['alcaldia']];
+            $userif = 'post_author = '.$_POST['alcaldia'];
+
         }
 
         if(count($users) !== 0){
-        
+            
             $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE ('.$userif.')  AND post_type = "post" AND post_status = "publish"  ORDER BY post_date LIMIT 10';
         
-            $results['alcaldia'] =  $wpdb->get_results( $query );
-            
+            $results['alcaldia'] = $wpdb->get_results( $query );
+                        
             for($i = 0; $i < count($results['alcaldia']); $i++){
+                
                 $results['alcaldia'][$i]->thumbnail = get_the_post_thumbnail_url($results['alcaldia'][$i]->ID);
-                $results['alcaldia'][$i]->permalink = get_permalink($results['alcaldia'][$i]->ID);
+                $results['alcaldia'][$i]->permalink = get_permalink($results['alcaldia'][$i]->ID);           
+            
             }
             
         }else {
@@ -42,16 +52,24 @@ function serlib_entries(){
 
     if( isset($_POST['gobernacion']) ){   
 
-        $users = get_users( [ 'role__in' => [ 'gobernacion' ] ] );
+        if( $_POST['gobernacion'] === 'ALL' ){   
 
-        $userif = '';
-        
-        for( $i = 0; $i < count($users); $i++ ){
-            if($i === 0){
-                $userif .= ' post_author = '.$users[$i]->ID;
-            }else{
-                $userif .= ' OR  post_author = '.$users[$i]->ID;
+            $users = get_users( [ 'role__in' => [ 'gobernacion' ] ] );
+
+            $userif = '';
+            
+            for( $i = 0; $i < count($users); $i++ ){
+                if($i === 0){
+                    $userif .= ' post_author = '.$users[$i]->ID;
+                }else{
+                    $userif .= ' OR  post_author = '.$users[$i]->ID;
+                }
             }
+        
+        }else{
+
+            $userif = 'post_author = '.$_POST['gobernacion'];
+
         }
 
         if(count($users) !== 0){
@@ -81,5 +99,76 @@ function serlib_entries(){
 
 
 }
+
+function serlib_entries_array($rol){
+
+    if(isset($_GET["busqueda"]) || empty($rol)){
+    
+        return [];
+    
+    }else{
+    
+        $rutas = explode('/' ,$_SERVER['REQUEST_URI']);
+    
+    }
+
+    if(isset($rutas[1]) ){
+        $categoria = get_term_by('slug', $rutas[1], 'category' );
+        $categoria = [ 'object_ids' => $categoria->term_id ];
+    }else{
+        $categoria = [];
+    }
+
+    
+    $results = [];  
+
+    if( isset($rol['aliado']) ){
+        
+        global $wpdb;
+
+        $results = [];
+            
+        $users = get_users( [ 'role__in' => [ 'aliado' ] ] );
+
+        $userif = '';
+        
+        for( $i = 0; $i < count($users); $i++ ){
+            if($i === 0){
+                $userif .= ' post_author = '.$users[$i]->ID;
+            }else{
+                $userif .= ' OR  post_author = '.$users[$i]->ID;
+            }
+        }
+
+        if(count($users) !== 0){
+        
+            $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE ('.$userif.')  AND post_type = "post" AND post_status = "publish"  ORDER BY post_date LIMIT 10';
+        
+            $results =  $wpdb->get_results( $query );
+            
+            for($i = 0; $i < count($results['aliado']); $i++){
+             
+                if( !empty(wp_get_post_categories($results['aliado'][$i]->ID, $categoria)) ){
+            
+                    $results['aliado'][$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
+                    $results['aliado'][$i]->permalink = get_permalink($results[$i]->ID);
+            
+                }else{
+                    array_splice($results, $i);
+                }
+               
+            }
+            
+        }
+
+        
+    }   
+
+    return $results;
+
+
+
+}
+
 ?>
 

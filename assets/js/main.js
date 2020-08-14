@@ -79,7 +79,7 @@
 
   function item_blog(publicacion, municipio){
     var date = new Date(publicacion.post_date);
-  
+    
     return '<div class="swiper-slide mkdf-team mkdf-item-space info-hover">'
         +'<div class="mkdf-team-inner">'
             +'<div class="mkdf-team-image">'
@@ -164,6 +164,8 @@
             $('#post_reciente_alcaldia .mkdf-post-date-day').text(date.getDay());
             $('#post_reciente_alcaldia .mkdf-post-date-month').text(months[date.getMonth()]);
             $('#post_reciente_alcaldia .mkdf-post-excerpt').text(data.alcaldia[0].post_excerpt );
+        }else{
+            $('#post_reciente_alcaldia').hide();
         }
 
         for(var i = 0; i < data.gobernacion.length; i++){ 
@@ -268,61 +270,67 @@
             $('#post_reciente_alcaldia .mkdf-post-date-day').text(date.getDay());
             $('#post_reciente_alcaldia .mkdf-post-date-month').text(months[date.getMonth()]);
             $('#post_reciente_alcaldia .mkdf-post-excerpt').text(data.alcaldia[0].post_excerpt );
+        }else{
+            $('#post_reciente_alcaldia').hide();
         }
 
         for(var i = 0; i < data.gobernacion.length; i++){ 
             slides_gobernacion.push( item_blog2(data.gobernacion[i]) );
         }
+        
+        if(slides_gobernacion.length !== 0){
 
-        var swiper1 = new Swiper('.swiper-container-gobernacion', {            
-            spaceBetween: 10,
-            loop: true,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: true
-            },
-            speed: 1500,
-            breakpoints: {
-                200: {
-                slidesPerView: 1
+            var swiper1 = new Swiper('.swiper-container-gobernacion', {            
+                spaceBetween: 10,
+                loop: true,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: true
                 },
-                700: {
-                slidesPerView: 2
-                },
-                1000: {
-                slidesPerView: 3
+                speed: 1500,
+                breakpoints: {
+                    200: {
+                    slidesPerView: 1
+                    },
+                    700: {
+                    slidesPerView: 2
+                    },
+                    1000: {
+                    slidesPerView: 3
+                    }
                 }
-            }
-        });
-        swiper1.removeAllSlides();
-        swiper1.appendSlide(slides_gobernacion);
+            });
+            swiper1.appendSlide(slides_gobernacion);
 
+        }
+
+        if(slides_alcaldia.length !== 0){
         
-        var swiper2 = new Swiper('.swiper-container-alcaldia', {            
-            spaceBetween: 10,
-            loop: true,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: true
-            },
-            speed: 1500,
-            breakpoints: {
-                200: {
-                slidesPerView: 1
+            var swiper2 = new Swiper('.swiper-container-alcaldia', {            
+                spaceBetween: 10,
+                loop: true,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: true
                 },
-                700: {
-                slidesPerView: 2
-                },
-                1000: {
-                slidesPerView: 3
+                speed: 1500,
+                breakpoints: {
+                    200: {
+                    slidesPerView: 1
+                    },
+                    700: {
+                    slidesPerView: 2
+                    },
+                    1000: {
+                    slidesPerView: 3
+                    }
                 }
-            }
-        });
-        swiper2.removeAllSlides();
-        swiper2.appendSlide(slides_alcaldia);
+            });
+            swiper2.removeAllSlides();
+            swiper2.appendSlide(slides_alcaldia);
 
-        
-        
+        }    
+            
         
         /**Aqui se invocaria el carrusel y se colocaria la primera entrada de la alcaldia*/
 
@@ -346,7 +354,8 @@
     var form        =   {
         action:         'serlib_entries',
         alcaldia:       id_municipio,
-        gobernacion:    id_gobernacion
+        gobernacion:    id_gobernacion,
+        municipio:       $(this).attr('municipio'),
     };
 
     /**Llamar a las entradas de las alcaldias a mostrar */
@@ -363,54 +372,61 @@
             slides_gobernacion.push( item_blog2(data.gobernacion[i]) );
         }
 
-        var swiper1 = new Swiper('.swiper-container-gobernacion', {            
-            spaceBetween: 10,
-            loop: true,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: true
-            },
-            speed: 1500,
-            breakpoints: {
-                200: {
-                slidesPerView: 1
+        if(slides_gobernacion.length !== 0){
+       
+            var swiper1 = new Swiper('.swiper-container-gobernacion', {            
+                spaceBetween: 10,
+                loop: true,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: true
                 },
-                700: {
-                slidesPerView: 2
-                },
-                1000: {
-                slidesPerView: 3
+                speed: 1500,
+                breakpoints: {
+                    200: {
+                    slidesPerView: 1
+                    },
+                    700: {
+                    slidesPerView: 2
+                    },
+                    1000: {
+                    slidesPerView: 3
+                    }
                 }
-            }
-        });
-        swiper1.removeAllSlides();
-        swiper1.appendSlide(slides_gobernacion);
+       
+            });
+           
+            swiper1.appendSlide(slides_gobernacion);
+
+        }
+
+        if(slides_alcaldia.length !== 0){
 
         
-        var swiper2 = new Swiper('.swiper-container-alcaldia', {            
-            spaceBetween: 10,
-            loop: true,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: true
-            },
-            speed: 1500,
-            breakpoints: {
-                200: {
-                slidesPerView: 1
+            var swiper2 = new Swiper('.swiper-container-alcaldia', {            
+                spaceBetween: 10,
+                loop: true,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: true
                 },
-                700: {
-                slidesPerView: 2
-                },
-                1000: {
-                slidesPerView: 3
+                speed: 1500,
+                breakpoints: {
+                    200: {
+                    slidesPerView: 1
+                    },
+                    700: {
+                    slidesPerView: 2
+                    },
+                    1000: {
+                    slidesPerView: 3
+                    }
                 }
-            }
-        });
-        swiper2.removeAllSlides();
-        swiper2.appendSlide(slides_alcaldia);
+            });
 
-        
+            swiper2.appendSlide(slides_alcaldia);
+
+        }
         
         
         /**Aqui se invocaria el carrusel y se colocaria la primera entrada de la alcaldia*/
