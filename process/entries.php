@@ -118,16 +118,15 @@ function serlib_entries_array($rol){
     }else{
         $categoria = [];
     }
-
     
     $results = [];  
 
-    if( isset($rol['aliado']) ){
+    if( $rol === 'aliado' ){
         
         global $wpdb;
 
         $results = [];
-            
+
         $users = get_users( [ 'role__in' => [ 'aliado' ] ] );
 
         $userif = '';
@@ -140,18 +139,19 @@ function serlib_entries_array($rol){
             }
         }
 
+
         if(count($users) !== 0){
         
             $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE ('.$userif.')  AND post_type = "post" AND post_status = "publish"  ORDER BY post_date LIMIT 10';
-        
+            
             $results =  $wpdb->get_results( $query );
             
-            for($i = 0; $i < count($results['aliado']); $i++){
+            for($i = 0; $i < count($results); $i++){
              
-                if( !empty(wp_get_post_categories($results['aliado'][$i]->ID, $categoria)) ){
+                if( !empty(wp_get_post_categories($results[$i]->ID, $categoria)) ){
             
-                    $results['aliado'][$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
-                    $results['aliado'][$i]->permalink = get_permalink($results[$i]->ID);
+                    $results[$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
+                    $results[$i]->permalink = get_permalink($results[$i]->ID);
             
                 }else{
                     array_splice($results, $i);

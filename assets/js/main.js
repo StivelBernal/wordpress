@@ -428,8 +428,28 @@
 
         }
         
-        
-        /**Aqui se invocaria el carrusel y se colocaria la primera entrada de la alcaldia*/
+    
+        var swiper3 = new Swiper('.swiper-container-aliado', {            
+            spaceBetween: 10,
+            loop: true,
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: true
+            },
+            speed: 1500,
+            breakpoints: {
+                200: {
+                slidesPerView: 1
+                },
+                700: {
+                slidesPerView: 2
+                },
+                1000: {
+                slidesPerView: 3
+                }
+            }
+        });
+
 
 
     });  

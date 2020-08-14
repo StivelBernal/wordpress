@@ -1335,3 +1335,19 @@ p[disabled = "disabled"]{
     background-size:100% 100%;
     background-attachment: fixed;
 }
+
+.entradas_tipo_usuario{
+    overflow:hidden;
+
+}
+
+.entradas_tipo_usuario{
+    overflow:hidden;
+    
+}
+.swiper-container-aliado, .swiper-container{
+    display: none;
+}
+.swiper-container-aliado.swiper-container-initialized, .swiper-container.swiper-container-initialized{
+    display:block !important;
+}

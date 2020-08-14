@@ -177,14 +177,47 @@ function serlib_buscador_home_results_blog_shortcode($atts){
     }else if($a['tipo_usuario'] === 'gobernacion'){
       $HTML = file_get_contents( 'templates/results-destino-gobernacion.php', true );
     }else if($a['tipo_usuario'] === 'aliado'){
-
+      
       $HTML = '<div class="mkdf-blog-holder mkdf-blog-standard-date-on-side entradas_tipo_usuario">
-                  <div class="swiper-container-tipo_usuario">
+                  <div class="swiper-container-aliado">
                       <div class="swiper-wrapper">
-                          ';
-                  /**traemos los post de este tipo de usuario toca hacer toda la logica o llamar a la funcion */
+                         ';
 
-      $HTML .='
+                         $posts   =   serlib_entries_array('aliado');
+                         $months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+                         $itemsCarrusel = '';
+                         foreach ($posts as $key => $value) {
+                
+                         
+                          $day = date("d", strtotime($value->post_date));
+                          $month = date("n", strtotime($value->post_date));
+                          $year = date("Y", strtotime($value->post_date));
+
+                          $fecha = $months[$month-1].' '. $day.', '.$year;
+                          $itemsCarrusel .= '
+                          <div class="swiper-slide mkdf-team mkdf-item-space info-hover">
+                            <div class="mkdf-team-inner">
+                              <div class="mkdf-team-image">
+                                  <img style="width:100%;" src="'.$value->thumbnail.'" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" >
+                                  <div class="mkdf-team-info-tb">
+                                      <div class="mkdf-team-info-tc">
+                                          <div class="mkdf-team-title-holder">
+                                              <h4 itemprop="name" class="mkdf-team-name entry-title">
+                                                  <a itemprop="url" href="'.$value->permalink.'">Aliados'.$value->post_title.'</a>
+                                              </h4>
+                                              <h6>'.$fecha.'</h6>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>';
+                  
+                      }
+                         
+
+      $HTML .= $itemsCarrusel.'
                       </div>
                   </div>
               </div>';
