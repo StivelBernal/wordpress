@@ -1707,7 +1707,7 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
         })
         .state('articulos.create', {
             url: "/form",
-            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form-gobierno.php',
             controller: 'BaseFormGobierno',
             resolve: {
                 Instance: ['$stateParams', '$http', function ($stateParams, $http) {
@@ -1722,7 +1722,7 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
         })
         .state('articulos.update', {
             url: '/form/:ID',
-            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form.php',
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/form-gobierno.php',
             controller: 'BaseFormGobierno',
             resolve: {
                 Instance: ['$stateParams', '$http', function ($stateParams, $http) {
@@ -2019,7 +2019,7 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
 
 
 }]);
-
+/**Agregarle los estados necesarios para hacer unos pasos en el formulario y modificar la visual */
 admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'Instance', '$http',
     function BaseFormGobierno($scope, $state, Config, Instance, $http) {
         
@@ -2027,9 +2027,24 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
         $scope.municipios = [];
         $scope.loader = false;
         $scope.Instance = Instance.data;
+        $scope.step = 1;
+        $scope.busqueda_mapa = '';
         $scope.is_submit = 0;
-        $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png'
+        $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png';
+
+        $scope.set_step = function(step, invalid = true){
+            /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
+            if(!invalid){
+                $scope.step = step;
+            }
+        }
         
+        $scope.set_map_src = function(src){
+            if(src === '') src = 'golfo%20de%20morrosquillo';
+            $scope.busqueda = src;
+        
+        }
+
         var params = {};
         $scope.Model = {};
 
@@ -2086,6 +2101,8 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
         
         if($scope.Instance.post){
             $scope.Model = $scope.Instance.post;  
+            console.log('asdi')
+            if($scope.Model.mapa_negocio){  $scope.busqueda_mapa = $scope.Model.mapa_negocio; $scope.busqueda = $scope.Model.mapa_negocio;}
             if($scope.Model.thumbnail) $scope.featured = $scope.Model.thumbnail;
             
         }
@@ -2145,8 +2162,13 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
             if(id_featured){
                 params.id_featured = id_featured;
             }    
+
+            var obj =  {
+                mapa: angular.copy($scope.busqueda)
+            }; 
+
+            var data = angular.merge(angular.copy($scope.Model), obj) ;
         
-            var data = angular.copy($scope.Model);
             data._wpnonce = angular.element('#_wpnonce').val();
             
             $http({

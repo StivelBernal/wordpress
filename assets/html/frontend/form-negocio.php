@@ -7,7 +7,7 @@ $user = wp_get_current_user();
 $roles =  $user->roles[0];
 
 $STEP1 = __('Galeria', 'serlib');
-$STEP2 = __('información', 'serlib');
+$STEP2 = __('Información', 'serlib');
 $STEP3 = __('Servicios', 'serlib');
 $STEP4 = __('Localización', 'serlib');
 
