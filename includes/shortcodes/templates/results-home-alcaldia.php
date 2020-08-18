@@ -18,10 +18,8 @@
                     </div>
                 </div>
                 <div class="mkdf-post-text-inner">
-                    <h3 itemprop="name" class="entry-title mkdf-post-title">
-                        <a itemprop="url" href="" title="">
-                           </a>
-                    </h3>
+                    <a itemprop="url" href="" title=""><h3 itemprop="name" class="entry-title mkdf-post-title">                          
+                    </h3> </a>
                     <div class="mkdf-post-text-main">
                         <div class="mkdf-post-excerpt-holder">
                             <p itemprop="description" class="mkdf-post-excerpt">
