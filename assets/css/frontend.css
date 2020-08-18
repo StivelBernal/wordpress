@@ -1355,3 +1355,8 @@ p[disabled = "disabled"]{
 .mkdf-team-image img{
     height:210px;
 }
+
+.in:before{
+    display: inline;
+    content: ', ';
+}
