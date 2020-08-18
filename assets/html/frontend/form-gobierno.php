@@ -43,7 +43,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             <div class="s-100">
                 <div class="form-group s-100">
                     <md-input-container  titulo-post">
-                            <label>Nombre del negocio</label>
+                            <label>Titulo del articulo</label>
                             <input class="md-primary" ng-model="Model.post_title"  required>
                     </md-input-container>
                 </div>
@@ -63,7 +63,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             <div class="s-100">
                 <div class="form-group s-flex">
                     <label>'.__('Municipio', 'serlib').'</label>      
-                    <selector model="Model.post_category" name="municipios" value-attr="term_id" Label-attr="name" multiple="true" require="true" options="municipios"></selector>
+                    <selector model="Model.post_category" name="municipios" value-attr="term_id" Label-attr="name" multi="true" require="true" options="municipios"></selector>
                 </div>
             </div>
 
