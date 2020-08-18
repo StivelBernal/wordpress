@@ -23,7 +23,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 4}" ng-disabled="content.$invalid || servicios.length < 1" ng-click="set_step(4, (servicios.length < 1))">'.$STEP4.'</p></div>
     <div class="s-7"></div>
     <md-button  class="s-flex" ng-class="{finish: step === 4}" ';  ?> ng-disabled="content.$invalid || servicios.length < 1 || (busqueda !== '' && !busqueda)" <?php echo 'ng-click="submitFiles()">
-    {{ (Instance.post) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
+    {{ (Instance.post) ? "'.__('Guardar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
     </md-button>
 </div>
 

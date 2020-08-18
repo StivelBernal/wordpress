@@ -782,6 +782,7 @@ function serlib_users_info(){
         }
 
         if(!empty($user_fields)){
+
             $user_fields['ID'] = get_current_user_id();  
             $results['user_update'] = wp_update_user($user_fields);
         }          

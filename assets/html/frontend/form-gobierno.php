@@ -21,7 +21,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 3}" ng-disabled="content.$invalid" ng-click="set_step(3, content.$invalid)">'.$STEP3.'</p></div>
     <div class="s-7"></div>
     <md-button  class="s-flex" ng-class="{finish: step === 4}" ';  ?> ng-disabled="content.$invalid" <?php echo 'ng-click="submitFiles()">
-    {{ (Instance.post) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
+    {{ (Instance.post) ? "'.__('Guardar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
     </md-button>
 </div>
 
@@ -63,14 +63,14 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             <div class="s-100">
                 <div class="form-group s-flex">
                     <label>'.__('Municipio', 'serlib').'</label>      
-                    <selector model="Model.post_category" name="municipios" value-attr="term_id" Label-attr="name" require="true" options="municipios"></selector>
+                    <selector model="Model.post_category" name="municipios" value-attr="term_id" Label-attr="name" multiple="true" require="true" options="municipios"></selector>
                 </div>
             </div>
 
             <div class="s-100">
                 <div class="form-group s-flex">
                     <label>'.__('Categoria', 'serlib').'</label>      
-                    <selector model="Model.tipo_entrada"  name="tipo_entrada" value-attr="term_id" Label-attr="name" require="true" options="tipos"></selector>
+                    <selector model="Model.tipo_entrada"  name="tipo_entrada" value-attr="term_id" Label-attr="name" multiple="true" require="true" options="tipos"></selector>
                 </div>
             </div>
 

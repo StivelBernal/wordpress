@@ -90,7 +90,7 @@
                             +'<h4 itemprop="name" class="mkdf-team-name entry-title">'
                                 +'<a itemprop="url" href="'+publicacion.permalink+'">'+publicacion.post_title+'</a>'
                             +'</h4>'
-                            +'<h6>'+months[date.getMonth()]+' '+date.getDay()+', '+date.getFullYear()+'</h6>'
+                            +'<h6>'+months[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear()+'</h6>'
                         +'</div>'
                     +'</div>'
                 +'</div>'
@@ -111,7 +111,7 @@
          +'<div class="mkdf-bli-info">'
               +'<div itemprop="dateCreated" class="mkdf-post-info-date entry-date published updated">'
                   +'<a >'
-                      +'<div class="mkdf-post-date-wrap">'+months[date.getMonth()]+' '+date.getDay()+', '+date.getFullYear()+' </div>'
+                      +'<div class="mkdf-post-date-wrap">'+months[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear()+' </div>'
                   +'</a>'
               +'</div>'
           +'<h4 itemprop="name" class="entry-title mkdf-post-title">'
@@ -161,7 +161,7 @@
             $('#post_reciente_alcaldia img').attr('src', data.alcaldia[0].thumbnail);
             $('#post_reciente_alcaldia a').attr('href', data.alcaldia[0].permalink);
             $('#post_reciente_alcaldia h3').text(data.alcaldia[0].post_title);
-            $('#post_reciente_alcaldia .mkdf-post-date-day').text(date.getDay());
+            $('#post_reciente_alcaldia .mkdf-post-date-day').text(date.getDate());
             $('#post_reciente_alcaldia .mkdf-post-date-month').text(months[date.getMonth()]);
             $('#post_reciente_alcaldia .mkdf-post-excerpt').text(data.alcaldia[0].post_excerpt );
         }else{
@@ -267,7 +267,7 @@
             $('#post_reciente_alcaldia img').attr('src', data.alcaldia[0].thumbnail);
             $('#post_reciente_alcaldia a').attr('href', data.alcaldia[0].permalink);
             $('#post_reciente_alcaldia h3').text(data.alcaldia[0].post_title);
-            $('#post_reciente_alcaldia .mkdf-post-date-day').text(date.getDay());
+            $('#post_reciente_alcaldia .mkdf-post-date-day').text(date.getDate());
             $('#post_reciente_alcaldia .mkdf-post-date-month').text(months[date.getMonth()]);
             $('#post_reciente_alcaldia .mkdf-post-excerpt').text(data.alcaldia[0].post_excerpt );
         }else{

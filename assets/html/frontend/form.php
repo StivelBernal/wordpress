@@ -36,7 +36,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
         <h2 md-truncate="" flex="">'.$TIPO.'</h2>
         <div class="s-flex"></div>
         <md-button ng-click="submitFiles()">
-        {{ (Instance.post) ? "'.__('Editar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
+        {{ (Instance.post) ? "'.__('Guardar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
         </md-button>
     </div>
 
