@@ -128,7 +128,10 @@
   +'</div>';
   }
 
-
+  $('.destino_menu').click(function(e){
+      e.preventDefault();
+        $(this).children('ul').toggleClass('view_childs');
+  });
   $('.button-destinof').click(function(e){
 
     e.preventDefault();   
