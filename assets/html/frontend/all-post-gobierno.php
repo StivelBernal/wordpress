@@ -10,13 +10,13 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false );
         <div class="toggle_side" ng-click="toogle_side()"><i class="fa fa-bars" aria-hidden="true"></i></div>
         <h2 md-truncate="" flex=""><?php echo __('PUBLICACIONES', 'serlib'); ?></h2>
         <div class="s-flex"></div>
-        <md-button ui-sref="publicaciones.create"><?php echo __('Agregar Nueva', 'serlib'); ?></md-button>
+        <md-button  ui-sref="articulos.create"><?php echo __('Agregar Nuevo', 'serlib'); ?></md-button>   
     </div>
 
     <div class="crud-wrapper">
         <div class="item-wrapper">
             <strong class="s-flex uppercase"><?php echo __('Titulo', 'serlib'); ?></strong>
-            <strong class="s-flex uppercase"><?php echo __('Categorias', 'serlib'); ?></strong>
+            <strong class="s-flex uppercase"><?php echo __('Extracto', 'serlib'); ?></strong>
             <strong class="s-flex uppercase text-center"><?php echo __('Imagen', 'serlib'); ?></strong>
             <strong class="s-10 uppercase text-center"><?php echo __('Acciones', 'serlib'); ?></strong>
         </div>
@@ -33,9 +33,8 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false );
                 <strong class="date">{{object.post_date }}</strong>
             </div>
             
-            <div class="s-flex uppercase" style="font-weight:600;" ng-if="object.post_category !== false"><span ng-repeat="cat in object.post_category" ng-class="{in:!$first}" >{{cat.name}}</span></div>
-            <div class="s-flex uppercase" ng-if="object.post_category == false"><strong><?php echo __('sin categoria', 'serlib'); ?></strong> </div>
-            <div class="s-flex text-center"> 
+            <div class="s-flex uppercase" style="font-weight:500;" ><span>{{object.post_excerpt}}</span></div>
+             <div class="s-flex text-center"> 
                 <img ng-src="{{object.thumbnail ? object.thumbnail: '/wp-content/plugins/ser_lib/assets/img/images.png'}}" width="80px">
             </div>
             <div class="s-10 text-center" >

@@ -1360,3 +1360,98 @@ p[disabled = "disabled"]{
     display: inline;
     content: ', ';
 }
+
+.toogle-afm{
+    font-size:1.3rem;
+    display: none;
+}
+
+.toggle_side{
+    display: none;
+}
+
+.p_tabs > .s-flex > p > span{
+    display: inline;
+}
+
+.p_tabs > .s-flex p i{
+    display: none;
+    font-size: 1.4rem;
+}
+
+@media(max-width:800px){
+   .toggle_side{
+        display: block;
+    }
+
+    .btnn-edit, .btnn-delete{
+        padding: 8px;
+        font-size: 16px;
+        
+    }
+    .item-wrapper{
+        padding:0 !important;
+        font-size: 0.8rem !important;
+    }
+    .content-post{
+        height: auto;
+    }
+
+    .options-post{
+        padding-top: 15px !important;
+    }
+    .item-wrapper > .s-10{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        align-content: flex-start;
+    }
+
+    #admin_frontend sidebar{
+        z-index: 801;
+        position: absolute;
+        height: 100vh;
+        left:-500px;
+        transition: all ease 0.4s;
+    }
+    .toolbar-actions button, .toolbar-actions .md-button{
+        min-width: fit-content !important;
+        background-color: #f3f3f3;
+        color: #50727c;
+    }
+
+    #admin_frontend sidebar.showside{
+        left:0px;
+    }
+    .imagen-usuario{
+        width: 60px !important; 
+        height: 60px !important;
+        margin-bottom: 15px !important;
+    }
+
+    #back-side{
+        height: 100vh;
+        width: 100vw;
+        background-color:#00000070;
+        position: fixed;
+        top: 0;
+        display: none;
+        left: 0;
+        z-index: 800;
+    }
+
+    .p_tabs > .s-flex > p > span{
+        display: none;
+    }
+
+    .p_tabs > .s-flex p i{
+        display: inline;
+    }
+
+}
+
+
+.md-dialog-container, .md-scroll-mask{
+    z-index: 1000 !important;
+}

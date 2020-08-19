@@ -10,6 +10,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 <form name="profile">
 
     <div class="row toolbar-actions">
+        <div class="toggle_side" ng-click="toogle_side()"><i class="fa fa-bars" aria-hidden="true"></i></div>
         <h2 md-truncate="" flex="">'.__('PERFIL', 'serlib').'</h2>
         <div class="s-flex"></div>
         <md-button style="padding:0 20px;" ng-click="submitFiles()">

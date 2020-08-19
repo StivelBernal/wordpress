@@ -14,14 +14,14 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 <div ng-if="loader" class="loader"><div class="ser-ripple"><div></div><div></div></div></div>
 </div>
-<div class="row toolbar-actions">
-    {{hasValue(featured_file)}}
-    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 1}" ng-click="set_step(1, false)">'.$STEP1.'</p></div>
-    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 2}" ng-disabled="content.$invalid" ng-click="set_step(2, (galery.length < 1))">'.$STEP2.'</p></div>
-    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 3}" ng-disabled="content.$invalid" ng-click="set_step(3, content.$invalid)">'.$STEP3.'</p></div>
+<div class="row toolbar-actions p_tabs ">
+    <div class="toggle_side" ng-click="toogle_side()"><i class="fa fa-bars" aria-hidden="true"></i></div>
+    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 1}" ng-click="set_step(1, false)"><i class="fa fa-file-text-o" aria-hidden="true" title="'.$STEP1.'"></i><span>'.$STEP1.'</span></p></div>
+    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 2}" ng-disabled="content.$invalid" ng-click="set_step(2, content.$invalid)"><i class="fa fa-users" title="'.$STEP2.'" aria-hidden="true"></i><span>'.$STEP2.'</span></p></div>
+    <div class="s-flex"><p md-truncate="" ng-class="{active_step: step === 3}" ng-disabled="content.$invalid" ng-click="set_step(3, content.$invalid)"><i class="fa fa-globe" aria-hidden="true" title="'.$STEP3.'" ></i><span>'.$STEP3.'</span></p></div>
     <div class="s-7"></div>
     <md-button  class="s-flex" ng-class="{finish: step === 4}" ';  ?> ng-disabled="content.$invalid" <?php echo 'ng-click="submitFiles()">
-    {{ (Instance.post) ? "'.__('Guardar', 'serlib').'": "'.__('Crear', 'serlib').'" }}
+        <span>{{ (Instance.post) ? "'.__('Guardar', 'serlib').'": "'.__('Crear', 'serlib').'" }}</span>
     </md-button>
 </div>
 

@@ -17,6 +17,7 @@
     });
 
    
+   
 
     
 
@@ -48,6 +49,7 @@
         }
     });
 
+    
     var mySwiper = new Swiper ('.swiper-container-comercio', {
         speed: 400,
         spaceBetween: 0,
@@ -507,6 +509,8 @@
 
   });
 
+   
+
   $('.history-back').click(function(){
     history.back();
   });
@@ -568,6 +572,7 @@ search_app.controller('formController', ['$scope', '$http',
         console.log('fallo cargando referencias', response);            
     });
 
+
    
   
     $scope.submit = function(){
@@ -623,6 +628,8 @@ $scope.add_galery = function(){
     }
           
 }
+
+
 
 $scope.delete_image = function(index){
     
@@ -1729,7 +1736,7 @@ var admin_frontend = angular.module('admin_frontend', ['SER.selector', 'ngMateri
         })
         .state('articulos.all', {
             url: "/all",
-            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/all-post.php',
+            templateUrl: '../wp-content/plugins/ser_lib/assets/html/frontend/all-post-gobierno.php',
             controller: 'BaseCrud',
             resolve: {
                 Posts: ['$http', function ($http) {
@@ -1793,6 +1800,11 @@ admin_frontend.controller('AppCtrl', ['$scope',
     $scope.rol =  userinfo.rol;
     $scope.img_profile = userinfo.img_profile;
 
+    $scope.remove_side = function(){
+        $('#admin_frontend .sidebar_profile').removeClass('showside');
+        $('#back-side').hide();
+    }
+
 }]);
 
 admin_frontend.controller('BaseProfile', ['$scope', '$http',
@@ -1804,6 +1816,11 @@ admin_frontend.controller('BaseProfile', ['$scope', '$http',
         $scope.photo = []; 
         var id =  $scope.Model.ID;
         $scope.loader = false;
+
+        $scope.toogle_side = function(){
+            $('#back-side').show();
+            $('#admin_frontend .sidebar_profile').toggleClass('showside');
+        }
         
         $scope.submitFiles = function(){
             $scope.loader = true;
@@ -1866,29 +1883,50 @@ admin_frontend.controller('BaseProfile', ['$scope', '$http',
 
 }]);
 
-admin_frontend.controller('BaseCrud', ['$scope', 'Posts', '$http',
-    function BaseCrud($scope, Posts,  $http ) {
+admin_frontend.controller('BaseCrud', ['$scope', 'Posts', '$http', '$mdDialog',
+    function BaseCrud($scope, Posts,  $http, $mdDialog ) {
     $scope.rol =  userinfo.rol;
     $scope.ObjectList = Posts.data.posts;
 
-    $scope.delete = function(ID){
-          
+    $scope.toogle_side = function(){
+        $('#back-side').show();
+        $('#admin_frontend .sidebar_profile').toggleClass('showside');
+    }
+
+    $scope.delete = function(ID, ev){
         
         var data = { ID: ID};
-        
-        data._wpnonce = angular.element('#_wpnonce').val();
-       
-        $http({
-            method: 'DELETE',
-            params:  { action: 'serlib_users_info'},
-            url:    front_obj.ajax_url,
-            data: data
-        }).then(function successCallback(response) {
+        var templateForm = '../wp-content/plugins/ser_lib/assets/html/frontend/confirm_action.html';
+        var controllerForm =  DialogForm;
+        $mdDialog.show({
+            controller:           controllerForm,
+            templateUrl:          templateForm,
+            parent:               angular.element(document.body),
+            locals:               { Instance: ID }, 
+            targetEvent:          ev,
+            clickOutsideToClose:  true
+        })
+        .then(function(response) {
             
-           location.reload();
-
-        }, function errorCallback(error) {
-            location.reload();          
+            if(response == true ){
+                data._wpnonce = angular.element('#_wpnonce').val();
+       
+                $http({
+                    method: 'DELETE',
+                    params:  { action: 'serlib_users_info'},
+                    url:    front_obj.ajax_url,
+                    data: data
+                }).then(function successCallback(response) {
+                    
+                    window.location.reload();
+        
+                }, function errorCallback(error) {
+                    window.location.reload();      
+                });
+                
+            }
+        }, function(error) {
+            $scope.error =  error.data;
         });
 
     }
@@ -1904,6 +1942,11 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
         $scope.is_submit = 0;
         $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png'
         
+        $scope.toogle_side = function(){
+            $('#back-side').show();
+            $('#admin_frontend .sidebar_profile').toggleClass('showside');
+        }
+
         var params = {};
         $scope.Model = {};
 
@@ -2067,6 +2110,11 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
         $scope.busqueda_mapa = '';
         $scope.is_submit = 0;
         $scope.featured = '../wp-content/plugins/ser_lib/assets/img/images.png';
+
+        $scope.toogle_side = function(){
+            $('#back-side').show();
+            $('#admin_frontend .sidebar_profile').toggleClass('showside');
+        }
 
         $scope.set_step = function(step, invalid = true){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
@@ -2261,6 +2309,11 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         var params = {};
         $scope.Model = {};
 
+        $scope.toogle_side = function(){
+            $('#back-side').hide();
+            $('#admin_frontend .sidebar_profile').toggleClass('showside');
+        }
+
         $scope.set_step = function(step, invalid = true){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
             if(!invalid){
@@ -2374,8 +2427,8 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         $scope.submitFiles = function(){
             
             if($scope.is_submit !== 0) return;
-           
             $scope.is_submit = 1;
+           
             $scope.loader = true;
 
             var promises = 0;
@@ -2558,6 +2611,29 @@ admin_frontend.directive('appFilereader', function($q) {
         } 
     }; 
 });
+
+function DialogForm($scope, $mdDialog, Instance) {
+    
+    $scope.Model = {};
+    
+    if(hasValue(Instance)){ 
+        $scope.title    =   'Eliminar Publicación';
+        $scope.action   =   'Si, eliminar';
+    }else{ 
+        $scope.title    =   'Eliminar Publicación';
+        $scope.action   =   'Si, eliminar';
+    }
+    
+    $scope.confirm = function() {
+        $mdDialog.hide(true);
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    
+}
 
 
 (function($) {

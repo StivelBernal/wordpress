@@ -1,0 +1,24 @@
+<md-dialog >
+    <form ng-cloak>
+      <div style="padding:15px; text-align: center;">
+          <h5>{{title}}</h5>
+      </div>
+      
+      <md-dialog-content>
+        <div class="md-dialog-content">
+          <div style="color:red; text-align: center;">{{error}}</div>
+        </div>
+        
+      </md-dialog-content>
+  
+      <md-dialog-actions layout="row">
+        <md-button ng-click="cancel()">
+            Cancelar
+        </md-button>
+        <span flex></span>
+        <md-button ng-click="confirm()">
+            {{ action }}
+        </md-button>
+      </md-dialog-actions>
+    </form>
+  </md-dialog>

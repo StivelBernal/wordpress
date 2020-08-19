@@ -1,8 +1,8 @@
 <div ng-app="admin_frontend" ng-controller="AppCtrl" id="admin_frontend" layout="column"  ng-cloak>
 
     <div class="row main">
-
-        <sidebar class="s-15">
+        <div id="back-side" ng-click="remove_side()"></div>
+        <sidebar class="sidebar_profile s-15">
             <div class="avatar">
                 <img class="imagen-usuario" ng-src="{{img_profile}}">
                 <div class="name">{{name}}</div>
