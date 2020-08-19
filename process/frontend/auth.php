@@ -239,12 +239,12 @@ function serlib_auth_handler(){
                             'code' => 401];
 
         $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
-       
+       /*
         if( !wp_verify_nonce( $nonce, 'serlib_auth' ) ){
            
             wp_send_json($output);
             die();
-        }
+        }*/
         
         if( !isset( $objDatos->email ) ){
              
