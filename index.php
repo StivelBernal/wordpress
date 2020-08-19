@@ -107,3 +107,19 @@ if ( !function_exists( 'wp_password_change_notification' ) ) {
 if ( !function_exists( 'wp_new_user_notification' ) ) {
     function wp_new_user_notification() {}
 }
+
+
+
+function ser_footer_scripts() {
+    echo `
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175783940-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-175783940-1');
+    </script>`;
+}
+
+add_action( 'wp_footer', 'ser_footer_scripts' );
