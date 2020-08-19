@@ -128,11 +128,8 @@
   +'</div>';
   }
 
-  $('.destino_menu .mobile_arrow').click(function(e){
-      e.preventDefault();
-      
-        $(this).parents().toggleClass('view_childs');
-  });
+  $('.destino_menu ul').css({display: 'block'});
+
 
   $('.button-destinof').click(function(e){
 
