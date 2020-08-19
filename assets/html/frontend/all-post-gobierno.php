@@ -16,7 +16,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false );
     <div class="crud-wrapper">
         <div class="item-wrapper">
             <strong class="s-flex uppercase"><?php echo __('Titulo', 'serlib'); ?></strong>
-            <strong class="s-flex uppercase"><?php echo __('Extracto', 'serlib'); ?></strong>
+            <strong class="s-flex excerpt uppercase"><?php echo __('Extracto', 'serlib'); ?></strong>
             <strong class="s-flex uppercase text-center"><?php echo __('Imagen', 'serlib'); ?></strong>
             <strong class="s-10 uppercase text-center"><?php echo __('Acciones', 'serlib'); ?></strong>
         </div>
@@ -33,7 +33,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false );
                 <strong class="date">{{object.post_date }}</strong>
             </div>
             
-            <div class="s-flex uppercase" style="font-weight:500;" ><span>{{object.post_excerpt}}</span></div>
+            <div class="excerpt s-flex uppercase" style="font-weight:500;" ><span>{{object.post_excerpt}}</span></div>
              <div class="s-flex text-center"> 
                 <img ng-src="{{object.thumbnail ? object.thumbnail: '/wp-content/plugins/ser_lib/assets/img/images.png'}}" width="80px">
             </div>

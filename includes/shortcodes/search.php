@@ -96,7 +96,7 @@ function serlib_buscador_home_results_shortcode(){
         $titulo = explode('/' ,$url);
         $icono = wp_get_attachment_image_src( get_post_meta($categorias_publicacion[$i]->post_id, 'icono_publicacion_municipio' )[0], 'single-post-thumbnail')[0];
         $imagen =  wp_get_attachment_image_src( get_post_thumbnail_id( $categorias_publicacion[$i]->post_id ), 'medium' )[0];
-        $iconos[$titulo[1]] = [ $url, $icono, $imagen];
+        $iconos[$titulo[1]] = [ $url, $icono, $imagen ];
         
         
     }
@@ -124,8 +124,8 @@ function serlib_buscador_home_results_shortcode(){
                           <div class="serlib-gallery-simple-item-content-inner">
                               <img class="icono" src="'.$value[1].'">
                               <div class="mkdf-tours-gallery-simple-title-holder">
-                                  <h4 class="mkdf-tour-title">
-                                  '.$key.' </h4>
+                                  <h4 class="tipo_mun_title mkdf-tour-title">
+                                  '. str_replace('-', ' ', $key ) .' </h4>
                               </div>
                           </div>
                       </div>

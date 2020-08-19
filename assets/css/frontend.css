@@ -934,7 +934,7 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
 }
 
 .btnn-edit{
-    background-color: orange;
+    background-color: #AEC9D6;
     padding: 11px;
     text-align: center;
     line-height: 20px;
@@ -945,7 +945,7 @@ body > div.mkdf-wrapper > div.mkdf-wrapper-inner > div.mkdf-content div.mkdf-ful
 }
 
 .btnn-delete{
-    background-color: red;
+    background-color: #9B6C33;
     padding: 11px;
     text-align: center;
     line-height: 20px;
@@ -1389,6 +1389,11 @@ p[disabled = "disabled"]{
         font-size: 16px;
         
     }
+
+    .item-wrapper .excerpt{
+        display:none;
+    }
+
     .item-wrapper{
         padding:0 !important;
         font-size: 0.8rem !important;
@@ -1427,7 +1432,6 @@ p[disabled = "disabled"]{
     .imagen-usuario{
         width: 60px !important; 
         height: 60px !important;
-        margin-bottom: 15px !important;
     }
 
     #back-side{
@@ -1451,7 +1455,14 @@ p[disabled = "disabled"]{
 
 }
 
-
 .md-dialog-container, .md-scroll-mask{
     z-index: 1000 !important;
+}
+
+.imagen-usuario{
+    margin-bottom: 15px !important;
+}
+
+.tipo_mun_title{
+    text-transform: capitalize;
 }
