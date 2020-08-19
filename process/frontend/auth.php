@@ -4,7 +4,7 @@ function serlib_auth_handler(){
     
     function enviar_email_confirm($email, $username, $pass){
 
-        $headers[]= 'From: Contacto <contact@golfomorrosquillo.com>';
+        $headers[]= 'From: Contacto <contacto@golfomorrosquillo.com>';
 
         $code = md5($email);
         $user = base64_encode($username);
@@ -19,18 +19,28 @@ function serlib_auth_handler(){
                                 <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
                                 </a>
                             </div>
+
+                            <div style="margin: auto; display: block; text-align: left;">
+                                <p style="text-align: center; color: #5e5e5e; font-weight:600; font-family: Poppins; font-size: x-large;">
+                                
+                                    Hemos creado un usuario para que hagas parte de nuestra comunidad del Golfo de Morrosquillo, Has click en el siguiente en lace para confirmar tu cuenta.
+                                </p>
+                                
+                            </div>
+
                             <div style="margin: auto; display: block; text-align: left;">
                             
                                 <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
                                 
                             
-                                '._x('Correo', 'plantilla email', 'serlib').': '.$email.' <br>
-                                '._x('Contraseña', 'plantilla email', 'serlib').': '.$pass.'<br>
-                                
+                                '._x('Usuario', 'plantilla email', 'serlib').': '.$email.' <br><br>
+
+                                    Para establecer tu contraseña, visita la siguiente dirección:<br>
 
                                 </p>
-                                
+                                   
                             </div>
+                            
                             <div style="margin: auto; display: block; text-align: left;">
                                 <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
                                 
@@ -39,6 +49,11 @@ function serlib_auth_handler(){
                                 </p>
                                 
                             </div>
+                            <div style="text-align: left;">
+                                <br><br><p>Cordialmente,</p>
+                                <img src="" width="120px">
+                            </div>
+
                         </body>
                     
                     </html> '; 
@@ -431,7 +446,7 @@ function serlib_auth_handler(){
         $username = base64_encode($user->data->user_login);
         $code = base64_encode(md5($user->data->user_login.$user->ID.$user->data->user_email.$user->data->user_pass));
         
-        $headers[]= 'From: Contacto <contact@golfomorrosquillo.com>';
+        $headers[]= 'From: Contacto <contacto@golfomorrosquillo.com>';
 
         $message = '<html>
                         <head>	
@@ -443,12 +458,12 @@ function serlib_auth_handler(){
                                 </a>
                             </div>
                             <div style="margin: auto; display: block; text-align: left;">
-                            
-                                <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
-                                
+                                <p style="font-weight: 500; font-size:17px;">
+                                    Accede a tu cuenta y crea una publicación que cumpla con los requisitos establecidos para nuestra Comunidad del Golfo de Morrosquillo
+                                </p>
+                                <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">  
                             
                                 '._x('Correo', 'plantilla email recuperar cuenta', 'serlib').': '.$objDatos->email.' <br>
-                                
 
                                 </p>
                                 
@@ -456,13 +471,17 @@ function serlib_auth_handler(){
                             <div style="margin: auto; display: block; text-align: left;">
                                 <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
                                 
-                                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth/recover-account?code='.$code.'&u='.$username.'" target="_blank">'._x('Recuperar cuenta',  'plantilla email recuperar cuenta', 'serlib').'</a>
+                                    <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth/recover-account?code='.$code.'&u='.$username.'" target="_blank">Haz click aquí</a>
 
                                 </p>
-                                
                             </div>
+                            <div style="text-align: left;">
+                                <br><br><p>Cordialmente,</p>
+                                <img src="" width="120px">
+                            </div>
+
                         </body>
-                    }
+                    
                     </html> '; 
 
 

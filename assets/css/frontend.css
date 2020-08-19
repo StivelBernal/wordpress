@@ -1368,6 +1368,10 @@ p[disabled = "disabled"]{
 
 .toggle_side{
     display: none;
+    background-color: #ffffffee;
+    border-radius: 50%;
+    padding: 5px 10px;
+    color: #1280B5;
 }
 
 .p_tabs > .s-flex > p > span{
@@ -1451,6 +1455,15 @@ p[disabled = "disabled"]{
 
     .p_tabs > .s-flex p i{
         display: inline;
+    }
+    .active_step{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding:5px;
+    }
+    .active_step span{
+        display: inline !important;
     }
 
 }
