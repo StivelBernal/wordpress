@@ -131,7 +131,7 @@
   $('.destino_menu .mobile_arrow').click(function(e){
       e.preventDefault();
       
-        $(this).parent().toggleClass('view_childs');
+        $(this).parents().toggleClass('view_childs');
   });
 
   $('.button-destinof').click(function(e){
