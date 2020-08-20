@@ -64,7 +64,7 @@ function enviar_email_rechazo($post_id, $causa){
                         </div>
                         <div style="text-align: left;">
                             <br><br><p>Cordialmente,</p>
-                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="120px">
+                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="250px">
                         </div>
                     
                     </body>
@@ -111,7 +111,7 @@ function enviar_email_confirm($post_id){
                         </div>
                         <div style="text-align: left;">
                             <br><br><p>Cordialmente,</p>
-                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="120px">
+                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="250px">
                         </div>
                     
                     </body>
