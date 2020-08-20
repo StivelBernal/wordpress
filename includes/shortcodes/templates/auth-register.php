@@ -21,12 +21,11 @@ NONCE_FIELD_PH
                     
                     <div class="row-wrap space-around-center" >
                        
-                        <div class="s-95">
+                        <div class="s-70">
                             
                             <div class="socials-buttons-auth row">
                                 <div class="google" g-login>Google</div>
-                                <div ng-click="AuthSocial('facebook')" class="facebook">Facebook</div>
-                                <div ng-click="InstagramRedirect()" class="instagram">Instagram</div>            
+                                <div ng-click="AuthSocial('facebook')" class="facebook">Facebook</div>         
                             </div>
                             <div class="account-social"><h7>or_register_with_I18N</h7></div>
                         </div>
@@ -199,7 +198,7 @@ NONCE_FIELD_PH
 
                     <div class="row-wrap space-around-center" >
 
-                        <div class="s-95">
+                        <div class="s-70">
                             
                             <div class="socials-buttons-auth row">
                                 <div class="google" g-login>Google</div>
