@@ -47,9 +47,10 @@ NONCE_FIELD_PH
                                 <div ng-if="is_submit" class="lds-ripple-small"><div></div><div></div></div>login_I18N</button>
                             </div>
                         </div>
+                        
 
                         <div ng-if="error" class="s-100">
-                            <p style="text-align:center; color:red;">{{error}}</p>
+                           <p style="text-align:center; color:red;">{{error}}</p>
                         </div>
                         <div ng-if="user_login"  class="s-100">
                             <p style="text-align:center; color:green;">Inicio_de_session_I18N</p>
