@@ -5,20 +5,23 @@ function ser_save_post_admin( $post_id, $post, $update ){
     $data   =   get_post_meta( $post_id, 'activa', true );
 
     if($data === 'RECHAZADO'){
-       
+        $causa   =   get_post_meta( $post_id, 'causa_rechazo', true );
+        if($causa === 'Otro'){
+            $causa = get_post_meta( $post_id, 'causa_otro', true );
+        }
         remove_action( 'save_post_post', 'ser_save_post_admin' );
  
         wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
        
         add_action( 'save_post_post', 'ser_save_post_admin' );
 
-        enviar_email_rechazo($post_id);
+        enviar_email_rechazo($post_id, $causa);
        
     }
     
 }
 
-function enviar_email_rechazo($post_id){
+function enviar_email_rechazo($post_id, $causa){
 
     $headers[]= 'From: Contacto <contacto@golfomorrosquillo.com>';
 
@@ -51,7 +54,7 @@ function enviar_email_rechazo($post_id){
                             <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="120px">
                         </div>
                         <div style="margin: auto; display: block; text-align: left;">
-                            '.$email.'       
+                            '.$email.$causa.'    
                         </div>
                     </body>
                 </html> '; 
