@@ -6,9 +6,11 @@ function ser_save_post_admin( $post_id, $post, $update ){
 
     if($data === 'RECHAZADO' && $post->post_status === 'pending'){
         $causa   =   get_post_meta( $post_id, 'causa_rechazo', true );
+      
         if($causa === 'Otro'){
             $causa = get_post_meta( $post_id, 'causa_otro', true );
         }
+      
         remove_action( 'save_post_post', 'ser_save_post_admin' );
  
         wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
