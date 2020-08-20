@@ -275,7 +275,7 @@ NONCE_FIELD_PH
 
                         <div class="form-group s-45">
                             <label for="c_telefono">telefono_I18N</label>
-                            <input class="fovea-input input-text"  id="c_telefono" ng-model="Model.telefono" name="telefono" maxlength="20" type="text">
+                            <input class="fovea-input input-text"  id="c_telefono" ng-model="Model.telefono" name="telefono" maxlength="20" type="text" required>
                             <div ng-messages="c_Form.telefono.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
@@ -322,7 +322,7 @@ NONCE_FIELD_PH
                         <div class="form-group s-24">
                             <label>Fotocopia_documento_I18N</label>
                             <label for="fotocopia_documento" class="input-file-label">{{ !File.name ? 'Seleccionar archivo': File.name }} </label>      
-                            <input name="fotocopia_documento" type="file" ng-model="File" accept="image/png, image/jpeg" app-filereader style="display:none;"  id="fotocopia_documento"></selector>
+                            <input name="fotocopia_documento" type="file" ng-model="File" accept="image/png, image/jpeg, image/jpg, application/pdf" app-filereader style="display:none;"  id="fotocopia_documento"></selector>
                             <div ng-messages >
                                 <div  ng-if="!File">required_I18N</div>
                             </div> 
