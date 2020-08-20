@@ -1988,6 +1988,9 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
             callbacks : {
                 onImageUpload: function(image) {
                     uploadImage(image[0]);
+                },
+                onImageUploadError: function(msg){
+                    alert('La imagen no puede exceder (2 MB)');
                 }
             }
             
@@ -2171,6 +2174,9 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
             callbacks : {
                 onImageUpload: function(image) {
                     uploadImage(image[0]);
+                },
+                onImageUploadError: function(msg){
+                    alert('La imagen no puede exceder (2 MB)');
                 }
             }
             
@@ -2376,11 +2382,10 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             ],
             callbacks : {
                 onImageUpload: function(image) {
-                    console.log(image);
                     uploadImage(image[0]);
                 },
                 onImageUploadError: function(msg){
-                    alert(msg + ' (2 MB)');
+                    alert('La imagen no puede exceder (2 MB)');
                 }
             }
             
