@@ -110,7 +110,6 @@ if ( !function_exists( 'wp_new_user_notification' ) ) {
     }
 }
 
-
 function ser_footer_scripts() {
     echo '
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175783940-1"></script>

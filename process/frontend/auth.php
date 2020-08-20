@@ -247,15 +247,17 @@ function serlib_auth_handler(){
                             'code' => 401];
 
         $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
-       /*
+       
         if( !wp_verify_nonce( $nonce, 'serlib_auth' ) ){
-           
+            $output     =     [ 'error' => __('No autorizado', 'serlib').$nonce,
+                            'code' => 401];
             wp_send_json($output);
             die();
-        }*/
+        }
         
         if( !isset( $objDatos->email ) ){
-             
+            $output     =     [ 'error' => __('Por favor coloca un correo electronico', 'serlib').$nonce,
+            'code' => 401];
             wp_send_json($output);
             die();
         }
@@ -337,7 +339,14 @@ function serlib_auth_handler(){
           //  var_dump($user);
           
             if( is_wp_error($user) ){
-                $output['error'] = _x('correo electrónico o contraseña invalida', 'login form mensaje error contraseña', 'serlib');
+                if($objDatos->modo === 'directo' ){
+                    
+                    $output['error'] = _x('correo electrónico o contraseña invalida', 'login form mensaje error contraseña', 'serlib');
+                
+                }else{
+                    $output['error'] = _x('Todavia no estas registrado con esta red social', 'error login redes sociales', 'serlib');
+                }
+                
                 wp_send_json($output);
             }
                     
