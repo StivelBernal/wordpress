@@ -405,6 +405,9 @@ function serlib_auth_handler(){
 
         $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
         
+
+        echo 'dfg';
+        return;
         if( !wp_verify_nonce( $nonce, 'serlib_auth' ) ){
            
             wp_send_json($output);

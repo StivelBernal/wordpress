@@ -36,7 +36,7 @@ function tipo_de_contenido_html() {
 
 function enviar_email_rechazo($post_id, $causa){
 
-    $headers[]= 'From: Contacto <contacto@golfomorrosquillo.com>';
+    $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
 
     $post_c = get_post( $post_id );
 
@@ -73,7 +73,7 @@ function enviar_email_rechazo($post_id, $causa){
       
        add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    $email = 'brayan.bernalg@gmail.com';
+    //$email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] '._x('Publicación rechazada', 'asunto email', 'serlib') , $message, $headers );
 
@@ -83,7 +83,7 @@ function enviar_email_rechazo($post_id, $causa){
 
 function enviar_email_confirm($post_id){
 
-    $headers[]= 'From: Contacto <contacto@golfomorrosquillo.com>';
+    $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
 
     $post_c = get_post( $post_id );
 
@@ -124,7 +124,7 @@ function enviar_email_confirm($post_id){
       
     add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    $email = 'brayan.bernalg@gmail.com';
+    //    $email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Publicación aprobada', $message, $headers );
 
@@ -134,7 +134,7 @@ function enviar_email_confirm($post_id){
 
 function enviar_email_usuario_nuevo($user_id){
 
-    $headers[]= 'From: Contacto <contacto@golfomorrosquillo.com>';
+    $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
 
     $author = get_userdata($user_id);
 
@@ -184,7 +184,7 @@ function enviar_email_usuario_nuevo($user_id){
       
     add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    $email = 'brayan.bernalg@gmail.com';
+    //$email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
 
