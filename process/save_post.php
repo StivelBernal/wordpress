@@ -152,7 +152,7 @@ function enviar_email_usuario_nuevo($user_id){
                         <div style="margin: auto; display: block; text-align: left;">
                             <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">Hemos creado un usuario para que hagas parte de nuestra comunidad del Golfo de Morrosquillo.</p>
                             <p style="font-weight: 600; font-size:17px;">
-                                Usuario: '.$author->user_login.'<br><br>
+                                Usuario: '.$author->user_email.'<br><br>
 
                             </p>
                             <p style="font-weight: 600; font-size:17px;">

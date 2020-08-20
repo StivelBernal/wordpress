@@ -1314,10 +1314,10 @@ p[disabled = "disabled"]{
 }
 
 .history-back{
-    background-color: #767776;
+    background-color: #1280B5;
     color: #fff;
-    padding:6px 20px !important;
-    border-radius:10px;
+    padding: 9px 20px !important;
+    border-radius: 24px;
 }
 
 .history-back span{
