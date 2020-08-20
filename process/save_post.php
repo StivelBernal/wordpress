@@ -33,7 +33,7 @@ function enviar_email_rechazo($post_id){
                     </head>
                     <body>
                         <div style="margin: auto; display: block; flex-direction: column; text-align: center;">
-                            <a class="logo" href="https://golfodemorrosquillo.com">
+                            <a class="logo" href="https://golfodemorrosquillo.com" target="blank">
                             <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
                             </a>
                         </div>
@@ -42,13 +42,13 @@ function enviar_email_rechazo($post_id){
                             <p style="font-weight: 600; font-size:17px;">
                                 Accede a tu cuenta y crea una publicación que cumpla con los requisitos establecidos para nuestra Comunidad del Golfo de Morrosquillo
                             </p>
-                            <a href="https://golfodemorrosquillo.com/auth/">
+                            <a target="blank" href="https://golfodemorrosquillo.com/auth/">
                                 https://golfodemorrosquillo.com/auth/
                             </a>
                         </div>
                         <div style="text-align: left;">
                             <br><br><p>Cordialmente,</p>
-                            <img src="" width="120px">
+                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="120px">
                         </div>
                         <div style="margin: auto; display: block; text-align: left;">
                             '.$email.'       
