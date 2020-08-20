@@ -1504,3 +1504,21 @@ p[disabled = "disabled"]{
 .tipo_mun_title{
     text-transform: capitalize;
 }
+
+.load_images + .note-editor::before{
+    width: 100%;
+    display: block !important;
+    content: '';
+    height: 4px;
+    background: linear-gradient(to right, #AEC9D6 8%, #1280B5 18%, #AEC9D6 33%);
+    animation:1s infinite preloadAnimation ;
+}
+
+@keyframes preloadAnimation{
+    0%{
+        background-position: -769px 0
+    }
+    100%{
+        background-position: 769px 0
+    }
+}

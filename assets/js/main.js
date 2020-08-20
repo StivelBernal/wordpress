@@ -2000,7 +2000,7 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
         function uploadImage(image) {
             var data = new FormData();
             data.append("files",image);
-          
+            $('#summernote').addClass('load_images');
             angular.element.ajax({
                 type: 'POST',
                 url: front_obj.ajax_url+'?action=serlib_uploader&destino=image',
@@ -2009,13 +2009,17 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
                 cache: false,
                 processData:false,
                 success: function(url) {
-                    /**BRAYAN */
-                    console.log(url);
-                    angular.element('#summernote').summernote('editor.insertImage', url);
+                    
+                    angular.element('#summernote').summernote('editor.insertImage', url, function ($image) {
+                        $image.css('width', '50%');
+                        $image.attr('data-filename', 'retriever');
+                      });
+                      $('#summernote').removeClass('load_images');
 
                 },
                 error: function(data) {
                     console.log(data);
+                    $('#summernote').removeClass('load_images');
                 }
             });
         }
@@ -2186,7 +2190,7 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
         function uploadImage(image) {
             var data = new FormData();
             data.append("files",image);
-          
+            $('#summernote').addClass('load_images');
             angular.element.ajax({
                 type: 'POST',
                 url: front_obj.ajax_url+'?action=serlib_uploader&destino=image',
@@ -2196,10 +2200,16 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
                 processData:false,
                 success: function(url) {
                     
-                    $('#summernote').summernote('editor.insertImage', url);
+                    $('#summernote').summernote('editor.insertImage', url, function ($image) {
+                        $image.css('width', '50%');
+                        $image.attr('data-filename', 'retriever');
+                      });
+                    
+                    $('#summernote').removeClass('load_images');
 
                 },
                 error: function(data) {
+                    $('#summernote').removeClass('load_images');
                     console.log(data);
                 }
             });
@@ -2232,7 +2242,7 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
                                 
                 var formData = new FormData();
                 formData.append('files', $scope.featured_file);
-            
+                
                 angular.element.ajax({
                     type: 'POST',
                     url: front_obj.ajax_url+'?action=serlib_uploader&destino=featured',
@@ -2394,7 +2404,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         function uploadImage(image) {
             var data = new FormData();
             data.append("files",image);
-          
+            $('#summernote').addClass('load_images');
             angular.element.ajax({
                 type: 'POST',
                 url: front_obj.ajax_url+'?action=serlib_uploader&destino=image',
@@ -2404,11 +2414,16 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
                 processData:false,
                 success: function(url) {
                     
-                    $('#summernote').summernote('editor.insertImage', url);
+                    $('#summernote').summernote('editor.insertImage', url, function ($image) {
+                        $image.css('width', '50%');
+                        $image.attr('data-filename', 'retriever');
+                      });
+                      $('#summernote').removeClass('load_images');
 
                 },
                 error: function(data) {
                     console.log(data);
+                    $('#summernote').removelass('load_images');
                 }
             });
         }

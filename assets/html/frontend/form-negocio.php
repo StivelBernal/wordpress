@@ -83,42 +83,42 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             </div>
 
             <div class="s-100 form-group ">
-                <label>'.__('Slogan del negocio:', 'serlib').'</label>
+                <label>'.__('Slogan del negocio y/o horarios de atención:', 'serlib').'</label>
                 <textarea rows="3" maxlength="50" ng-model="Model.post_excerpt" required></textarea>
             </div>
 
             <div class="row-wrap space-around-end""> 
                 <div class="s-49" > 
                     <label>'.__('Telefono:', 'serlib').'</label>
-                    <input ng-model="Model.telefono"  type="text"  >
+                    <input ng-model="Model.telefono" type="text"  >
                 </div>
                 <div class="s-49" > 
                     <label>'.__('Whatsapp:', 'serlib').'</label>
-                    <input ng-model="Model.whatsapp"  type="text"  >
+                    <input ng-model="Model.whatsapp" placeholder="Número celular" type="text"  >
                 </div>
                 <div class="s-32" > 
                     <label>'.__('Facebook:', 'serlib').'</label>
-                    <input ng-model="Model.facebook"  type="text"  >
+                    <input ng-model="Model.facebook" placeholder="https://www.facebook.com/GolfoMorrosquillo/" type="text"  >
                 </div>
 
                 <div class="s-32" > 
                     <label>'.__('Página web:', 'serlib').'</label>
-                    <input ng-model="Model.web"  type="text"  >
+                    <input ng-model="Model.web"  type="text" placeholder="https://golfodemorrosquillo.com/" >
                 </div>
 
                 <div class="s-32" > 
                     <label>'.__('Instagram:', 'serlib').'</label>
-                    <input ng-model="Model.instagram"  type="text"  >
+                    <input ng-model="Model.instagram" placeholder="https://www.instagram.com/golfomorrosquillo"  type="text"  >
                 </div>
 
                 <div class="s-49" > 
                     <label>'.__('Correo:', 'serlib').'</label>
-                    <input ng-model="Model.correo"  type="text"  >
+                    <input ng-model="Model.correo" placeholder="Ejemplo@gmail.com"  type="text"  >
                 </div>
 
                 <div class="s-49" > 
                     <label>'.__('Dirección:', 'serlib').'</label>
-                    <input ng-model="Model.direccion"  type="text"  >
+                    <input ng-model="Model.direccion" placeholder="Calle y carrera" type="text"  >
                 </div>
 
             </div>
