@@ -397,12 +397,12 @@ function serlib_auth_handler(){
     }
 
     if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['recover'])){
-               
+
         $objDatos   =     json_decode(file_get_contents("php://input"));
         
         $output     =     [ 'error' => __('Usuario no encontrado', 'serlib'),
                             'code' => 401];
-
+        return;
         $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
         
 
