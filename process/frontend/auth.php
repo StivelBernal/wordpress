@@ -51,7 +51,7 @@ function serlib_auth_handler(){
                             </div>
                             <div style="text-align: left;">
                                 <br><br><p>Cordialmente,</p>
-                                <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="120px">
+                                <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="250px">
                             </div>
 
                         </body>
@@ -69,7 +69,6 @@ function serlib_auth_handler(){
     }
 
     global $wpdb;
-
 
     if( $_SERVER['REQUEST_METHOD'] === 'GET' ){
         
@@ -440,7 +439,7 @@ function serlib_auth_handler(){
         $username = base64_encode($user->data->user_login);
         $code = base64_encode(md5($user->data->user_login.$user->ID.$user->data->user_email.$user->data->user_pass));
         
-        $headers[]= 'From: Contacto <contacto@golfomorrosquillo.com>';
+        $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
 
         $message = '<html>
                         <head>	
@@ -471,7 +470,7 @@ function serlib_auth_handler(){
                             </div>
                             <div style="text-align: left;">
                                 <br><br><p>Cordialmente,</p>
-                                <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="120px">
+                                <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="250px">
                             </div>
 
                         </body>

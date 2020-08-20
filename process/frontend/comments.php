@@ -3,8 +3,8 @@
 
 
 function serlib_comments(){
-    if( $_SERVER['REQUEST_METHOD'] === 'POST'){
 
+    if( $_SERVER['REQUEST_METHOD'] === 'POST'){
 
         $objDatos   =     json_decode(file_get_contents("php://input"));
         if($objDatos->text  === '') { $objDatos->text  = '...'; }
@@ -15,6 +15,8 @@ function serlib_comments(){
             $parent = $objDatos->parent;
         }
         
+
+
         $result = wp_handle_comment_submission ( ["comment_post_ID" => $objDatos->post_id , 'comment' => $objDatos->text, 'comment_parent' => $parent ] );
         
         if ( !is_wp_error( $result ) ) {
@@ -25,6 +27,8 @@ function serlib_comments(){
             
             $result = [ 'success' => _x('Comentario publicado', 'comentarios respuestas ajax correcto', 'serlib'),
                         'comment_ID' => $result->comment_ID];
+
+            enviar_email_notificaciones($objDatos->post_id);
 
         }else{
     
