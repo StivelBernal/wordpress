@@ -1971,6 +1971,7 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
             height: 450,
             shortcuts: false,
             lang: "es-ES",
+            maximumImageFileSize: 2000*1024,
             placeholder: '...',
             dialogsInBody: true,
             toolbar: [
@@ -2153,6 +2154,7 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
             height: 450,
             shortcuts: false,
             lang: "es-ES",
+            maximumImageFileSize: 2000*1024,
             placeholder: '...',
             dialogsInBody: true,
             toolbar: [
@@ -2360,6 +2362,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             shortcuts: false,
             lang: "es-ES",
             placeholder: '...',
+            maximumImageFileSize: 2000*1024,
             dialogsInBody: true,
             toolbar: [
                 ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -2373,7 +2376,11 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             ],
             callbacks : {
                 onImageUpload: function(image) {
+                    console.log(image);
                     uploadImage(image[0]);
+                },
+                onImageUploadError: function(msg){
+                    alert(msg + ' (2 MB)');
                 }
             }
             
@@ -2583,9 +2590,6 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
 
         }
 
-      
-
-
 }]);
 
 admin_frontend.directive('appFilereader', function($q) {
@@ -2686,7 +2690,7 @@ function DialogForm($scope, $mdDialog, Instance) {
             shapeNone: 'Forma: Ninguna',
             dragImageHere: 'Arrastre una imagen o texto aquí',
             dropImage: 'Suelte una imagen o texto',
-            selectFromFiles: 'Seleccione un fichero',
+            selectFromFiles: 'Seleccione un fichero (Max: 2MB)',
             maximumFileSize: 'Tamaño máximo del fichero',
             maximumFileSizeError: 'Superado el tamaño máximo de fichero.',
             url: 'URL de la imagen',
@@ -2698,7 +2702,7 @@ function DialogForm($scope, $mdDialog, Instance) {
             videoLink: 'Enlace del vídeo',
             insert: 'Insertar un vídeo',
             url: 'URL del vídeo',
-            providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion o Youku)',
+            providers: '(YouTube, Vimeo, Instagram)',
             },
             link: {
             link: 'Enlace',
