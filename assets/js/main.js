@@ -1538,6 +1538,10 @@ app.controller('authSocialController', ['$scope', '$rootScope', '$http', 'Config
             
             case 'facebook':
                 
+                FB.logout(function(response){
+
+                });
+
                 FB.login(function(response){
                     validarUsuario();
                 }, {scope: 'public_profile, email'})

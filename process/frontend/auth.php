@@ -336,9 +336,8 @@ function serlib_auth_handler(){
 
             $user   =   wp_signon( $creds, is_ssl());
 
-          //  var_dump($user);
-          
             if( is_wp_error($user) ){
+
                 if($objDatos->modo === 'directo' ){
                     
                     $output['error'] = _x('correo electrónico o contraseña invalida', 'login form mensaje error contraseña', 'serlib');
@@ -346,7 +345,7 @@ function serlib_auth_handler(){
                 }else{
                     $output['error'] = _x('Todavia no estas registrado con esta red social', 'error login redes sociales', 'serlib');
                 }
-                
+
                 wp_send_json($output);
             }
                     
