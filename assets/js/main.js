@@ -1368,9 +1368,10 @@ app.controller('registerController', ['$scope', '$http', '$controller',
 
             if($scope.Model.modo === 'directo' || $scope.Model.rol === 'comerciante'){  
                 setTimeout(() => { window.location = "/gracias?pending="+$scope.Model.rol; }, 2000);
-            }else{
-                setTimeout(() => { window.location = "/gracias"; }, 2000);
+            }else if($scope.Model.modo !== 'directo'){
+                setTimeout(() => { window.location = "/blog"; }, 2000);
             }       
+            
         }
 
         $scope.submit = function(){
