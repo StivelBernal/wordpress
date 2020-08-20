@@ -22,10 +22,12 @@ function enviar_email_rechazo($post_id){
 
     $headers[]= 'From: Contacto <contacto@golfomorrosquillo.com>';
 
-    $code = md5($email);
-    $user = base64_encode($username);
-    $code  = base64_encode($code);
-    
+    $post_c = get_post( $post_id );
+
+    $author = get_userdata($post_c->post_author);
+
+    $email = $author->user_email;
+
     $message = '<html>
                     <head>	
                     </head>
@@ -36,27 +38,22 @@ function enviar_email_rechazo($post_id){
                             </a>
                         </div>
                         <div style="margin: auto; display: block; text-align: left;">
-                        
-                            <p style="text-align: center; color: #5e5e5e;     font-family: Poppins; font-size: x-large;">
-                            
-                        
-                            '._x('Correo', 'plantilla email', 'serlib').': '.$email.' <br>
-                            '._x('Contraseña', 'plantilla email', 'serlib').': '.$pass.'<br>
-                            
-
+                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">Tu publicación '.$post_c->post_author.' en el Golfo de Morrosquillo ha sido rechazada por el equipo de Golfo de Morrosquillo</p>
+                            <p style="font-weight: 600; font-size:17px;">
+                                Accede a tu cuenta y crea una publicación que cumpla con los requisitos establecidos para nuestra Comunidad del Golfo de Morrosquillo
                             </p>
-                            
+                            <a href="https://golfodemorrosquillo.com/auth/">
+                                https://golfodemorrosquillo.com/auth/
+                            </a>
+                        </div>
+                        <div style="text-align: left;">
+                            <br><br><p>Cordialmente,</p>
+                            <img src="" width="120px">
                         </div>
                         <div style="margin: auto; display: block; text-align: left;">
-                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
-                            
-                                <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth?confirm='.$code.'&u='.$user.'" target="_blank">'._x('Activar cuenta','plantilla email', 'serlib').'</a>
-
-                            </p>
-                            
+                            '.$email.'       
                         </div>
                     </body>
-                
                 </html> '; 
             
     /**
@@ -68,7 +65,7 @@ function enviar_email_rechazo($post_id){
       
        add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    // $email = 'brayan.bernalg@gmail.com';
+     $email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] '._x('Confirmación de cuenta', 'asunto email', 'serlib') , $message, $headers );
 

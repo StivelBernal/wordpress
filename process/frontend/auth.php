@@ -51,7 +51,7 @@ function serlib_auth_handler(){
                             </div>
                             <div style="text-align: left;">
                                 <br><br><p>Cordialmente,</p>
-                                <img src="" width="120px">
+                                <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="120px">
                             </div>
 
                         </body>
@@ -477,7 +477,7 @@ function serlib_auth_handler(){
                             </div>
                             <div style="text-align: left;">
                                 <br><br><p>Cordialmente,</p>
-                                <img src="" width="120px">
+                                <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="120px">
                             </div>
 
                         </body>
