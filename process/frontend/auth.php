@@ -58,13 +58,7 @@ function serlib_auth_handler(){
                     
                     </html> '; 
                 
-        /**
-        *Funcion para enviar el mensaje
-        */ 
-        function tipo_de_contenido_html() {
-             return 'text/html';
-      	}
-    	  
+        	  
 	   	add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
        
         // $email = 'brayan.bernalg@gmail.com';
@@ -484,14 +478,6 @@ function serlib_auth_handler(){
                     
                     </html> '; 
 
-
-
-        /**
-        *Funcion para enviar el mensaje
-        */ 
-        function tipo_de_contenido_html() {
-        return 'text/html';
-        }
 
         add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
        
