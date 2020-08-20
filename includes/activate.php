@@ -69,7 +69,7 @@ function serlib_activate_plugin(){
     remove_role( 'editor' );
 
     add_role(
-        'pendiente comerciante',
+        'pendiente_comerciante',
         __('Pendiente Comerciante', 'serlib'),
         []
     );
