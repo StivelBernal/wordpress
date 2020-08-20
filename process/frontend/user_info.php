@@ -298,7 +298,8 @@ function serlib_users_info(){
                 $objDatos->tags = esc_attr($objDatos->tags);
             }
             
-
+            remove_action( 'save_post_post', 'ser_save_post_admin' );
+        
             $post_id                        =   wp_insert_post([
                 'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
                 'post_content'                =>    $content,
@@ -309,7 +310,9 @@ function serlib_users_info(){
                 'post_type'                   =>    'post',
                 'comment_status'              =>    'open'
             ]);
-
+            
+            add_action( 'save_post_post', 'ser_save_post_admin' );
+            
             if( !is_wp_error($post_id) ){
 
                 wp_set_post_terms($post_id, $objDatos->post_category, 'category');
@@ -452,6 +455,9 @@ function serlib_users_info(){
             } else {
                 $objDatos->post_category = esc_attr($objDatos->post_category);
             }
+
+            remove_action( 'save_post_post', 'ser_save_post_admin' );
+        
             if($objDatos->post_category === 'emergencias'){
                 $post_id                        =   wp_insert_post([
                     'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
@@ -475,6 +481,8 @@ function serlib_users_info(){
                     'comment_status'              =>    'open'
                  ]);
             }
+            
+            add_action( 'save_post_post', 'ser_save_post_admin' );
 
             if( !is_wp_error($post_id) ){
 
@@ -653,6 +661,9 @@ function serlib_users_info(){
             } else {
                 $objDatos->post_category = esc_attr($objDatos->post_category);
             }
+
+            remove_action( 'save_post_post', 'ser_save_post_admin' );
+        
             if($objDatos->post_category === 'emergencias'){
                 $post_id                        =   wp_insert_post([
                     'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
@@ -676,7 +687,9 @@ function serlib_users_info(){
                     'comment_status'              =>    'open'
                  ]);
             }
-
+            
+            add_action( 'save_post_post', 'ser_save_post_admin' );
+            
             if( !is_wp_error($post_id) ){
 
                 wp_set_post_terms($post_id, $objDatos->post_category, 'category');
