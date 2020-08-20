@@ -160,7 +160,7 @@ function serlib_auth_handler(){
                 wp_send_json($output);
                 return;
             } 
-          
+
             $user_id                =   wp_insert_user([
                 'user_login'            =>  $username,
                 'first_name'            =>  $first_name,
@@ -168,7 +168,7 @@ function serlib_auth_handler(){
                 'user_pass'             =>  $pass,
                 'user_email'            =>  $email,
                 'user_nicename'         =>  $first_name,
-                'role'                  =>  'pendiente',
+                'role'                  =>  ($role === 'turista' ? 'pendiente': 'pendiente_comerciante'),
                 'show_admin_bar_front'  =>  false 
             ]);
 
