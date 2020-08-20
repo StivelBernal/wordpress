@@ -17,6 +17,8 @@ function ser_save_post_admin( $post_id, $post, $update ){
        
         add_action( 'save_post_post', 'ser_save_post_admin' );
 
+        delete_post_meta( $post_id, 'activa');
+
         enviar_email_rechazo($post_id, $causa);
        
     }else if($data === 'ACTIVO' && ($post->post_status === 'pending' || $post->post_status === 'draft')){
