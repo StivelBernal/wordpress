@@ -47,7 +47,7 @@ NONCE_FIELD_PH
                                 <div ng-if="is_submit" class="lds-ripple-small"><div></div><div></div></div>login_I18N</button>
                             </div>
                         </div>
-                        
+
 
                         <div ng-if="error" class="s-100">
                            <p style="text-align:center; color:red;">{{error}}</p>
@@ -61,8 +61,7 @@ NONCE_FIELD_PH
                             <div class="account-social"><h6>or_login_with_I18N</h6></div>
                             <div class="socials-buttons-auth row">
                                 <div class="google" g-login>Google</div>
-                                <div ng-click="AuthSocial('facebook')" class="facebook">Facebook</div>
-                                <?php /*<div ng-click="InstagramRedirect()" class="instagram">Instagram</div> */ ?>      
+                                <div ng-click="AuthSocial('facebook')" class="facebook">Facebook</div> 
                             </div>
                         </div>
 
