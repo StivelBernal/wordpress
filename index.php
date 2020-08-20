@@ -105,7 +105,9 @@ if ( !function_exists( 'wp_password_change_notification' ) ) {
 
 
 if ( !function_exists( 'wp_new_user_notification' ) ) {
-    function wp_new_user_notification() {}
+    function wp_new_user_notification($user_id, $deprecated = null, $notify = '') {
+        enviar_email_usuario_nuevo($user_id);
+    }
 }
 
 
