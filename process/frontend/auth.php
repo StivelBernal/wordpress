@@ -268,7 +268,7 @@ function serlib_auth_handler(){
         $isActive = true;
 
         for($i = 0; $i < count( $userActive->roles); $i++){
-            if($userActive->roles[$i] === 'pendiente' ) $isActive = false;  
+            if($userActive->roles[$i] === 'pendiente' || $userActive->roles[$i] === 'pendiente_comerciante' ) $isActive = false;  
         }       
 
         if( !$isActive ){ 

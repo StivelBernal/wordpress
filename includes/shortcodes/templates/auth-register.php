@@ -350,7 +350,7 @@ NONCE_FIELD_PH
                         </div>
 
                         <div class="form-group s-45">
-                            <label>Ciudades a visitar_I18N</label>
+                            <label>Ubicacion_negocios_I18N</label>
                             <selector name="ciudadesVisitar" require="true" model="Model.city_active" value-attr="ID" Label-attr="nombre" multi="true" options="cities_active"></selector>
                             <div ng-messages="c_Form.ciudadesVisitar.$error">
                                 <div ng-message="required">required_I18N</div>
