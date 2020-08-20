@@ -321,8 +321,8 @@ NONCE_FIELD_PH
 
                         <div class="form-group s-24">
                             <label>Fotocopia_documento_I18N</label>
-                            <label for="fotocopia_documento" class="input-file-label">{{ !File.name ? 'Seleccionar archivo': File.name }} </label>      
-                            <input name="fotocopia_documento" type="file" ng-model="File" accept="image/png, image/jpeg, image/jpg, application/pdf" app-filereader style="display:none;"  id="fotocopia_documento"></selector>
+                            <label for="fotocopia_documento" class="input-file-label">{{ !File.name ? 'Seleccionar archivo( pdf, jpg, png, doc )': File.name }} </label>      
+                            <input name="fotocopia_documento" type="file" ng-model="File" accept="image/png, image/jpeg, image/jpg, application/pdf, application/msword" app-filereader style="display:none;"  id="fotocopia_documento"></selector>
                             <div ng-messages >
                                 <div  ng-if="!File">required_I18N</div>
                             </div> 
