@@ -4,7 +4,7 @@ function serlib_auth_handler(){
     
     function enviar_email_confirm($email, $username, $pass){
 
-        $headers[]= 'From: Contacto <contacto@golfomorrosquillo.com>';
+        $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
 
         $code = md5($email);
         $user = base64_encode($username);
@@ -397,7 +397,7 @@ function serlib_auth_handler(){
     }
 
     if( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['recover'])){
-return;
+
         $objDatos   =     json_decode(file_get_contents("php://input"));
         
         $output     =     [ 'error' => __('Usuario no encontrado', 'serlib'),
@@ -405,9 +405,6 @@ return;
         
         $nonce      =     isset($objDatos->_wpnonce) ? $objDatos->_wpnonce : '';
         
-
-        echo 'dfg';
-        return;
         if( !wp_verify_nonce( $nonce, 'serlib_auth' ) ){
            
             wp_send_json($output);

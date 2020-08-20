@@ -23,7 +23,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
        
     }else if($data === 'ACTIVO' && ($post->post_status === 'pending' || $post->post_status === 'draft')){
         
-        enviar_email_confirm($post_id);
+        enviar_email_confirm_post($post_id);
 
     }
 
@@ -81,9 +81,9 @@ function enviar_email_rechazo($post_id, $causa){
 }
 
 
-function enviar_email_confirm($post_id){
+function enviar_email_confirm_post($post_id){
 
-    $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
+    $headers[] = 'From: Contacto <soporte@golfomorrosquillo.com>';
 
     $post_c = get_post( $post_id );
 
@@ -187,7 +187,5 @@ function enviar_email_usuario_nuevo($user_id){
     //$email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
-
-    return $mail_res;
 
 }
