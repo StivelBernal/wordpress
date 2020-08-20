@@ -17,7 +17,7 @@ function extra_profile_fields( $user ) {
     
 	if(isset($user->roles)){
 			
-		if( $user->roles[0]  ===  'comerciante' ){
+		if( $user->roles[0]  ===  'comerciante' || $user->roles[0]  ===  'pendiente_comerciante' ){
     
     ?>
    
