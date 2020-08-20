@@ -4,7 +4,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
     
     $data   =   get_post_meta( $post_id, 'activa', true );
 
-    if($data === 'RECHAZADO' && $post->post_status === 'pending'){
+    if($data === 'RECHAZADO' && ( $post->post_status === 'pending' || $post->post_status === 'draft') ){
         $causa   =   get_post_meta( $post_id, 'causa_rechazo', true );
       
         if($causa === 'Otro'){
@@ -19,7 +19,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
 
         enviar_email_rechazo($post_id, $causa);
        
-    }else if($data === 'ACTIVO' && $post->post_status === 'pending'){
+    }else if($data === 'ACTIVO' && ($post->post_status === 'pending' || $post->post_status === 'draft')){
         
         enviar_email_confirm($post_id);
 
