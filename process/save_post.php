@@ -160,7 +160,7 @@ function enviar_email_usuario_nuevo($user_id){
 
                             </p>
                             <a target="blank" href="https://golfodemorrosquillo.com/auth/recover">
-                                https://golfodemorrosquillo.com/auth/recover
+                                https://golfodemorrosquillo.com/auth/recover-account/
                             </a><br><br>
                             <p style="font-weight: 600; font-size:17px;">
                                 Guarda nuestro link en la pestaña de favoritos:<br>
