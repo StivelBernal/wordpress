@@ -1274,36 +1274,60 @@ p[disabled = "disabled"]{
  /*LIKE AND SHARED*/
 
 .s_socials_shared{
-    
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .s_socials_shared button{
     padding:5px;
-    border:#33333355;
     outline: none;
     transition: all ease 0.4s;
+    color:white;
+    border:none;
 
+}
+
+.s_socials_shared [red]{
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
 }
 
 .facebook-compartir{
-    color: #00a2ff;
+    background-color: #00a2ff;
 }
 
 .mail-compartir{
-    color: #6b6b6b;
+    background-color: #2e2e2e;
 }
 
 .whatsapp-compartir{
-    color: #00db42;
-    font-size:1.1rem;
+    background-color: #00db42;
+    font-size:1.5rem;
     font-weight: 700;
+    top: 4px;
+    position: relative;
+    display: inline-block;
 }
+
+.history-back{
+    background-color: #767776;
+    color: #fff;
+    padding:6px 20px !important;
+    border-radius:10px;
+}
+
 .history-back span{
-    margin-right:4px;
+    margin-right:3px;
 }
 
 .me_gusta_post{
-    color: #db1a00;
+    border-radius: 10px;
+    padding: 7px !important;
+    background-color: #ff7664;
 }
 
 
