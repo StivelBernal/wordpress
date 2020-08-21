@@ -105,17 +105,17 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
         </div>
         <div class="s-32" > 
             <label>'.__('Facebook:', 'serlib').'</label>
-            <input ng-model="Model.facebook"  type="text" placeholder="https://www.facebook.com/GolfoMorrosquillo/" >
+            <input ng-model="Model.facebook"  type="text" placeholder="URL" >
         </div>
 
         <div class="s-32" > 
             <label>'.__('Página web:', 'serlib').'</label>
-            <input ng-model="Model.web"  type="text" placeholder="https://golfodemorrosquillo.com/" >
+            <input ng-model="Model.web"  type="text" placeholder="URL" >
         </div>
 
         <div class="s-32" > 
             <label>'.__('Instagram:', 'serlib').'</label>
-            <input ng-model="Model.instagram" placeholder="https://www.instagram.com/golfomorrosquillo"  type="text"  >
+            <input ng-model="Model.instagram" placeholder="URL"  type="text"  >
         </div>
 
         <div class="s-49" > 
