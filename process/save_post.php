@@ -4,12 +4,11 @@ function ser_save_post_admin( $post_id, $post, $update ){
     
 
     if($post->post_type !== 'post' || $post->post_type !== 'blog' || $post->post_type !== 'revision'){
-        echo 'dfg';
+        var_dump($post->post_type);
         die();
         return;
     }
-    echo 'dfsdfdfg';
-    die();
+    
     $user_meta = get_userdata($post->post_author);
 
     if( $user_meta->roles[0] !== 'turista' || $user_meta->roles[0] === 'comerciante' ){
