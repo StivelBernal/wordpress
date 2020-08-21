@@ -28,9 +28,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
                 $causa = $data[2];
             }
 
-            remove_action( 'save_post_post', 'ser_save_post_admin'); 
-            remove_action( 'save_post_blog', 'ser_save_post_admin'); 
- 
+            remove_action( 'save_post', 'ser_save_post_admin'); 
             // update the post, which calls save_post again
             wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
 
