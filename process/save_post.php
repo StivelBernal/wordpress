@@ -25,7 +25,8 @@ function ser_save_post_admin( $post_id, $post, $update ){
             array_push($data, $valor );
  
         }
-
+        var_dump($data);
+        die();
         if($data[0] === 'RECHAZADO'){
 
             $causa   =   $data[1];
@@ -34,7 +35,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
                 $causa = $data[2];
             }
             
-//                enviar_email_rechazo($post_id, $causa);
+                enviar_email_rechazo($post_id, $causa);
               
                 remove_action( 'save_post', 'ser_save_post_admin');  
                 
