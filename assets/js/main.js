@@ -72,8 +72,7 @@
         }
     });
 
-    $('.destino_menu ul').css({display: 'block'});
-
+  
   });
   if(document.querySelector('#search-results')){
     var offset = $('#search-results').offset().top;
