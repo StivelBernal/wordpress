@@ -4,9 +4,6 @@ function ser_save_post_admin( $post_id, $post, $update ){
     
     $type = get_post_type($post_id);
 
-    var_dump($type);
-    die();
-    
     if($post->post_type !== 'post' || $post->post_type !== 'blog' || $post->post_type !== 'revision'){
         return;
     }
