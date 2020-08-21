@@ -19,7 +19,10 @@ function ser_save_post_admin( $post_id, $post, $update ){
             array_push($data, $valor );
  
         }
-    
+        
+        var_dump($data);
+        die();
+        
         if($data[0] === 'RECHAZADO'){
 
             $causa   =   $data[1];
