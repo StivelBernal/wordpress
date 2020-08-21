@@ -16,7 +16,7 @@ function extra_profile_fields( $user ) {
     $user = get_userdata($user->ID );
     
     ?>
-
+    <div style="background-color: gray;">
     <h3><?php _e('Información general del usuario'); ?></h3>
     <table class="form-table">
         <tr>
@@ -80,5 +80,7 @@ function extra_profile_fields( $user ) {
 <?php
         }   
     }
-
+    ?>
+    </div>
+    <?php
 }
