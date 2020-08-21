@@ -13,12 +13,12 @@ function ser_save_post_admin( $post_id, $post, $update ){
       
         remove_action( 'save_post_post', 'ser_save_post_admin' );
         
-        delete_post_meta( $post_id, 'activa');
+        /*delete_post_meta( $post_id, 'activa');*/
         
         wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
        
         enviar_email_rechazo($post_id, $causa);
-        
+
         add_action( 'save_post_post', 'ser_save_post_admin' );
 
        
