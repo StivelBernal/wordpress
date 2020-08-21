@@ -1,6 +1,10 @@
 <?php 
 
 function ser_save_post_admin( $post_id, $post, $update ){
+    
+    if($post->post_type !== 'post' || $post->post_type !== 'blog'){
+        return;
+    }
 
     $user_meta = get_userdata($post->post_author);
     
@@ -29,12 +33,11 @@ function ser_save_post_admin( $post_id, $post, $update ){
             }
             
             //enviar_email_rechazo($post_id, $causa);
-            if($post->post_type === 'post' || $post->post_type === 'blog'){
               
                 remove_action( 'save_post', 'ser_save_post_admin');  
                 wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
             
-            }
+            
             
 
             
