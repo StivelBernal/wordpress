@@ -9,7 +9,6 @@ function ser_save_post_admin( $post_id, $post, $update ){
     }
 
     $user_meta = get_userdata($post->post_author);
-    
 
     if( $user_meta->roles[0] !== 'turista' || $user_meta->roles[0] === 'comerciante' ){
         //return;
@@ -25,8 +24,10 @@ function ser_save_post_admin( $post_id, $post, $update ){
             array_push($data, $valor );
  
         }
+
         var_dump($data);
         die();
+        
         if($data[0] === 'RECHAZADO'){
 
             $causa   =   $data[1];
