@@ -1,7 +1,7 @@
 <?php 
 
 function ser_save_post_admin( $post_id, $post, $update ){
-    if( $post->post->status === 'trash' ){
+    if( $post->post_status === 'trash' ){
         return;
     }
 
