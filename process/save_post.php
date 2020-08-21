@@ -14,6 +14,9 @@ function ser_save_post_admin( $post_id, $post, $update ){
         //return;
     } 
 
+    var_dump($_POST['acf']);
+    die();
+
 
     if( isset($_POST['acf']) ){
 
@@ -25,7 +28,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
  
         }
 
-        var_dump($data);
+        
         die();
         
         if($data[0] === 'RECHAZADO'){
