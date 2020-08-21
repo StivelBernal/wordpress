@@ -8,7 +8,8 @@ function ser_save_post_admin( $post_id, $post, $update ){
         die();
         return;
     }
-
+    echo 'dfsdfdfg';
+    die();
     $user_meta = get_userdata($post->post_author);
 
     if( $user_meta->roles[0] !== 'turista' || $user_meta->roles[0] === 'comerciante' ){
