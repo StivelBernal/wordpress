@@ -405,7 +405,7 @@ function serlib_users_info(){
                 $user = wp_get_current_user();
                 $roles =  $user->roles[0];
                 
-                $tipos_alcaldia = ['transporte', 'eventos', 'cultura', 'sitios'  ];
+                $tipos_alcaldia = ['emergencias', 'ferias-y-fiestas', 'cultura', 'sitios'  ];
                 $arrayTaxAlcaldia = [];
                 $results['tipos'] = get_terms([
                     'hide_empty' => false,
