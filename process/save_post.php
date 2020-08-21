@@ -7,7 +7,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
         delete_post_meta( $post_id, 'activa');
     }
     
-    $data   =   get_post_meta( $post->ID, 'activa', true );
+    $data   =   get_post_meta( $post_id, 'activa', true );
     
    
 
