@@ -1,31 +1,34 @@
 <?php 
 
-function ser_save_post_admin( $post_id, $post, $update ){
+function ser_save_update( $post_id, $post, $update ){
     
-     /**TRAE EL POST NUEVO */
+     /**  TRAE EL POST NUEVO  */
+    
+    /*
+    
     if( $post->post_status === 'trash' ){
-        delete_post_meta( $post_id, 'activa');
+        update_post_meta( $post_id, 'activa', 'RECHAZADO');
+    }else if($post->post_status === 'draft'){
+        update_post_meta( $post_id, 'activa', 'PENDIENTE');
+    }else if($post->post_status === 'publish'){
+        update_post_meta( $post_id, 'activa', 'ACTIVO');
     }
-    
-    $data   =   get_post_meta( $post_id, 'activa', true );
-    
-   
 
+
+    $data   =   get_post_meta( $post_id, 'activa', true );  
+    
     if($data === 'RECHAZADO'){
+
         $causa   =   get_post_meta( $post_id, 'causa_rechazo', true );
       
         if($causa === 'Otro'){
             $causa = get_post_meta( $post_id, 'causa_otro', true );
         }
-      
-        remove_action( 'save_post_post', 'ser_save_post_admin' );
-            
-        wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
-       
+        
+        var_dump($causa);
+        die();
+        return;
         enviar_email_rechazo($post_id, $causa);
-
-        add_action( 'save_post_post', 'ser_save_post_admin' );
-
        
     }else if($data === 'ACTIVO'){
         
@@ -33,7 +36,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
 
     }
 
-    
+    */
 }
 
 function tipo_de_contenido_html() {

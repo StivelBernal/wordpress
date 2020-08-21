@@ -44,7 +44,8 @@ include( 'includes/shortcodes/like_shared.php' );
 // Hooks
 register_activation_hook( __FILE__ , 'serlib_activate_plugin' );
 add_action( 'init', 'serlib_fovea_init' ); 
-add_action( 'save_post_post', 'ser_save_post_admin', 10, 3 ); 
+add_action( 'save_post_post', 'ser_save_post_admin', 5, 3 ); 
+add_action( 'save_post_blog', 'ser_save_post_admin', 5, 3 ); 
 add_filter( 'the_content', 'serlib_filter_destino_content' );
 add_action( 'wp_enqueue_scripts', 'serlib_enqueue_scripts', 100 );
 
@@ -109,19 +110,12 @@ if ( !function_exists( 'wp_new_user_notification' ) ) {
         enviar_email_usuario_nuevo($user_id);
     }
 }
-
+/*
 function ser_footer_scripts() {
     echo '
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175783940-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag("js", new Date());
-    
-      gtag("config", "UA-175783940-1");
-    </script>';
+    ';
 }
 
 add_action( 'wp_footer', 'ser_footer_scripts' );
-
+*/
 add_action( 'set_user_role', 'notificacion_activacion_cuenta', 10, 3);
