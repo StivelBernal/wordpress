@@ -1523,8 +1523,9 @@ p[disabled = "disabled"]{
     }
 }
 
-
-#admin_frontend .toolbar-actions .active_step span{
-    color:#1280B5;
-    background-color:#ffffff90;
+@media(max-width:801px){
+    #admin_frontend .toolbar-actions .active_step span{
+        text-decoration: underline #1280B5;
+    
+    }
 }
