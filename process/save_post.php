@@ -5,7 +5,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
     $data   =   get_post_meta( $update->ID, 'activa', true );
     
     /**TRAE EL POST NUEVO */
-    if( $post->post_status === 'draft' ){
+    if( $post->post_status === 'draft'  ||  $post->post_status === 'trash' ){
          delete_post_meta( $post_id, 'activa');
          $data = '';
     }
