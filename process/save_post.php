@@ -46,7 +46,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
         }else if($data[0] === 'ACTIVO'){
                 
             if( get_post_meta($post_id, 'es_activo', true) !== 1 ){
-                enviar_email_confirm_post($post_id);
+               // enviar_email_confirm_post($post_id);
                 update_post_meta($post_id, 'es_activo', 1);
             }
 
