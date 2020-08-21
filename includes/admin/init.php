@@ -15,23 +15,44 @@ function extra_profile_fields( $user ) {
 
     $user = get_userdata($user->ID );
     
+    ?>
+
+    <h3><?php _e('Información general del usuario'); ?></h3>
+    <table class="form-table">
+        <tr>
+            <th><label for="document_type">Teléfono</label></th>
+            <td>
+            <input type="text" id="user_telefono" value="<?php echo esc_attr( get_the_author_meta( 'user_telefono', $user->ID ) ); ?>" class="regular-text" /><br />
+            
+            </td>
+        </tr>
+    </table>
+
+
+
+
+    <?php
+
+
 	if(isset($user->roles)){
 			
 		if( $user->roles[0]  ===  'comerciante' || $user->roles[0]  ===  'pendiente_comerciante' ){
     
     ?>
-   
+    
+
+
     <h3><?php _e('Datos para verificar del comerciante'); ?></h3>
     <table class="form-table">
         <tr>
-            <th><label for="document_type">TIPO DE DOCUMENTO</label></th>
+            <th><label for="document_type">Tipo de documento</label></th>
             <td>
             <input type="text" name="gmail" id="document_type" value="<?php echo esc_attr( get_the_author_meta( 'document_type', $user->ID ) ); ?>" class="regular-text" /><br />
             
             </td>
         </tr>
         <tr>
-            <th><label for="document_number">NUMERO DE DOCUMENTO</label></th>
+            <th><label for="document_number">Número de documento</label></th>
             <td>
             <input type="text" name="yahoo" id="document_number" value="<?php echo esc_attr( get_the_author_meta( 'document_number', $user->ID ) ); ?>" class="regular-text" /><br />
             
@@ -39,7 +60,7 @@ function extra_profile_fields( $user ) {
         </tr>
         
         <tr>
-            <th><label>ARCHIVO DOCUMENTO</label></th>
+            <th><label>Fotocopia del RUT</label></th>
             <td>
             <a  target="_blank" href="<?php
             $FILE = esc_attr( get_the_author_meta( 'file_document', $user->ID ) );
@@ -50,7 +71,7 @@ function extra_profile_fields( $user ) {
                 $FILE );
             echo $FILE;
              
-             ?>" >File</a><br />
+             ?>" >Ver Archivo</a><br />
             
             </td>
         </tr>
