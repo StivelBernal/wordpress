@@ -2,15 +2,15 @@
 
 function ser_save_post_admin( $post_id, $post, $update ){
     
-    $data   =   get_post_meta( $post_id, 'activa', true );
+    $data   =   get_post_meta( $update->ID, 'activa', true );
     
     /**TRAE EL POST NUEVO */
-    if($post->post_status === 'draft' ){
+    if( $post->post_status === 'draft' ){
          delete_post_meta( $post_id, 'activa');
          $data = '';
     }
 
-    if($data === 'RECHAZADO' && ( $post->post_status === 'pending' || $post->post_status === 'publish') ){
+    if($data === 'RECHAZADO'){
         $causa   =   get_post_meta( $post_id, 'causa_rechazo', true );
       
         if($causa === 'Otro'){
@@ -26,7 +26,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
         add_action( 'save_post_post', 'ser_save_post_admin' );
 
        
-    }else if($data === 'ACTIVO' && ($post->post_status === 'pending' || $post->post_status === 'draft')){
+    }else if($data === 'ACTIVO'){
         
         enviar_email_confirm_post($post_id);
 
