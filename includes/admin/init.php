@@ -16,7 +16,7 @@ function extra_profile_fields( $user ) {
     $user = get_userdata($user->ID );
     
     ?>
-    <div style="background-color: gray;">
+    <div style="padding: 10px 14px; background-color: #c9e7cd;">
     <h3><?php _e('Información general del usuario'); ?></h3>
     <table class="form-table">
         <tr>
