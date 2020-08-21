@@ -6,6 +6,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
     
     if($post->post_status === 'trash' ){
          delete_post_meta( $post_id, 'activa');
+         $data = '';
     }
 
     if($data === 'RECHAZADO' && ( $post->post_status === 'pending' || $post->post_status === 'draft' || $post->post_status === 'publish') ){
