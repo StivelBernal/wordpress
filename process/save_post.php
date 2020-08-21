@@ -1,6 +1,7 @@
 <?php 
 
 function ser_save_post_admin( $post_id, $post, $update ){
+    
     if( $post->post_status === 'trash' ){
         return;
     }
@@ -35,12 +36,11 @@ function ser_save_post_admin( $post_id, $post, $update ){
                 $causa = $data[2];
             }
             
-            remove_action( 'save_post', 'ser_save_post_admin' );
+            remove_action( 'save_post', 'ser_save_post_admin', 6, 3 );
             
             //enviar_email_rechazo($post_id, $causa);
             wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
             
-            add_action( 'save_post', 'ser_save_post_admin' );
 
               
         }else if($data[0] === 'ACTIVO'){
