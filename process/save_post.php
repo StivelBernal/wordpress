@@ -4,8 +4,6 @@ function ser_save_post_admin( $post_id, $post, $update ){
     
 
     if( !($post->post_type === 'post' || $post->post_type === 'blog' || $post->post_type === 'revision' )){
-        var_dump($post->post_type);
-        die();
         return;
     }
     
@@ -14,10 +12,6 @@ function ser_save_post_admin( $post_id, $post, $update ){
     if( $user_meta->roles[0] !== 'turista' || $user_meta->roles[0] === 'comerciante' ){
         //return;
     } 
-
-    var_dump($_POST['acf']);
-    die();
-
 
     if( isset($_POST['acf']) ){
 
@@ -30,7 +24,6 @@ function ser_save_post_admin( $post_id, $post, $update ){
         }
 
         
-        die();
         
         if($data[0] === 'RECHAZADO'){
 
@@ -47,11 +40,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
                 wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
                 
                 add_action( 'save_post', 'ser_save_post_admin');  
-            
-            
-
-            
-        
+              
         }else if($data[0] === 'ACTIVO'){
                 
             if( get_post_meta($post_id, 'es_activo', true) !== 1 ){
