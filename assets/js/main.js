@@ -536,8 +536,9 @@
         success: function(data){
             if(data === 'no-login'){
                 alert('logueate para poder comentar esta publicación');
+            }else{
+                contador.html(data);
             }
-            contador.html(data);
         },
         error: function(error){
             console.log(error);
