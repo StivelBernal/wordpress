@@ -44,8 +44,7 @@ include( 'includes/shortcodes/like_shared.php' );
 // Hooks
 register_activation_hook( __FILE__ , 'serlib_activate_plugin' );
 add_action( 'init', 'serlib_fovea_init' ); 
-add_action( 'save_post_post', 'ser_save_post_admin', 5, 3 ); 
-add_action( 'save_post_blog', 'ser_save_post_admin', 5, 3 ); 
+add_action( 'save_post', 'ser_save_post_admin', 5, 3 ); 
 add_filter( 'the_content', 'serlib_filter_destino_content' );
 add_action( 'wp_enqueue_scripts', 'serlib_enqueue_scripts', 100 );
 
