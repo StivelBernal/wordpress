@@ -3,7 +3,7 @@
 function ser_save_post_admin( $post_id, $post, $update ){
     
 
-    if( !($post->post_type === 'post' || $post->post_type === 'blog' || $post->post_type === 'revision' )){
+    if( !($post->post_type === 'post' || $post->post_type === 'blog' || $post->post_type === 'revision' ) || $post->post->status === 'trash' ){
         return;
     }
     
@@ -33,13 +33,13 @@ function ser_save_post_admin( $post_id, $post, $update ){
                 $causa = $data[2];
             }
             
-                //enviar_email_rechazo($post_id, $causa);
-              
-                remove_action( 'save_post', 'ser_save_post_admin');  
-                
-                wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
-                
-                add_action( 'save_post', 'ser_save_post_admin');  
+            remove_action( 'save_post', 'ser_save_post_admin' );
+            
+            //enviar_email_rechazo($post_id, $causa);
+            wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
+            
+            add_action( 'save_post', 'ser_save_post_admin' );
+
               
         }else if($data[0] === 'ACTIVO'){
                 
