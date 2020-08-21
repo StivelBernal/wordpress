@@ -38,7 +38,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
             
             remove_action( 'save_post', 'ser_save_post_admin', 6, 3 );
             
-            //enviar_email_rechazo($post_id, $causa);
+            enviar_email_rechazo($post_id, $causa);
             wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
             
 
