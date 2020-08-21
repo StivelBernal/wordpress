@@ -27,7 +27,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false );
                     <a ng-href="{{object.permalink}}" target="_blank">{{object.post_title}} <br>
                         <em ng-if="object.post_status === 'pending'"><?php echo __('Pendiente', 'serlib'); ?></em>
                         <em ng-if="object.post_status === 'publish'"><?php echo __('Publicada', 'serlib'); ?></em>
-                        <em ng-if="object.post_status === 'trash'"><?php echo __('Eliminada', 'serlib'); ?></em>
+                        <em ng-if="object.post_status === 'trash'"><?php echo __('Rechazada', 'serlib'); ?></em>
                     </a>
                 </strong>
                 <strong class="date">{{object.post_date }}</strong>

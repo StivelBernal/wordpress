@@ -24,6 +24,11 @@ function serlib_like_destino(){
     
     $post_ID    =   absint( $_POST['ID'] );
     $user_ID    =   get_current_user_id();
+
+    if($user_ID === 0){
+        echo 'no-login';
+        wp_die();
+    }
     //delete_post_meta( $post_ID, 's_likes_data', [1,2,3]);
     $post_data  =   get_post_meta( $post_ID, 's_likes_data')[0];
     if(isset($post_data)){

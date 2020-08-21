@@ -534,6 +534,9 @@
         url: front_obj.ajax_url,
         data: form,
         success: function(data){
+            if(data === 'no-login'){
+                alert('logueate para poder comentar esta publicación');
+            }
             contador.html(data);
         },
         error: function(error){
