@@ -1,9 +1,11 @@
 <?php 
 
 function ser_save_post_admin( $post_id, $post, $update ){
-    
+    if( $post->post->status === 'trash' ){
+        return;
+    }
 
-    if( !($post->post_type === 'post' || $post->post_type === 'blog' || $post->post_type === 'revision' ) || $post->post->status === 'trash' ){
+    if( !($post->post_type === 'post' || $post->post_type === 'blog' || $post->post_type === 'revision' ) ){
         return;
     }
     
