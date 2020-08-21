@@ -27,12 +27,14 @@ function ser_save_post_admin( $post_id, $post, $update ){
             if($causa === 'Otro'){
                 $causa = $data[2];
             }
-
+            
+            enviar_email_rechazo($post_id, $causa);
+            
             remove_action( 'save_post', 'ser_save_post_admin'); 
             // update the post, which calls save_post again
             wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
 
-            enviar_email_rechazo($post_id, $causa);
+            
         
         }else if($data[0] === 'ACTIVO'){
                 
