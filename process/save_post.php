@@ -3,6 +3,10 @@
 function ser_save_post_admin( $post_id, $post, $update ){
     
     $data   =   get_post_meta( $post_id, 'activa', true );
+    
+    if($post->post_status === 'trash' ){
+         delete_post_meta( $post_id, 'activa');
+    }
 
     if($data === 'RECHAZADO' && ( $post->post_status === 'pending' || $post->post_status === 'draft' || $post->post_status === 'publish') ){
         $causa   =   get_post_meta( $post_id, 'causa_rechazo', true );
@@ -12,9 +16,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
         }
       
         remove_action( 'save_post_post', 'ser_save_post_admin' );
-        
-        /*delete_post_meta( $post_id, 'activa');*/
-        
+            
         wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
        
         enviar_email_rechazo($post_id, $causa);
