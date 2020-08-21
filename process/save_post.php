@@ -34,9 +34,6 @@ function ser_save_post_admin( $post_id, $post, $update ){
             // update the post, which calls save_post again
             wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
 
-            add_action( 'save_post_post', 'ser_save_post_admin'); 
-            add_action( 'save_post_blog', 'ser_save_post_admin'); 
-
             enviar_email_rechazo($post_id, $causa);
         
         }else if($data[0] === 'ACTIVO'){
