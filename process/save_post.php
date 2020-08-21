@@ -1,9 +1,9 @@
 <?php 
 
 function ser_save_post_admin( $post_id, $post, $update ){
-    var_dump($post->post_type);
+    var_dump($post);
     die();
-    if($post->post_type !== 'post' || $post->post_type !== 'blog'){
+    if($post->post_type !== 'post' || $post->post_type !== 'blog' || $post->post_type !== 'revision'){
         return;
     }
 
