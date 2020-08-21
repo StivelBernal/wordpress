@@ -29,10 +29,14 @@ function ser_save_post_admin( $post_id, $post, $update ){
             }
             
             enviar_email_rechazo($post_id, $causa);
+            if($post->post_type === 'post'){
+                remove_action( 'save_post_post', 'ser_save_post_admin');  
+                wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
+            }else{
+                remove_action( 'save_post_blog', 'ser_save_post_admin');  
+                wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) ); 
+            }
             
-            remove_action( 'save_post', 'ser_save_post_admin'); 
-            // update the post, which calls save_post again
-            wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
 
             
         
