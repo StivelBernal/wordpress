@@ -132,7 +132,7 @@ function notificacion_activacion_cuenta($user_id, $role, $old_roles){
       
     add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-        $email = 'brayan.bernalg@gmail.com';
+        //$email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Cuenta aprobada', $message, $headers );
 
