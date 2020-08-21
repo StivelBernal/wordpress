@@ -1,7 +1,8 @@
 <?php 
 
 function ser_save_post_admin( $post_id, $post, $update ){
-    
+    var_dump($post->post_type);
+    die();
     if($post->post_type !== 'post' || $post->post_type !== 'blog'){
         return;
     }
