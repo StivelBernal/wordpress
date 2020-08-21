@@ -12,14 +12,15 @@ function ser_save_post_admin( $post_id, $post, $update ){
         }
       
         remove_action( 'save_post_post', 'ser_save_post_admin' );
- 
+        
+        delete_post_meta( $post_id, 'activa');
+        
         wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
        
+        enviar_email_rechazo($post_id, $causa);
+        
         add_action( 'save_post_post', 'ser_save_post_admin' );
 
-        delete_post_meta( $post_id, 'activa');
-
-        enviar_email_rechazo($post_id, $causa);
        
     }else if($data === 'ACTIVO' && ($post->post_status === 'pending' || $post->post_status === 'draft')){
         
@@ -73,7 +74,7 @@ function enviar_email_rechazo($post_id, $causa){
       
        add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    //$email = 'brayan.bernalg@gmail.com';
+    $email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] '._x('Publicación rechazada', 'asunto email', 'serlib') , $message, $headers );
 

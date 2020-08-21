@@ -125,7 +125,7 @@ function serlib_buscador_home_results_shortcode(){
                               <img class="icono" src="'.$value[1].'">
                               <div class="mkdf-tours-gallery-simple-title-holder">
                                   <h4 class="tipo_mun_title mkdf-tour-title">
-                                  '. str_replace('-', ' ', $key ) .' </h4>
+                                  '. str_replace(['-', 'ion'], [' ', 'ión'], $key ) .' </h4>
                               </div>
                           </div>
                       </div>
