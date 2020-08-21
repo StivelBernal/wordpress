@@ -1480,21 +1480,21 @@ p[disabled = "disabled"]{
     .p_tabs > .s-flex p i{
         display: inline;
     }
-    .active_step{
+    .active_hover{
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         padding:5px;
        
     }
-    .active_step span{
+    .active_hover span{
         display: inline !important;
     }
 
 }
 
+z-index: 1000 !important;
 .md-dialog-container, .md-scroll-mask{
-    z-index: 1000 !important;
 }
 
 .imagen-usuario{
@@ -1523,8 +1523,8 @@ p[disabled = "disabled"]{
     }
 }
 
-@media(max-width:801px){
-    #admin_frontend .toolbar-actions .active_step span{
+@media(min-width:801px){
+    #admin_frontend .toolbar-actions .active_hover span{
        
         color:#fff;
         border-bottom: 2px solid #fff;
