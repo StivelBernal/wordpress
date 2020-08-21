@@ -3,7 +3,7 @@
 function ser_save_post_admin( $post_id, $post, $update ){
     
 
-    if($post->post_type !== 'post' || $post->post_type !== 'blog' || $post->post_type !== 'revision'){
+    if( !($post->post_type === 'post' || $post->post_type === 'blog' || $post->post_type === 'revision' )){
         var_dump($post->post_type);
         die();
         return;
