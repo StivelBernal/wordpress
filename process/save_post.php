@@ -80,6 +80,63 @@ function enviar_email_rechazo($post_id, $causa){
     return $mail_res;
 }
 
+function notificacion_activacion_cuenta($user_id, $role, $old_roles){
+    
+    if( $role !== 'comerciante'){ 
+        return;
+    }
+
+    $headers[] = 'From: Contacto <soporte@golfomorrosquillo.com>';
+
+    $author = get_userdata($user_id);
+
+    $email = $author->user_email;
+    
+    $text = 'Su cuenta en el Golfo de Morrosquillo ha sido aprobada por el equipo del golfo de Morrosquillo';
+
+    $message = '<html>
+                    <head>	
+                    </head>
+                    <body>
+                      
+                        <div style="margin: auto; display: block; flex-direction: column; text-align: center;">
+                            <a class="logo" href="https://golfodemorrosquillo.com" target="blank">
+                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
+                            </a>
+                        </div>
+                        <div style="margin: auto; display: block; text-align: left;">
+                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">'.$text.'</p>
+                            
+                            <p style="font-weight: 600; font-size:17px;">
+                                <br><br>Correo: '.$email.'<br><br>
+                            </p>
+                            <p style="font-weight: 600; font-size:17px;">
+                                Accede a tu cuenta en el siguiente enlace:.
+                            </p>
+                            <a target="blank" href="https://golfodemorrosquillo.com/auth/">
+                                https://golfodemorrosquillo.com/auth/
+                            </a>
+                        </div>
+                        <div style="text-align: left;">
+                            <br><br><p>Cordialmente,</p>
+                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="250px">
+                        </div>
+                    
+                    </body>
+                </html> '; 
+            
+    /**
+    *Funcion para enviar el mensaje
+    */ 
+   
+      
+    add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
+   
+        $email = 'brayan.bernalg@gmail.com';
+
+    $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Cuenta aprobada', $message, $headers );
+
+}
 
 function enviar_email_confirm_post($post_id){
 

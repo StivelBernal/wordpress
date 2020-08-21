@@ -123,3 +123,5 @@ function ser_footer_scripts() {
 }
 
 add_action( 'wp_footer', 'ser_footer_scripts' );
+
+add_action( 'set_user_role', 'notificacion_activacion_cuenta', 10, 3);
