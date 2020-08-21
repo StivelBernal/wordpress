@@ -1,42 +1,40 @@
 <?php 
 
-function ser_save_update( $post_id, $post, $update ){
+function ser_save_post_admin( $post_id, $post, $update ){
     
-     /**  TRAE EL POST NUEVO  */
-    
-    /*
-    
-    if( $post->post_status === 'trash' ){
-        update_post_meta( $post_id, 'activa', 'RECHAZADO');
-    }else if($post->post_status === 'draft'){
-        update_post_meta( $post_id, 'activa', 'PENDIENTE');
-    }else if($post->post_status === 'publish'){
-        update_post_meta( $post_id, 'activa', 'ACTIVO');
-    }
+    if( isset($_POST['acf']) ){
 
+        $data = [];
+ 
+        foreach ($_POST['acf'] as $nombre => $valor) {
 
-    $data   =   get_post_meta( $post_id, 'activa', true );  
-    
-    if($data === 'RECHAZADO'){
-
-        $causa   =   get_post_meta( $post_id, 'causa_rechazo', true );
-      
-        if($causa === 'Otro'){
-            $causa = get_post_meta( $post_id, 'causa_otro', true );
+            array_push($data, $valor );
+ 
         }
-        
-        var_dump($causa);
+
         die();
-        return;
-        enviar_email_rechazo($post_id, $causa);
-       
-    }else if($data === 'ACTIVO'){
+    
+        if($data[0] === 'RECHAZADO'){
+
+            $causa   =   $data[1];
+            
+            if($causa === 'Otro'){
+                $causa = $data[2];
+            }
+            
+            enviar_email_rechazo($post_id, $causa);
         
-        enviar_email_confirm_post($post_id);
+        }else if($data[0] === 'ACTIVO'){
+            
+            if( get_post_meta($post_id, 'es_activo', true) === 1 ){
+                enviar_email_confirm_post($post_id);
+                update_post_meta($post_id, 'es_activo', 1);
+            }
+
+        }
 
     }
-
-    */
+    
 }
 
 function tipo_de_contenido_html() {
