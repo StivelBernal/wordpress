@@ -1093,8 +1093,7 @@ label.input-file-label{
 }
 #admin_frontend .toolbar-actions p.active_step{
     color:#fff;
-    padding-bottom: 5px;
-    
+    padding-bottom: 5px;   
 }
 #admin_frontend .toolbar-actions p, #admin_frontend .toolbar-actions button{
     font-weight: 600;
@@ -1486,8 +1485,7 @@ p[disabled = "disabled"]{
         flex-direction: column;
         flex-wrap: wrap;
         padding:5px;
-        color:#1280B5;
-        background-color:#ffffff90;
+       
     }
     .active_step span{
         display: inline !important;
@@ -1525,3 +1523,8 @@ p[disabled = "disabled"]{
     }
 }
 
+
+#admin_frontend .toolbar-actions .active_step span{
+    color:#1280B5;
+    background-color:#ffffff90;
+}
