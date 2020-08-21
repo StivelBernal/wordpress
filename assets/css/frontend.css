@@ -1486,6 +1486,8 @@ p[disabled = "disabled"]{
         flex-direction: column;
         flex-wrap: wrap;
         padding:5px;
+        color:#1280B5;
+        background-color:#ffffff90;
     }
     .active_step span{
         display: inline !important;
