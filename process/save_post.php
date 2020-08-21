@@ -1,7 +1,15 @@
 <?php 
 
 function ser_save_post_admin( $post_id, $post, $update ){
+
+    $user_meta = get_userdata($post->post_author);
     
+
+    if( $user_meta->roles[0] !== 'turista' || $user_meta->roles[0] === 'comerciante' ){
+        return;
+    } 
+
+
     if( isset($_POST['acf']) ){
 
         $data = [];
@@ -11,8 +19,6 @@ function ser_save_post_admin( $post_id, $post, $update ){
             array_push($data, $valor );
  
         }
-
-        die();
     
         if($data[0] === 'RECHAZADO'){
 
@@ -21,12 +27,21 @@ function ser_save_post_admin( $post_id, $post, $update ){
             if($causa === 'Otro'){
                 $causa = $data[2];
             }
-            
+
+            remove_action( 'save_post_post', 'ser_save_post_admin'); 
+            remove_action( 'save_post_blog', 'ser_save_post_admin'); 
+ 
+            // update the post, which calls save_post again
+            wp_update_post( array( 'ID' => $post_id, 'post_status' => 'trash' ) );
+
+            add_action( 'save_post_post', 'ser_save_post_admin'); 
+            add_action( 'save_post_blog', 'ser_save_post_admin'); 
+
             enviar_email_rechazo($post_id, $causa);
         
         }else if($data[0] === 'ACTIVO'){
-            
-            if( get_post_meta($post_id, 'es_activo', true) === 1 ){
+                
+            if( get_post_meta($post_id, 'es_activo', true) !== 1 ){
                 enviar_email_confirm_post($post_id);
                 update_post_meta($post_id, 'es_activo', 1);
             }
