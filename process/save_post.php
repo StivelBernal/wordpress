@@ -212,9 +212,9 @@ function enviar_email_notificaciones($post_id){
                         </div>
                         
                         <div style="margin: auto; display: block; text-align: left;">
-                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">Tu publicación '.$post_c->post_title.' en el Golfo de Morrosquillo ha sido aprobada por el equipo del golfo de Morrosquillo</p>
+                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">Ingresa a tu cuenta del Golfo de Morrosquillo, tienes notificaciones pendientes por revisar en tu publicación '.$post_c->post_title.'.</p>
                             <p style="font-weight: 600; font-size:17px;">
-                                Accede a tu cuenta en el siguiente enlace:.
+                                Acceder
                             </p>
                             <a target="blank" href="https://golfodemorrosquillo.com/auth/">
                                 https://golfodemorrosquillo.com/auth/
