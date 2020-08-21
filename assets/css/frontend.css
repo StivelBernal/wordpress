@@ -1525,7 +1525,9 @@ p[disabled = "disabled"]{
 
 @media(max-width:801px){
     #admin_frontend .toolbar-actions .active_step span{
-        text-decoration: underline #1280B5;
-    
+       
+        color:#fff;
+        border-bottom: 2px solid #fff;
+        
     }
 }
