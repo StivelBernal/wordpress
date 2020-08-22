@@ -165,7 +165,7 @@ function serlib_entries_array($rol){
 
                 for($i = 0; $i < count($results); $i++){
                     
-                    $results[$i]->author = get_userdata($results[$i]->post_author)->username;
+                    $results[$i]->author = get_userdata($results[$i]->post_author)->name;
                     $results[$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
                     $results[$i]->permalink = get_permalink($results[$i]->ID);        
                     
