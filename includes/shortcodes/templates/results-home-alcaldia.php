@@ -12,9 +12,9 @@
                 <div class="mkdf-post-date-inner">
                     <div class="mkdf-post-date-wrap">
                         <div class="mkdf-post-date-day">
-                            01 </div>
+                            Dia </div>
                         <div class="mkdf-post-date-month">
-                            Junio </div>
+                            Mes </div>
                     </div>
                 </div>
                 <div class="mkdf-post-text-inner">
@@ -36,5 +36,3 @@
         </div>
     </div>
 </div>
-
-
