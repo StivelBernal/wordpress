@@ -5,7 +5,7 @@ function serlib_uploader(){
     function guardar_archivo(){ 
         
         $file = $_FILES['files'];
-        $name = esc_url_raw($file['name']);
+        $name = str_replace([' ', 'á', 'e', 'í', 'ó', 'ú'], ['-', 'a', 'e', 'i', 'o', 'u'], $file['name']);
         $wordpress_upload_dir = wp_upload_dir();
         // number of tries when the file with the same name is already exists
         $i = 1; 
@@ -93,10 +93,4 @@ function serlib_uploader(){
         guardar_archivo();
     }
 
-    
-
-    
-       
-
-   
 }
