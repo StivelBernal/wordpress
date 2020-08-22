@@ -268,7 +268,7 @@ function enviar_email_usuario_nuevo($user_id){
       
     add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    $email = 'brayan.bernalg@gmail.com';
+//    $email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
 
@@ -426,7 +426,7 @@ function enviar_email_notificaciones($post_id){
       
     add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    //$email = 'brayan.bernalg@gmail.com';
+    $email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Tienes una notificación pendiente del Golfo de Morrosquillo', $message, $headers );
 

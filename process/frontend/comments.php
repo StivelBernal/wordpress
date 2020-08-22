@@ -29,6 +29,7 @@ function serlib_comments(){
                         'comment_ID' => $result->comment_ID];
 
             enviar_email_notificaciones($objDatos->post_id);
+            
 
         }else{
     
