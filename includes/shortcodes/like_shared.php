@@ -12,6 +12,7 @@ function ser_like_share_shortcode(){
                     <button red="whatsapp" class="whatsapp-compartir ser-shared-sn"><span class="mkdf-social-icon-widget ion-social-whatsapp-outline"></span></button>
                     <button red="email" class="mail-compartir ser-shared-sn"><span class="mkdf-social-icon-widget fa fa-envelope"></span></button>
                     <button class="me_gusta_post" id_post="'.get_the_ID().'"><span class="mkdf-social-icon-widget fa fa-heart"></span> <span class="number">'.$like_count.'</span></button>
+                    '.do_shortcode('[views]').'
                 </div>
             </div>
     ';
