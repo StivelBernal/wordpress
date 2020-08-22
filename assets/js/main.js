@@ -93,7 +93,10 @@
                             +'<h4 itemprop="name" class="mkdf-team-name entry-title">'
                                 +'<a itemprop="url" href="'+publicacion.permalink+'">'+publicacion.post_title+'</a>'
                             +'</h4>'
-                            +'<h6>'+months[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear()+'</h6>'
+                            +'<div class="detalles-post-slider">'
+                                +'<span class="author"> <i class="fa fa-user" aria-hidden="true"></i>'+publicacion.author+' </span>'
+                                +'<span class="fecha"> <i class="fa fa-calendar-check-o" aria-hidden="true"></i> '+months[date.getMonth()]+' '+date.getDate()+', '+date.getFullYear()+'</span>'
+                            +'</div>'
                         +'</div>'
                     +'</div>'
                 +'</div>'
@@ -399,12 +402,12 @@
         var slides_alcaldia =  [], slides_gobernacion =  [];
         for(var i = 0; i < data.alcaldia.length; i++){ 
             
-            slides_alcaldia.push( item_blog2(data.alcaldia[i], municipio) );
+            slides_alcaldia.push( item_blog(data.alcaldia[i], municipio) );
         }
       
 
         for(var i = 0; i < data.gobernacion.length; i++){ 
-            slides_gobernacion.push( item_blog2(data.gobernacion[i]) );
+            slides_gobernacion.push( item_blog(data.gobernacion[i]) );
         }
 
         if(slides_gobernacion.length !== 0){

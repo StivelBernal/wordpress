@@ -1552,3 +1552,12 @@ p[disabled = "disabled"]{
     font-size: 1.3rem ;
     margin-top: 0;
 }
+
+.swiper-slide .detalles-post-slider{
+    display: flex;
+    flex-direction: column;
+}
+
+.swiper-slide .detalles-post-slider span i{
+    margin-right: 3px;
+}

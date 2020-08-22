@@ -251,8 +251,8 @@ function serlib_buscador_home_results_blog_shortcode($atts){
                                                   <a itemprop="url" href="'.$value->permalink.'">Aliados'.$value->post_title.'</a>
                                               </h4>
                                               <div class="detalles-post-slider">
-                                                <span class="fecha">'.$fecha.'</span>
-                                                <span class="author"><i class="fa fa-user"></i>'.$value->author.' </span>
+                                                <span class="author"> <i class="fa fa-user" aria-hidden="true"></i>'.$value->author.' </span>
+                                                <span class="fecha"> <i class="fa fa-calendar-check-o" aria-hidden="true"></i> '.$fecha.'</span>
                                               </div>
                                           </div>
                                       </div>

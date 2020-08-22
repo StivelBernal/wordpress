@@ -37,7 +37,8 @@ function serlib_entries(){
             $results['alcaldia'] = $wpdb->get_results( $query );
                         
             for($i = 0; $i < count($results['alcaldia']); $i++){
-                
+                $author = get_userdata($results['alcaldia'][$i]->post_author);
+                $results['alcaldia'][$i]->author = $author->user_login;
                 $results['alcaldia'][$i]->thumbnail = get_the_post_thumbnail_url($results['alcaldia'][$i]->ID);
                 $results['alcaldia'][$i]->permalink = get_permalink($results['alcaldia'][$i]->ID);           
             
@@ -79,6 +80,8 @@ function serlib_entries(){
             $results['gobernacion'] =  $wpdb->get_results( $query );
             
             for($i = 0; $i < count($results['gobernacion']); $i++){
+                $author = get_userdata($results['gobernacion'][$i]->post_author);
+                $results['gobernacion'][$i]->author = $author->user_login;
                 $results['gobernacion'][$i]->thumbnail = get_the_post_thumbnail_url($results['gobernacion'][$i]->ID);
                 $results['gobernacion'][$i]->permalink = get_permalink($results['gobernacion'][$i]->ID);
             }
@@ -152,7 +155,7 @@ function serlib_entries_array($rol){
                     
                     if( !empty(wp_get_post_categories($results[$i]->ID, $categoria)) ){
                         $author = get_userdata($results[$i]->post_author);
-                        $results[$i]->author = $author->first_name.' '.$author->last_name;
+                        $results[$i]->author = $author->user_login;
                         $results[$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
                         $results[$i]->permalink = get_permalink($results[$i]->ID);
                 
@@ -166,7 +169,7 @@ function serlib_entries_array($rol){
 
                 for($i = 0; $i < count($results); $i++){
                     $author = get_userdata($results[$i]->post_author);
-                    $results[$i]->author = $author->first_name.' '.$author->last_name;
+                    $results[$i]->author = $author->user_login;
                     $results[$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
                     $results[$i]->permalink = get_permalink($results[$i]->ID);        
                     
