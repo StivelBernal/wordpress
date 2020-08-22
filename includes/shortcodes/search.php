@@ -237,7 +237,7 @@ function serlib_buscador_home_results_blog_shortcode($atts){
                           $day = date("d", strtotime($value->post_date));
                           $month = date("n", strtotime($value->post_date));
                           $year = date("Y", strtotime($value->post_date));
-
+                          
                           $fecha = $months[$month-1].' '. $day.', '.$year;
                           $itemsCarrusel .= '
                           <div class="swiper-slide mkdf-team mkdf-item-space info-hover">
@@ -250,7 +250,10 @@ function serlib_buscador_home_results_blog_shortcode($atts){
                                               <h4 itemprop="name" class="mkdf-team-name entry-title">
                                                   <a itemprop="url" href="'.$value->permalink.'">Aliados'.$value->post_title.'</a>
                                               </h4>
-                                              <h6>'.$fecha.'</h6>
+                                              <div class="detalles-post-slider">
+                                                <span class="fecha">'.$fecha.'</span>
+                                                <span class="author"><i class="fa fa-user"></i>'.$value->author.' </span>
+                                              </div>
                                           </div>
                                       </div>
                                   </div>
