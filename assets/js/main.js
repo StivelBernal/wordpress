@@ -129,7 +129,9 @@
   +'</div>';
   }
 
- 
+  
+  
+    $('#year_copy').html(new Date().getFullYear());
 
 
   $('.button-destinof').click(function(e){
