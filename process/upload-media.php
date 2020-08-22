@@ -3,13 +3,14 @@
 function serlib_uploader(){  
     
     function guardar_archivo(){ 
-       
+        
         $file = $_FILES['files'];
+        $name = esc_url_raw($file['name']);
         $wordpress_upload_dir = wp_upload_dir();
         // number of tries when the file with the same name is already exists
         $i = 1; 
         
-        $new_file_path = $wordpress_upload_dir['path'] . '/' . esc_url_raw($file['name']);
+        $new_file_path = $wordpress_upload_dir['path'] . '/' . $name;
         
         $new_file_mime = mime_content_type( $file['tmp_name'] );
 
@@ -27,7 +28,7 @@ function serlib_uploader(){
 
         while( file_exists( $new_file_path ) ) {
             $i++;
-            $new_file_path = $wordpress_upload_dir['path'] . '/' . $i . '_' . esc_url_raw($file['name']);
+            $new_file_path = $wordpress_upload_dir['path'] . '/' . $i . '_' . $name;
         }
       
         // looks like everything is OK
