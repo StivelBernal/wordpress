@@ -151,7 +151,8 @@ function serlib_entries_array($rol){
                 for($i = 0; $i < count($results); $i++){
                     
                     if( !empty(wp_get_post_categories($results[$i]->ID, $categoria)) ){
-                
+                        $author = get_userdata($results[$i]->post_author);
+                        $results[$i]->author = $author->first_name.' '.$author->last_name;
                         $results[$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
                         $results[$i]->permalink = get_permalink($results[$i]->ID);
                 
@@ -164,8 +165,8 @@ function serlib_entries_array($rol){
             }else{
 
                 for($i = 0; $i < count($results); $i++){
-                    
-                    $results[$i]->author = get_userdata($results[$i]->post_author)->user_email;
+                    $author = get_userdata($results[$i]->post_author);
+                    $results[$i]->author = $author->first_name.' '.$author->last_name;
                     $results[$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
                     $results[$i]->permalink = get_permalink($results[$i]->ID);        
                     
