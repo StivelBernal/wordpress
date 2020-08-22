@@ -371,12 +371,12 @@
         var slides_alcaldia =  [], slides_gobernacion =  [];
         for(var i = 0; i < data.alcaldia.length; i++){ 
             
-            slides_alcaldia.push( item_blog(data.alcaldia[i], municipio) );
+            slides_alcaldia.push( item_blog2(data.alcaldia[i], municipio) );
         }
       
 
         for(var i = 0; i < data.gobernacion.length; i++){ 
-            slides_gobernacion.push( item_blog(data.gobernacion[i]) );
+            slides_gobernacion.push( item_blog2(data.gobernacion[i]) );
         }
 
         if(slides_gobernacion.length !== 0){
