@@ -287,12 +287,12 @@
 
         if(data.gobernacion[0]){
             var date = new Date(data.gobernacion[0].post_date);
-            $('#post_reciente_gobernacion img').attr('src', data.slides_gobernacion[0].thumbnail);
-            $('#post_reciente_gobernacion a').attr('href', data.slides_gobernacion[0].permalink);
-            $('#post_reciente_gobernacion h3').text(data.slides_gobernacion[0].post_title);
+            $('#post_reciente_gobernacion img').attr('src', data.gobernacion[0].thumbnail);
+            $('#post_reciente_gobernacion a').attr('href', data.gobernacion[0].permalink);
+            $('#post_reciente_gobernacion h3').text(data.gobernacion[0].post_title);
             $('#post_reciente_gobernacion .mkdf-post-date-day').text(date.getDate());
             $('#post_reciente_gobernacion .mkdf-post-date-month').text(months[date.getMonth()]);
-            $('#post_reciente_gobernacion .mkdf-post-excerpt').text(data.slides_gobernacion[0].post_excerpt );
+            $('#post_reciente_gobernacion .mkdf-post-excerpt').text(data.gobernacion[0].post_excerpt );
         }else{
             $('#post_reciente_gobernacion').hide();
         }
