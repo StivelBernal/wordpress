@@ -280,7 +280,7 @@
         }
 
         for(var i = 0; i < data.gobernacion.length; i++){ 
-            slides_gobernacion.push( item_blog2(data.gobernacion[i]) );
+            slides_gobernacion.push( item_blog(data.gobernacion[i]) );
         }
         
         if(slides_gobernacion.length !== 0){
@@ -374,7 +374,7 @@
       
 
         for(var i = 0; i < data.gobernacion.length; i++){ 
-            slides_gobernacion.push( item_blog2(data.gobernacion[i]) );
+            slides_gobernacion.push( item_blog(data.gobernacion[i]) );
         }
 
         if(slides_gobernacion.length !== 0){
