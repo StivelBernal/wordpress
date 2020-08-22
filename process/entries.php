@@ -146,18 +146,32 @@ function serlib_entries_array($rol){
             
             $results =  $wpdb->get_results( $query );
             
-            for($i = 0; $i < count($results); $i++){
-             
-                if( !empty(wp_get_post_categories($results[$i]->ID, $categoria)) ){
-            
-                    $results[$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
-                    $results[$i]->permalink = get_permalink($results[$i]->ID);
-            
-                }else{
-                    array_splice($results, $i);
+            if(isset($rutas[1]) ){
+
+                for($i = 0; $i < count($results); $i++){
+                    
+                    if( !empty(wp_get_post_categories($results[$i]->ID, $categoria)) ){
+                
+                        $results[$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
+                        $results[$i]->permalink = get_permalink($results[$i]->ID);
+                
+                    }else{
+                        array_splice($results, $i);
+                    }
+                    
                 }
-               
+
+            }else{
+
+                for($i = 0; $i < count($results); $i++){
+                
+                    $results[$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
+                    $results[$i]->permalink = get_permalink($results[$i]->ID);        
+                    
+                }
+
             }
+
             
         }
 
