@@ -1231,6 +1231,7 @@ app.controller('resetPass', ['$scope', '$http',
                 }).then(function successCallback(response) {
 
                     if(response.data.success){
+                        alert('tu contraseña  sido cambiada');
                         window.location = '/';
                     }
                 }, function errorCallback(error) {
