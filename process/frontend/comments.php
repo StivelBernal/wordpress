@@ -18,7 +18,9 @@ function serlib_comments(){
 
 
         $result = wp_handle_comment_submission ( ["comment_post_ID" => $objDatos->post_id , 'comment' => $objDatos->text, 'comment_parent' => $parent ] );
-      
+        var_dump($result);
+
+        return;
         if ( !is_wp_error( $result ) ) {
             
             if(!empty($objDatos->stars)){
