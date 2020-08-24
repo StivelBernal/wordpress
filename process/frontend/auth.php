@@ -117,7 +117,7 @@ function serlib_auth_handler(){
                 'user_pass'             =>  $pass,
                 'user_email'            =>  $email,
                 'user_nicename'         =>  $first_name,
-                'role'                  =>  $role,
+                'role'                  =>  ($role === 'turista' ? 'turista': 'pendiente_comerciante'),
                 'show_admin_bar_front'  =>  false 
             ]);
             
