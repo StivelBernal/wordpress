@@ -144,8 +144,9 @@ function serlib_auth_handler(){
             update_user_meta( $user_id, 'user_city_id', $city_id );
             update_user_meta( $user_id, 'user_state_id', $state_id );
             update_user_meta( $user_id, 'user_intereses', $intereses );
-
-           // enviar_email_usuario_nuevo_turista( $user_id );
+            if( $modo !== 'directo'){
+                enviar_email_usuario_nuevo_turista( $user_id );
+            }
         }
         if($role === 'comerciante'){
             update_user_meta( $user_id, 'document_type', $document_type );

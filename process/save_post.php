@@ -274,63 +274,7 @@ function enviar_email_usuario_nuevo($user_id){
 
 }
 
-function enviar_email_usuario_nuevo_turista($user_id){
 
-    $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
-
-    $author = get_userdata($user_id);
-
-    $email = $author->user_email;
-
-    $message = '<html>
-                    <head>	
-                    </head>
-                    <body>
-                        <div style="margin: auto; display: block; flex-direction: column; text-align: center;">
-                            <a class="logo" href="https://golfodemorrosquillo.com" target="blank">
-                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
-                            </a>
-                        </div>
-                        <div style="margin: auto; display: block; text-align: left;">
-                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">Haz creado un usuario para que hagas parte de nuestra comunidad del Golfo de Morrosquillo.</p>
-                            <p style="font-weight: 600; font-size:17px;">
-                                Usuario: '.$author->user_email.'<br><br>
-
-                            </p>
-                            <p style="font-weight: 600; font-size:17px;">
-                                Para establecer tu contraseña visita el siguiente enlace:<br>
-
-                            </p>
-                            <a target="blank" href="https://golfodemorrosquillo.com/auth/recover">
-                                https://golfodemorrosquillo.com/auth/recover-account/
-                            </a><br><br>
-                            <p style="font-weight: 600; font-size:17px;">
-                                Guarda nuestro link en la pestaña de favoritos:<br>
-                            </p>
-                            <a target="blank" href="https://golfodemorrosquillo.com/auth/">
-                                https://golfodemorrosquillo.com/auth/
-                            </a>
-                        </div>
-                        <div style="text-align: left;"> 
-                            <br><br><p>Cordialmente,</p>
-                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="250px">
-                        </div>
-                    
-                    </body>
-                </html> '; 
-            
-    /**
-    *Funcion para enviar el mensaje
-    */ 
-   
-      
-    add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
-   
-    //$email = 'brayan.bernalg@gmail.com';
-
-    $mail_res = wp_mail( $email, 'Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
-
-}
 
 function enviar_email_usuario_nuevo_comerciante($user_id){
 
@@ -497,4 +441,62 @@ function enviar_email_confirm($email, $username, $pass){
     $mail_res = wp_mail( $email, _x('Bienvenidos a la comunidad del Golfo de morrosquillo', 'asunto email', 'serlib') , $message, $headers );
 
     return $mail_res;
+}
+
+function enviar_email_usuario_nuevo_turista($user_id){
+
+    $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
+
+    $author = get_userdata($user_id);
+
+    $email = $author->user_email;
+
+    $message = '<html>
+                    <head>	
+                    </head>
+                    <body>
+                        <div style="margin: auto; display: block; flex-direction: column; text-align: center;">
+                            <a class="logo" href="https://golfodemorrosquillo.com" target="blank">
+                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
+                            </a>
+                        </div>
+                        <div style="margin: auto; display: block; text-align: left;">
+                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">Haz creado un usuario para que hagas parte de nuestra comunidad del Golfo de Morrosquillo.</p>
+                            <p style="font-weight: 600; font-size:17px;">
+                                Usuario: '.$author->user_email.'<br><br>
+
+                            </p>
+                            <p style="font-weight: 600; font-size:17px;">
+                                Para establecer tu contraseña visita el siguiente enlace:<br>
+
+                            </p>
+                            <a target="blank" href="https://golfodemorrosquillo.com/auth/recover">
+                                https://golfodemorrosquillo.com/auth/recover-account/
+                            </a><br><br>
+                            <p style="font-weight: 600; font-size:17px;">
+                                Guarda nuestro link en la pestaña de favoritos:<br>
+                            </p>
+                            <a target="blank" href="https://golfodemorrosquillo.com/auth/">
+                                https://golfodemorrosquillo.com/auth/
+                            </a>
+                        </div>
+                        <div style="text-align: left;"> 
+                            <br><br><p>Cordialmente,</p>
+                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="250px">
+                        </div>
+                    
+                    </body>
+                </html> '; 
+            
+    /**
+    *Funcion para enviar el mensaje
+    */ 
+   
+      
+    add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
+   
+    //$email = 'brayan.bernalg@gmail.com';
+
+    $mail_res = wp_mail( $email, 'Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
+
 }
