@@ -1,4 +1,4 @@
-var offset_textarea = $("#comments").offset();
+const offset_textarea = $("#comments").offset();
 
 (function($){ 
     
