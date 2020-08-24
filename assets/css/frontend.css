@@ -1557,8 +1557,13 @@ p[disabled = "disabled"]{
     display: flex;
     flex-direction: column;
 }
+.detalles-post-blog{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
 
-.swiper-slide .detalles-post-slider span i{
+.swiper-slide .detalles-post-slider span i, .detalles-post-blog  span i{
     margin-right: 3px;
 }
 
