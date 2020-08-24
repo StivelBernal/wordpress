@@ -336,15 +336,21 @@ function enviar_email_usuario_nuevo_comerciante($user_id){
 }
 
 
-function enviar_email_notificaciones($post_id){
+function enviar_email_notificaciones_author_post($post_id){
 
     $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
 
     $post_c = get_post( $post_id );
 
+    if(get_current_user_id() === $post_c->post_author){
+        return;
+    }
+
     $author = get_userdata($post_c->post_author);
 
     $email = $author->user_email;
+
+
 
     $message = '<html>
                     <head>	
@@ -385,6 +391,65 @@ function enviar_email_notificaciones($post_id){
     $mail_res = wp_mail( $email, 'Tienes una notificación pendiente del Golfo de Morrosquillo', $message, $headers );
 
 }
+
+function enviar_email_notificaciones_author_comment($post_id, $user_id, $user_commenter){
+
+    $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
+
+    if(get_current_user_id() === $user_id){
+        return;
+    }
+
+    $post_c = get_post( $post_id );
+
+    $author_commenter = get_userdata($user_commenter);
+    $author = get_userdata($user_id);
+
+    $email = $author->user_email;
+
+    $author_commenter = $author_commenter->first_name + ' ' + $author_commenter->last_name;
+    $author = $author->first_name + ' ' + $author->last_name;
+
+    $message = '<html>
+                    <head>	
+                    </head>
+                    <body>
+                        <div style="margin: auto; display: block; flex-direction: column; text-align: center;">
+                            <a class="logo" href="https://golfodemorrosquillo.com" target="blank">
+                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
+                            </a>
+                        </div>
+                        
+                        <div style="margin: auto; display: block; text-align: left;">
+                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">'.$author_commenter.', ha respondido tu comentario en la publicación '.$post_c->post_title.'.</p>
+                            <p style="font-weight: 600; font-size:17px;">
+                                Acceder
+                            </p>
+                            <a target="blank" href="https://golfodemorrosquillo.com/auth/">
+                                https://golfodemorrosquillo.com/auth/
+                            </a>
+                        </div>
+
+                        <div style="text-align: left;"> 
+                            <br><br><p>Cordialmente,</p>
+                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="250px">
+                        </div>
+                        
+                    </body>
+                </html> '; 
+            
+    /**
+    *Funcion para enviar el mensaje
+    */ 
+      
+    add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
+   
+    //$email = 'brayan.bernalg@gmail.com';
+
+    $mail_res = wp_mail( $email, 'Tienes una notificación pendiente del Golfo de Morrosquillo', $message, $headers );
+
+}
+
 
 function enviar_email_confirm($email, $username, $pass){
 

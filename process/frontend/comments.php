@@ -18,17 +18,25 @@ function serlib_comments(){
 
 
         $result = wp_handle_comment_submission ( ["comment_post_ID" => $objDatos->post_id , 'comment' => $objDatos->text, 'comment_parent' => $parent ] );
-        
+        var_dump($result);
+        return;
         if ( !is_wp_error( $result ) ) {
             
             if(!empty($objDatos->stars)){
             update_comment_meta( $result->comment_ID, 'stars_items', $objDatos->stars );
             }
             
+            if($result->comment_parent === 0){
+                enviar_email_notificaciones_author_post($objDatos->post_id);
+            }else{
+                $user_repl = get_comment($result->comment_ID);
+                enviar_email_notificaciones_author_comment($objDatos->post_id, $user_repl->user_id, $result->user_id);
+            }
+            
+            
             $result = [ 'success' => _x('Comentario publicado', 'comentarios respuestas ajax correcto', 'serlib'),
                         'comment_ID' => $result->comment_ID];
-
-            enviar_email_notificaciones($objDatos->post_id);
+            
             
 
         }else{
