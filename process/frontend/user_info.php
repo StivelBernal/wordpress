@@ -216,6 +216,7 @@ function serlib_users_info(){
                 $results['municipios'] = get_terms([
                     'hide_empty' => false,
                     'order' => 'DESC',
+                    'exclude' => [1, 28],
                     'taxonomy' => 'category' ]);
 
                 $results['tags'] = get_terms('post_tag', [
@@ -396,6 +397,7 @@ function serlib_users_info(){
                 $results['municipios'] = get_terms([
                     'hide_empty' => false,
                     'order' => 'DESC',
+                    'exclude' => [1, 28],
                     'taxonomy' => 'category' ]);
                 
             }
@@ -615,6 +617,7 @@ function serlib_users_info(){
                 $arrayTaxAlcaldia = [];
                 $results['tipos'] = get_terms([
                     'hide_empty' => false,
+                    'exclude' => [1, 28],
                     'order' => 'DESC',
                     'taxonomy' => 'tipos_entradas' ]);
                     

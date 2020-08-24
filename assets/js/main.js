@@ -495,14 +495,9 @@
 
     });  
 
-
-
-
-
-
   }
   
-  $('[disabled="disabled"]').click(() => alert('por favor llena los datos obligatorios'));
+
 
   $('.fovea-category-2').mouseover(function(){
      
@@ -2879,4 +2874,7 @@ function DialogForm($scope, $mdDialog, Instance) {
         },
         });
     }
+
+  
+
   })(jQuery);
