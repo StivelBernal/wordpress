@@ -101,7 +101,7 @@ function enviar_email_rechazo($post_id, $causa){
    
    // $email = 'brayan.bernalg@gmail.com';
 
-    $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] '._x('Publicación rechazada', 'asunto email', 'serlib') , $message, $headers );
+    $mail_res = wp_mail( $email, _x('Publicación rechazada', 'asunto email', 'serlib') , $message, $headers );
 
     return $mail_res;
 }
@@ -160,7 +160,7 @@ function notificacion_activacion_cuenta($user_id, $role, $old_roles){
    
         //$email = 'brayan.bernalg@gmail.com';
 
-    $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Bienvenido a la comunidad del Golfo de Morrosquillo', $message, $headers );
+    $mail_res = wp_mail( $email, 'Bienvenido a la comunidad del Golfo de Morrosquillo', $message, $headers );
 
 }
 
@@ -209,7 +209,7 @@ function enviar_email_confirm_post($post_id){
    
       //  $email = 'brayan.bernalg@gmail.com';
 
-    $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Publicación aprobada', $message, $headers );
+    $mail_res = wp_mail( $email, 'Publicación aprobada', $message, $headers );
 
     return $mail_res;
 
@@ -270,7 +270,7 @@ function enviar_email_usuario_nuevo($user_id){
    
 //    $email = 'brayan.bernalg@gmail.com';
 
-    $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
+    $mail_res = wp_mail( $email, 'Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
 
 }
 
@@ -328,7 +328,7 @@ function enviar_email_usuario_nuevo_turista($user_id){
    
     //$email = 'brayan.bernalg@gmail.com';
 
-    $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
+    $mail_res = wp_mail( $email, 'Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
 
 }
 
@@ -376,7 +376,7 @@ function enviar_email_usuario_nuevo_comerciante($user_id){
    
     //$email = 'brayan.bernalg@gmail.com';
 
-    $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
+    $mail_res = wp_mail( $email, 'Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
 
 }
 
@@ -427,6 +427,74 @@ function enviar_email_notificaciones($post_id){
    
     //$email = 'brayan.bernalg@gmail.com';
 
-    $mail_res = wp_mail( $email, '[Golfo de Morrosquillo] Tienes una notificación pendiente del Golfo de Morrosquillo', $message, $headers );
+    $mail_res = wp_mail( $email, 'Tienes una notificación pendiente del Golfo de Morrosquillo', $message, $headers );
 
+}
+
+function enviar_email_confirm($email, $username, $pass){
+
+    $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
+
+    $code = md5($email);
+    $user = base64_encode($username);
+    $code  = base64_encode($code);
+    
+    $message = '<html>
+                    <head>	
+                    </head>
+                    <body>
+                        <div style="margin: auto; display: block; flex-direction: column; text-align: center;">
+                            <a class="logo" href="https://golfodemorrosquillo.com">
+                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/05/GDFRecurso-1MICOSCOLOR-e1588719554428.png" class="logo_main" width="300" >
+                            </a>
+                        </div>
+
+                        <div style="margin: auto; display: block; text-align: left;">
+                            <p style="text-align: center; color: #5e5e5e; font-weight:600; font-family: Poppins; font-size: x-large;">
+                            
+                                Haz creado un usuario para ser parte de nuestra comunidad del Golfo de Morrosquillo.
+                            </p>
+                            
+                        </div>
+
+                        <div style="margin: auto; display: block; text-align: left;">
+                        
+                            <p style="text-align: center; color: #5e5e5e;  font-family: Poppins; font-size: x-large;">
+                            
+                        
+                            '._x('Usuario', 'plantilla email', 'serlib').': '.$email.' <br><br>
+
+                            </p>
+
+                            <p style="font-weight: 600; font-size:17px;">
+                                Haz click en este botón para activar la cuenta:<br><br>
+                            </p>
+                               
+                        </div>
+                        
+                        <div style="margin: auto; display: block; text-align: left;">
+                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
+                            
+                                <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth?confirm='.$code.'&u='.$user.'" target="_blank">'._x('Activar cuenta','plantilla email', 'serlib').'</a>
+
+                            </p>
+                            
+                        </div>
+                        <div style="text-align: left;">
+                            <br><br><p>Cordialmente,</p>
+                            <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="250px">
+                        </div>
+
+                    </body>
+                
+                </html> '; 
+            
+          
+       add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
+   
+    // $email = 'brayan.bernalg@gmail.com';
+
+    $mail_res = wp_mail( $email, _x('Bienvenidos a la comunidad del Golfo de morrosquillo', 'asunto email', 'serlib') , $message, $headers );
+
+    return $mail_res;
 }
