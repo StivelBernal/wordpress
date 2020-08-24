@@ -401,7 +401,7 @@ function serlib_auth_handler(){
                             </div>
                             <div style="margin: auto; display: block; text-align: left;">
                                 <p style="font-weight: 500; font-size:17px;">
-                                    Accede a tu cuenta y crea una publicación que cumpla con los requisitos establecidos para nuestra Comunidad del Golfo de Morrosquillo
+                                    Haz click en el siguiente enlace para recuperar tu cuenta
                                 </p>
                                 <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">  
                             
@@ -414,7 +414,7 @@ function serlib_auth_handler(){
                                 <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
                                 
                                     <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth/recover-account?code='.$code.'&u='.$username.'" target="_blank">Haz click aquí</a>
-
+                                    <br><br>
                                 </p>
                             </div>
                             <div style="text-align: left;">
@@ -429,7 +429,7 @@ function serlib_auth_handler(){
 
         add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
        
-        $mail_res = wp_mail( $objDatos->email, '[Golfo de Morrosquillo] '._x('Recuperación de cuenta', 'asunto email', 'serlib'), $message, $headers );
+        $mail_res = wp_mail( $objDatos->email, _x('Recuperación cuenta', 'asunto email', 'serlib'), $message, $headers );
 
         if($mail_res){
             $output     =     [ 'success' => $mail_res,

@@ -106,7 +106,7 @@ function serlib_recover_account_shortcode(){
     [ 
       __('Recuperar Cuenta', 'serlib'), __('Correo electrónico', 'serlib'), __('requerido', 'serlib'),
       __('Por favor coloca un email valido', 'serlib'), __('Recuperar', 'serlib'),
-      __('Hemos enviado un correo electronico con la información para recuperar su cuenta', 'serlib'),
+      __('Hemos enviado un correo electronico con la información para recuperar tu cuenta', 'serlib'),
       __('Restablecer Contraseña', 'serlib'), __('Contraseña', 'serlib'), 
       __('Por favor ingresa una contraseña que contenga, mayusculas, minisculas, un numero y mayor de 6 digitos', 'serlib'),
       __('Repetir contraseña', 'serlib'), __('Las contraseñas no son iguales', 'serlib')
