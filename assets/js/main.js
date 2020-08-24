@@ -1,3 +1,5 @@
+var offset_textarea = $("#comments").offset();
+
 (function($){ 
     
    
@@ -648,7 +650,7 @@ function commentsController($scope, $http) {
 /**Aqui Guardaria el label y i para guardarlo */
 /**Asignarle una calificación  tiene varias acciones hover y click para asignar el valor */
 /**Colocar unos input para subir imagenes y validacion para enviar */
-var offset_textarea = $("#respond").offset();
+
 $scope.item_star = [];
 $scope.item_selected = [];
 $scope.comment_text = '';
@@ -2136,6 +2138,8 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
                 }
                 if(response.data.status === 2 ){
                    /// response.data.status
+                   
+                   alert('Gracias revisaremos tu publicación para ser aprobada');
                     $scope.revition = true;
                     $state.go(Config.redirectTo);
                     /**Ahi que enviar a la url de edicion */
@@ -2254,7 +2258,7 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
         
         if($scope.Instance.post){
             $scope.Model = $scope.Instance.post;  
-            console.log('asdi')
+         
             if($scope.Model.mapa_negocio){  $scope.busqueda_mapa = $scope.Model.mapa_negocio; $scope.busqueda = $scope.Model.mapa_negocio;}
             if($scope.Model.thumbnail) $scope.featured = $scope.Model.thumbnail;
             
@@ -2337,6 +2341,8 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
                 if(response.data.status === 2 ){
                    /// response.data.status
                     $scope.revition = true;
+                    
+                    alert('Gracias revisaremos tu publicación para ser aprobada');
                     $state.go(Config.redirectTo);
                     /**Ahi que enviar a la url de edicion */
                 }
@@ -2626,6 +2632,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
                 if(response.data.status === 2 ){
                    /// response.data.status
                     $scope.revition = true;
+                    alert('Gracias revisaremos tu publicación para ser aprobada');
                     $state.go(Config.redirectTo);
                     /**Ahi que enviar a la url de edicion */
                 }
