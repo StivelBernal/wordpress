@@ -282,6 +282,7 @@
             $('#post_reciente_alcaldia .mkdf-post-excerpt').text(data.alcaldia[0].post_excerpt );
         }else{
             $('#post_reciente_alcaldia').hide();
+            $('#entradas_alcaldia').remove();
         }
 
         for(var i = 1; i < data.gobernacion.length; i++){ 
@@ -298,6 +299,8 @@
             $('#post_reciente_gobernacion .mkdf-post-excerpt').text(data.gobernacion[0].post_excerpt );
         }else{
             $('#post_reciente_gobernacion').hide();
+            $('#entradas_gobernacion').remove();
+
         }
 
         
