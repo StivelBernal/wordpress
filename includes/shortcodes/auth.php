@@ -195,7 +195,7 @@ function serlib_register_gracias_shortcode(){
 
     if($_GET['pending'] === 'comerciante'){
        $formHTML  = str_replace( ['gracias_I18N', 'parrafo_I18N', 'ir_al_inicio_I18N'],
-       [__('Gracias', 'serlib'), __('Se revisara tu información para activar la cuenta', 'serlib'), __('Ir al Inicio', 'serlib') ], 
+       [__('Gracias', 'serlib'), __('Se revisará tu información para activar la cuenta', 'serlib'), __('Ir al Inicio', 'serlib') ], 
         $formHTML );
     }
     if($_GET['pending'] === 'turista'){
