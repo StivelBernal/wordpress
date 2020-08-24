@@ -46,7 +46,7 @@ function ser_save_post_admin( $post_id, $post, $update ){
         }else if($data[0] === 'ACTIVO'){
                 
             if( get_post_meta($post_id, 'es_activo', true) !== 1 ){
-               // enviar_email_confirm_post($post_id);
+                enviar_email_confirm_post($post_id);
                 update_post_meta($post_id, 'es_activo', 1);
             }
 
@@ -207,7 +207,7 @@ function enviar_email_confirm_post($post_id){
       
     add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-      //  $email = 'brayan.bernalg@gmail.com';
+    // $email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, 'Publicación aprobada', $message, $headers );
 
@@ -273,16 +273,27 @@ function enviar_email_usuario_nuevo($user_id){
     $mail_res = wp_mail( $email, 'Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
 
 }
+/*
+$modo = get_user_meta($user_id, 'user_modo', true);
+    $email = $author->user_email;
 
+    if($modo === 'directo'){
 
+        $revover_text = '';
 
+    }else{
+
+        $recover_text = '';
+    }
+*/
 function enviar_email_usuario_nuevo_comerciante($user_id){
 
     $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
 
     $author = get_userdata($user_id);
-
     $email = $author->user_email;
+
+  
 
     $message = '<html>
                     <head>	
@@ -466,13 +477,6 @@ function enviar_email_usuario_nuevo_turista($user_id){
                                 Usuario: '.$author->user_email.'<br><br>
 
                             </p>
-                            <p style="font-weight: 600; font-size:17px;">
-                                Para establecer tu contraseña visita el siguiente enlace:<br>
-
-                            </p>
-                            <a target="blank" href="https://golfodemorrosquillo.com/auth/recover">
-                                https://golfodemorrosquillo.com/auth/recover-account/
-                            </a><br><br>
                             <p style="font-weight: 600; font-size:17px;">
                                 Guarda nuestro link en la pestaña de favoritos:<br>
                             </p>
