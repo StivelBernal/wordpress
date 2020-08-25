@@ -796,9 +796,9 @@ $scope.submit = function(){
 };
 
 $scope.reply = function(id_comment, $event){
-
+    //console.log(offset_textarea.top,$($event.toElement).offset().top);
     var offsetF = offset_textarea.top-$($event.toElement).offset().top-600;
-    console.log(offsetF);
+    //console.log(offsetF);
     $scope.reply_id = id_comment;
     $('body').animate( { scrollTop : offsetF }, 1500 );
 }
@@ -1027,8 +1027,9 @@ var comments_app = angular.module('comments', ['ngMaterial'])
     };
 
     $scope.reply = function(id_comment, $event){
+        //console.log(offset_textarea.top,$($event.toElement).offset().top);
         var offsetF = offset_textarea.top-$($event.toElement).offset().top-600;
-        console.log(offsetF);
+        //console.log(offsetF);
         $scope.reply_id = id_comment;
         $('body').animate( { scrollTop : offsetF }, 1500 );
     }
