@@ -400,13 +400,12 @@ function enviar_email_notificaciones_author_comment($post_id, $user_id, $user_co
         return;
     }
 
-    var_dump($user_id, $user_commenter );
-    return;
-
     $post_c = get_post( $post_id );
 
-    $author = get_userdata($user_commenter);
-    $author_commenter = get_userdata($user_id);
+    $author_commenter = get_userdata($user_commenter);
+    $author = get_userdata($user_id);
+
+    var_dump($author, $author_commenter);
 
     $email = $author->user_email;
 
