@@ -178,11 +178,20 @@ form.register{
 }
 
 
-button[disabled]{
+button[disabled], .disabled{
     cursor: default !important;
     opacity: 0.6;
 }
 
+.validated_step input.ng-invalid-required:not(.md-input) ,.validated_step select.ng-invalid-required ,
+.validated_step .selector-container.ng-invalid ,.validated_step textarea.ng-invalid-required,
+.validated_step .summernote.ng-invalid + div{
+    border: 1px solid rgb(221,44,0) !important;
+}
+
+.validated_step input.ng-invalid-required.md-input{
+    border-color: rgb(221,44,0);
+}
 .bttn.default[disabled="disabled"]:hover{
     background-color: #0485a5 !important;
     

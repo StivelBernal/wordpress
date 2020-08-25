@@ -17,12 +17,17 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 <div class="row toolbar-actions p_tabs ">
     <div class="toggle_side" ng-click="toogle_side()"><i class="fa fa-bars" aria-hidden="true"></i></div>
     <div class="s-flex"><p md-truncate="" ng-class="{active_step: step >= 1, active_hover: step === 1}" ng-click="set_step(1, false)"><i class="dripicons-document" aria-hidden="true" title="'.$STEP1.'"></i><span>'.$STEP1.'</span></p></div>
-    <div class="s-flex" ng-class="{ disabled_step: content.$invalid }"><p md-truncate="" ng-class="{active_step: step === 3, active_hover: step === 3}" ng-disabled="content.$invalid" ng-click="set_step(3, content.$invalid)"><i class="fa fa-map-marker" aria-hidden="true" title="'.$STEP3.'" ></i><span>'.$STEP3.'</span></p></div>
-    <div class="s-flex" ng-class="{ disabled_step: content.$invalid }"><p md-truncate="" ng-class="{active_step: step >= 2, active_hover: step === 2}" ng-disabled="content.$invalid" ng-click="set_step(2, content.$invalid)"><i class="fa fa-users" title="'.$STEP2.'" aria-hidden="true"></i><span>'.$STEP2.'</span></p></div>
+    <div class="s-flex" ng-class="{ disabled_step: content.$invalid }"><p md-truncate="" ng-class="{active_step: step === 3, active_hover: step === 3, disabled: content.$invalid }" ng-click="set_step(3, content.$invalid)"><i class="fa fa-map-marker" aria-hidden="true" title="'.$STEP3.'" ></i><span>'.$STEP3.'</span></p></div>
+    <div class="s-flex" ng-class="{ disabled_step: content.$invalid }"><p md-truncate="" ng-class="{active_step: step >= 2, active_hover: step === 2, disabled: content.$invalid }" ng-click="set_step(2, content.$invalid)"><i class="fa fa-users" title="'.$STEP2.'" aria-hidden="true"></i><span>'.$STEP2.'</span></p></div>
     <div class="s-7"></div>
     <md-button  class="s-flex" ng-class="{finish: step === 4}" ';  ?> ng-disabled="content.$invalid" <?php echo 'ng-click="submitFiles()">
         <span>{{ (Instance.post) ? "'.__('Guardar', 'serlib').'": "'.__('Crear', 'serlib').'" }}</span>
     </md-button>
+</div>
+
+
+<div ng-if="error" class="s-100">
+<p style="text-align:center; color:red;">{{error}}</p>
 </div>
 
 <div class="row" ng-if="status">
@@ -34,7 +39,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 
 
-<div ng-show="step === 1">
+<div ng-show="step === 1" ng-class="{ validated_step: validated_step }">
 
     <form name="content" class="row-wrap"> 
         
@@ -91,7 +96,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 </div>
 
-<div ng-if="step === 2" style="padding:15px;">   
+<div ng-if="step === 2" style="padding:15px;" ng-class="{ validated_step: validated_step }">   
                 
     <div class="row-wrap space-around-end""> 
    
@@ -133,7 +138,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 </div>
 
-<div ng-show="step === 3">
+<div ng-show="step === 3" ng-class="{ validated_step: validated_step }">
 
     <div class="row-wrap">
         

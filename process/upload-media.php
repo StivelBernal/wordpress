@@ -13,18 +13,16 @@ function serlib_uploader(){
         $new_file_path = $wordpress_upload_dir['path'] . '/' . $name;
         
         $new_file_mime = mime_content_type( $file['tmp_name'] );
-
-        if( empty( $file ) )
-            die( 'File is not selected.' );
-
-        if( $file['error'] )
+        
+        if( $file['error'] ){
             die( $file['error'] );
-
-        if( $file['size'] > wp_max_upload_size() )
-            die( 'It is too large than expected.' );
+        }
+//        if( $file['size'] > wp_max_upload_size() )
+  //          die( 'It is too large than expected.' );
     
-        if( !in_array( $new_file_mime, get_allowed_mime_types() ) )
+        if( !in_array( $new_file_mime, get_allowed_mime_types() ) ){
             die( 'WordPress doesn\'t allow this type of uploads.' );
+        }
 
         while( file_exists( $new_file_path ) ) {
             $i++;

@@ -847,8 +847,11 @@ return {
             
             var element = e.target;
             var files = element.files[0]
+            if(files.size > (1024*5)*1000){
+                alert('el tamaño maximo permitido es 5MB')
+                return;
+            }
             ngModel.$setViewValue(files);
-           
             var urlObject = URL.createObjectURL(files);
             
             if(attrs.preview){
@@ -1072,12 +1075,16 @@ var comments_app = angular.module('comments', ['ngMaterial'])
         link: function(scope, element, attrs, ngModel) {
            
             if (!ngModel && attrs.type !== 'file') return;
-
+            
             ngModel.$render = function() {};
             element.bind('change', function(e) {
                 
                 var element = e.target;
                 var files = element.files[0]
+                if(files.size > (1024*5)*1000){
+                    alert('el tamaño maximo permitido es 5MB')
+                    return;
+                }
                 ngModel.$setViewValue(files);
                
                 var urlObject = URL.createObjectURL(files);
@@ -1465,7 +1472,11 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             element.bind('change', function(e) {
                 
                 var element = e.target;
-                var files = element.files[0]
+                var files = element.files[0];
+                if(files.size > (1024*5)*1000){
+                    alert('el tamaño maximo permitido es 5MB')
+                    return;
+                }
                 ngModel.$setViewValue(files);
                 
                 if(attrs.preview){
@@ -2185,12 +2196,19 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
             $('#admin_frontend .sidebar_profile').toggleClass('showside');
         }
 
+       
+        $scope.validated_step = false;
+
         $scope.set_step = function(step, invalid = true){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
             if(!invalid){
                 $scope.step = step;
+                $scope.validated_step = true;
+            }else{
+                $scope.validated_step = true;
+                alert('por favor llena todo los campos obligatorios')
             }
-        }
+        } 
         
         $scope.set_map_src = function(src){
             if(src === '') src = 'golfo%20de%20morrosquillo';
@@ -2395,10 +2413,16 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             $('#admin_frontend .sidebar_profile').toggleClass('showside');
         }
 
+        $scope.validated_step = false;
+
         $scope.set_step = function(step, invalid = true){
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
             if(!invalid){
                 $scope.step = step;
+                $scope.validated_step = true;
+            }else{
+                $scope.validated_step = true;
+                alert('por favor llena todo los campos obligatorios')
             }
         }   
 
@@ -2674,7 +2698,11 @@ admin_frontend.directive('appFilereader', function($q) {
             element.bind('change', function(e) {
                 
                 var element = e.target;
-                var files = element.files[0]
+                var files = element.files[0];
+                if(files.size > (1024*5)*1000){
+                    alert('el tamaño maximo permitido es 5MB')
+                    return;
+                }
                 ngModel.$setViewValue(files);
                 
                 var urlObject = URL.createObjectURL(files);
