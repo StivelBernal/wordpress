@@ -3,7 +3,7 @@
 function serlib_uploader(){  
     
     function guardar_archivo(){ 
-        
+        ini_set('error_reporting', E_ALL);
         $file = $_FILES['files'];
         $name = str_replace([' ', 'á', 'e', 'í', 'ó', 'ú'], ['-', 'a', 'e', 'i', 'o', 'u'], $file['name']);
         $wordpress_upload_dir = wp_upload_dir();
@@ -13,24 +13,28 @@ function serlib_uploader(){
         $new_file_path = $wordpress_upload_dir['path'] . '/' . $name;
         
         $new_file_mime = mime_content_type( $file['tmp_name'] );
-        
-        if( $file['error'] ){
+
+        if( empty( $file ) )
+            die( 'File is not selected.' );
+
+        if( $file['error'] )
             die( $file['error'] );
-        }
-//        if( $file['size'] > wp_max_upload_size() )
-  //          die( 'It is too large than expected.' );
+
+        if( $file['size'] > wp_max_upload_size() )
+            die( 'It is too large than expected.' );
     
-        if( !in_array( $new_file_mime, get_allowed_mime_types() ) ){
+        if( !in_array( $new_file_mime, get_allowed_mime_types() ) )
             die( 'WordPress doesn\'t allow this type of uploads.' );
-        }
 
         while( file_exists( $new_file_path ) ) {
             $i++;
             $new_file_path = $wordpress_upload_dir['path'] . '/' . $i . '_' . $name;
         }
-      
+        
+        $file_move = move_uploaded_file( $file['tmp_name'], $new_file_path );
+        
         // looks like everything is OK
-        if( move_uploaded_file( $file['tmp_name'], $new_file_path ) ) {
+        if( $file_move ) {
         
             $upload_id = wp_insert_attachment( array(
                 'guid'           => $new_file_path, 
@@ -86,6 +90,7 @@ function serlib_uploader(){
         die();
     
     }
+
 
     if( $_GET['destino'] === 'featured' || $_GET['destino'] === 'image' || $_GET['destino'] ===  'photo_profile' || $_GET['destino'] ===  'file_document' || $_GET['destino'] ===  'comments_media'  ){
         guardar_archivo();
