@@ -26,7 +26,8 @@ function serlib_comments(){
             if($result->comment_parent === 0){
                 enviar_email_notificaciones_author_post($objDatos->post_id);
             }else{
-                $user_repl = get_comment($result->comment_ID);
+                $user_repl = get_comment($result->comment_parent);
+                var_dump($user_repl);
                 enviar_email_notificaciones_author_comment($objDatos->post_id, $user_repl->user_id, $result->user_id);
             }
             
