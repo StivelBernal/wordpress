@@ -392,7 +392,7 @@ function enviar_email_notificaciones_author_post($post_id){
 
 }
 
-function enviar_email_notificaciones_author_comment($post_id, $user_id, $user_commenter){
+function enviar_email_notificaciones_author_comment($post_id, $user_id, $author_commenter){
 
     $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
 
@@ -402,15 +402,9 @@ function enviar_email_notificaciones_author_comment($post_id, $user_id, $user_co
 
     $post_c = get_post( $post_id );
 
-    $author_commenter = get_userdata($user_commenter);
     $author = get_userdata($user_id);
 
-   // var_dump($author, $author_commenter);
-
     $email = $author->user_email;
-
-    $author_commenter = $author_commenter->first_name + ' ' + $author_commenter->last_name;
-    $author = $author->first_name + ' ' + $author->last_name;
 
     $message = '<html>
                     <head>	
