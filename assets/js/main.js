@@ -797,7 +797,7 @@ $scope.submit = function(){
 
 $scope.reply = function(id_comment, $event){
     $scope.reply_id = id_comment;
-    $('body').animate( { scrollTop : offset_textarea.top+150 }, 1500 );
+    $('body').animate( { scrollTop : offset_textarea.top+350 }, 1500 );
 }
 
 $scope.cancel_reply = function(){
