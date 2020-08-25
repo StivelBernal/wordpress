@@ -405,7 +405,7 @@ function enviar_email_notificaciones_author_comment($post_id, $user_id, $user_co
     $author_commenter = get_userdata($user_commenter);
     $author = get_userdata($user_id);
 
-    var_dump($author, $author_commenter);
+   // var_dump($author, $author_commenter);
 
     $email = $author->user_email;
 
