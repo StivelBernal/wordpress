@@ -1,4 +1,5 @@
 var offset_textarea = $("#comment").offset();
+
 (function($){ 
     
    
@@ -796,13 +797,10 @@ $scope.submit = function(){
 
 $scope.reply = function(id_comment, $event){
 
-    
-    
-    var user_offset = $($event.toElement).offset().top;
-    console.log(offset_textarea,$event);
+    var offsetF = offset_textarea.top-$($event.toElement).offset().top;
+    console.log(offsetF);
     $scope.reply_id = id_comment;
-
-    $('body').animate( { scrollTop : offset_textarea.top }, 1500 );
+    $('body').animate( { scrollTop : offsetF }, 1500 );
 }
 
 $scope.cancel_reply = function(){
@@ -1029,11 +1027,10 @@ var comments_app = angular.module('comments', ['ngMaterial'])
     };
 
     $scope.reply = function(id_comment, $event){
-
-        var user_offset = $($event.toElement).offset().top;
-        console.log(offset_textarea, user_offset);
+        var offsetF = offset_textarea.top-$($event.toElement).offset().top;
+        console.log(offsetF);
         $scope.reply_id = id_comment;
-        $('body').animate( { scrollTop : offset_textarea.top+150 }, 1500 );
+        $('body').animate( { scrollTop : offsetF }, 1500 );
     }
 
     $scope.cancel_reply = function(){
