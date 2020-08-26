@@ -407,7 +407,7 @@ function serlib_users_info(){
                 $user = wp_get_current_user();
                 $roles =  $user->roles[0];
                 
-                $tipos_alcaldia = ['emergencias', 'ferias-y-fiestas', 'cultura', 'sitios'  ];
+                $tipos_aliado = [ 'ferias-y-fiestas', 'cultura', 'eventos' ];
                 $arrayTaxAlcaldia = [];
                 $results['tipos'] = get_terms([
                     'hide_empty' => false,
@@ -416,7 +416,7 @@ function serlib_users_info(){
                     
                 for( $i = 0; $i < count($results['tipos']); $i++ ){
                     
-                    if( in_array( $results['tipos'][$i]->slug, $tipos_alcaldia ) ) { 
+                    if( in_array( $results['tipos'][$i]->slug, $tipos_aliado ) ) { 
                         //var_dump(in_array( $results['tipos'][$i]->slug, $tipos_alcaldia));
                         array_push($arrayTaxAlcaldia,  $results['tipos'][$i] );
                     }
