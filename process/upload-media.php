@@ -5,8 +5,8 @@ function serlib_uploader(){
     function guardar_archivo(){ 
         
         ini_set('error_reporting', E_ALL);
-        ini_set('post_max_size','100M');
-        ini_set('upload_max_filesize','100M');
+        ini_set('post_max_size','120M');
+        ini_set('upload_max_filesize','120M');
         ini_set('max_execution_time','1000');
         ini_set('max_input_time','1000');
         $file = $_FILES['files'];
