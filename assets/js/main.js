@@ -847,7 +847,7 @@ return {
             
             var element = e.target;
             var files = element.files[0]
-            if(files.size > (1024*6)*1000){
+            if(files.size > (1024*10)*1000){
                 alert('el tamaño maximo permitido es 2MB')
                 return;
             }
@@ -1081,7 +1081,7 @@ var comments_app = angular.module('comments', ['ngMaterial'])
                 
                 var element = e.target;
                 var files = element.files[0]
-                if(files.size > (1024*6)*1000){
+                if(files.size > (1024*10)*1000){
                     alert('el tamaño maximo permitido es 2MB')
                     return;
                 }
@@ -1473,7 +1473,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                 
                 var element = e.target;
                 var files = element.files[0];
-                if(files.size > (1024*6)*1000){
+                if(files.size > (1024*10)*1000){
                     alert('el tamaño maximo permitido es 2MB')
                     return;
                 }
@@ -2699,7 +2699,7 @@ admin_frontend.directive('appFilereader', function($q) {
                 
                 var element = e.target;
                 var files = element.files[0];
-                if(files.size > (1024*6)*1000){
+                if(files.size > (1024*10)*1000){
                     alert('el tamaño maximo permitido es 2MB')
                     return;
                 }
