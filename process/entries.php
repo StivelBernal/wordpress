@@ -162,8 +162,8 @@ function serlib_entries_array($rol){
                 for($i = 0; $i < count($results); $i++){
 
                     $user_meta=get_userdata($results[0]->post_author);
-
                     $user_roles=$user_meta->roles[0];
+                    echo $user_roles;
                     if( $user_roles === $rol ){
                         $author = get_userdata($results[$i]->post_author);
                         $results[$i]->author = $author->user_login;
