@@ -2373,7 +2373,7 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
                    /// response.data.status
                     $scope.revition = true;
                     
-                    alert('Gracias revisaremos tu publicación para ser aprobada');
+                    
                     $state.go(Config.redirectTo);
                     /**Ahi que enviar a la url de edicion */
                 }
