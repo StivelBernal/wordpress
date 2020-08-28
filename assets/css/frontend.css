@@ -678,8 +678,8 @@ label[for="fotocopia_documento"]{
 }
 .serlib-gallery-item img.icono{
     position: relative;
-    height: 72%;
-    width: 72%;
+    height: 65%;
+    width: 65%;
     display: flex;
     visibility: visible; 
 }
