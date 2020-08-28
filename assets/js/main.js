@@ -803,7 +803,7 @@ $scope.submit = function(){
 
 $scope.reply = function(id_comment, $event){
     //console.log(offset_textarea.top,$($event.toElement).offset().top);
-    var offsetF = offset_textarea.top-$($event.toElement).offset().top-600;
+    var offsetF = offset_textarea.top-$($event.toElement).offset().top-900;
     //console.log(offsetF);
     $scope.reply_id = id_comment;
     $('body').animate( { scrollTop : offsetF }, 1500 );
@@ -853,7 +853,7 @@ return {
             
             var element = e.target;
             var files = element.files[0]
-            if(files.size > (1024*10)*1000){
+            if(files.size > (1024*2)*1000){
                 alert('el tamaño maximo permitido es 2MB')
                 return;
             }
@@ -1087,7 +1087,7 @@ var comments_app = angular.module('comments', ['ngMaterial'])
                 
                 var element = e.target;
                 var files = element.files[0]
-                if(files.size > (1024*10)*1000){
+                if(files.size > (1024*2)*1000){
                     alert('el tamaño maximo permitido es 2MB')
                     return;
                 }
@@ -1480,7 +1480,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                 
                 var element = e.target;
                 var files = element.files[0];
-                if(files.size > (1024*10)*1000){
+                if(files.size > (1024*2)*1000){
                     alert('el tamaño maximo permitido es 2MB')
                     return;
                 }
@@ -2705,7 +2705,7 @@ admin_frontend.directive('appFilereader', function($q) {
                 
                 var element = e.target;
                 var files = element.files[0];
-                if(files.size > (1024*10)*1000){
+                if(files.size > (1024*2)*1000){
                     alert('el tamaño maximo permitido es 2MB')
                     return;
                 }
