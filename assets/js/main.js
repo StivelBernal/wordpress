@@ -266,13 +266,10 @@ var offset_textarea = $("#comment").offset();
     /**Llamar a las entradas de las alcaldias a mostrar */
     $.post( front_obj.ajax_url, form, function(data){
         
-        var slides_alcaldia =  [], slides_gobernacion =  [];
-        for(var i = 1; i < data.alcaldia.length; i++){ 
-             
-            slides_alcaldia.push( item_blog(data.alcaldia[i], municipio) );
-        }
+        var slides_alcaldia =  [], slides_gobernacion =  [];        
 
         if(data.alcaldia[0]){
+            $('#entradas_alcaldia_fila').show();
             var date = new Date(data.alcaldia[0].post_date);
             $('#post_reciente_alcaldia img').attr('src', data.alcaldia[0].thumbnail);
             $('#post_reciente_alcaldia a').attr('href', data.alcaldia[0].permalink);
@@ -280,16 +277,22 @@ var offset_textarea = $("#comment").offset();
             $('#post_reciente_alcaldia .mkdf-post-date-day').text(date.getDate());
             $('#post_reciente_alcaldia .mkdf-post-date-month').text(months[date.getMonth()]);
             $('#post_reciente_alcaldia .mkdf-post-excerpt').text(data.alcaldia[0].post_excerpt );
+            
+            for(var i = 1; i < data.alcaldia.length; i++){ 
+             
+                slides_alcaldia.push( item_blog(data.alcaldia[i], municipio) );
+            }
         }else{
+            
             $('#post_reciente_alcaldia').hide();
             $('#entradas_alcaldia').remove();
         }
 
-        for(var i = 1; i < data.gobernacion.length; i++){ 
-            slides_gobernacion.push( item_blog(data.gobernacion[i]) );
-        }
+       
 
         if(data.gobernacion[0]){
+            
+            $('#entradas_gobernacion_fila').show();
             var date = new Date(data.gobernacion[0].post_date);
             $('#post_reciente_gobernacion img').attr('src', data.gobernacion[0].thumbnail);
             $('#post_reciente_gobernacion a').attr('href', data.gobernacion[0].permalink);
@@ -297,13 +300,18 @@ var offset_textarea = $("#comment").offset();
             $('#post_reciente_gobernacion .mkdf-post-date-day').text(date.getDate());
             $('#post_reciente_gobernacion .mkdf-post-date-month').text(months[date.getMonth()]);
             $('#post_reciente_gobernacion .mkdf-post-excerpt').text(data.gobernacion[0].post_excerpt );
+
+            for(var i = 1; i < data.gobernacion.length; i++){ 
+                slides_gobernacion.push( item_blog(data.gobernacion[i]) );
+            }
+
         }else{
             $('#post_reciente_gobernacion').hide();
             $('#entradas_gobernacion').remove();
 
         }
 
-        
+        console.log(slides_gobernacion);
         if(slides_gobernacion.length !== 0){
 
             var swiper1 = new Swiper('.swiper-container-gobernacion', {            

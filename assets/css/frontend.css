@@ -203,6 +203,7 @@ button[disabled], .disabled{
     height:150px;
     margin:10px auto 30px;
 }
+
     
 .profile-image-container div{
       overflow:hidden;
@@ -787,7 +788,7 @@ label[for="fotocopia_documento"]{
         font-size:21px;
     }
 }
-#post_reciente_alcaldia .mkdf-post-image{
+#post_reciente_alcaldia .mkdf-post-image, #post_reciente_gobernacion .mkdf-post-image{
     width: 100%;
 }
 #post_reciente_alcaldia .mkdf-post-image img, #post_reciente_gobernacion .mkdf-post-image img{
