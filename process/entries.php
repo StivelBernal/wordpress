@@ -121,7 +121,7 @@ function serlib_entries_array($rol){
 
     if(isset($rutas[1]) ){
         $categoria = get_term_by('slug', $rutas[1], 'category' );
-        $categoria = [ 'object_ids' => $categoria->term_id ];
+        $categoria = $categoria->term_id;
     }else{
         $categoria = [];
     }
