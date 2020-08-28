@@ -21,7 +21,7 @@ function serlib_comments(){
             update_comment_meta( $result->comment_ID, 'stars_items', $objDatos->stars );
             }
             
-            if($result->comment_parent === 0){
+            if($result->comment_parent == 0){
                 enviar_email_notificaciones_author_post($objDatos->post_id);
             }else{
 

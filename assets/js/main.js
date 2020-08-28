@@ -784,7 +784,7 @@ $scope.submit = function(){
             
             if(response.data.success){
             
-               // $scope.submitFiles(response.data.success, response.data.comment_ID);
+               $scope.submitFiles(response.data.success, response.data.comment_ID);
              
                 
             }else if( response.data.error ){
