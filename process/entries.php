@@ -158,10 +158,12 @@ function serlib_entries_array($rol){
 
             if(isset($rutas[1]) ){
 
-
+                if(!isset($categoria['object_ids'])){
+                    return;
+                }
                 
                 for($i = 0; $i < count($results); $i++){
-                    var_dump(wp_get_post_categories($results[$i]->ID, $categoria), $results[$i]->ID);
+                    var_dump(wp_get_post_categories($results[$i]->ID, $categoria), $results[$i]->ID, $categoria);
                     if( !empty(wp_get_post_categories($results[$i]->ID, $categoria)) ){
                         $author = get_userdata($results[$i]->post_author);
                         $results[$i]->author = $author->user_login;
