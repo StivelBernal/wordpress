@@ -1212,6 +1212,7 @@ app.controller('recoverController', ['$scope', '$http',
 
                     if(response.data.success){
                         $scope.user_recover = true;
+                        $scope.is_submit = false;
                     }else if(response.data.error){
                         $scope.error = response.data.error;
                         $scope.is_submit = false;
