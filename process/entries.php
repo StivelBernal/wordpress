@@ -161,9 +161,9 @@ function serlib_entries_array($rol){
                 if(!isset($categoria['object_ids'])){
                     return;
                 }
-                
+
                 for($i = 0; $i < count($results); $i++){
-                    var_dump(wp_get_post_categories($results[$i]->ID, $categoria), $results[$i]->ID, $categoria);
+                    var_dump(wp_get_post_categories($results[$i]->ID, $categoria),'sdfdsf');
                     if( !empty(wp_get_post_categories($results[$i]->ID, $categoria)) ){
                         $author = get_userdata($results[$i]->post_author);
                         $results[$i]->author = $author->user_login;
