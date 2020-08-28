@@ -165,6 +165,7 @@ function serlib_entries_array($rol){
                     $user_roles=$user_meta->roles[0];
                     
                     if( $user_roles === 'aliado' ){
+                        echo 'dsfsdf';
                         $author = get_userdata($results[$i]->post_author);
                         $results[$i]->author = $author->user_login;
                         $thumb = get_the_post_thumbnail_url($results[$i]->ID);
