@@ -270,7 +270,7 @@ function serlib_users_info(){
             $direccion    =   sanitize_text_field( $objDatos->direccion );
             $instagram    =   sanitize_text_field( $objDatos->instagram );
 
-            $servicios  = new stdClass;
+            $servicios  = [];
             
             if(!empty($objDatos->servicios)){
                 for($i = 0; $i < count($objDatos->servicios); $i++){
