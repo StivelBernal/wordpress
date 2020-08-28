@@ -160,7 +160,9 @@ function serlib_entries_array($rol){
                     if( !empty(wp_get_post_categories($results[$i]->ID, $categoria)) ){
                         $author = get_userdata($results[$i]->post_author);
                         $results[$i]->author = $author->user_login;
-                        $results[$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
+                        $thumb = get_the_post_thumbnail_url($results[$i]->ID);
+                        $thumb = $thumb ? $thumb: 'https://golfodemorrosquillo.com/wp-content/uploads/2020/08/AZUL-OSCURO-con-logo-Horizontal.png';
+                        $results[$i]->thumbnail = $thumb;
                         $results[$i]->permalink = get_permalink($results[$i]->ID);
                 
                     }else{
