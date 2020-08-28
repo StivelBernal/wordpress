@@ -228,6 +228,8 @@ function serlib_buscador_home_results_blog_shortcode($atts){
                          ';
 
                          $posts   =   serlib_entries_array('aliado');
+
+                         var_dump($posts);
                          $months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
                          $itemsCarrusel = '';
