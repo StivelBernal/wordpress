@@ -125,9 +125,6 @@ function serlib_entries_array($rol){
     }else{
         $categoria = [];
     }
-    
-
-    var_dump($categoria);
 
     $results = [];  
 
@@ -152,18 +149,19 @@ function serlib_entries_array($rol){
 
         if(count($users) !== 0){
         
-            $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE ('.$userif.')  AND post_type = "post" AND post_status = "publish"  ORDER BY post_date LIMIT 10';
             
-            $results =  $wpdb->get_results( $query );
-
+            $results = get_posts(["category" => $categoria ]);
+            
+            var_dump($results);
+            
             if(isset($rutas[1]) ){
-
+                
                 if(!isset($categoria)){
                     return;
                 }
-
+                
                 for($i = 0; $i < count($results); $i++){
-                    var_dump(wp_get_post_categories( $results[$i]->ID, 'category', [ 'include' => intval($categoria) ] ), [ 'include' => intval($categoria) ]);
+
                     if( !empty(wp_get_post_categories($results[$i]->ID, [ 'object_ids' => intval($categoria) ] ) ) ){
                         $author = get_userdata($results[$i]->post_author);
                         $results[$i]->author = $author->user_login;
@@ -171,15 +169,19 @@ function serlib_entries_array($rol){
                         $thumb = $thumb ? $thumb: 'https://golfodemorrosquillo.com/wp-content/uploads/2020/08/AZUL-OSCURO-con-logo-Horizontal.png';
                         $results[$i]->thumbnail = $thumb;
                         $results[$i]->permalink = get_permalink($results[$i]->ID);
-                
+                        
                     }else{
                         array_splice($results, $i);
                     }
                     
                 }
-
+                
             }else{
-
+                
+                $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE ('.$userif.')  AND post_type = "post" AND post_status = "publish"  ORDER BY post_date LIMIT 10';
+                
+                $results =  $wpdb->get_results( $query );
+                
                 for($i = 0; $i < count($results); $i++){
                     $author = get_userdata($results[$i]->post_author);
                     $results[$i]->author = $author->user_login;
