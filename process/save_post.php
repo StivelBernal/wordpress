@@ -118,7 +118,7 @@ function notificacion_activacion_cuenta($user_id, $role, $old_roles){
 
     $email = $author->user_email;
     
-    $text = 'Su cuenta en el Golfo de Morrosquillo ha sido aprobada por el equipo del golfo de Morrosquillo';
+    $text = 'Tu cuenta en el Golfo de Morrosquillo ha sido aprobada por el equipo del golfo de Morrosquillo';
 
     $message = '<html>
                     <head>	
@@ -311,7 +311,7 @@ function enviar_email_usuario_nuevo_comerciante($user_id){
                             </a>
                         </div>
                         <div style="margin: auto; display: block; text-align: left;">
-                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">Haz creado un usuario para que hagas parte de nuestra comunidad del Golfo de Morrosquillo.</p>
+                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">Haz creado un usuario para ser parte de nuestra comunidad del Golfo de Morrosquillo.</p>
                             <p style="font-weight: 600; font-size:17px;">
                                 Usuario: '.$author->user_email.'<br><br>
                             </p>
