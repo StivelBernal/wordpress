@@ -101,10 +101,10 @@ function serlib_recover_account_shortcode(){
   }
 
   $formHTML               = str_replace(
-    ['recover_account_I18N', 'email_I18N', 'required_I18N', 'email_error_I18N', 'recover_I18N', 'email_info_I18N',
+    ['recover_account_I18N', 'recover_button_I18N', 'email_I18N', 'required_I18N', 'email_error_I18N', 'recover_I18N', 'email_info_I18N',
       'reset_pass_I18N', 'password1_I18N', 'password_error_I18N', 'repeat_password_I18N', 'password_error_matchI18N'],
     [ 
-      __('Recuperar Cuenta', 'serlib'), __('Correo electrónico', 'serlib'), __('requerido', 'serlib'),
+      __('Recuperar Cuenta', 'serlib'), __('Cambiar', 'serlib'), __('Correo electrónico', 'serlib'), __('requerido', 'serlib'),
       __('Por favor coloca un email valido', 'serlib'), __('Recuperar', 'serlib'),
       __('Hemos enviado un correo electronico con la información para recuperar tu cuenta', 'serlib'),
       __('Establecer nueva contraseña', 'serlib'), __('Contraseña', 'serlib'), 

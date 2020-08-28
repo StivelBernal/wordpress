@@ -36,7 +36,7 @@ NONCE_FIELD_PH
                         <div class="row s-100 center-center" style="margin-top:20px;">
                             <div>
                                 <button ng-click="submit()" ng-disabled="recoverForm.$invalid" class="bttn default s-100">
-                                <div ng-if="is_submit" class="lds-ripple-small"><div></div><div></div></div>reset_pass_I18N</button>
+                                <div ng-if="is_submit" class="lds-ripple-small"><div></div><div></div></div>recover_button_I18N</button>
                             </div>
                         </div>
 
