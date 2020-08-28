@@ -781,7 +781,7 @@ $scope.submit = function(){
             url:    front_obj.ajax_url,
             data: data
         }).then(function successCallback(response) {
-            
+            console.log(response);
             if(response.data.success){
             
                 $scope.submitFiles(response.data.success, response.data.comment_ID);
