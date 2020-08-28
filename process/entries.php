@@ -39,7 +39,9 @@ function serlib_entries(){
             for($i = 0; $i < count($results['alcaldia']); $i++){
                 $author = get_userdata($results['alcaldia'][$i]->post_author);
                 $results['alcaldia'][$i]->author = $author->user_login;
-                $results['alcaldia'][$i]->thumbnail = get_the_post_thumbnail_url($results['alcaldia'][$i]->ID);
+                $thumb = get_the_post_thumbnail_url($results['alcaldia'][$i]->ID);
+                $thumb = $thumb ? $thumb: 'https://golfodemorrosquillo.com/wp-content/uploads/2020/08/AZUL-OSCURO-con-logo-Horizontal.png';
+                $results['alcaldia'][$i]->thumbnail = $thumb;
                 $results['alcaldia'][$i]->permalink = get_permalink($results['alcaldia'][$i]->ID);           
             
             }
@@ -82,7 +84,9 @@ function serlib_entries(){
             for($i = 0; $i < count($results['gobernacion']); $i++){
                 $author = get_userdata($results['gobernacion'][$i]->post_author);
                 $results['gobernacion'][$i]->author = $author->user_login;
-                $results['gobernacion'][$i]->thumbnail = get_the_post_thumbnail_url($results['gobernacion'][$i]->ID);
+                $thumb = get_the_post_thumbnail_url($results['alcaldia'][$i]->ID);
+                $thumb = $thumb ? $thumb: 'https://golfodemorrosquillo.com/wp-content/uploads/2020/08/AZUL-OSCURO-con-logo-Horizontal.png';
+                $results['gobernacion'][$i]->thumbnail = $thumb;
                 $results['gobernacion'][$i]->permalink = get_permalink($results['gobernacion'][$i]->ID);
             }
             
@@ -170,7 +174,9 @@ function serlib_entries_array($rol){
                 for($i = 0; $i < count($results); $i++){
                     $author = get_userdata($results[$i]->post_author);
                     $results[$i]->author = $author->user_login;
-                    $results[$i]->thumbnail = get_the_post_thumbnail_url($results[$i]->ID);
+                    $thumb = get_the_post_thumbnail_url($results['alcaldia'][$i]->ID);
+                    $thumb = $thumb ? $thumb: 'https://golfodemorrosquillo.com/wp-content/uploads/2020/08/AZUL-OSCURO-con-logo-Horizontal.png';
+                    $results[$i]->thumbnail = $thumb;
                     $results[$i]->permalink = get_permalink($results[$i]->ID);        
                     
                 }
@@ -190,4 +196,3 @@ function serlib_entries_array($rol){
 }
 
 ?>
-
