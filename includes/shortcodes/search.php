@@ -268,7 +268,32 @@ function serlib_buscador_home_results_blog_shortcode($atts){
       $HTML .= $itemsCarrusel.'
                       </div>
                   </div>
-              </div>';
+              </div>
+              
+              <script>
+              
+              var swiper3 = new Swiper(".swiper-container-aliado", {            
+                spaceBetween: 10,
+                loop: true,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: true
+                },
+                speed: 1500,
+                breakpoints: {
+                    200: {
+                    slidesPerView: 1
+                    },
+                    700: {
+                    slidesPerView: 2
+                    },
+                    1000: {
+                    slidesPerView: 3
+                    }
+                }
+            });
+              
+              </script>';
     }
    
   }
