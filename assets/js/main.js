@@ -2372,8 +2372,7 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
                 if(response.data.status === 2 ){
                    /// response.data.status
                     $scope.revition = true;
-                    
-                    
+                                      
                     $state.go(Config.redirectTo);
                     /**Ahi que enviar a la url de edicion */
                 }
