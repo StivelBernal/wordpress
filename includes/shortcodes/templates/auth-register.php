@@ -235,10 +235,9 @@ NONCE_FIELD_PH
                        
                         <div class="form-group s-45">
                             <label for="c_birthdate">fecha_nacimiento_I18N</label>
-                            <datepicker date-format="yyyy-MM-dd" button-prev-title="previous month"  button-next-title="next month" date-year-title="Click aqui">
-                                <input  ng-model="Model.birthday" name="birthdate" id="c_birthdate" type="text" required/>
-                            </datepicker>
-                            <div ng-messages="c_Form.birthdate.$error">
+                            <input  ng-model="Model.birthday" name="birthdate" id="c_birthdate" type="date" required/>
+                            
+                            <div ng-messages="registerForm.birthdate.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
                           

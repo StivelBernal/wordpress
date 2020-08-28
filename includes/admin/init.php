@@ -62,9 +62,8 @@ function extra_profile_fields( $user ) {
         <tr>
             <th><label>Fotocopia del RUT</label></th>
             <td>
-            <?php var_dump(get_the_author_meta( 'file_document', $user->ID )); ?>
             <a  target="_blank" href="<?php
-            echo get_the_author_meta( 'file_document', $user->ID, true );
+            
             $FILE = esc_attr( get_the_author_meta( 'file_document', $user->ID ) );
             $FILE                = str_replace( 
                 ['/home/brayan/Escritorio/FOVEA', '/home/u135059516/domains/golfodemorrosquillo.com/public_html',
