@@ -659,6 +659,7 @@ function commentsController($scope, $http) {
 
 $scope.item_star = [];
 $scope.item_selected = [];
+$scope.reply_name = '';
 $scope.comment_text = '';
 $scope.reply_id = false;
 $scope.galery = [];
@@ -801,16 +802,17 @@ $scope.submit = function(){
 
 };
 
-$scope.reply = function(id_comment, $event){
+$scope.reply = function(id_comment, name, $event){
     //console.log(offset_textarea.top,$($event.toElement).offset().top);
     //var offsetF = offset_textarea.top-$($event.toElement).offset().top-900;
     //console.log(offsetF);
     $scope.reply_id = id_comment;
-    $('body').animate( { scrollTop : offsetF }, 1500 );
+    $scope.reply_name = name;
 }
 
 $scope.cancel_reply = function(){
     $scope.reply_id = false;
+    $scope.reply_name = '';
 }
 
 $scope.delete_comment = function(id, $event, child = false){
@@ -898,6 +900,7 @@ var comments_app = angular.module('comments', ['ngMaterial'])
     $scope.comment_text = '';
     $scope.cal_total = cal_total;
     $scope.reply_id = false;
+    $scope.reply_name = '';
     $scope.galery = [];
     $scope.preview_galery = [];
     $scope.is_submit = false;
@@ -1035,17 +1038,19 @@ var comments_app = angular.module('comments', ['ngMaterial'])
 
     };
 
-    $scope.reply = function(id_comment, $event){
+    $scope.reply = function(id_comment, name, $event){
         //console.log(offset_textarea.top,$($event.toElement).offset().top);
-        var offsetF = offset_textarea.top-$($event.toElement).offset().top;
+        //var offsetF = offset_textarea.top-$($event.toElement).offset().top-900;
         //console.log(offsetF);
         $scope.reply_id = id_comment;
-        $('body').animate( { scrollTop : offsetF }, 1500 );
+        $scope.reply_name = name;
     }
-
+    
     $scope.cancel_reply = function(){
         $scope.reply_id = false;
+        $scope.reply_name = '';
     }
+    
 
     $scope.delete_comment = function(id, $event, child = false){
        
