@@ -163,8 +163,8 @@ function serlib_entries_array($rol){
 
                     $user_meta=get_userdata($results[$i]->post_author);
                     $user_roles=$user_meta->roles[0];
-                    echo $user_roles;
-                    if( $user_roles === $rol ){
+                    
+                    if( $user_roles === 'aliado' ){
                         $author = get_userdata($results[$i]->post_author);
                         $results[$i]->author = $author->user_login;
                         $thumb = get_the_post_thumbnail_url($results[$i]->ID);
