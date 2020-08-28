@@ -163,7 +163,7 @@ function serlib_entries_array($rol){
                 }
 
                 for($i = 0; $i < count($results); $i++){
-                    var_dump(wp_get_object_terms( $results[$i]->ID, 'category' ), 'sdfdsf', $categoria);
+                    var_dump(wp_get_object_terms( $results[$i]->ID, 'category', [ 'object_ids' => intval($categoria) ] ), [ 'object_ids' => intval($categoria) ]);
                     if( !empty(wp_get_post_categories($results[$i]->ID, [ 'object_ids' => intval($categoria) ] ) ) ){
                         $author = get_userdata($results[$i]->post_author);
                         $results[$i]->author = $author->user_login;
