@@ -121,7 +121,7 @@ function serlib_entries_array($rol){
 
     if(isset($rutas[1]) ){
         $categoria = get_term_by('slug', $rutas[1], 'category' );
-        $categoria = $categoria->term_id;
+        $categoria = [ 'object_ids' => $categoria->term_id ];
     }else{
         $categoria = [];
     }
@@ -155,6 +155,8 @@ function serlib_entries_array($rol){
 
             if(isset($rutas[1]) ){
 
+
+                var_dump(wp_get_post_categories($results[$i]->ID, $categoria));
                 for($i = 0; $i < count($results); $i++){
                     
                     if( !empty(wp_get_post_categories($results[$i]->ID, $categoria)) ){
