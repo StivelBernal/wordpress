@@ -229,7 +229,6 @@ function serlib_buscador_home_results_blog_shortcode($atts){
 
                          $posts   =   serlib_entries_array('aliado');
 
-                         var_dump($posts);
                          $months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
                          $itemsCarrusel = '';
@@ -260,8 +259,8 @@ function serlib_buscador_home_results_blog_shortcode($atts){
                                       </div>
                                   </div>
                               </div>
-                          </div>
-                      </div>';
+                            </div>
+                        </div>';
                   
                       }
                          
@@ -274,7 +273,7 @@ function serlib_buscador_home_results_blog_shortcode($atts){
    
   }
 
-echo $HTML;
+echo $HTML,'dsdfs';
 
 }
 
