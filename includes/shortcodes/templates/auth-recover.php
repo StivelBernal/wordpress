@@ -7,7 +7,7 @@ NONCE_FIELD_PH
 
                 <form class="form-show-hide" name="recoverForm" style="padding-bottom:20px;">
 
-                    <h4>recover_account_I18N</h4>
+                    <h2 style="text-align:center;">recover_account_I18N</h2>
 
                     <div class="row-wrap " >
                                              
