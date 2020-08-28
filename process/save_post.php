@@ -222,6 +222,9 @@ function enviar_email_usuario_nuevo($user_id){
 
     $author = get_userdata($user_id);
 
+    $username = base64_encode($author->data->user_login);
+    $code = base64_encode(md5($author->data->user_login.$author->ID.$author->data->user_email.$author->data->user_pass));
+
     $email = $author->user_email;
 
     $message = '<html>
@@ -243,9 +246,12 @@ function enviar_email_usuario_nuevo($user_id){
                                 Para establecer tu contraseña visita el siguiente enlace:<br>
 
                             </p>
-                            <a target="blank" href="https://golfodemorrosquillo.com/auth/recover-account">
-                                https://golfodemorrosquillo.com/auth/recover-account/
-                            </a><br><br>
+                            <p style="text-align: center; color: #5e5e5e; font-family: Poppins; font-size: x-large;">
+                                
+                                <a style="padding:5px 10px; text-decoration:none; color:#fff; background-color: #4c9ac1; border:2px solid #3d81a2;" href="https://golfodemorrosquillo.com/auth/recover-account?code='.$code.'&u='.$username.'" target="_blank">Haz click aquí</a>
+                            
+                            </p>
+                            <br><br>
                             <p style="font-weight: 600; font-size:17px;">
                                 Guarda nuestro link en la pestaña de favoritos:<br>
                             </p>
