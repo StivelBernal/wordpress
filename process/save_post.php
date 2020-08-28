@@ -391,7 +391,7 @@ function enviar_email_notificaciones_author_post($post_id){
       
     add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    $email = 'brayan.bernalg@gmail.com';
+    //$email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, 'Tienes una notificación pendiente del Golfo de Morrosquillo', $message, $headers );
 
