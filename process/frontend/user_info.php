@@ -115,6 +115,9 @@ function serlib_users_info(){
         
             if( !is_wp_error($post_id) ){
 
+
+                enviar_email_notificacione_staff('Nuevo publicacion de turista por aprobar');
+
                 wp_set_post_terms($post_id, $objDatos->post_category, 'categorias_articulos');
             
                 //update_post_meta( $post_id, 'ser_data', $ser_data );
@@ -313,8 +316,11 @@ function serlib_users_info(){
             ]);
             
             add_action( 'save_post_post', 'ser_save_post_admin' );
+
             
             if( !is_wp_error($post_id) ){
+                
+                enviar_email_notificacione_staff('Nuevo publicación de comerciante por aprobar');
 
                 wp_set_post_terms($post_id, $objDatos->post_category, 'category');
                 wp_set_post_terms($post_id, $objDatos->tipo_entrada, 'tipos_entradas');
