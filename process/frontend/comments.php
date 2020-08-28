@@ -12,8 +12,6 @@ function serlib_comments(){
         if(isset($objDatos->parent)){
             $parent = $objDatos->parent;
         }
-        
-
 
         $result = wp_handle_comment_submission ( ["comment_post_ID" => $objDatos->post_id , 'comment' => $objDatos->text, 'comment_parent' => $parent ] );
     

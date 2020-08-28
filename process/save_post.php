@@ -348,18 +348,13 @@ function enviar_email_notificaciones_author_post($post_id){
 
     $post_c = get_post( $post_id );
 
-    if(get_current_user_id() === $post_c->post_author){
+    if(get_current_user_id() == $post_c->post_author){
         return;
     }
 
     $author = get_userdata($post_c->post_author);
 
     $email = $author->user_email;
-
-    var_dump($email);
-
-    return;
-    
 
     $message = '<html>
                     <head>	
@@ -385,6 +380,7 @@ function enviar_email_notificaciones_author_post($post_id){
                             <br><br><p>Cordialmente,</p>
                             <img src="https://golfodemorrosquillo.com/wp-content/uploads/2020/08/a131e581-9844-44ea-bc79-d6385dbccee2.jpeg" width="250px">
                         </div>
+                        '.$email.'
                         
                     </body>
                 </html> '; 
@@ -395,7 +391,7 @@ function enviar_email_notificaciones_author_post($post_id){
       
     add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    //$email = 'brayan.bernalg@gmail.com';
+    $email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, 'Tienes una notificación pendiente del Golfo de Morrosquillo', $message, $headers );
 
