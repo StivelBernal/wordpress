@@ -311,7 +311,7 @@ var offset_textarea = $("#comment").offset();
 
         }
 
-        console.log(slides_gobernacion);
+        //console.log(slides_gobernacion);
         if(slides_gobernacion.length !== 0){
 
             var swiper1 = new Swiper('.swiper-container-gobernacion', {            
@@ -364,30 +364,30 @@ var offset_textarea = $("#comment").offset();
             swiper2.appendSlide(slides_alcaldia);
 
         }    
-            
-        var swiper3 = new Swiper('.swiper-container-aliado', {            
-            spaceBetween: 10,
-            loop: true,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: true
-            },
-            speed: 1500,
-            breakpoints: {
-                200: {
-                slidesPerView: 1
-                },
-                700: {
-                slidesPerView: 2
-                },
-                1000: {
-                slidesPerView: 3
-                }
-            }
-        });
 
      });
     
+     var swiper3 = new Swiper('.swiper-container-aliado', {            
+        spaceBetween: 10,
+        loop: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: true
+        },
+        speed: 1500,
+        breakpoints: {
+            200: {
+            slidesPerView: 1
+            },
+            700: {
+            slidesPerView: 2
+            },
+            1000: {
+            slidesPerView: 3
+            }
+        }
+    });
+
     $('.item-servicio-home').each( (i, element) =>  $(element).attr('href', municipio+$(element).attr('base') ));
            
   }
@@ -478,30 +478,32 @@ var offset_textarea = $("#comment").offset();
         }
         
     
-        var swiper3 = new Swiper('.swiper-container-aliado', {            
-            spaceBetween: 10,
-            loop: true,
-            autoplay: {
-                delay: 2000,
-                disableOnInteraction: true
-            },
-            speed: 1500,
-            breakpoints: {
-                200: {
-                slidesPerView: 1
-                },
-                700: {
-                slidesPerView: 2
-                },
-                1000: {
-                slidesPerView: 3
-                }
-            }
-        });
+        
 
 
 
     });  
+
+    var swiper3 = new Swiper('.swiper-container-aliado', {            
+        spaceBetween: 10,
+        loop: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: true
+        },
+        speed: 1500,
+        breakpoints: {
+            200: {
+            slidesPerView: 1
+            },
+            700: {
+            slidesPerView: 2
+            },
+            1000: {
+            slidesPerView: 3
+            }
+        }
+    });
 
   }
   
