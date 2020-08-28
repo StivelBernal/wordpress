@@ -356,7 +356,10 @@ function enviar_email_notificaciones_author_post($post_id){
 
     $email = $author->user_email;
 
+    var_dump($email);
 
+    return;
+    
 
     $message = '<html>
                     <head>	
