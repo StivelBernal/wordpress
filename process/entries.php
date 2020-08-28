@@ -158,7 +158,7 @@ function serlib_entries_array($rol){
 
             if(isset($rutas[1]) ){
 
-                if(!isset($categoria['object_ids'])){
+                if(!isset($categoria)){
                     return;
                 }
 
