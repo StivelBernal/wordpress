@@ -892,7 +892,7 @@ var comments_app = angular.module('comments', ['ngMaterial'])
     /**Aqui Guardaria el label y i para guardarlo */
     /**Asignarle una calificación  tiene varias acciones hover y click para asignar el valor */
     /**Colocar unos input para subir imagenes y validacion para enviar */
-    var offset_textarea = $("#respond").offset();
+    //var offset_textarea = $("#respond").offset();
     $scope.item_star = [];
     $scope.item_selected = [];
     $scope.comment_text = '';
@@ -1037,7 +1037,7 @@ var comments_app = angular.module('comments', ['ngMaterial'])
 
     $scope.reply = function(id_comment, $event){
         //console.log(offset_textarea.top,$($event.toElement).offset().top);
-        var offsetF = offset_textarea.top-$($event.toElement).offset().top-600;
+        var offsetF = offset_textarea.top-$($event.toElement).offset().top;
         //console.log(offsetF);
         $scope.reply_id = id_comment;
         $('body').animate( { scrollTop : offsetF }, 1500 );
