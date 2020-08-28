@@ -150,19 +150,21 @@ function serlib_entries_array($rol){
         if(count($users) !== 0){
         
             
-            $results = get_posts(["category" => $categoria ]);
-            
-            var_dump($results);
             
             if(isset($rutas[1]) ){
                 
                 if(!isset($categoria)){
                     return;
                 }
+
+                $results = get_posts(["category" => $categoria ]);
                 
                 for($i = 0; $i < count($results); $i++){
 
-                    if( !empty(wp_get_post_categories($results[$i]->ID, [ 'object_ids' => intval($categoria) ] ) ) ){
+                    $user_meta=get_userdata($results[0]->post_author);
+
+                    $user_roles=$user_meta->roles[0];
+                    if( $user_roles === $rol ){
                         $author = get_userdata($results[$i]->post_author);
                         $results[$i]->author = $author->user_login;
                         $thumb = get_the_post_thumbnail_url($results[$i]->ID);
