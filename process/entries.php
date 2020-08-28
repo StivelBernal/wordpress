@@ -121,7 +121,7 @@ function serlib_entries_array($rol){
 
     if(isset($rutas[1]) ){
         $categoria = get_term_by('slug', $rutas[1], 'category' );
-        $categoria = [ 'object_ids' => $categoria->term_id ];
+        $categoria = $categoria->term_id;
     }else{
         $categoria = [];
     }
@@ -164,7 +164,7 @@ function serlib_entries_array($rol){
 
                 for($i = 0; $i < count($results); $i++){
                     var_dump(wp_get_post_categories($results[$i]->ID, $categoria),'sdfdsf');
-                    if( !empty(wp_get_post_categories($results[$i]->ID, $categoria)) ){
+                    if( !empty(wp_get_post_categories($results[$i]->ID, [ 'object_ids' => $categoria ] ) ) ){
                         $author = get_userdata($results[$i]->post_author);
                         $results[$i]->author = $author->user_login;
                         $thumb = get_the_post_thumbnail_url($results[$i]->ID);
