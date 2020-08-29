@@ -793,6 +793,10 @@ $scope.submit = function(){
         }, function errorCallback(error) {
             
             $scope.is_submit = false;
+            if(response.data.error == 0){
+                response.data.error = 'Tú sessión a expiró';
+            }
+            
             $scope.error =  error.data;            
         });
 
@@ -1020,6 +1024,9 @@ var comments_app = angular.module('comments', ['ngMaterial'])
                  
                     
                 }else if( response.data.error ){
+                    if(response.data.error == 0){
+                        response.data.error = 'Tú sessión a expiró';
+                    }
                     $scope.error = response.data.error;
                     $scope.is_submit = false;
                 }
