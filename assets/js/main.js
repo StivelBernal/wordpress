@@ -2046,7 +2046,7 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
             height: 450,
             shortcuts: false,
             lang: "es-ES",
-            maximumImageFileSize: 2000*1024,
+            maximumImageFileSize: (1024*10)*1000,
             placeholder: '...',
             dialogsInBody: true,
             toolbar: [
@@ -2065,7 +2065,7 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
                     uploadImage(image[0]);
                 },
                 onImageUploadError: function(msg){
-                    alert('La imagen no puede exceder (2 MB)');
+                    alert('La imagen no puede exceder (10 MB)');
                 }
             }
             
@@ -2245,7 +2245,7 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
             height: 450,
             shortcuts: false,
             lang: "es-ES",
-            maximumImageFileSize: 2000*1024,
+            maximumImageFileSize: (1024*10)*1000,
             placeholder: '...',
             dialogsInBody: true,
             toolbar: [
@@ -2264,7 +2264,7 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
                     uploadImage(image[0]);
                 },
                 onImageUploadError: function(msg){
-                    alert('La imagen no puede exceder (2 MB)');
+                    alert('La imagen no puede exceder (10 MB)');
                 }
             }
             
@@ -2469,7 +2469,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             shortcuts: false,
             lang: "es-ES",
             placeholder: '...',
-            maximumImageFileSize: 2000*1024,
+            maximumImageFileSize: (1024*10)*1000,
             dialogsInBody: true,
             toolbar: [
                 ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -2486,7 +2486,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
                     uploadImage(image[0]);
                 },
                 onImageUploadError: function(msg){
-                    alert('La imagen no puede exceder (2 MB)');
+                    alert('La imagen no puede exceder (10 MB)');
                 }
             }
             
@@ -2806,7 +2806,7 @@ function DialogForm($scope, $mdDialog, Instance) {
             shapeNone: 'Forma: Ninguna',
             dragImageHere: 'Arrastre una imagen o texto aquí',
             dropImage: 'Suelte una imagen o texto',
-            selectFromFiles: 'Seleccione un fichero (Max: 2MB)',
+            selectFromFiles: 'Seleccione un fichero (Max: 10MB)',
             maximumFileSize: 'Tamaño máximo del fichero',
             maximumFileSizeError: 'Superado el tamaño máximo de fichero.',
             url: 'URL de la imagen',
