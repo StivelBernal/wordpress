@@ -158,7 +158,7 @@ function serlib_entries_array($rol){
 
         if(count($users) !== 0){
                 var_dump($rutas);
-            if(isset($rutas[1]) ){
+            if(isset($rutas[1]) && $rutas[1] !== ''){
                 
                 if(!isset($categoria)){
                     return;
