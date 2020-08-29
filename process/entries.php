@@ -127,8 +127,8 @@ function serlib_entries_array($rol){
     
     }
 
-    if(isset($rutas[1]) ){
-        if($rutas !== '') {
+    if($rutas !== '') {
+        if(isset($rutas[1]) ){
             $categoria = [];
         }else{
             $categoria = get_term_by('slug', $rutas[1], 'category' );
@@ -190,15 +190,12 @@ function serlib_entries_array($rol){
                     
                 }
                 
-            }else{
-                
+            }else{      
 
                 $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE ('.$userif.')  AND post_type = "post" AND post_status = "publish"  ORDER BY post_date LIMIT 10';
                 
                 $results =  $wpdb->get_results( $query );
-                
-                var_dump($results);
-                
+
                 for($i = 0; $i < count($results); $i++){
                     $author = get_userdata($results[$i]->post_author);
                     $results[$i]->author = $author->user_login;
