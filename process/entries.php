@@ -154,12 +154,10 @@ function serlib_entries_array($rol){
             }
         }
 
-        var_dump($users);
 
 
         if(count($users) !== 0){
-            var_dump('dfsdf32');
-                        
+                var_dump($rutas);
             if(isset($rutas[1]) ){
                 
                 if(!isset($categoria)){
