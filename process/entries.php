@@ -128,8 +128,12 @@ function serlib_entries_array($rol){
     }
 
     if(isset($rutas[1]) ){
-        $categoria = get_term_by('slug', $rutas[1], 'category' );
-        $categoria = $categoria->term_id;
+        if($rutas !== '') {
+            $categoria = [];
+        }else{
+            $categoria = get_term_by('slug', $rutas[1], 'category' );
+            $categoria = $categoria->term_id;
+        }
     }else{
         $categoria = [];
     }
@@ -158,7 +162,7 @@ function serlib_entries_array($rol){
 
         if(count($users) !== 0){
                 var_dump($rutas);
-            if(isset($rutas[1]) && $rutas[1] !== ''){
+            if( $categoria !== [] ){
                 
                 if(!isset($categoria)){
                     return;
