@@ -222,7 +222,9 @@ function serlib_buscador_home_results_blog_shortcode($atts){
       $HTML = file_get_contents( 'templates/results-destino-gobernacion.php', true );
     }else if($a['tipo_usuario'] === 'aliado'){
       
-      $HTML = '<div class="mkdf-blog-holder mkdf-blog-standard-date-on-side entradas_tipo_usuario">
+      $HTML = '
+      <script> var aliado_carrusel = true;  </script>
+      <div class="mkdf-blog-holder mkdf-blog-standard-date-on-side entradas_tipo_usuario">
                   <div class="swiper-container-aliado">
                       <div class="swiper-wrapper">
                          ';
@@ -270,11 +272,7 @@ function serlib_buscador_home_results_blog_shortcode($atts){
                   </div>
               </div>
               
-              <script>
-             
-              var aliado_carrusel = true;
-              
-              </script>';
+              ';
     }
    
   }
