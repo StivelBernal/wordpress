@@ -385,12 +385,12 @@ var offset_textarea = $("#comment").offset();
     if (typeof(id_gobernacion) !== 'undefined') {
         var id_gobernacion = 0;
     }
-    
+
     $('#search-results .row-wrap').css('display', 'flex');
 
     var form        =   {
         action:         'serlib_entries',
-        alcaldia:       id_municipio,
+        alcaldia:       id_alcaldia,
         gobernacion:    id_gobernacion,
         municipio:       $(this).attr('municipio'),
     };
