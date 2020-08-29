@@ -154,6 +154,8 @@ function serlib_entries_array($rol){
             }
         }
 
+        var_dump($users);
+
 
         if(count($users) !== 0){
         
