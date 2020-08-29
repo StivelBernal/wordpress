@@ -787,7 +787,7 @@ $scope.submit = function(){
                 $scope.error = response.data.error;
                 $scope.is_submit = false;
             }else if(response.data == 0){
-                response.data.error = 'Tú sessión a expiró, refresca  la página';
+                response.data.error = 'Tú sessión expiró, refresca la página';
             }
             
             
@@ -796,7 +796,7 @@ $scope.submit = function(){
             
             $scope.is_submit = false;
             if(error.data == 0){
-                $scope.error =  'Tú sessión a expiró, refresca  la página';            
+                $scope.error =  'Tú sessión expiró, refresca la página';            
             }else{
                 $scope.error = error.data;
             }
@@ -1031,7 +1031,7 @@ var comments_app = angular.module('comments', ['ngMaterial'])
                     $scope.error = response.data.error;
                     $scope.is_submit = false;
                 }else if( response.data == 0){
-                    $scope.error = 'Tú sessión a expiró, refresca  la página';
+                    $scope.error = 'Tú sessión expiró, refresca la página';
                     $scope.is_submit = false;
                 }
                 
@@ -1039,7 +1039,7 @@ var comments_app = angular.module('comments', ['ngMaterial'])
 
             }, function errorCallback(error) {
                 if(error.data == 0){
-                    $scope.error = 'Tú sessión a expiró, refresca  la página';
+                    $scope.error = 'Tú sessión expiró, refresca la página';
                 }else{
                     $scope.error =  error.data;            
                 }
