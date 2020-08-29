@@ -399,7 +399,7 @@ var offset_textarea = $("#comment").offset();
     $.post( front_obj.ajax_url, form, function(data){
         
         if(data.error) return;
-        
+
         var slides_alcaldia =  [], slides_gobernacion =  [];
         for(var i = 0; i < data.alcaldia.length; i++){ 
             
@@ -476,7 +476,7 @@ var offset_textarea = $("#comment").offset();
 
   }
 
-  if(aliado_carrusel){
+  if(typeof(aliado_carrusel) !== 'undefined'){
        
     var swiper3 = new Swiper(".swiper-container-aliado", {            
         spaceBetween: 10,
