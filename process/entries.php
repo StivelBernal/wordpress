@@ -25,8 +25,12 @@ function serlib_entries(){
             }
         
         }else{
-            $users = [$_POST['alcaldia']];
-            $userif = 'post_author = '.$_POST['alcaldia'];
+
+            if($_POST['alcaldia'] !== 0){
+                $users = [$_POST['alcaldia']];
+                $userif = 'post_author = '.$_POST['alcaldia'];
+
+            } 
 
         }
 
@@ -71,7 +75,11 @@ function serlib_entries(){
         
         }else{
 
-            $userif = 'post_author = '.$_POST['gobernacion'];
+            if($_POST['gobernacion'] !== 0){
+                $users = [$_POST['gobernacion']];
+                $userif = 'post_author = '.$_POST['gobernacion'];
+            } 
+
 
         }
 

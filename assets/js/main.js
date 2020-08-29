@@ -376,8 +376,16 @@ var offset_textarea = $("#comment").offset();
   if (typeof(carrusel_instancia) !== 'undefined' ){
     primer_destino();
   }
-  else if (typeof(id_gobernacion) !== 'undefined' || typeof(id_gobernacion) !== 'undefined' ){
+  else{
      
+    if (typeof(id_alcaldia) !== 'undefined' ){
+        var id_alcaldia = 0;
+    }
+
+    if (typeof(id_gobernacion) !== 'undefined') {
+        var id_gobernacion = 0;
+    }
+    
     $('#search-results .row-wrap').css('display', 'flex');
 
     var form        =   {
