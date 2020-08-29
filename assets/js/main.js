@@ -398,6 +398,8 @@ var offset_textarea = $("#comment").offset();
     /**Llamar a las entradas de las alcaldias a mostrar */
     $.post( front_obj.ajax_url, form, function(data){
         
+        if(data.error) return;
+        
         var slides_alcaldia =  [], slides_gobernacion =  [];
         for(var i = 0; i < data.alcaldia.length; i++){ 
             
