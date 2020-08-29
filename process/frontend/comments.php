@@ -4,7 +4,6 @@ function serlib_comments(){
 
     if( $_SERVER['REQUEST_METHOD'] === 'POST'){
 
-        return;
         $objDatos   =     json_decode(file_get_contents("php://input"));
         if($objDatos->text  === '') { $objDatos->text  = '...'; }
        
