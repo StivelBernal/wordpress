@@ -777,7 +777,7 @@ $scope.submit = function(){
             url:    front_obj.ajax_url,
             data: data
         }).then(function successCallback(response) {
-            console.log(response);
+            
             if(response.data.success){
             
                 $scope.submitFiles(response.data.success, response.data.comment_ID);
@@ -786,6 +786,8 @@ $scope.submit = function(){
             }else if( response.data.error ){
                 $scope.error = response.data.error;
                 $scope.is_submit = false;
+            }else if(response.data == 0){
+                response.data.error = 'Tú sessión a expiró';
             }
             
             
@@ -793,11 +795,12 @@ $scope.submit = function(){
         }, function errorCallback(error) {
             
             $scope.is_submit = false;
-            if(response.data.error == 0){
-                response.data.error = 'Tú sessión a expiró';
+            if(error.data == 0){
+                $scope.error =  'Tú sessión a expiró';            
+            }else{
+                $scope.error = error.data;
             }
             
-            $scope.error =  error.data;            
         });
 
 };
@@ -1024,19 +1027,23 @@ var comments_app = angular.module('comments', ['ngMaterial'])
                  
                     
                 }else if( response.data.error ){
-                    if(response.data.error == 0){
-                        response.data.error = 'Tú sessión a expiró';
-                    }
+                                      
                     $scope.error = response.data.error;
+                    $scope.is_submit = false;
+                }else if( response.data == 0){
+                    $scope.error = 'Tú sessión a expiró';
                     $scope.is_submit = false;
                 }
                 
                 
 
             }, function errorCallback(error) {
-                
+                if(error.data == 0){
+                    $scope.error = 'Tú sessión a expiró';
+                }else{
+                    $scope.error =  error.data;            
+                }
                 $scope.is_submit = false;
-                $scope.error =  error.data;            
             });
 
     };
