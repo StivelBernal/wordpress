@@ -117,7 +117,7 @@ function serlib_entries(){
 
 function serlib_entries_array($rol){
 
-    if(isset($_GET["busqueda"]) || empty($rol)){
+    if( isset($_GET["busqueda"]) || $rol === '' ){
     
         return [];
     
@@ -158,7 +158,7 @@ function serlib_entries_array($rol){
 
 
         if(count($users) !== 0){
-        
+            var_dump('dfsdf32');
                         
             if(isset($rutas[1]) ){
                 
