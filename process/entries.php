@@ -147,7 +147,6 @@ function serlib_entries_array($rol){
         $results = [];
 
         $users = get_users( [ 'role__in' => [ 'aliado' ] ] );
-
         $userif = '';
         
         for( $i = 0; $i < count($users); $i++ ){
@@ -162,13 +161,13 @@ function serlib_entries_array($rol){
 
         if(count($users) !== 0){
                 
-            if( !empty($categoria) ){
+            if( $categoria ){
                 
                 if(!isset($categoria)){
                     return;
                 }
 
-                var_dump($categoria);
+                
 
                 $results = get_posts(["category" => $categoria ]);
                 
