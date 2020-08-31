@@ -160,7 +160,7 @@ function serlib_entries_array($rol){
 
 
         if(count($users) !== 0){
-                
+            var_dump(is_home());
             if( !(is_home())){
                 
                 if(!isset($categoria)){
