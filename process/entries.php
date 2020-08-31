@@ -2,11 +2,23 @@
 
 function serlib_entries(){
     
-    $results = [];     
+    global $wpdb;
+    $results = []; 
+
+    if( isset($_POST['municipio']) ){
+        $municipio = get_term_by('slug',$_POST['municipio'], 'category' );
+
+        $value = $wpdb->get_results( "SELECT * FROM $wpdb->postmeta WHERE meta_value = ".$municipio->term_id." AND meta_key = 'municipio'" );
+
+        $id_municipio = get_post_meta( $value[0]->post_id, 'alcaldiau');
+        $id_gobernacion = get_post_meta( $value[0]->post_id, 'gobernacion');
+    
+    }
+    
 
     if( isset($_POST['alcaldia']) ){
         
-        global $wpdb;
+        
 
         $results = [];        
 
@@ -25,6 +37,8 @@ function serlib_entries(){
             }
         
         }else{
+
+            
 
             if($_POST['alcaldia'] !== 0){
                 $users = [$_POST['alcaldia']];
