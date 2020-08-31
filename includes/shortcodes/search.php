@@ -196,7 +196,7 @@ function serlib_buscador_home_results_blog_shortcode($atts){
                                       <div class="mkdf-team-info-tc">
                                           <div class="mkdf-team-title-holder">
                                               <h4 itemprop="name" class="mkdf-team-name entry-title">
-                                                  <a itemprop="url" href="'.$value->permalink.'">Aliados'.$value->post_title.'</a>
+                                                  <a itemprop="url" href="'.$value->permalink.'">'.$value->post_title.'</a>
                                               </h4>
                                               <h6>'.$fecha.'</h6>
                                           </div>
