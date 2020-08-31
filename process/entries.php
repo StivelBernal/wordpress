@@ -10,9 +10,9 @@ function serlib_entries(){
 
         $value = $wpdb->get_results( "SELECT * FROM $wpdb->postmeta WHERE meta_value = ".$municipio->term_id." AND meta_key = 'municipio'" );
 
-        $_POST['alcaldia'] = get_post_meta( $value[0]->post_id, 'alcaldiau');
-        $_POST['gobernacion'] = get_post_meta( $value[0]->post_id, 'gobernacion');
-        echo  $_POST['alcaldia'].$_POST['alcaldia'];
+        $_POST['alcaldia'] = get_post_meta( $value[0]->post_id, 'alcaldiau', true);
+        $_POST['gobernacion'] = get_post_meta( $value[0]->post_id, 'gobernacion', true);
+       
     }   
     
 
