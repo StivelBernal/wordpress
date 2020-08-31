@@ -369,7 +369,7 @@ function serlib_auth_handler(){
         $user_modo = get_user_meta( $user->ID, 'user_modo', true );
         
         if($user_modo && $user_modo !== 'directo' ){
-            $output     =     [ 'error' => __('La cuenta esta vinculada a ', 'serlib'),
+            $output     =     [ 'error' => __('La cuenta esta vinculada a ', 'serlib').$user_modo,
             'code' => 401];
             wp_send_json($output);
             die();
