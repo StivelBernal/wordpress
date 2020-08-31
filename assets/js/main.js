@@ -377,6 +377,8 @@ var offset_textarea = $("#comment").offset();
     primer_destino();
   }
   else{
+
+    console.log(id_alcaldia, id_gobernacion);
      
     if (typeof(id_alcaldia) == 'undefined' ){
         var id_alcaldia = 0;
