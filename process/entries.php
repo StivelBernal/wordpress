@@ -126,9 +126,9 @@ function serlib_entries_array($rol){
         $rutas = explode('/' ,$_SERVER['REQUEST_URI']);
     
     }
-    var_dump($rutas);
+    
     if($rutas !== '') {
-        if(isset($rutas[1]) ){
+        if(!isset($rutas[1]) ){
             $categoria = [];
         }else{
             $categoria = get_term_by('slug', $rutas[1], 'category' );
