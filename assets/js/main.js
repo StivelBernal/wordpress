@@ -412,7 +412,7 @@ var offset_textarea = $("#comment").offset();
         }
 
         if(slides_gobernacion.length !== 0){
-       
+            $('#entradas_gobernacion').show();
             var swiper1 = new Swiper('.swiper-container-gobernacion', {            
                 spaceBetween: 10,
                 loop: true,
@@ -441,7 +441,7 @@ var offset_textarea = $("#comment").offset();
 
         if(slides_alcaldia.length !== 0){
 
-        
+            $('#entradas_alcaldia').show();
             var swiper2 = new Swiper('.swiper-container-alcaldia', {            
                 spaceBetween: 10,
                 loop: true,
