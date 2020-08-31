@@ -162,7 +162,7 @@ function serlib_entries_array($rol){
 
         if(count($users) !== 0){
                 
-            if( $categoria !== [] ){
+            if( !empty($categoria) ){
                 
                 if(!isset($categoria)){
                     return;
