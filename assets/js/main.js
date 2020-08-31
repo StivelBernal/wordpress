@@ -377,23 +377,12 @@ var offset_textarea = $("#comment").offset();
     primer_destino();
   }
   else{
-
-    console.log(id_alcaldia, id_gobernacion);
-     
-    if (typeof(id_alcaldia) == 'undefined' ){
-        var id_alcaldia = 0;
-    }
-
-    if (typeof(id_gobernacion) == 'undefined') {
-        var id_gobernacion = 0;
-    }
+      
 
     $('#search-results .row-wrap').css('display', 'flex');
 
     var form        =   {
         action:         'serlib_entries',
-        alcaldia:       id_alcaldia,
-        gobernacion:    id_gobernacion,
         municipio:       $(this).attr('municipio'),
     };
 
