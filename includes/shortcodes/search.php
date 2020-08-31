@@ -158,7 +158,7 @@ function serlib_buscador_home_results_blog_shortcode($atts){
   }
  
   if( !$municipio ){
-   
+    
     if($a['tipo_usuario'] === 'alcaldia'){
       $HTML = file_get_contents( 'templates/results-home-alcaldia.php', true );
     }else if($a['tipo_usuario'] === 'gobernacion'){

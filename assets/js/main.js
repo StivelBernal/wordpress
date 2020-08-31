@@ -269,7 +269,7 @@ var offset_textarea = $("#comment").offset();
         var slides_alcaldia =  [], slides_gobernacion =  [];        
 
         if(data.alcaldia[0]){
-            $('#entradas_alcaldia_fila').show();
+            $('#entradas_alcaldia').show();
             var date = new Date(data.alcaldia[0].post_date);
             $('#post_reciente_alcaldia img').attr('src', data.alcaldia[0].thumbnail);
             $('#post_reciente_alcaldia a').attr('href', data.alcaldia[0].permalink);
@@ -292,7 +292,7 @@ var offset_textarea = $("#comment").offset();
 
         if(data.gobernacion[0]){
             
-            $('#entradas_gobernacion_fila').show();
+            $('#entradas_gobernacion').show();
             var date = new Date(data.gobernacion[0].post_date);
             $('#post_reciente_gobernacion img').attr('src', data.gobernacion[0].thumbnail);
             $('#post_reciente_gobernacion a').attr('href', data.gobernacion[0].permalink);

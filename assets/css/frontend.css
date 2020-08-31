@@ -747,6 +747,7 @@ label[for="fotocopia_documento"]{
 .entradas_alcaldia, .entradas_gobernacion{
     overflow:hidden;
     width: 100%;
+    display:none;
     
 }
 #entradas_alcaldia_fila, #entradas_gobernacion_fila{
