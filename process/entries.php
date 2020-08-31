@@ -168,6 +168,8 @@ function serlib_entries_array($rol){
                     return;
                 }
 
+                var_dump($categoria);
+
                 $results = get_posts(["category" => $categoria ]);
                 
                 for($i = 0; $i < count($results); $i++){
