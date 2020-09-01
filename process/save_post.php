@@ -560,7 +560,7 @@ function enviar_email_confirm($email, $username, $pass){
    
     // $email = 'brayan.bernalg@gmail.com';
 
-    $mail_res = wp_mail( $email, _x('Bienvenidos a la comunidad del Golfo de morrosquillo', 'asunto email', 'serlib') , $message, $headers );
+    $mail_res = wp_mail( $email, _x('Bienvenido a la comunidad del Golfo de morrosquillo', 'asunto email', 'serlib') , $message, $headers );
 
     return $mail_res;
 }
@@ -610,8 +610,8 @@ function enviar_email_usuario_nuevo_turista($user_id){
       
     add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    //$email = 'brayan.bernalg@gmail.com';
+    $email = 'brayan.bernalg@gmail.com';
 
-    $mail_res = wp_mail( $email, 'Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
+    $mail_res = wp_mail( $email, 'Bienvenido a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
 
 }

@@ -144,9 +144,11 @@ function serlib_auth_handler(){
             update_user_meta( $user_id, 'user_city_id', $city_id );
             update_user_meta( $user_id, 'user_state_id', $state_id );
             update_user_meta( $user_id, 'user_intereses', $intereses );
+           
             if( $modo !== 'directo'){
                 enviar_email_usuario_nuevo_turista( $user_id );
             }
+            
         }
         if($role === 'comerciante'){
             update_user_meta( $user_id, 'document_type', $document_type );
@@ -375,9 +377,8 @@ function serlib_auth_handler(){
             die();
         } 
 
-        
 
-        for($i = 0; $i < count( $user->roles); $i++){
+        for($i = 0; $i < count( $user->roles ); $i++){
         
             if( $user->roles[$i] === 'pendiente' ){
                 die();
