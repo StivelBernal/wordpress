@@ -610,7 +610,7 @@ function enviar_email_usuario_nuevo_turista($user_id){
       
     add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    $email = 'brayan.bernalg@gmail.com';
+    //$email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, 'Bienvenido a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
 
