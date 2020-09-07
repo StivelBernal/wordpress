@@ -236,7 +236,8 @@ function serlib_register_form_shortcode(){
        'fecha_nacimiento_I18N', 'email_I18N', 'password_error_matchI18N', 'password_error_I18N', 'repeat_password_I18N',
        'telefono_I18N', 'terminos_condiciones_I18N', 'politica_privacidad_I18N', 'register_aditional_I18N', 'Departamento_I18N',
        'Ciudad_I18N', 'Conocimiento_pagina_I18N', 'Intereses_I18N', 'Ciudades a visitar_I18N', 'register_button_I18N', 'otro_I18N',
-       'Tipo_documento_I18N', 'Numero_documento_I18N', 'Fotocopia_documento_I18N', 'Usuario_creado_I18N', 'register_comerciante_I18N', 'register_turista_I18N', 'Ubicacion_negocios_I18N'], 
+       'Tipo_documento_I18N', 'Numero_documento_I18N', 'Fotocopia_documento_I18N', 'Usuario_creado_I18N', 'register_comerciante_I18N',
+        'register_turista_I18N', 'Ubicacion_negocios_I18N', 'terms_and_polities_text_I18N', 'more_terms_I18N', 'more_terms_text_I18N', 'accept_terms_and_polities_I18N' ], 
        [ 
          __('Registrarme como:', 'serlib'), __('Turista', 'serlib'), __('requerido', 'serlib'),
          __('Por favor coloca un email valido', 'serlib'), __('Contraseña', 'serlib'), __('Comerciante', 'serlib'),
@@ -247,7 +248,8 @@ function serlib_register_form_shortcode(){
          __('Datos adicionales', 'serlib'), __('Departamento origen', 'serlib'), __('Ciudad origen', 'serlib'), __('Conocimiento de la página', 'serlib'), 
          __('Intereses', 'serlib'), __('Ciudades a visitar', 'serlib'), __('Registrarme', 'serlib'), __('¿ Cual ?', 'serlib'),
          __('Tipo de documento', 'serlib'), __('Número de documento', 'serlib'), __('Fotocopia del documento', 'serlib'), __('Usuario creado, redireccionando...', 'serlib')
-         , __('Registro Comerciante', 'serlib'), __('Registro como turista', 'serlib'), __('Ubicación de negocios', 'serlib')
+         , __('Registro Comerciante', 'serlib'), __('Registro como turista', 'serlib'), __('Ubicación de negocios', 'serlib'),
+         __('texto politicas', 'serlib'),  __('da click aqui', 'serlib'),  __('para saber más', 'serlib'),  __('acepto terminos y politicas', 'serlib'),     
        ],
       $formHTML
     );

@@ -96,38 +96,15 @@ NONCE_FIELD_PH
 
                         <div class="form-group s-45">
                             <label for="telefono">telefono_I18N</label>
-                            <input class="fovea-input input-text"  id="telefono" ng-model="Model.telefono" name="telefono" maxlength="20" type="text">
+                            <input class="fovea-input input-text"  id="telefono" ng-model="Model.telefono" name="telefono" maxlength="20" type="text" required>
                             <div ng-messages="registerForm.telefono.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
                         </div>
-
-                        <div class="form-group row space-around-center s-45">
-                         
-                            <div class="S-50">
-                                <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
-                                    <a href="/terminos" target="_blank" >terminos_condiciones_I18N</a>
-                                </md-checkbox>
-                                <div ng-messages >
-                                    <div  ng-if="!Model.terms === true">required_I18N</div>
-                                </div>
-                            </div>
-
-                            <div class="S-50">
-                                <md-checkbox  aria-label="politica_privacidad_I18N" class="md-primary" ng-model="Model.policy">
-                                    <a href="/politicas" target="_blank" >politica_privacidad_I18N</a>
-                                </md-checkbox>
-                                <div ng-messages >
-                                    <div  ng-if="!Model.policy === true">required_I18N</div>
-                                </div>
-                            </div>
-
-                        </div>
-
                                        
                     </div>
-                    
-                    <h4>register_aditional_I18N</h4>
+
+                    <div class="s-45"></div> 
                     
                     <div class="row-wrap space-around-center" >
                       
@@ -180,9 +157,29 @@ NONCE_FIELD_PH
                             </div>
                         </div> 
 
+                        <div class="form-group row-wrap space-around-center s-100">
+
+                            <div class="s-100" style="overflow:auto; height:200px;" >
+                            
+                                terms_and_polities_text_I18N
+                              
+                            </div>
+                            <div class="S-50">
+                            
+                                <div class="terms_links">more_terms_text_I18N<a href="/terminos" target="_blank" >more_terms_I18N</a></div>
+                                <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
+                                    accept_terms_and_polities_I18N
+                                </md-checkbox>
+                                <div ng-messages >
+                                    <div  ng-if="!Model.terms === true">required_I18N</div>
+                                </div>
+                            </div>
+
+                        </div>
+
                         <div class="row s-100 center-center" style="margin-top:20px;">
                             <div>
-                                <button ng-click="submit()" ng-disabled="registerForm.$invalid || !Model.terms === true || !Model.policy === true" class="bttn default s-100">
+                                <button ng-click="submit()" ng-disabled="registerForm.$invalid || !Model.terms === true" class="bttn default s-100">
                                 <div ng-if="is_submit" class="lds-ripple-small"><div></div><div></div></div> register_button_I18N</button>
                             </div>
                         </div>
@@ -278,29 +275,9 @@ NONCE_FIELD_PH
                             <div ng-messages="c_Form.telefono.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
-                        </div>                        
+                        </div>    
 
-                        <div class="form-group row space-around-center s-45">
-                         
-                            <div class="S-50">
-                                <md-checkbox aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
-                                    <a href="/terminos" target="_blank" >terminos_condiciones_I18N</a>
-                                </md-checkbox>
-                                <div ng-messages >
-                                    <div  ng-if="!Model.terms === true">required_I18N</div>
-                                </div>
-                            </div>
-
-                            <div class="S-50">
-                                <md-checkbox aria-label="politica_privacidad_I18N" class="md-primary" ng-model="Model.policy">
-                                    <a href="/politicas" target="_blank" >politica_privacidad_I18N</a>
-                                </md-checkbox>
-                                <div ng-messages >
-                                    <div  ng-if="!Model.policy === true">required_I18N</div>
-                                </div>
-                            </div>
-
-                        </div>
+                        <div class="form-group s-45"></div>           
 
                         <div class="form-group s-30">
                             <label>Tipo_documento_I18N</label>      
@@ -328,7 +305,6 @@ NONCE_FIELD_PH
                         </div>
                     
                     </div>
-                    <h4>register_aditional_I18N</h4>
                     
                     <div class="row-wrap space-around-center" >
 
@@ -356,9 +332,29 @@ NONCE_FIELD_PH
                             </div>
                         </div> 
 
+                        <div class="form-group row-wrap space-around-center s-100">
+
+                            <div class="s-100" style="overflow:auto; height:200px;" >
+                            
+                                terms_and_polities_text_I18N
+                              
+                            </div>
+                            <div class="S-50">
+                            
+                                <div class="terms_links">more_terms_text_I18N<a href="/terminos" target="_blank" >more_terms_I18N</a></div>
+                                <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
+                                    accept_terms_and_polities_I18N
+                                </md-checkbox>
+                                <div ng-messages >
+                                    <div  ng-if="!Model.terms === true">required_I18N</div>
+                                </div>
+                            </div>
+
+                        </div>
+
                         <div class="row s-100 center-center" style="margin-top:20px;">
                             <div > 
-                                <button ng-click="submit()" ng-disabled="c_Form.$invalid || !Model.terms === true || !Model.policy === true || !File" class="bttn default s-100">
+                                <button ng-click="submit()" ng-disabled="c_Form.$invalid || !Model.terms === true || !File" class="bttn default s-100">
                                 <div ng-if="is_submit" class="lds-ripple-small"><div></div><div></div></div>register_button_I18N</button>
                             </div>
                         </div>
