@@ -427,7 +427,7 @@ function enviar_email_notificacione_staff($subject){
       
     add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    //$email = 'brayan.bernalg@gmail.com';
+    $email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, $subject, $message, $headers );
 
@@ -550,7 +550,7 @@ function enviar_email_confirm($email, $username, $pass){
           
        add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    $email = 'brayan.bernalg@gmail.com';
+    //$email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, _x('Bienvenido a la comunidad del Golfo de morrosquillo', 'asunto email', 'serlib') , $message, $headers );
 
