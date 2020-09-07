@@ -35,13 +35,13 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 
 <div ng-if="step === 1" ng-class="{ validated_step: validated_step }">
-
+     <p>Te recomendamos que tus fotos sean de la mejor calidad posible para la visibilidad de tu publicación</p>
     <div class="row-wrap"> 
         
             <div class="s-25" ng-repeat="image in galery">       
                 
                 <div class="galery-image-container">
-                <p>Te recomendamos que tus fotos sean de la mejor calidad posible para la visibilidad de tu publicación</p>
+               
                 ';
                 ?>
                     <div><img class="img-galeria"  ng-src="{{preview_galery[$index] ? preview_galery[$index]: preview_default}}"></div> 
