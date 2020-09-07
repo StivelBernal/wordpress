@@ -655,8 +655,15 @@ $scope.is_submit = false;
 $scope.preview_default = '/wp-content/plugins/ser_lib/assets/img/images.png'
 $scope.error = '', $scope.success = '';
 $scope.add_galery = function(){
-    if($scope.galery.length  < 7){
+    
+    if($scope.galery.length  < 11){
+
         $scope.galery.push({text: ''});
+    
+    }else{
+       
+        alert('el máximo de fotos son 10');
+        
     }
           
 }
@@ -901,7 +908,12 @@ var comments_app = angular.module('comments', ['ngMaterial'])
     $scope.error = '', $scope.success = '';
     $scope.add_galery = function(){
         if($scope.galery.length  < 7){
+        
             $scope.galery.push({text: ''});
+        
+        }else{
+
+            alert('el máximo de fotos son 10');
         }
               
     }
