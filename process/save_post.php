@@ -12,9 +12,9 @@ function ser_save_post_admin( $post_id, $post, $update ){
     
     $user_meta = get_userdata($post->post_author);
 
-    if( $user_meta->roles[0] !== 'turista' || $user_meta->roles[0] === 'comerciante' ){
+    //if( $user_meta->roles[0] !== 'turista' || $user_meta->roles[0] === 'comerciante' ){
         //return;
-    } 
+    //} 
 
     if( isset($_POST['acf']) ){
 

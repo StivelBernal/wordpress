@@ -680,7 +680,7 @@ function serlib_users_info(){
                     'post_name'                   =>    $title,
                     'post_title'                  =>    $title,
                     'post_excerpt'                =>    $excerpt,
-                    'post_status'                 =>    'publish',
+                    'post_status'                 =>    'pending',
                     'post_type'                   =>    'post',
                     'comment_status'              =>    'closed'
                  ]);
@@ -691,7 +691,7 @@ function serlib_users_info(){
                     'post_name'                   =>    $title,
                     'post_title'                  =>    $title,
                     'post_excerpt'                =>    $excerpt,
-                    'post_status'                 =>    'publish',
+                    'post_status'                 =>    'pending',
                     'post_type'                   =>    'post',
                     'comment_status'              =>    'open'
                  ]);

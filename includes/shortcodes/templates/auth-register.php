@@ -157,16 +157,16 @@ NONCE_FIELD_PH
                             </div>
                         </div> 
 
-                        <div class="form-group row-wrap t-c-a space-around-center s-100">
+                        <div class="form-group row-wrap t-c-a start-center s-100">
 
-                            <div class="s-100" style="overflow:auto; height:200px;" >
+                            <div class="s-100 text-term-container" >
                             
                                 terms_and_polities_text_I18N
                               
                             </div>
-                            <div class="S-50">
+                            <div class="s-50">
                             
-                                <div class="terms_links">more_terms_text_I18N<a href="/terminos" target="_blank" >more_terms_I18N</a></div>
+                                <div class="terms_links">more_terms_text_I18N <a href="/terminos" target="_blank" >more_terms_I18N</a></div>
                                 <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
                                     accept_terms_and_polities_I18N
                                 </md-checkbox>
@@ -332,16 +332,16 @@ NONCE_FIELD_PH
                             </div>
                         </div> 
 
-                        <div class="form-group row-wrap t-c-a space-around-center s-100">
+                        <div class="form-group row-wrap t-c-a start-center s-100">
 
-                            <div class="s-100" style="overflow:auto; height:200px;" >
+                            <div class="s-100 text-term-container" >
                             
                                 terms_and_polities_text_I18N
                               
                             </div>
                             <div class="S-50">
                             
-                                <div class="terms_links">more_terms_text_I18N<a href="/terminos" target="_blank" >more_terms_I18N</a></div>
+                                <div class="terms_links">more_terms_text_I18N <a href="/terminos" target="_blank" >more_terms_I18N</a></div>
                                 <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
                                     accept_terms_and_polities_I18N
                                 </md-checkbox>
