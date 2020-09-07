@@ -656,7 +656,7 @@ $scope.preview_default = '/wp-content/plugins/ser_lib/assets/img/images.png'
 $scope.error = '', $scope.success = '';
 $scope.add_galery = function(){
     
-    if($scope.galery.length  < 11){
+    if($scope.galery.length  < 10){
 
         $scope.galery.push({text: ''});
     
@@ -907,7 +907,7 @@ var comments_app = angular.module('comments', ['ngMaterial'])
     $scope.preview_default = '/wp-content/plugins/ser_lib/assets/img/images.png'
     $scope.error = '', $scope.success = '';
     $scope.add_galery = function(){
-        if($scope.galery.length  < 7){
+        if($scope.galery.length  < 10){
         
             $scope.galery.push({text: ''});
         
@@ -2809,7 +2809,7 @@ function DialogForm($scope, $mdDialog, Instance) {
             dragImageHere: 'Arrastre una imagen o texto aquí',
             dropImage: 'Suelte una imagen o texto',
             selectFromFiles: 'Seleccione un fichero (Max: 10MB)',
-            maximumFileSize: 'Tamaño máximo del fichero',
+            maximumFileSize: 'Te recomendamos que tus fotos sean de la mejor calidad posible para la visibilidad de tu publicación; el tamaño máximo del fichero',
             maximumFileSizeError: 'Superado el tamaño máximo de fichero.',
             url: 'URL de la imagen',
             remove: 'Eliminar la imagen',
