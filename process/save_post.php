@@ -12,9 +12,9 @@ function ser_save_post_admin( $post_id, $post, $update ){
     
     $user_meta = get_userdata($post->post_author);
 
-    //if( $user_meta->roles[0] !== 'turista' || $user_meta->roles[0] === 'comerciante' ){
-        //return;
-    //} 
+    // if ( $user_meta->roles[0] !== 'turista' || $user_meta->roles[0] === 'comerciante' ){
+        // return;
+    // } 
 
     if( isset($_POST['acf']) ){
 
@@ -164,6 +164,7 @@ function notificacion_activacion_cuenta($user_id, $role, $old_roles){
 
 }
 
+/**PUBLICACION APROVADA */
 function enviar_email_confirm_post($post_id){
 
     $headers[] = 'From: Contacto <soporte@golfomorrosquillo.com>';
@@ -215,7 +216,7 @@ function enviar_email_confirm_post($post_id){
 
 }
 
-/**CREANDO POR EL ADMIN */
+/**CREANDO POR EL ADMIN GOBERNACION ALCALDIA ALIADO */
 function enviar_email_usuario_nuevo($user_id){
 
     $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
@@ -279,19 +280,8 @@ function enviar_email_usuario_nuevo($user_id){
     $mail_res = wp_mail( $email, 'Bienvenidos a la Comunidad del Golfo de Morrosquillo!', $message, $headers );
 
 }
-/*
-$modo = get_user_meta($user_id, 'user_modo', true);
-    $email = $author->user_email;
 
-    if($modo === 'directo'){
-
-        $revover_text = '';
-
-    }else{
-
-        $recover_text = '';
-    }
-*/
+/**NUEVO USUARIO COMERCIANTE */
 function enviar_email_usuario_nuevo_comerciante($user_id){
 
     $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
@@ -341,7 +331,7 @@ function enviar_email_usuario_nuevo_comerciante($user_id){
 
 }
 
-
+/**NOTIFICACION AUTOR COMENTARIOS */
 function enviar_email_notificaciones_author_post($post_id){
 
     $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
@@ -396,6 +386,7 @@ function enviar_email_notificaciones_author_post($post_id){
 
 }
 
+/**NOTIFICACIONES STAFF ASUNTO DINAMICO */
 function enviar_email_notificacione_staff($subject){
 
     $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
@@ -442,6 +433,7 @@ function enviar_email_notificacione_staff($subject){
 
 }
 
+/**NOTIFICACIONES AUTOR DE COMENTARIO */
 function enviar_email_notificaciones_author_comment($post_id, $user_id, $author_commenter){
 
     $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
@@ -496,7 +488,7 @@ function enviar_email_notificaciones_author_comment($post_id, $user_id, $author_
 
 }
 
-
+/**USUARIO TURISTA SIN CONFIRMAR */
 function enviar_email_confirm($email, $username, $pass){
 
     $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';
@@ -558,13 +550,14 @@ function enviar_email_confirm($email, $username, $pass){
           
        add_filter( 'wp_mail_content_type', 'tipo_de_contenido_html' );
    
-    // $email = 'brayan.bernalg@gmail.com';
+    $email = 'brayan.bernalg@gmail.com';
 
     $mail_res = wp_mail( $email, _x('Bienvenido a la comunidad del Golfo de morrosquillo', 'asunto email', 'serlib') , $message, $headers );
 
     return $mail_res;
 }
 
+/**CUANDO SE CREA USUARIO TURISTA CON REDES SOCIALES */
 function enviar_email_usuario_nuevo_turista($user_id){
 
     $headers[]= 'From: Contacto <soporte@golfomorrosquillo.com>';

@@ -473,7 +473,7 @@ function serlib_users_info(){
                     'post_name'                   =>    $title,
                     'post_title'                  =>    $title,
                     'post_excerpt'                =>    $excerpt,
-                    'post_status'                 =>    'publish',
+                    'post_status'                 =>    'pending',
                     'post_type'                   =>    'post',
                     'comment_status'              =>    'closed'
                  ]);
@@ -484,7 +484,7 @@ function serlib_users_info(){
                     'post_name'                   =>    $title,
                     'post_title'                  =>    $title,
                     'post_excerpt'                =>    $excerpt,
-                    'post_status'                 =>    'publish',
+                    'post_status'                 =>    'pending',
                     'post_type'                   =>    'post',
                     'comment_status'              =>    'open'
                  ]);
@@ -493,6 +493,8 @@ function serlib_users_info(){
             add_action( 'save_post_post', 'ser_save_post_admin' );
 
             if( !is_wp_error($post_id) ){
+
+                enviar_email_notificacione_staff('Nuevo publicacion de aliado por aprobar');
 
                 wp_set_post_terms($post_id, $objDatos->post_category, 'category');
                 wp_set_post_terms($post_id, $objDatos->tipo_entrada, 'tipos_entradas');
@@ -700,6 +702,8 @@ function serlib_users_info(){
             add_action( 'save_post_post', 'ser_save_post_admin' );
             
             if( !is_wp_error($post_id) ){
+
+                enviar_email_notificacione_staff('Nuevo publicacion de gobernacion/alcaldia por aprobar');
 
                 wp_set_post_terms($post_id, $objDatos->post_category, 'category');
                 wp_set_post_terms($post_id, $objDatos->tipo_entrada, 'tipos_entradas');
