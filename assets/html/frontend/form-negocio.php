@@ -35,7 +35,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
 
 
 <div ng-if="step === 1" ng-class="{ validated_step: validated_step }">
-     <p>Te recomendamos que tus fotos sean de la mejor calidad posible para la visibilidad de tu publicación</p>
+    <p style="padding:20px 30px;">Recomendamos utilizar fotos de calidad y una alta resolución para que la primera impresión sea buena</p>
     <div class="row-wrap"> 
         
             <div class="s-25" ng-repeat="image in galery">       

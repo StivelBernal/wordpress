@@ -2809,7 +2809,7 @@ function DialogForm($scope, $mdDialog, Instance) {
             dragImageHere: 'Arrastre una imagen o texto aquí',
             dropImage: 'Suelte una imagen o texto',
             selectFromFiles: 'Seleccione un fichero (Max: 10MB)',
-            maximumFileSize: 'Te recomendamos que tus fotos sean de la mejor calidad posible para la visibilidad de tu publicación; el tamaño máximo del fichero',
+            maximumFileSize: 'Recomendamos utilizar fotos de calidad y una alta resolución para que la primera impresión sea buena; el tamaño máximo del fichero',
             maximumFileSizeError: 'Superado el tamaño máximo de fichero.',
             url: 'URL de la imagen',
             remove: 'Eliminar la imagen',
