@@ -164,7 +164,7 @@ NONCE_FIELD_PH
                                 terms_and_polities_text_I18N
                               
                             </div>
-                            <div class="s-50">
+                            <div class="s-100 column center-center">
                             
                                 <div class="terms_links">more_terms_text_I18N <a href="/terminos" target="_blank" >more_terms_I18N</a></div>
                                 <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
@@ -339,7 +339,7 @@ NONCE_FIELD_PH
                                 terms_and_polities_text_I18N
                               
                             </div>
-                            <div class="S-50">
+                            <div class="s-100 column center-center">
                             
                                 <div class="terms_links">more_terms_text_I18N <a href="/terminos" target="_blank" >more_terms_I18N</a></div>
                                 <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">

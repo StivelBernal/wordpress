@@ -1600,4 +1600,10 @@ span.visitas{
 
 .terms_links{
     margin:10px 0;
+
+}
+
+.terms_links a{
+    color: #7c9ec2;
+    font-weight: 500;
 }
