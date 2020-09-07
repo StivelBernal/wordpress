@@ -160,7 +160,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                 <div class="form-group s-100">
                 <label for="featured" class="input-file-label">{{ !featured_file.name ? "'.__('Seleccionar imagen','serlib').'": featured_file.name }} </label>      
                 <input class="input_file" type="file" ng-model="featured_file" preview="featured" app-filereader accept="image/png, image/jpeg" app-filereader style="display:none;"  id="featured"></selector>
-                
+                <p style="padding:20px 30px;">Recomendamos utilizar fotos de calidad y una alta resolución para que la primera impresión sea buena</p>
             </div>
             </div>
         </div>
