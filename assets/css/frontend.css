@@ -1607,3 +1607,7 @@ span.visitas{
     color: #7c9ec2;
     font-weight: 500;
 }
+
+.t-c-a [ng-messages], .t-c-a md-checkbox{
+    margin: 0;
+} 
