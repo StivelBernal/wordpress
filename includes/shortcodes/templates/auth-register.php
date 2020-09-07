@@ -157,7 +157,7 @@ NONCE_FIELD_PH
                             </div>
                         </div> 
 
-                        <div class="form-group row-wrap space-around-center s-100">
+                        <div class="form-group row-wrap t-c-a space-around-center s-100">
 
                             <div class="s-100" style="overflow:auto; height:200px;" >
                             
@@ -332,7 +332,7 @@ NONCE_FIELD_PH
                             </div>
                         </div> 
 
-                        <div class="form-group row-wrap space-around-center s-100">
+                        <div class="form-group row-wrap t-c-a space-around-center s-100">
 
                             <div class="s-100" style="overflow:auto; height:200px;" >
                             
