@@ -10,8 +10,11 @@ function serlib_uploader(){
         ini_set('max_execution_time','1000');
         ini_set('max_input_time','1000');
         $file = $_FILES['files'];
-        
+        $strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
+            "}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
+            "â€”", "â€“", ",", "<", ".", ">", "/", "?");
         $name = str_replace([' ', 'á', 'e', 'í', 'ó', 'ú'], ['-', 'a', 'e', 'i', 'o', 'u'], $file['name']);
+        $name = str_replace($strip, '', $name);
         $wordpress_upload_dir = wp_upload_dir();
         // number of tries when the file with the same name is already exists
         $i = 1; 
