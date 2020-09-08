@@ -2074,9 +2074,19 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
         };
 
 
+       
+        $scope.photos_count = 10;
         function uploadImage(image) {
             var data = new FormData();
             data.append("files",image);
+            if($scope.photos_count < 10){
+                $scope.photos_count--;
+            }else{
+        
+                alert('el máximo de fotos son 10');
+                return
+            }
+
             $('#summernote').addClass('load_images');
             angular.element.ajax({
                 type: 'POST',
@@ -2242,7 +2252,8 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
 
         var params = {};
         $scope.Model = {};
-
+       
+    
         $scope.options = {
             height: 450,
             shortcuts: false,
@@ -2272,11 +2283,22 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
             
         };
 
-
+        $scope.photos_count = 10;
         function uploadImage(image) {
             var data = new FormData();
             data.append("files",image);
+            if($scope.photos_count < 10){
+                $scope.photos_count--;
+            }else{
+        
+                alert('el máximo de fotos son 10');
+                return
+            }
+
             $('#summernote').addClass('load_images');
+
+
+
             angular.element.ajax({
                 type: 'POST',
                 url: front_obj.ajax_url+'?action=serlib_uploader&destino=image',
@@ -2494,9 +2516,18 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             
         };
 
+        $scope.photos_count = 10;
         function uploadImage(image) {
             var data = new FormData();
             data.append("files",image);
+            if($scope.photos_count < 10){
+                $scope.photos_count--;
+            }else{
+        
+                alert('el máximo de fotos son 10');
+                return
+            }
+
             $('#summernote').addClass('load_images');
             angular.element.ajax({
                 type: 'POST',
