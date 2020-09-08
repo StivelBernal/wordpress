@@ -2075,12 +2075,12 @@ admin_frontend.controller('BaseForm', ['$scope', '$state', 'Config', 'Instance',
 
 
        
-        $scope.photos_count = 10;
+        $scope.photos_count = 0;
         function uploadImage(image) {
             var data = new FormData();
             data.append("files",image);
             if($scope.photos_count < 10){
-                $scope.photos_count--;
+                $scope.photos_count++;
             }else{
         
                 alert('el máximo de fotos son 10');
@@ -2283,12 +2283,12 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
             
         };
 
-        $scope.photos_count = 10;
+        $scope.photos_count = 0;
         function uploadImage(image) {
             var data = new FormData();
             data.append("files",image);
             if($scope.photos_count < 10){
-                $scope.photos_count--;
+                $scope.photos_count++;
             }else{
         
                 alert('el máximo de fotos son 10');
@@ -2516,12 +2516,12 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             
         };
 
-        $scope.photos_count = 10;
+        ;
         function uploadImage(image) {
             var data = new FormData();
             data.append("files",image);
             if($scope.photos_count < 10){
-                $scope.photos_count--;
+                $scope.photos_count++;
             }else{
         
                 alert('el máximo de fotos son 10');
@@ -2580,8 +2580,21 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
         
 
         $scope.add_galery = function(){
+            
             /**Aqui colocar las validaciones si se requieren y pasar el mensaje al status */
-            $scope.galery.push({text: ''});
+            
+            if($scope.galery.length < 10){
+               
+                $scope.galery.push({text: ''});
+            
+            }else{
+            
+                alert('el máximo de fotos son 10');
+            
+                return
+            
+            }
+
         }
 
         $scope.delete_image = function(index){
@@ -2839,7 +2852,7 @@ function DialogForm($scope, $mdDialog, Instance) {
             shapeNone: 'Forma: Ninguna',
             dragImageHere: 'Arrastre una imagen o texto aquí',
             dropImage: 'Suelte una imagen o texto',
-            selectFromFiles: 'Seleccione un fichero (Max: 10MB)',
+            selectFromFiles: 'Seleccione un fichero (Max: 10MB), Límite 10 fotos',
             maximumFileSize: 'Recomendamos utilizar fotos de calidad y una alta resolución para que la primera impresión sea buena; el tamaño máximo del fichero',
             maximumFileSizeError: 'Superado el tamaño máximo de fichero.',
             url: 'URL de la imagen',
