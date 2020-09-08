@@ -2516,7 +2516,7 @@ admin_frontend.controller('FormComerciante', ['$scope', '$state', 'Config', 'Ins
             
         };
 
-        ;
+        $scope.photos_count = 0;
         function uploadImage(image) {
             var data = new FormData();
             data.append("files",image);
