@@ -2410,6 +2410,8 @@ admin_frontend.controller('BaseFormGobierno', ['$scope', '$state', 'Config', 'In
                 }
                 if(response.data.status === 2 ){
                    /// response.data.status
+                   
+                   alert('Gracias revisaremos tu publicación para ser aprobada');
                     $scope.revition = true;
                                       
                     $state.go(Config.redirectTo);
