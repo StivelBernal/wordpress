@@ -67,7 +67,7 @@ function enviar_email_rechazo($post_id, $causa){
 
     $author = get_userdata($post_c->post_author);
 
-    if( $author->roles[0] == 'administrador'){
+    if( get_user_by('email', $author->user_email)->roles[0] == 'administrador'){
         return;
     }
 
@@ -90,7 +90,6 @@ function enviar_email_rechazo($post_id, $causa){
                             <a target="blank" href="https://golfodemorrosquillo.com/auth/">
                                 https://golfodemorrosquillo.com/auth/
                             </a>
-                            '.$author->user_email.'
                         </div>
                         <div style="text-align: left;">
                             <br><br><p>Cordialmente,</p>
@@ -177,11 +176,11 @@ function enviar_email_confirm_post($post_id){
 
     $author = get_userdata($post_c->post_author);
 
-    $email = $author->user_email;
-
-    if( $author->roles[0] == 'administrador'){
+    if( get_user_by('email', $author->user_email)->roles[0] == 'administrador'){
         return;
     }
+
+    $email = $author->user_email;
 
     $message = '<html>
                     <head>	
