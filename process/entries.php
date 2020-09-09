@@ -182,12 +182,12 @@ function serlib_entries_array($rol){
 
                 $result_s = [];
                 $results = get_posts(["category" => $categoria ]);
-                var_dump(count($results));
+                
                 for($i = 0; $i < count($results); $i++){
-                    var_dump($results[$i]->post_author);
+                    
                     $user_meta=get_userdata($results[$i]->post_author);
                     $user_roles=$user_meta->roles[0];
-                    var_dump($user_meta);
+                 
                     if( $user_roles == 'aliado' ){
                         
                         $author = get_userdata($results[$i]->post_author);
