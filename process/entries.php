@@ -182,7 +182,7 @@ function serlib_entries_array($rol){
 
                 
                 $results = get_posts(["category" => $categoria ]);
-                var_dump($categoria, $results);    
+                var_dump($categoria);    
                 for($i = 0; $i < count($results); $i++){
 
                     $user_meta=get_userdata($results[$i]->post_author);
