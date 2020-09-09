@@ -67,6 +67,10 @@ function enviar_email_rechazo($post_id, $causa){
 
     $author = get_userdata($post_c->post_author);
 
+    if( $author->roles[0] == 'administrador'){
+        return;
+    }
+
     $email = $author->user_email;
 
     $message = '<html>
@@ -173,6 +177,10 @@ function enviar_email_confirm_post($post_id){
     $author = get_userdata($post_c->post_author);
 
     $email = $author->user_email;
+
+    if( $author->roles[0] == 'administrador'){
+        return;
+    }
 
     $message = '<html>
                     <head>	
