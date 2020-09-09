@@ -90,6 +90,7 @@ function enviar_email_rechazo($post_id, $causa){
                             <a target="blank" href="https://golfodemorrosquillo.com/auth/">
                                 https://golfodemorrosquillo.com/auth/
                             </a>
+                            '.$author->user_email.'
                         </div>
                         <div style="text-align: left;">
                             <br><br><p>Cordialmente,</p>
@@ -199,6 +200,7 @@ function enviar_email_confirm_post($post_id){
                             <a target="blank" href="https://golfodemorrosquillo.com/auth/">
                                 https://golfodemorrosquillo.com/auth/
                             </a>
+                            '.$author->user_email.'
                         </div>
                         <div style="text-align: left;">
                             <br><br><p>Cordialmente,</p>
