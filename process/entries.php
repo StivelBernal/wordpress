@@ -177,14 +177,12 @@ function serlib_entries_array($rol){
             if( !(is_front_page())){
                 
                 if(!isset($categoria)){
-                    echo 'no es categoria';
                     return;
                 }
 
-                echo 'sigue despues';
                 
                 $results = get_posts(["category" => $categoria ]);
-                
+                var_dump($categoria, $results);    
                 for($i = 0; $i < count($results); $i++){
 
                     $user_meta=get_userdata($results[$i]->post_author);
