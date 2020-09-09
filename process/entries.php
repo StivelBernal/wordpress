@@ -177,9 +177,11 @@ function serlib_entries_array($rol){
             if( !(is_front_page())){
                 
                 if(!isset($categoria)){
+                    echo 'no es categoria';
                     return;
                 }
 
+                echo 'sigue despues';
                 
                 $results = get_posts(["category" => $categoria ]);
                 
@@ -226,8 +228,6 @@ function serlib_entries_array($rol){
 
         
     }   
-
-    var_dump($results);
 
     return $results;
 
