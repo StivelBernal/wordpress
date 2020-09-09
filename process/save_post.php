@@ -67,7 +67,7 @@ function enviar_email_rechazo($post_id, $causa){
 
     $author = get_userdata($post_c->post_author);
 
-    if( get_user_by('email', $author->user_email)->roles[0] == 'administrator'){
+    if( $author->roles[0] == 'administrator'){
         return;
     }
 
@@ -176,7 +176,7 @@ function enviar_email_confirm_post($post_id){
 
     $author = get_userdata($post_c->post_author);
 
-    if( get_user_by('email', $author->user_email)->roles[0] == 'administrator'){
+    if( $author->roles[0] == 'administrator'){
         return;
     }
 
