@@ -25,11 +25,13 @@ function serlib_comments(){
             if($result->comment_parent == 0){
                 
                 enviar_email_notificaciones_author_post($objDatos->post_id);
+
             }else{
 
                 $user_repl = get_comment($result->comment_parent);
 
                 $post_user_id = get_post( $objDatos->post_id );
+
                 if( $post_user_id->post_author === $result->user_id && get_userdata($post_user_id->post_author)->roles[0] === 'comerciante'){
                     $title = $post_user_id->post_title;
                 }else{
@@ -37,6 +39,7 @@ function serlib_comments(){
                 }
             
                 enviar_email_notificaciones_author_comment($objDatos->post_id, $user_repl->user_id, $title);
+                
             }
             
             

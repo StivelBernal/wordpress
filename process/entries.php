@@ -227,6 +227,8 @@ function serlib_entries_array($rol){
         
     }   
 
+    var_dump($results);
+
     return $results;
 
 
