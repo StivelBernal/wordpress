@@ -180,11 +180,11 @@ function serlib_entries_array($rol){
                     return;
                 }
 
-                
+                $result_s = [];
                 $results = get_posts(["category" => $categoria ]);
                 var_dump(count($results));
                 for($i = 0; $i < count($results); $i++){
-
+                    var_dump($results[$i]->post_author);
                     $user_meta=get_userdata($results[$i]->post_author);
                     $user_roles=$user_meta->roles[0];
                     var_dump($user_meta);
@@ -197,12 +197,12 @@ function serlib_entries_array($rol){
                         $results[$i]->thumbnail = $thumb;
                         $results[$i]->permalink = get_permalink($results[$i]->ID);
                         
-                    }else{
-                        array_splice($results, $i);
+                        array_push($result_s, $results[$i]);
                     }
                     
                 }
                 
+                $results = $result_s;
             }else{      
 
                 $query = 'SELECT * from '.$wpdb->prefix .'posts WHERE ('.$userif.')  AND post_type = "post" AND post_status = "publish"  ORDER BY post_date LIMIT 10';
