@@ -138,7 +138,8 @@ function serlib_auth_handler(){
         
         update_user_meta( $user_id, 'user_ciudad_visitar', $ciudad_visitar );
         update_user_meta( $user_id, 'user_conocimiento_pagina', $conocimiento_pagina );
-        update_user_meta( $user_id, 'user_photo', $photo );    
+        update_user_meta( $user_id, 'user_photo', $photo ); 
+        update_user_meta( $user_id, 'acept_terms', 1 );   
 
         if($role === 'turista'){
             update_user_meta( $user_id, 'user_city_id', $city_id );
