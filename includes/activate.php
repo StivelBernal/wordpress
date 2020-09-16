@@ -135,25 +135,25 @@ function serlib_activate_plugin(){
         __('Staff', 'serlib'),
         [
             'read'                      =>  true,
-            'edit_posts'                =>  true,
             'upload_files'              =>  true,
             'create_users'              =>  true,
             'delete_users'              =>  true,
+            'delete_published_pages'    =>  true,
+            'delete_published_posts'    =>  true,
+            'edit_published_pages'      =>  true,
+            'edit_published_posts'      =>  true,
+            'edit_others_pages'         =>  true,
+            'edit_others_posts'         =>  true,
+            'edit_posts'                =>  true,
+            'edit_pages'                =>  true,
             'edit_users'                =>  true,
             'list_users'                =>  true,
             'remove_users'              =>  true,
+            'edit_pages'                =>  true,
+            'promote_users'             =>  true,
             'moderate_comments'         =>  true,
             'manage_categories'         =>  true,
-            'manage_links'              =>  true,
-            'edit_others_posts'         =>  true,
-            'edit_pages'                =>  true,
-            'edit_others_pages'         =>  true,
-            'moderate_comments'         =>  true,
-            'manage_categories'         =>  true,
-            'manage_links'              =>  true,
-            'edit_others_posts'         =>  true,
-            'edit_pages'                =>  true,
-            'edit_others_pages'         =>  true
+            'manage_links'              =>  true
             
         ]
     );
