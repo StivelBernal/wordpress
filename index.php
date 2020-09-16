@@ -95,6 +95,10 @@ add_shortcode( 'menu_top_user', 'menu_top_user_shortcode' );
 /**Me gusta y compartir*/
 add_shortcode( 'ser_like_share', 'ser_like_share_shortcode' );
 
+add_shortcode( 'serlib_slider_superior', 'serlib_slider_superior_shortcode' );
+
+add_shortcode( 'serlib_slider_inferior', 'serlib_slider_inferior_shortcode' );
+
 
 // Modificaciones funciones de wordpress}
 
