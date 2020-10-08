@@ -11,10 +11,8 @@
             <div class="mkdf-post-text">
                 <div class="mkdf-post-date-inner">
                     <div class="mkdf-post-date-wrap">
-                        <div class="mkdf-post-date-day">
-                            Dia </div>
-                        <div class="mkdf-post-date-month">
-                            Mes </div>
+                        <div class="mkdf-post-date-day"></div>
+                        <div class="mkdf-post-date-month"></div>
                     </div>
                 </div>
                 <div class="mkdf-post-text-inner">
@@ -22,8 +20,7 @@
                     </h3> </a>
                     <div class="mkdf-post-text-main">
                         <div class="mkdf-post-excerpt-holder">
-                            <p itemprop="description" class="mkdf-post-excerpt">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin, tellus vitae condimentum egestas, libero dolor auctor tellus, eu consectetur neque elit quis nunc. Cras elementum pretium est. Nullam ac justo efficitur, tristique ligula a, pellentesque ipsum. Quisque augue ipsum, vehicula et tellus nec, maximus viverra metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin, tellus vitae condimentum egestas, libero dolor auctor tellus, eu consectetur neque elit quis nunc. Cras elementum pretium est. Nullam ac justo efficitur, tristique </p>
+                            <p itemprop="description" class="mkdf-post-excerpt"></p>
                         </div>
                     </div>
                 </div>
