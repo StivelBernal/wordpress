@@ -233,8 +233,6 @@ function serlib_register_form_shortcode(){
 
   $term_and_polities_html = $opts['terms_and_polities_html'];
 
-  var_dump($term_and_polities_html);
-
 
     $formHTML = file_get_contents( 'templates/auth-register.php', true );
     
