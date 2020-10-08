@@ -166,7 +166,7 @@ NONCE_FIELD_PH
                             </div>
                             <div class="s-100 column center-center">
                             
-                                <div class="terms_links">more_terms_text_I18N <a href="/terminos" target="_blank" >more_terms_I18N</a></div>
+                                <div class="terms_links">term_and_polities_html</div>
                                 <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
                                     accept_terms_and_polities_I18N
                                 </md-checkbox>
@@ -341,7 +341,7 @@ NONCE_FIELD_PH
                             </div>
                             <div class="s-100 column center-center">
                             
-                                <div class="terms_links">more_terms_text_I18N <a href="/terminos" target="_blank" >more_terms_I18N</a></div>
+                                <div class="terms_links">term_and_polities_html</div>
                                 <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
                                     accept_terms_and_polities_I18N
                                 </md-checkbox>
