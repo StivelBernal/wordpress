@@ -166,10 +166,10 @@ NONCE_FIELD_PH
                             </div>
                             <div class="s-100 column center-center">
                             
-                                <div class="terms_links">term_and_polities_html</div>
-                                <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
-                                    accept_terms_and_polities_I18N
-                                </md-checkbox>
+                                <div class="row">
+                                    <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms"></md-checkbox>
+                                    <div class="terms_links">term_and_polities_html</div>
+                                </div>
                                 <div ng-messages >
                                     <div  ng-if="!Model.terms === true">required_I18N</div>
                                 </div>
@@ -340,11 +340,10 @@ NONCE_FIELD_PH
                               
                             </div>
                             <div class="s-100 column center-center">
-                            
-                                <div class="terms_links">term_and_polities_html</div>
-                                <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms">
-                                    accept_terms_and_polities_I18N
-                                </md-checkbox>
+                                <div class="row">
+                                    <md-checkbox  aria-label="terminos_condiciones_I18N" class="md-primary" ng-model="Model.terms"></md-checkbox>
+                                    <div class="terms_links">term_and_polities_html</div>
+                                </div>
                                 <div ng-messages >
                                     <div  ng-if="!Model.terms === true">required_I18N</div>
                                 </div>
