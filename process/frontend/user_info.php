@@ -352,7 +352,7 @@ function serlib_users_info(){
     }
 
 
-    if($rol === 'aliado'){
+    if($rol === 'aliado' || $rol === 'staff' || $rol === 'administrator'){
         if( $method == 'GET' ){
             
             if( isset($_GET['ID']) && is_numeric($_GET['ID']) ){
@@ -414,17 +414,30 @@ function serlib_users_info(){
                 $roles =  $user->roles[0];
                 
                 $tipos_aliado = [ 'ferias-y-fiestas', 'cultura', 'eventos' ];
+
+
                 $arrayTaxAlcaldia = [];
                 $results['tipos'] = get_terms([
                     'hide_empty' => false,
                     'order' => 'DESC',
                     'taxonomy' => 'tipos_entradas' ]);
+                if($rol === 'aliado'){    
                     
-                for( $i = 0; $i < count($results['tipos']); $i++ ){
-                    
-                    if( in_array( $results['tipos'][$i]->slug, $tipos_aliado ) ) { 
-                        //var_dump(in_array( $results['tipos'][$i]->slug, $tipos_alcaldia));
+                    for( $i = 0; $i < count($results['tipos']); $i++ ){
+                        
+                        if( in_array( $results['tipos'][$i]->slug, $tipos_aliado ) ) { 
+                            //var_dump(in_array( $results['tipos'][$i]->slug, $tipos_alcaldia));
+                            array_push($arrayTaxAlcaldia,  $results['tipos'][$i] );
+                        }
+
+                    }
+
+                }else{
+
+                    for( $i = 0; $i < count($results['tipos']); $i++ ){
+                        
                         array_push($arrayTaxAlcaldia,  $results['tipos'][$i] );
+                     
                     }
 
                 }
@@ -465,36 +478,57 @@ function serlib_users_info(){
             }
 
             remove_action( 'save_post_post', 'ser_save_post_admin' );
-        
-            if($objDatos->post_category === 'emergencias'){
-                $post_id                        =   wp_insert_post([
-                    'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
-                    'post_content'                =>    $content,
-                    'post_name'                   =>    $title,
-                    'post_title'                  =>    $title,
-                    'post_excerpt'                =>    $excerpt,
-                    'post_status'                 =>    'pending',
-                    'post_type'                   =>    'post',
-                    'comment_status'              =>    'closed'
-                 ]);
+            if($rol === 'aliado'){    
+              
+                if($objDatos->post_category === 'emergencias'){
+                    $post_id                        =   wp_insert_post([
+                        'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
+                        'post_content'                =>    $content,
+                        'post_name'                   =>    $title,
+                        'post_title'                  =>    $title,
+                        'post_excerpt'                =>    $excerpt,
+                        'post_status'                 =>    'pending',
+                        'post_type'                   =>    'post',
+                        'comment_status'              =>    'closed'
+                    ]);
+                }else{
+                    $post_id                        =   wp_insert_post([
+                        'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
+                        'post_content'                =>    $content,
+                        'post_name'                   =>    $title,
+                        'post_title'                  =>    $title,
+                        'post_excerpt'                =>    $excerpt,
+                        'post_status'                 =>    'pending',
+                        'post_type'                   =>    'post',
+                        'comment_status'              =>    'open'
+                    ]);
+                }
+
+                add_action( 'save_post_post', 'ser_save_post_admin' );
+
             }else{
+
                 $post_id                        =   wp_insert_post([
                     'ID'                          =>    ($objDatos->ID ? $objDatos->ID: 0),
                     'post_content'                =>    $content,
                     'post_name'                   =>    $title,
                     'post_title'                  =>    $title,
                     'post_excerpt'                =>    $excerpt,
-                    'post_status'                 =>    'pending',
+                    'post_status'                 =>    'publish',
                     'post_type'                   =>    'post',
                     'comment_status'              =>    'open'
-                 ]);
+                ]);
+
             }
-            
-            add_action( 'save_post_post', 'ser_save_post_admin' );
+
 
             if( !is_wp_error($post_id) ){
 
-                enviar_email_notificacione_staff('Nuevo publicacion de aliado por aprobar');
+                if($rol === 'aliado'){    
+                    
+                    enviar_email_notificacione_staff('Nuevo publicacion de aliado por aprobar');
+                    
+                }
 
                 wp_set_post_terms($post_id, $objDatos->post_category, 'category');
                 wp_set_post_terms($post_id, $objDatos->tipo_entrada, 'tipos_entradas');

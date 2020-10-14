@@ -42,7 +42,7 @@
                         </ul>
                     </li>
 
-                    <li ng-if="rol === 'aliado'" class="menu"  ui-sref-active="{'active': 'articulos'}" aria-hidden="false">
+                    <li ng-if="rol === 'aliado' || rol === 'staff' || rol === 'administrator'" class="menu"  ui-sref-active="{'active': 'articulos'}" aria-hidden="false">
                         <div  class="title">PUBLICACIONES</div>
                         <ul class="submenu">
                             <li ><a ui-sref-active="{'active': 'articulos.all'}" ui-sref="articulos.all">Publicaciones</a></li>
