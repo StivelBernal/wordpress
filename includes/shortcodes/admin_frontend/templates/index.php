@@ -22,7 +22,7 @@
                         <div  class="title">NEGOCIOS</div>
                         <ul class="submenu">
                             <li ><a ui-sref-active="{'active': 'negocios.all'}" ui-sref="negocios.all">Negocios </a></li>
-                            <li ><a ui-sref-active="{'active': 'negocios.create'}" ui-sref="negocios.create">Agregar nuevo</a></li>
+                            <li ><a ui-sref-active="{'active': 'negocios.create'}" ui-sref="negocios.create">Agregar nuevo negocio</a></li>
                         </ul>
                     </li>
 
