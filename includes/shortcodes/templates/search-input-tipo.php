@@ -9,7 +9,7 @@
                          
             </div>
             <div class="form-group s-35">
-                <selector model="Model.tags" multi="true" value-attr="slug" Label-attr="name" options="options_tags" require="true"></selector>      
+                <selector model="Model.tags" multi="true" value-attr="slug" Label-attr="name" options="options_tags" placeholder="Etiquetas"></selector>      
             </div>
             
             <div class="s-flex">
