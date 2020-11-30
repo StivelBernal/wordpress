@@ -68,14 +68,14 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             <div class="s-100">
                 <div class="form-group s-flex">
                     <label>'.__('Municipio', 'serlib').'</label>      
-                    <selector model="Model.post_category" name="municipios" value-attr="term_id" Label-attr="name" multi="true" require="true" options="municipios"></selector>
+                    <selector model="Model.post_category" name="municipios" value-attr="term_id" disable-search="true" Label-attr="name" multi="true" require="true" options="municipios"></selector>
                 </div>
             </div>
 
             <div class="s-100">
                 <div class="form-group s-flex">
                     <label>'.__('Categoria', 'serlib').'</label>      
-                    <selector model="Model.tipo_entrada"  name="tipo_entrada" value-attr="term_id" Label-attr="name" multiple="true" require="true" options="tipos"></selector>
+                    <selector model="Model.tipo_entrada"  name="tipo_entrada" value-attr="term_id" disable-search="true" Label-attr="name" multiple="true" require="true" options="tipos"></selector>
                 </div>
             </div>
 

@@ -71,7 +71,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                 <div class="s-100">
                     <div class="form-group s-flex">
                         <label>'.__('Categorias', 'serlib').'</label>      
-                        <selector model="Model.post_category" name="categories" value-attr="term_id" Label-attr="name" multi="true" options="categories"></selector>
+                        <selector model="Model.post_category" name="categories" value-attr="term_id" Label-attr="name" disable-search="true" multi="true" options="categories"></selector>
                     </div>
                 </div>';
             }else if($roles === 'alcaldia' || $roles === 'gobernacion' || $roles === 'aliado'){
@@ -86,7 +86,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
                 <div class="s-100">
                     <div class="form-group s-flex">
                         <label>'.__('Categoria', 'serlib').'</label>      
-                        <selector model="Model.tipo_entrada" multi="true" name="tipo_entrada" value-attr="term_id" Label-attr="name" options="tipos"></selector>
+                        <selector model="Model.tipo_entrada" disable-search="true" multi="true" name="tipo_entrada" value-attr="term_id" Label-attr="name" options="tipos"></selector>
                     </div>
                 </div>
                 ';

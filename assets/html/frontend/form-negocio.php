@@ -148,7 +148,7 @@ echo wp_nonce_field( 'serlib_form', '_wpnonce', true, false ) .'
             <div class="s-100">
                 <div class="form-group s-flex">
                     <label>'.__('Etiquetas', 'serlib').'</label>      
-                    <selector model="Model.tags" multi="true" name="tags" value-attr="term_id" Label-attr="name" require="true" options="tags"></selector>
+                    <selector model="Model.tags"  disable-search="true" multi="true" name="tags" value-attr="term_id" Label-attr="name" require="true" options="tags"></selector>
                 </div>
             </div>
 
