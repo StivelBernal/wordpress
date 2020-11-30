@@ -42,7 +42,7 @@ function serlib_activate_plugin(){
     ) ENGINE=InnoDB " . $wpdb->get_charset_collate() . ";";
  
     dbDelta( $createCitiesSQL );
-*/
+
     /**Opciones del plugin */
     $serlib_opts        =   get_option( 'serlib_opts' );
    

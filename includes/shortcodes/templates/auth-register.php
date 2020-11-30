@@ -135,7 +135,7 @@ NONCE_FIELD_PH
                         
                         <div class="form-group s-45">
                             <label>Intereses_I18N</label>
-                            <selector name="intereses" require="true" model="Model.intereses" options=" Intereses" multi="true"></selector>
+                            <selector name="intereses" require="true" model="Model.intereses" options=" Intereses"  disable-search="true" multi="true"></selector>
                             <div ng-messages="registerForm.intereses.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
@@ -151,7 +151,7 @@ NONCE_FIELD_PH
 
                         <div class="form-group s-45">
                             <label>Ciudades a visitar_I18N</label>
-                            <selector name="ciudades" require="true" model="Model.city_active" value-attr="ID" Label-attr="nombre" multi="true" options="cities_active"></selector>
+                            <selector name="ciudades" require="true" disable-search="true" model="Model.city_active" value-attr="ID" Label-attr="nombre" multi="true" options="cities_active"></selector>
                             <div ng-messages="registerForm.ciudades.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
@@ -326,7 +326,7 @@ NONCE_FIELD_PH
 
                         <div class="form-group s-45">
                             <label>Ubicacion_negocios_I18N</label>
-                            <selector name="ciudadesVisitar" require="true" model="Model.city_active" value-attr="ID" Label-attr="nombre" multi="true" options="cities_active"></selector>
+                            <selector name="ciudadesVisitar" require="true" disable-search="true" model="Model.city_active" value-attr="ID" Label-attr="nombre" multi="true" options="cities_active"></selector>
                             <div ng-messages="c_Form.ciudadesVisitar.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
