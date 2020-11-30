@@ -127,7 +127,7 @@ NONCE_FIELD_PH
 
                         <div class="form-group s-45">
                             <label>Conocimiento_pagina_I18N</label>      
-                            <selector name="conocimiento" require="true" model="Model.conocimiento_pagina" require="true" options="conocimientoPagina" ></selector>
+                            <selector name="conocimiento" require="true" model="Model.conocimiento_pagina" require="true"  disable-search="true" options="conocimientoPagina" ></selector>
                             <div ng-messages="registerForm.conocimiento.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
@@ -281,7 +281,7 @@ NONCE_FIELD_PH
 
                         <div class="form-group s-30">
                             <label>Tipo_documento_I18N</label>      
-                            <selector name="tipo_documento" model="Model.tipo_documento" options="tipo_documento" require="true"></selector>
+                            <selector name="tipo_documento" model="Model.tipo_documento"  disable-search="true" options="tipo_documento" require="true"></selector>
                             <div ng-messages="c_Form.tipo_documento.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
@@ -298,7 +298,7 @@ NONCE_FIELD_PH
                         <div class="form-group s-24">
                             <label>Fotocopia_documento_I18N</label>
                             <label for="fotocopia_documento" class="input-file-label">{{ !File.name ? 'pdf, jpg, png, doc': File.name }} </label>      
-                            <input name="fotocopia_documento" type="file" ng-model="File" accept="image/png, image/jpeg, image/jpg, application/pdf, application/msword" app-filereader style="display:none;"  id="fotocopia_documento"></selector>
+                            <input name="fotocopia_documento" type="file" ng-model="File"  accept="image/png, image/jpeg, image/jpg, application/pdf, application/msword" app-filereader style="display:none;"  id="fotocopia_documento">
                             <div ng-messages >
                                 <div  ng-if="!File">required_I18N</div>
                             </div> 
@@ -310,7 +310,7 @@ NONCE_FIELD_PH
 
                         <div class="form-group s-45">
                             <label>Conocimiento_pagina_I18N</label>      
-                            <selector name="conocimiento" require="true" model="Model.conocimiento_pagina" options="conocimientoPagina"></selector>
+                            <selector name="conocimiento" require="true" model="Model.conocimiento_pagina"  disable-search="true" options="conocimientoPagina"></selector>
                             <div ng-messages="c_Form.conocimiento.$error">
                                 <div ng-message="required">required_I18N</div>
                             </div>
