@@ -57,7 +57,7 @@ NONCE_FIELD_PH
                        
                         <div class="form-group s-45">
                             <label for="birthdate">fecha_nacimiento_I18N</label>
-                            <input  ng-model="Model.birthday" name="birthdate" id="birthdate" type="date" required/>
+                            <input  ng-model="Model.birthday" name="birthdate" id="birthdate" type="text" minLength="8" maxLength="16" placeholder="01/01/01" />
                             
                             <div ng-messages="registerForm.birthdate.$error">
                                 <div ng-message="required">required_I18N</div>
@@ -232,7 +232,7 @@ NONCE_FIELD_PH
                        
                         <div class="form-group s-45">
                             <label for="c_birthdate">fecha_nacimiento_I18N</label>
-                            <input  ng-model="Model.birthday" name="birthdate" id="c_birthdate" type="date" required/>
+                            <input  ng-model="Model.birthday" name="birthdate" id="c_birthdate" type="text" minLength="8" maxLength="16" placeholder="01/01/01"/>
                             
                             <div ng-messages="registerForm.birthdate.$error">
                                 <div ng-message="required">required_I18N</div>
