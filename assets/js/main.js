@@ -614,10 +614,11 @@ search_app.controller('formController', ['$scope', '$http',
         var slug = angular.element('#slug-search').attr('slug');
         
         if($scope.Model.ciudad){
-            window.location = slug+$scope.Model.ciudad+'?busqueda='+$scope.Model.busqueda;
+            window.location = slug+$scope.Model.ciudad+'?busqueda='+$scope.Model.busqueda+'&tags='+$scope.Model.tags;
         }else if($scope.Model.tipo){
-            window.location = slug+$scope.Model.tipo+'?busqueda='+$scope.Model.busqueda;
-        }else if($scope.Model.tags){
+            window.location = slug+$scope.Model.tipo+'?busqueda='+$scope.Model.busqueda+'&tags='+$scope.Model.tags;
+        }
+        else if($scope.Model.tags){
             window.location = slug+'?busqueda='+$scope.Model.busqueda+'&tags='+$scope.Model.tags;
         }
        

@@ -3,16 +3,19 @@
 
         <div class="row-wrap">
 
-            <div class="form-group s-40">
+            <div class="form-group s-25">
                 
                 <input class="fovea-input input-text" ng-model="Model.busqueda" placeholder="buscar_placeholder_I18N"  type="text" required>
                          
             </div>
-            <div class="form-group s-35">
+            <div class="form-group s-25">
+                <selector model="Model.tags" multi="true" value-attr="slug" Label-attr="name" options="options_tags" placeholder="Etiquetas"></selector>      
+            </div>
+            <div class="form-group s-25">
                 <selector model="Model.tipo" value-attr="slug" Label-attr="name" options="options_tipos"  placeholder="Tipos" require="true"></selector>      
             </div>
             
-            <div class="s-flex">
+            <div class="s-25">
                 <button class="bttn default" ng-disabled="search_home.$invalid" ng-click="submit()">buscar_button_I18N</button>
             </div>
 
