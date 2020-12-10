@@ -1335,6 +1335,9 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         $scope.modo = 'directo';
         $scope.cities = [];
         $scope.photo = [], $scope.files = [];
+        $scope.photo_id = null;
+        $scope.files_ids = null;
+
         $scope.conocimientoPagina = [ 'Volante' , 'Correo Electrónico', 'Amigo', 'Redes Sociales', 'Otro' ],
         $scope.Intereses = ['Hospedaje', 'Gastronomía', 'Sitios', 'Diversión', 'Cultura', 'Transporte' ];  
         $scope.tipo_documento = ['Cedula ciudadania', 'Pasaporte', 'Visa',  'Cedula Extranjera' ];      
@@ -1357,7 +1360,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             $scope.cities = newValue.cities; 
         }
         
-        $scope.submitFiles = function(id){
+        $scope.submitFiles = function(){
             
             var prom = 0;         
 
@@ -1372,7 +1375,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             $scope.afterSubmit = function(){
                 prom--;
                 if(prom === 0){
-                    $scope.finish();
+                    $scope.saveUser();
                 }
             }
 
@@ -1383,22 +1386,27 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             
                 angular.element.ajax({
                     type: 'POST',
-                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=photo_profile&id='+id,
+                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=photo_profile',
                     data: formData,
                     contentType: false,
                     cache: false,
                     processData:false,
                     success: function(response){
+                        console.log(response);
+                        
+                        // $scope.photo_id
+                        // $scope.files_ids
+
                         if(response.success){
                             
                         }else if(response.data.error){
                             $scope.error =  response.error; 
                         }
-                        $scope.afterSubmit();
+                        // $scope.afterSubmit();
                     },
                     error: function(error){
                         $scope.error =  error; 
-                        $scope.afterSubmit();
+                        // $scope.afterSubmit();
                     }
                 });
 
@@ -1411,13 +1419,17 @@ app.controller('registerController', ['$scope', '$http', '$controller',
 
                 angular.element.ajax({
                     type: 'POST',
-                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=file_document&id='+id,
+                    url: front_obj.ajax_url+'?action=serlib_uploader&destino=file_document',
                     data: formData,
                     contentType: false,
                     cache: false,
                     processData:false,
                     success: function(response){
                         if(response.success){
+                            console.log(response);
+                        
+                        // $scope.photo_id
+                        // $scope.files_ids
                             
                         }else if(response.error){
                             $scope.error =  response.error; 
@@ -1460,6 +1472,12 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             $scope.is_submit = true;
             $scope.error  = false;
 
+            $scope.submitFiles(response.data.success);
+           
+        }
+
+        $scope.saveUser = function() {
+            
             $http( {
                 method: 'POST',
                 params: { action: 'serlib_auth_handler', 'create': ''},
@@ -1468,7 +1486,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             }).then(function successCallback(response) {
                 
                 if(response.data.success){
-                    $scope.submitFiles(response.data.success);
+                    $scope.finally_promises();
                   
                 }else if(response.data.error){
                     $scope.error = response.data.error;
@@ -1478,7 +1496,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                 $scope.is_submit = false;
                 $scope.error =  error.data;            
             });
-           
+
         }
     
 }])

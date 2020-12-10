@@ -64,9 +64,9 @@ function serlib_uploader(){
             $output  =  [ 'success' => $upload_id ];
 
             if( $_GET["destino"] === 'photo_profile' ){
-                update_user_meta( $_GET['id'], 'user_photo', $new_file_path );
+                // update_user_meta( $_GET['id'], 'user_photo', $new_file_path );
             }else if($_GET["destino"] === 'file_document'){
-                update_user_meta( $_GET['id'], 'file_document', $new_file_path );
+                // update_user_meta( $_GET['id'], 'file_document', $new_file_path );
             }else if($_GET["destino"] === 'comments_media'){
                
                 $media = get_comment_meta($_GET['id_comment'], 'comments_media')[0];
