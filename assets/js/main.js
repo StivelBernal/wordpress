@@ -1368,7 +1368,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             if(hasValue($scope.File) ) prom++;
 
             if(prom === 0) {
-                $scope.finish();
+                $scope.saveUser();
                 return;
             }
             
@@ -1392,17 +1392,15 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                     cache: false,
                     processData:false,
                     success: function(response){
-                        console.log(response);
-                        
-                        // $scope.photo_id
-                        // $scope.files_ids
 
                         if(response.success){
+                            
+                            $scope.photo_id = response.success;
                             
                         }else if(response.data.error){
                             $scope.error =  response.error; 
                         }
-                        // $scope.afterSubmit();
+                        $scope.afterSubmit();
                     },
                     error: function(error){
                         $scope.error =  error; 
@@ -1426,10 +1424,8 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                     processData:false,
                     success: function(response){
                         if(response.success){
-                            console.log(response);
-                        
-                        // $scope.photo_id
-                        // $scope.files_ids
+
+                            $scope.files_ids = response.success;
                             
                         }else if(response.error){
                             $scope.error =  response.error; 
@@ -1472,7 +1468,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             $scope.is_submit = true;
             $scope.error  = false;
 
-            $scope.submitFiles(response.data.success);
+            $scope.submitFiles();
            
         }
 
