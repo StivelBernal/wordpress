@@ -12,7 +12,7 @@ function serlib_uploader(){
         $file = $_FILES['files'];
         $strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
             "}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
-            "â€”", "â€“", ",", "<", ".", ">", "/", "?");
+            "â€”", "â€“", ",", "<", ">", "/", "?");
         $name = str_replace([' ', 'á', 'e', 'í', 'ó', 'ú'], ['-', 'a', 'e', 'i', 'o', 'u'], $file['name']);
         $name = str_replace($strip, '', $name);
         $wordpress_upload_dir = wp_upload_dir();
@@ -64,13 +64,17 @@ function serlib_uploader(){
             $output  =  [ 'success' => $upload_id ];
 
             if( $_GET["destino"] === 'photo_profile' ){
-                // update_user_meta( $_GET['id'], 'user_photo', $new_file_path );
+           
+                $output  =  [ 'success' => $new_file_path ];
+
             }else if($_GET["destino"] === 'file_document'){
+           
+                $output  =  [ 'success' => $new_file_path ];
+
                 // update_user_meta( $_GET['id'], 'file_document', $new_file_path );
             }else if($_GET["destino"] === 'comments_media'){
                
-                $media = get_comment_meta($_GET['id_comment'], 'comments_media')[0];
-            
+                $media = get_comment_meta($_GET['id_comment'], 'comments_media')[0]; 
                 
                 if(isset($media)){
                     array_push( $media, wp_get_attachment_image_src($upload_id)[0] );

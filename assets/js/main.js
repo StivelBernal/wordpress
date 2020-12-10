@@ -1335,8 +1335,6 @@ app.controller('registerController', ['$scope', '$http', '$controller',
         $scope.modo = 'directo';
         $scope.cities = [];
         $scope.photo = [], $scope.files = [];
-        $scope.photo_id = null;
-        $scope.files_ids = null;
 
         $scope.conocimientoPagina = [ 'Volante' , 'Correo Electrónico', 'Amigo', 'Redes Sociales', 'Otro' ],
         $scope.Intereses = ['Hospedaje', 'Gastronomía', 'Sitios', 'Diversión', 'Cultura', 'Transporte' ];  
@@ -1395,7 +1393,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
 
                         if(response.success){
                             
-                            $scope.photo_id = response.success;
+                            $scope.Model.photo_id = response.success;
                             
                         }else if(response.data.error){
                             $scope.error =  response.error; 
@@ -1425,7 +1423,7 @@ app.controller('registerController', ['$scope', '$http', '$controller',
                     success: function(response){
                         if(response.success){
 
-                            $scope.files_ids = response.success;
+                            $scope.Model.files_ids = response.success;
                             
                         }else if(response.error){
                             $scope.error =  response.error; 
@@ -1482,12 +1480,13 @@ app.controller('registerController', ['$scope', '$http', '$controller',
             }).then(function successCallback(response) {
                 
                 if(response.data.success){
-                    $scope.finally_promises();
+                    $scope.finish();
                   
                 }else if(response.data.error){
                     $scope.error = response.data.error;
                     $scope.is_submit = false;
                 }
+
             }, function errorCallback(error) {
                 $scope.is_submit = false;
                 $scope.error =  error.data;            
