@@ -319,9 +319,8 @@ label[for="fotocopia_documento"]{
 
   @media (max-width: 700px) {
     .carrusel-destinos .item-destino{
-        height:60vh !important;
+        height:90vh !important;
     }
-    
   }
 .search_home{
     margin: 35px 5%;
