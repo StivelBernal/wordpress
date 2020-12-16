@@ -309,6 +309,7 @@ label[for="fotocopia_documento"]{
   @media (min-width: 700px) {
     .carrusel-destinos .item-destino{
         height:100vh !important;
+        background-size: 100% 100%;
     }
     .search_home button{
         margin-left: 5px;
