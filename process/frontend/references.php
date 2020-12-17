@@ -17,7 +17,7 @@ function serlib_references(){
             
             for( $i = 0; $i < count($results['municipios']); $i++) {
                 
-                if($results['municipios'][$i]->name !== 'todos'){
+                if($results['municipios'][$i]->term_id !== 28){
                     array_push($municipios, $results['municipios'][$i]);
                 }
 
