@@ -5,7 +5,7 @@
 
             <div class="form-group s-25">
                 
-                <input class="fovea-input input-text" ng-model="Model.busqueda" placeholder="buscar_placeholder_I18N"  type="text" required>
+                <input class="fovea-input input-text" ng-model="Model.busqueda" placeholder="buscar_placeholder_I18N"  type="text">
                          
             </div>
             <div class="form-group s-25">
